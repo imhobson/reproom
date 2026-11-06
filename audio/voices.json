@@ -1,0 +1,14 @@
+[
+ {
+  "id": "kokoro-michael",
+  "label": "Kokoro Michael",
+  "engine": "kokoro",
+  "default": true
+ },
+ {
+  "id": "eleven-cornelius",
+  "label": "Cornelius (ElevenLabs)",
+  "engine": "elevenlabs",
+  "default": false
+ }
+]

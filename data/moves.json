@@ -1,0 +1,3904 @@
+{
+  "version": 1,
+  "source": "betterMe Exercises – Strava ready",
+  "generated": "2026-11-06",
+  "moves": [
+    {
+      "id": "kneeling-push-ups",
+      "name": "Kneeling Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/kneeling-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling push-ups.",
+        "nameHowTo": "Kneeling push-ups. Kneel with your hands a little wider than your shoulders. Keep a straight line from your knees to your head, lower your chest towards the floor, then press back up."
+      },
+      "sourceNames": [
+        "Kneeling Push-Ups",
+        "Kneeling Push-ups"
+      ]
+    },
+    {
+      "id": "commando-plank",
+      "name": "Commando Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Triceps"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/commando-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Commando plank.",
+        "nameHowTo": "Commando plank. Start in a plank on your elbows. Push up onto one hand, then the other, into a high plank. Lower back down one elbow at a time. Keep your hips steady and don't rock side to side."
+      },
+      "sourceNames": [
+        "Commando Plank"
+      ]
+    },
+    {
+      "id": "wide-grip-push-ups",
+      "name": "Wide Grip Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/wide-grip-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Wide grip push-ups.",
+        "nameHowTo": "Wide grip push-ups. Set your hands well outside your shoulders, legs straight behind you. Keep your body in one line as you lower your chest towards the floor, then push back up."
+      },
+      "sourceNames": [
+        "Wide Grip Push Ups",
+        "Wide Grip Push-Ups"
+      ]
+    },
+    {
+      "id": "diamond-push-ups",
+      "name": "Diamond Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Triceps"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/diamond-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Diamond push-ups.",
+        "nameHowTo": "Diamond push-ups. Bring your hands together under your chest so your thumbs and fingers make a diamond. Keep your elbows close to your sides as you lower down, then press back up. Drop to your knees if you need to."
+      },
+      "sourceNames": [
+        "Diamond Push-Ups"
+      ]
+    },
+    {
+      "id": "pike-push-ups",
+      "name": "Pike Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Traps"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/pike-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pike push-ups.",
+        "nameHowTo": "Pike push-ups. From a plank, walk your feet in and lift your hips high so your body makes an upside-down V. Bend your elbows to bring the top of your head towards the floor, then push back up."
+      },
+      "sourceNames": [
+        "Pike Push-Ups",
+        "Pike Push-ups"
+      ]
+    },
+    {
+      "id": "archer-push-ups",
+      "name": "Archer Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/archer-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Archer push-ups.",
+        "nameHowTo": "Archer push-ups. Set your hands very wide. Lower your chest towards one hand while the other arm stays straight out to the side, then push back up and go the other way. Keep your hips level."
+      },
+      "sourceNames": [
+        "Archer Push-Ups"
+      ]
+    },
+    {
+      "id": "kneeling-archer-push-ups",
+      "name": "Kneeling Archer Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/kneeling-archer-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling archer push-ups.",
+        "nameHowTo": "Kneeling archer push-ups. On your knees, set your hands very wide. Shift your weight and lower towards one hand while the other arm stays straight, then press up and go the other way."
+      },
+      "sourceNames": [
+        "Kneeling Archer Push-Ups",
+        "Kneeling Archer Push-ups"
+      ]
+    },
+    {
+      "id": "kneeling-push-ups-to-down-dog",
+      "name": "Kneeling Push-Ups to Down Dog",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest",
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/kneeling-push-ups-to-down-dog.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling push-ups to down dog.",
+        "nameHowTo": "Kneeling push-ups to down dog. Do one push-up from your knees. Then lift your knees and push your hips up and back into downward dog. Come back down to your knees and repeat."
+      },
+      "sourceNames": [
+        "Kneeling Push-Ups to Down Dog",
+        "Kneeling Push-ups to Down Dog"
+      ]
+    },
+    {
+      "id": "reverse-plank-tricep-dips",
+      "name": "Reverse Plank Tricep Dips",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Triceps"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Core"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/reverse-plank-tricep-dips.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Reverse plank tricep dips.",
+        "nameHowTo": "Reverse plank tricep dips. Sit with your hands behind you, fingers pointing towards your feet, and lift your hips. Bend your elbows to dip down, then straighten them to press back up. Keep your hips lifted."
+      },
+      "sourceNames": [
+        "Reverse Plank Tricep Dips"
+      ]
+    },
+    {
+      "id": "single-leg-push-ups",
+      "name": "Single Leg Push-Ups",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Core"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/single-leg-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Single leg push-ups.",
+        "nameHowTo": "Single leg push-ups. Get into a push-up position and lift one foot off the floor. Keep it raised as you lower your chest and press back up. Keep your hips level and your stomach tight."
+      },
+      "sourceNames": [
+        "Single Leg Push-Ups",
+        "Single Leg Push-Ups (L/R)"
+      ]
+    },
+    {
+      "id": "wave-push-up",
+      "name": "Wave Push-Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/wave-push-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Wave push-up.",
+        "nameHowTo": "Wave push-up. From a plank, lower your hips first and then your chest, as if rolling down to the floor. Push your chest up into a gentle cobra, then lift your hips back to plank. Make it one smooth wave."
+      },
+      "sourceNames": [
+        "Wave Push-Up",
+        "Wave Push-up"
+      ]
+    },
+    {
+      "id": "airplane-push-ups",
+      "name": "Airplane Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders",
+        "Core"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/airplane-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Airplane push-ups.",
+        "nameHowTo": "Airplane push-ups. Lower into a push-up. As you press back up, reach one arm out to the side like a wing. Bring it back down and repeat with the other arm."
+      },
+      "sourceNames": [
+        "Airplane Push-Ups"
+      ]
+    },
+    {
+      "id": "hindu-push-ups",
+      "name": "Hindu Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Triceps"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/hindu-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hindu push-ups.",
+        "nameHowTo": "Hindu push-ups. Start in downward dog with your hips high. Bend your elbows and swoop your chest down and forward, close to the floor, then up into a cobra. Push your hips back up to the start."
+      },
+      "sourceNames": [
+        "Hindu Push-Ups"
+      ]
+    },
+    {
+      "id": "kneeling-pseudo-push-ups",
+      "name": "Kneeling Pseudo Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest",
+        "Front Shoulders"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/kneeling-pseudo-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling pseudo push-ups.",
+        "nameHowTo": "Kneeling pseudo push-ups. On your knees, place your hands by your waist with your fingers turned out. Lean your shoulders forward past your hands, then lower your chest and press back up."
+      },
+      "sourceNames": [
+        "Kneeling Pseudo Push-Ups",
+        "Kneeling Pseudo Push-ups"
+      ]
+    },
+    {
+      "id": "kneeling-push-ups-hands-off",
+      "name": "Kneeling Push-Ups (hands-off)",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/kneeling-push-ups-hands-off.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling push-ups, hands off.",
+        "nameHowTo": "Kneeling push-ups, hands off. Do a push-up from your knees and lower all the way to the floor. Lift your hands off the ground for a moment, put them back down and press up."
+      },
+      "sourceNames": [
+        "Kneeling Push-Ups (hands-off)",
+        "Kneeling Push-ups (hands-off)"
+      ]
+    },
+    {
+      "id": "mountain-climber-to-push-ups-from-knees",
+      "name": "Mountain Climber to Push-Ups from Knees",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/mountain-climber-to-push-ups-from-knees.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Mountain climber to push-ups from knees.",
+        "nameHowTo": "Mountain climber to push-ups from knees. In a high plank, drive your knees towards your chest a few times. Then drop your knees to the floor, do one push-up, and go straight back into the climbers."
+      },
+      "sourceNames": [
+        "Mountain Climber to Push-Ups from Knees",
+        "Mountain Climber to Push-ups from Knees"
+      ]
+    },
+    {
+      "id": "scapular-push-ups",
+      "name": "Scapular Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Upper Back"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/scapular-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Scapular push-ups.",
+        "nameHowTo": "Scapular push-ups. Hold a plank with straight arms. Without bending your elbows, let your chest sink so your shoulder blades squeeze together, then push the floor away to spread them apart."
+      },
+      "sourceNames": [
+        "Scapular Push-Ups"
+      ]
+    },
+    {
+      "id": "walkouts-to-push-ups",
+      "name": "Walkouts to Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/walkouts-to-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Walkouts to push-ups.",
+        "nameHowTo": "Walkouts to push-ups. From standing, fold forward and put your hands on the floor. Walk them out to a plank, do one push-up, then walk your hands back to your feet and stand up."
+      },
+      "sourceNames": [
+        "Walkouts to Push-Ups",
+        "Walkouts to Push-ups"
+      ]
+    },
+    {
+      "id": "assisted-one-arm-push-ups",
+      "name": "Assisted One-Arm Push-Ups",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/assisted-one-arm-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Assisted one-arm push-ups.",
+        "nameHowTo": "Assisted one-arm push-ups. Put one hand under your chest and the other out wide on its fingertips. Lower down, letting the main arm do most of the work, then press back up. Drop to your knees if you need to."
+      },
+      "sourceNames": [
+        "Assisted One-Arm Push-Ups",
+        "Assisted One-Arm Push-Ups (L/R)",
+        "Assisted One-Arm Push-ups (L/R)"
+      ]
+    },
+    {
+      "id": "narrow-grip-kneeling-push-ups",
+      "name": "Narrow Grip Kneeling Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Triceps"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/narrow-grip-kneeling-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Narrow grip kneeling push-ups.",
+        "nameHowTo": "Narrow grip kneeling push-ups. On your knees, place your hands close together, just under your shoulders. Keep your elbows tucked in by your ribs as you lower your chest, then press back up."
+      },
+      "sourceNames": [
+        "Narrow Grip Kneeling Push-Ups",
+        "Narrow Grip Kneeling Push-ups"
+      ]
+    },
+    {
+      "id": "narrow-grip-push-ups",
+      "name": "Narrow Grip Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Triceps"
+      ],
+      "musclesSecondary": [
+        "Chest"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/narrow-grip-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Narrow grip push-ups.",
+        "nameHowTo": "Narrow grip push-ups. In a plank, place your hands close together under your shoulders. Keep your elbows tight to your sides as you lower down, then push back up in one straight line."
+      },
+      "sourceNames": [
+        "Narrow Grip Push-Ups"
+      ]
+    },
+    {
+      "id": "prayer-pulse",
+      "name": "Prayer Pulse",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/prayer-pulse.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Prayer pulse.",
+        "nameHowTo": "Prayer pulse. Sit or kneel tall and press your palms together in front of your chest. Push your hands hard into each other, then pulse them forward and back in small movements. Keep the pressure on."
+      },
+      "sourceNames": [
+        "Prayer Pulse"
+      ]
+    },
+    {
+      "id": "pseudo-push-ups",
+      "name": "Pseudo Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": null,
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Core"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/pseudo-push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pseudo push-ups.",
+        "nameHowTo": "Pseudo push-ups. In a plank, turn your fingers out and place your hands by your waist. Lean your shoulders forward past your hands, then lower your chest and press back up. Keep your body straight."
+      },
+      "sourceNames": [
+        "Pseudo Push-Ups"
+      ]
+    },
+    {
+      "id": "push-ups",
+      "name": "Push-Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Chest"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/push-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Push-ups.",
+        "nameHowTo": "Push-ups. Hands just wider than your shoulders, legs straight behind you. Keep your body in one line as you lower your chest close to the floor, then push back up. Don't let your hips drop."
+      },
+      "sourceNames": [
+        "Push-Ups",
+        "Push-ups"
+      ]
+    },
+    {
+      "id": "superman",
+      "name": "Superman",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Shoulders"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/superman.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Superman.",
+        "nameHowTo": "Superman. Lie face down with your arms stretched out in front. Lift your arms, chest and legs off the floor together, hold for a moment, then lower with control. Keep looking down at the floor."
+      },
+      "sourceNames": [
+        "Superman"
+      ]
+    },
+    {
+      "id": "bird-dogs",
+      "name": "Bird Dogs",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core",
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/bird-dogs.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bird dogs.",
+        "nameHowTo": "Bird dogs. Start on all fours. Reach one arm forward and the opposite leg back until they're level with your back. Pause, bring them in, then swap sides. Keep your hips square to the floor."
+      },
+      "sourceNames": [
+        "Bird Dogs"
+      ]
+    },
+    {
+      "id": "back-bow-with-alternating-heel-taps",
+      "name": "Back Bow with Alternating Heel Taps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/back-bow-with-alternating-heel-taps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Back bow with alternating heel taps.",
+        "nameHowTo": "Back bow with alternating heel taps. Lie face down and lift your chest off the floor. Bend one knee and reach back to tap that heel with your hand, then swap sides. Keep your chest lifted the whole time."
+      },
+      "sourceNames": [
+        "Back Bow with Alternating Heel Taps"
+      ]
+    },
+    {
+      "id": "hip-thrust",
+      "name": "Hip Thrust",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/hip-thrust.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hip thrust.",
+        "nameHowTo": "Hip thrust. Lie on your back with your knees bent and your feet flat. Drive through your heels and thrust your hips up hard, squeeze your glutes at the top, then lower with control."
+      },
+      "sourceNames": [
+        "Hip Thrust"
+      ]
+    },
+    {
+      "id": "back-bow-with-heel-taps",
+      "name": "Back Bow with Heel Taps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": null,
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/back-bow-with-heel-taps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Back bow with heel taps.",
+        "nameHowTo": "Back bow with heel taps. Lie face down and lift your chest off the floor. Bend both knees and reach back to tap your heels with both hands, then straighten your legs. Keep your chest lifted."
+      },
+      "sourceNames": [
+        "Back Bow with Heel Taps"
+      ]
+    },
+    {
+      "id": "elbow-to-knee-bird-dogs",
+      "name": "Elbow to Knee Bird Dogs",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/elbow-to-knee-bird-dogs.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Elbow to knee bird dogs.",
+        "nameHowTo": "Elbow to knee bird dogs. On all fours, reach one arm forward and the opposite leg back. Then curl them in under your body until your elbow meets your knee, and stretch out again."
+      },
+      "sourceNames": [
+        "Elbow to Knee Bird Dogs",
+        "Elbow to Knee Bird Dogs (L/R)"
+      ]
+    },
+    {
+      "id": "reverse-forearm-plank",
+      "name": "Reverse Forearm Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Glutes",
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Glutes"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/reverse-forearm-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Reverse forearm plank.",
+        "nameHowTo": "Reverse forearm plank. Sit with your legs straight and your elbows on the floor under your shoulders, behind you. Lift your hips until your body is in one straight line, facing the ceiling, and hold. Squeeze your glutes."
+      },
+      "sourceNames": [
+        "Reverse Forearm Plank"
+      ]
+    },
+    {
+      "id": "glute-bridge",
+      "name": "Glute Bridge",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/glute-bridge.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Glute bridge.",
+        "nameHowTo": "Glute bridge. Lie on your back with your knees bent and your feet flat, close to your hips. Squeeze your glutes and lift your hips until you're straight from knees to shoulders. Lower slowly."
+      },
+      "sourceNames": [
+        "Glute Bridge"
+      ]
+    },
+    {
+      "id": "bodyweight-squat",
+      "name": "Bodyweight Squat",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/bodyweight-squat.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bodyweight squat.",
+        "nameHowTo": "Bodyweight squat. Feet shoulder-width apart, toes turned out slightly. Sit your hips back and down as if onto a chair, keeping your chest up and your knees in line with your toes. Push through your heels to stand."
+      },
+      "sourceNames": [
+        "Bodyweight Squat"
+      ]
+    },
+    {
+      "id": "sumo-squat",
+      "name": "Sumo Squat",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Adductors",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/sumo-squat.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Sumo squat.",
+        "nameHowTo": "Sumo squat. Stand with your feet wide and your toes turned out. Lower your hips straight down, pushing your knees out over your toes. Keep your chest up, then squeeze your glutes to stand."
+      },
+      "sourceNames": [
+        "Sumo Squat",
+        "Sumo Squats"
+      ]
+    },
+    {
+      "id": "reverse-glute-raise",
+      "name": "Reverse Glute Raise",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Hamstrings",
+        "Back"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/reverse-glute-raise.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Reverse glute raise.",
+        "nameHowTo": "Reverse glute raise. Lie face down with your forehead resting on your hands. Keep your legs straight and lift them both off the floor using your glutes. Pause, then lower slowly."
+      },
+      "sourceNames": [
+        "Reverse Glute Raise"
+      ]
+    },
+    {
+      "id": "donkey-kicks",
+      "name": "Donkey Kicks",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/donkey-kicks.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Donkey kicks.",
+        "nameHowTo": "Donkey kicks. On all fours, keep one knee bent and kick that foot up towards the ceiling, sole facing up. Squeeze your glute at the top, lower, and repeat. Keep your back flat."
+      },
+      "sourceNames": [
+        "Donkey Kicks",
+        "Donkey Kicks (L/R)"
+      ]
+    },
+    {
+      "id": "lizard-lunge",
+      "name": "Lizard Lunge",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hip Flexors"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/lizard-lunge.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Lizard lunge.",
+        "nameHowTo": "Lizard lunge. Step one foot forward to the outside of your hands in a deep lunge, back knee down. Let your hips sink towards the floor and hold the stretch. Drop to your forearms if you can."
+      },
+      "sourceNames": [
+        "Lizard Lunge",
+        "Lizard Lunge (L/R)"
+      ]
+    },
+    {
+      "id": "5-oclock-lunges",
+      "name": "5 o'Clock Lunges",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/5-oclock-lunges.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Five o'clock lunges.",
+        "nameHowTo": "Five o'clock lunges. Stand tall. Step one leg back and out on a diagonal, like the hand of a clock, and sink into a lunge. Push back up to standing and repeat."
+      },
+      "sourceNames": [
+        "5 O'Clock Lunges (L/R)",
+        "5 o'Clock Lunges",
+        "5 o'Clock Lunges (L/R)"
+      ]
+    },
+    {
+      "id": "alternating-forward-lunge",
+      "name": "Alternating Forward Lunge",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/alternating-forward-lunge.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Alternating forward lunge.",
+        "nameHowTo": "Alternating forward lunge. Step forward and lower until both knees are bent at about a right angle. Push back to standing, then step forward with the other leg. Keep your chest tall."
+      },
+      "sourceNames": [
+        "Alternating Forward Lunge"
+      ]
+    },
+    {
+      "id": "glute-bridges-with-abduction",
+      "name": "Glute Bridges with Abduction",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/glute-bridges-with-abduction.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Glute bridges with abduction.",
+        "nameHowTo": "Glute bridges with abduction. Lift into a glute bridge with your knees bent and your feet flat. At the top, push your knees out to the sides and back in, then lower your hips. Keep squeezing your glutes."
+      },
+      "sourceNames": [
+        "Glute Bridge with Adbuction",
+        "Glute Bridges with Abduction"
+      ]
+    },
+    {
+      "id": "hip-thrust-to-knee-strike",
+      "name": "Hip Thrust to Knee Strike",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": null,
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/hip-thrust-to-knee-strike.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hip thrust to knee strike.",
+        "nameHowTo": "Hip thrust to knee strike. Lie on your back with your knees bent. Lift your hips into a bridge and drive one knee up towards your chest at the top. Lower your foot and your hips, and repeat."
+      },
+      "sourceNames": [
+        "Hip Thrust to Knee Strike",
+        "Hip Thrust to Knee Strike (L/R)"
+      ]
+    },
+    {
+      "id": "side-lunges",
+      "name": "Side Lunges",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Adductors"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/side-lunges.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Side lunges.",
+        "nameHowTo": "Side lunges. Stand with your feet together. Take a big step out to the side, bend that knee and sit your hips back, keeping the other leg straight. Push back to the middle and repeat."
+      },
+      "sourceNames": [
+        "Side Lunges",
+        "Side Lunges (L/R)"
+      ]
+    },
+    {
+      "id": "squats-with-kickback",
+      "name": "Squats with Kickback",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/squats-with-kickback.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Squats with kickback.",
+        "nameHowTo": "Squats with kickback. Lower into a squat. As you stand up, kick one leg straight back and squeeze your glute. Squat again and kick back with the other leg."
+      },
+      "sourceNames": [
+        "Squats with Kickback"
+      ]
+    },
+    {
+      "id": "alternating-glute-bridge-hold",
+      "name": "Alternating Glute Bridge Hold",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Hamstrings",
+        "Back"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/alternating-glute-bridge-hold.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Alternating glute bridge hold.",
+        "nameHowTo": "Alternating glute bridge hold. Lift your hips into a bridge and hold them there. Straighten one leg out, put it back down, then straighten the other. Keep your hips high and level the whole time."
+      },
+      "sourceNames": [
+        "Alternating Glute Bridge Hold"
+      ]
+    },
+    {
+      "id": "curtsey-lunges",
+      "name": "Curtsey Lunges",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Glutes",
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/curtsey-lunges.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Curtsey lunges.",
+        "nameHowTo": "Curtsey lunges. Stand tall. Cross one leg behind the other and out to the side, as if curtseying, and bend both knees. Push back up to standing and repeat."
+      },
+      "sourceNames": [
+        "Curtsey Lunges",
+        "Curtsey Lunges (L/R)"
+      ]
+    },
+    {
+      "id": "glute-bridge-hold",
+      "name": "Glute Bridge Hold",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": null,
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/glute-bridge-hold.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Glute bridge hold.",
+        "nameHowTo": "Glute bridge hold. Lie on your back with your knees bent and your feet flat. Lift your hips until you're straight from knees to shoulders, and hold. Keep squeezing your glutes and breathe steadily."
+      },
+      "sourceNames": [
+        "Glute Bridge Hold"
+      ]
+    },
+    {
+      "id": "pivot-lunge",
+      "name": "Pivot Lunge",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/pivot-lunge.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pivot lunge.",
+        "nameHowTo": "Pivot lunge. From a wide stance, pivot on the balls of your feet to turn sideways and drop into a lunge. Pivot back to face the front and repeat."
+      },
+      "sourceNames": [
+        "Pivot Lunge",
+        "Pivot Lunge (L/R)"
+      ]
+    },
+    {
+      "id": "prisoner-squat",
+      "name": "Prisoner Squat",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/prisoner-squat.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Prisoner squat.",
+        "nameHowTo": "Prisoner squat. Put your hands behind your head, elbows wide. Sit your hips back and down into a squat, keeping your chest lifted and your elbows open, then stand back up."
+      },
+      "sourceNames": [
+        "Prisoner Squat"
+      ]
+    },
+    {
+      "id": "side-step-squats",
+      "name": "Side Step Squats",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/side-step-squats.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Side step squats.",
+        "nameHowTo": "Side step squats. Take a step out to the side and lower into a squat. Stand up, bring your feet together, and step out the other way. Keep your chest up."
+      },
+      "sourceNames": [
+        "Side Step Squats"
+      ]
+    },
+    {
+      "id": "backward-lunges",
+      "name": "Backward Lunges",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Quads"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/backward-lunges.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Backward lunges.",
+        "nameHowTo": "Backward lunges. Stand tall and step one foot back, lowering until both knees are bent. Push through your front heel to come back to standing. Keep your front knee over your ankle."
+      },
+      "sourceNames": [
+        "Backward Lunges",
+        "Backward Lunges (L/R)"
+      ]
+    },
+    {
+      "id": "glute-bridge-hold-with-knee-to-chest",
+      "name": "Glute Bridge Hold with Knee to Chest",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Hinge",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hamstrings",
+        "Back"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/glute-bridge-hold-with-knee-to-chest.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Glute bridge hold with knee to chest.",
+        "nameHowTo": "Glute bridge hold with knee to chest. Hold your hips up in a glute bridge. Bring one knee in towards your chest, put the foot back down, then switch legs. Don't let your hips drop."
+      },
+      "sourceNames": [
+        "Bridge Hold with Knee to Chest",
+        "Glute Bridge Hold with Knee to Chest"
+      ]
+    },
+    {
+      "id": "squat-with-calf-raise",
+      "name": "Squat with Calf Raise",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/squat-with-calf-raise.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Squat with calf raise.",
+        "nameHowTo": "Squat with calf raise. Lower into a squat, then drive up to standing and keep going onto your tiptoes. Lower your heels and squat again. Move with control."
+      },
+      "sourceNames": [
+        "Squat with Calf Raise",
+        "Squats with Calf Raise"
+      ]
+    },
+    {
+      "id": "elbow-plank",
+      "name": "Elbow Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/elbow-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Elbow plank.",
+        "nameHowTo": "Elbow plank. Elbows under your shoulders, legs straight out behind you. Brace your stomach and hold your body in one straight line, with no sagging or lifting at the hips. Keep breathing."
+      },
+      "sourceNames": [
+        "Elbow Plank"
+      ]
+    },
+    {
+      "id": "leg-raises",
+      "name": "Leg Raises",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/leg-raises.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Leg raises.",
+        "nameHowTo": "Leg raises. Lie on your back with your legs straight and your hands by your sides. Press your lower back into the floor, lift your legs until they point at the ceiling, then lower them slowly without touching down."
+      },
+      "sourceNames": [
+        "Leg Raises"
+      ]
+    },
+    {
+      "id": "dead-bug",
+      "name": "Dead Bug",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/dead-bug.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Dead bug.",
+        "nameHowTo": "Dead bug. Lie on your back with your arms pointing at the ceiling and your knees bent over your hips. Lower one arm and the opposite leg towards the floor, bring them back, then switch. Keep your lower back down."
+      },
+      "sourceNames": [
+        "Dead Bug"
+      ]
+    },
+    {
+      "id": "sit-up",
+      "name": "Sit Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/sit-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Sit up.",
+        "nameHowTo": "Sit up. Lie on your back with your knees bent and your feet flat. Curl your chest up towards your knees until you're sitting up, then roll back down slowly. Lead with your chest, not your neck."
+      },
+      "sourceNames": [
+        "Sit Up",
+        "Sit Ups"
+      ]
+    },
+    {
+      "id": "spider-and-cross-plank",
+      "name": "Spider + Cross Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Obliques",
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/spider-and-cross-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Spider and cross plank.",
+        "nameHowTo": "Spider and cross plank. In a high plank, bring one knee out to the side towards the elbow on that side, then back. Next, bring it across your body towards the opposite elbow. Repeat on the other side."
+      },
+      "sourceNames": [
+        "Spider + Cross Plank"
+      ]
+    },
+    {
+      "id": "windshield-wipers",
+      "name": "Windshield Wipers",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/windshield-wipers.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Windshield wipers.",
+        "nameHowTo": "Windshield wipers. Lie on your back with your arms out wide and lift your knees above your hips. Let them drop slowly to one side, then sweep them across to the other. Keep your shoulders flat on the floor."
+      },
+      "sourceNames": [
+        "Windshield Wipers"
+      ]
+    },
+    {
+      "id": "airplane-plank",
+      "name": "Airplane Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/airplane-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Airplane plank.",
+        "nameHowTo": "Airplane plank. From a high plank, lift one arm out to the side like a wing, put it back down, then lift the other. Keep your hips square and still."
+      },
+      "sourceNames": [
+        "Airplane Plank"
+      ]
+    },
+    {
+      "id": "kayak-abs",
+      "name": "Kayak Abs",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Obliques"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/kayak-abs.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kayak abs.",
+        "nameHowTo": "Kayak abs. Sit with your knees bent and lean back a little, feet lifted. Clasp your hands and twist from side to side as if paddling a kayak. Keep your chest up."
+      },
+      "sourceNames": [
+        "Kayak Abs"
+      ]
+    },
+    {
+      "id": "flutter-kicks",
+      "name": "Flutter Kicks",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/flutter-kicks.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Flutter kicks.",
+        "nameHowTo": "Flutter kicks. Lie on your back with your hands under your hips. Lift your legs a little off the floor and kick them up and down in small, quick movements. Keep your lower back pressed down."
+      },
+      "sourceNames": [
+        "Flutter Kicks"
+      ]
+    },
+    {
+      "id": "heel-taps",
+      "name": "Heel Taps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Obliques"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/heel-taps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Heel taps.",
+        "nameHowTo": "Heel taps. Lie on your back with your knees bent and your shoulders lifted off the floor. Reach from side to side to tap each heel with your hand. Keep your stomach tight."
+      },
+      "sourceNames": [
+        "Heel Taps"
+      ]
+    },
+    {
+      "id": "l-crunch",
+      "name": "L-Crunch",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Obliques"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/l-crunch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "L-crunch.",
+        "nameHowTo": "L-crunch. Lie on your back with one leg pointing at the ceiling and the other straight on the floor. Reach your hands up towards the raised foot, lifting your shoulders, then lower slowly."
+      },
+      "sourceNames": [
+        "L-Crunch",
+        "L-Crunch (L/R)"
+      ]
+    },
+    {
+      "id": "modified-diagonal-mountain-climber",
+      "name": "Modified Diagonal Mountain Climber",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/modified-diagonal-mountain-climber.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Modified diagonal mountain climber.",
+        "nameHowTo": "Modified diagonal mountain climber. In a high plank, step one knee across towards the opposite elbow, then step it back. Switch legs. Keep a steady pace, no jumping."
+      },
+      "sourceNames": [
+        "Modified Diagonal Mountain Climber"
+      ]
+    },
+    {
+      "id": "seated-knee-tucks",
+      "name": "Seated Knee Tucks",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/seated-knee-tucks.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Seated knee tucks.",
+        "nameHowTo": "Seated knee tucks. Sit and lean back on your hands with your legs out and lifted. Pull your knees in towards your chest, then push your legs back out. Keep your feet off the floor."
+      },
+      "sourceNames": [
+        "Seated Knee Tucks"
+      ]
+    },
+    {
+      "id": "wood-chops",
+      "name": "Wood Chops",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Abs"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/wood-chops.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Wood chops.",
+        "nameHowTo": "Wood chops. Stand with your feet wide and clasp your hands above one shoulder. Swing them down diagonally across your body towards the opposite hip, turning your chest, then bring them back up."
+      },
+      "sourceNames": [
+        "Wood Chops",
+        "Wood Chops (L/R)"
+      ]
+    },
+    {
+      "id": "side-plank",
+      "name": "Side Plank",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Core",
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/side-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Side plank.",
+        "nameHowTo": "Side plank. Lie on your side and prop yourself up on your forearm, elbow under your shoulder. Lift your hips so you're straight from head to feet, and hold. Don't let your hips sink."
+      },
+      "sourceNames": [
+        "Side Plank",
+        "Side Plank (L/R)"
+      ]
+    },
+    {
+      "id": "standing-side-crunch",
+      "name": "Standing Side Crunch",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Abs"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/standing-side-crunch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Standing side crunch.",
+        "nameHowTo": "Standing side crunch. Stand with one hand behind your head. Lift that knee out to the side and bring your elbow down to meet it, crunching through your side. Return and repeat."
+      },
+      "sourceNames": [
+        "Standing Side Crunch",
+        "Standing Side Crunch (L/R)"
+      ]
+    },
+    {
+      "id": "v-sit-bicycles",
+      "name": "V Sit Bicycles",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs",
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Obliques"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/v-sit-bicycles.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "V sit bicycles.",
+        "nameHowTo": "V sit bicycles. Sit and lean back into a V with your feet off the floor. Pedal your legs as if riding a bike, twisting to bring each elbow towards the opposite knee. Keep your chest lifted."
+      },
+      "sourceNames": [
+        "V Sit Bicycles",
+        "V-sit Bicycles"
+      ]
+    },
+    {
+      "id": "overhead-sit-ups",
+      "name": "Overhead Sit Ups",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/overhead-sit-ups.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Overhead sit ups.",
+        "nameHowTo": "Overhead sit ups. Lie on your back with your arms stretched overhead. Keep your arms by your ears as you sit all the way up, then roll back down slowly. Keep your feet on the floor."
+      },
+      "sourceNames": [
+        "Overhead Sit Ups"
+      ]
+    },
+    {
+      "id": "shoulder-taps",
+      "name": "Shoulder Taps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/shoulder-taps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Shoulder taps.",
+        "nameHowTo": "Shoulder taps. Hold a high plank with your feet a little apart. Lift one hand to tap the opposite shoulder, put it back down, then switch. Keep your hips as still as you can."
+      },
+      "sourceNames": [
+        "Shoulder Taps"
+      ]
+    },
+    {
+      "id": "suitcase-sit-up",
+      "name": "Suitcase Sit Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/suitcase-sit-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Suitcase sit up.",
+        "nameHowTo": "Suitcase sit up. Lie flat with your arms stretched past your head. In one move, fold up and bring your knees and chest together, like closing a suitcase. Unfold slowly back to the floor."
+      },
+      "sourceNames": [
+        "Suitcase Sit Up"
+      ]
+    },
+    {
+      "id": "extended-suitcase-crunch",
+      "name": "Extended Suitcase Crunch",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/extended-suitcase-crunch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Extended suitcase crunch.",
+        "nameHowTo": "Extended suitcase crunch. Lie with your arms overhead and your legs straight, just off the floor. Crunch up, pulling your knees in and reaching your arms forward to meet them, then stretch back out without resting."
+      },
+      "sourceNames": [
+        "Extended Suitcase Crunch"
+      ]
+    },
+    {
+      "id": "high-plank-walk-out",
+      "name": "High Plank Walk Out",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/high-plank-walk-out.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "High plank walk out.",
+        "nameHowTo": "High plank walk out. From standing, fold down and walk your hands forward into a high plank. Hold for a moment, then walk your hands back to your feet and stand up."
+      },
+      "sourceNames": [
+        "High Plank Walk Out"
+      ]
+    },
+    {
+      "id": "plank-to-kick-back",
+      "name": "Plank to Kick Back",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/plank-to-kick-back.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Plank to kick back.",
+        "nameHowTo": "Plank to kick back. In a high plank, bring one knee towards your chest, then kick that leg straight back and up. Return to plank and repeat with the other leg."
+      },
+      "sourceNames": [
+        "Plank to Kick Back"
+      ]
+    },
+    {
+      "id": "raised-scorpion",
+      "name": "Raised Scorpion",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Shoulders"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/raised-scorpion.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Raised scorpion.",
+        "nameHowTo": "Raised scorpion. Lie face down with your arms out wide. Lift one leg, bend the knee and twist your hips to reach that foot across towards the opposite hand. Return slowly."
+      },
+      "sourceNames": [
+        "Raised Scorpion",
+        "Raised Scorpion (L/R)"
+      ]
+    },
+    {
+      "id": "scissor-kicks",
+      "name": "Scissor Kicks",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/scissor-kicks.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Scissor kicks.",
+        "nameHowTo": "Scissor kicks. Lie on your back with your hands under your hips and your legs straight and lifted a little. Cross one leg over the other, then switch, in a quick scissor movement. Keep your lower back down."
+      },
+      "sourceNames": [
+        "Scissor Kicks"
+      ]
+    },
+    {
+      "id": "hollow-body-hold",
+      "name": "Hollow Body Hold",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Abs",
+        "Hip Flexors"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "not-yet",
+      "image": "img/moves/hollow-body-hold.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hollow body hold.",
+        "nameHowTo": "Hollow body hold. Lie on your back and press your lower back into the floor. Lift your shoulders and your straight legs off the ground, reach your arms forward, and hold that curved shape."
+      },
+      "sourceNames": [
+        "Hollow Body Hold"
+      ]
+    },
+    {
+      "id": "burpee-walk",
+      "name": "Burpee Walk",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "full-body",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Full Body"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Quads",
+        "Core"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/burpee-walk.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Burpee walk.",
+        "nameHowTo": "Burpee walk. From standing, bend down and put your hands on the floor. Step your feet back one at a time into a plank, step them forward again and stand up. No jumping, just keep a steady rhythm."
+      },
+      "sourceNames": [
+        "Burpee Walk"
+      ]
+    },
+    {
+      "id": "burpees",
+      "name": "Burpees",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "full-body",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Full Body"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Quads",
+        "Core"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/burpees.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Burpees.",
+        "nameHowTo": "Burpees. Squat down and put your hands on the floor. Jump your feet back into a plank, jump them back in, then jump up with your arms overhead. Land softly and go again."
+      },
+      "sourceNames": [
+        "Burpees"
+      ]
+    },
+    {
+      "id": "squat-to-walkout",
+      "name": "Squat to Walkout",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "full-body",
+      "pattern": null,
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Core",
+        "Shoulders"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/squat-to-walkout.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Squat to walkout.",
+        "nameHowTo": "Squat to walkout. Lower into a squat and put your hands on the floor. Walk your hands out into a plank, walk them back in, then stand up. Keep a steady pace."
+      },
+      "sourceNames": [
+        "Squat to Walkout"
+      ]
+    },
+    {
+      "id": "shadow-boxing",
+      "name": "Shadow Boxing",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Core",
+        "Arms"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/shadow-boxing.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Shadow boxing.",
+        "nameHowTo": "Shadow boxing. Stand with your feet staggered and your hands up by your face. Throw quick punches straight ahead, one arm then the other, and stay light on your feet. Keep your guard up."
+      },
+      "sourceNames": [
+        "Shadow Boxing"
+      ]
+    },
+    {
+      "id": "high-knees",
+      "name": "High Knees",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Hip Flexors"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/high-knees.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "High knees.",
+        "nameHowTo": "High knees. Run on the spot, driving your knees up to hip height. Pump your arms and land lightly on the balls of your feet. Keep your chest tall."
+      },
+      "sourceNames": [
+        "High Knees"
+      ]
+    },
+    {
+      "id": "squat-jumps",
+      "name": "Squat Jumps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Calves"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "advanced",
+      "status": "in-plan",
+      "image": "img/moves/squat-jumps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Squat jumps.",
+        "nameHowTo": "Squat jumps. Lower into a squat, then jump up as high as you can. Land softly with bent knees and go straight into the next squat."
+      },
+      "sourceNames": [
+        "Squat Jumps"
+      ]
+    },
+    {
+      "id": "jump-plank",
+      "name": "Jump Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Legs"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/jump-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Jump plank.",
+        "nameHowTo": "Jump plank. Hold a high plank. Jump both feet out wide and back together, like a jumping jack. Keep your hips low and your shoulders over your hands."
+      },
+      "sourceNames": [
+        "Jump Plank"
+      ]
+    },
+    {
+      "id": "butt-kicks",
+      "name": "Butt Kicks",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/butt-kicks.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Butt kicks.",
+        "nameHowTo": "Butt kicks. Jog on the spot, kicking your heels up towards your glutes. Stay light on your feet and keep your arms moving."
+      },
+      "sourceNames": [
+        "Butt Kicks"
+      ]
+    },
+    {
+      "id": "mountain-climber",
+      "name": "Mountain Climber",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Legs"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/mountain-climber.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Mountain climber.",
+        "nameHowTo": "Mountain climber. In a high plank, drive one knee towards your chest, then switch legs quickly, as if running on the spot. Keep your hips low and your shoulders over your hands."
+      },
+      "sourceNames": [
+        "Mountain Climber"
+      ]
+    },
+    {
+      "id": "4-point-box-jumps",
+      "name": "4-Point Box Jumps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Cardio",
+      "musclesPrimary": [
+        "Quads",
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Calves"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/4-point-box-jumps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Four point box jumps.",
+        "nameHowTo": "Four point box jumps. Jump forward, to the side, back, then to the other side, as if tracing a square on the floor. Land softly on the balls of your feet."
+      },
+      "sourceNames": [
+        "4-Point Box Jumps"
+      ]
+    },
+    {
+      "id": "plank-jack-shoulder-taps",
+      "name": "Plank Jack Shoulder Taps",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "cardio",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Legs"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/plank-jack-shoulder-taps.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Plank jack shoulder taps.",
+        "nameHowTo": "Plank jack shoulder taps. In a high plank, jump your feet out and back in, then tap each hand to the opposite shoulder. Keep repeating and hold your hips steady."
+      },
+      "sourceNames": [
+        "Plank Jack Shoulder Taps"
+      ]
+    },
+    {
+      "id": "dynamic-side-bends",
+      "name": "Dynamic Side Bends",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/dynamic-side-bends.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Dynamic side bends.",
+        "nameHowTo": "Dynamic side bends. Stand tall with your feet hip-width apart. Reach one arm up and over your head as you bend to the opposite side, then switch. Keep your hips still and the movement smooth."
+      },
+      "sourceNames": [
+        "Dynamic Side Bends"
+      ]
+    },
+    {
+      "id": "standing-hip-rotation",
+      "name": "Standing Hip Rotation",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/standing-hip-rotation.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Standing hip rotation.",
+        "nameHowTo": "Standing hip rotation. Balance on one leg with your hands on your hips. Lift the other knee to hip height, swing it out to the side and lower it, drawing a big slow circle. Hold a wall if you need to."
+      },
+      "sourceNames": [
+        "Standing Hip Rotation",
+        "Standing Hip Rotation (L/R)",
+        "Standing Hip Rotations (L/R)"
+      ]
+    },
+    {
+      "id": "elbow-rotations",
+      "name": "Elbow Rotations",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Arms"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/elbow-rotations.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Elbow rotations.",
+        "nameHowTo": "Elbow rotations. Stand tall with your arms out to the sides. Circle your forearms around your elbows, first one way and then the other. Keep your shoulders relaxed."
+      },
+      "sourceNames": [
+        "Elbow Rotations"
+      ]
+    },
+    {
+      "id": "cross-body-shoulder-stretch",
+      "name": "Cross-Body Shoulder Stretch",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Shoulders",
+        "Upper Back"
+      ],
+      "musclesSecondary": [
+        "Upper Back"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/cross-body-shoulder-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Cross-body shoulder stretch.",
+        "nameHowTo": "Cross-body shoulder stretch. Bring one arm straight across your chest. Use your other hand to hug it in towards you, just above the elbow. Keep your shoulder down and hold the stretch."
+      },
+      "sourceNames": [
+        "Cross Body Shoulder Stretch (L/R)",
+        "Cross-Body Shoulder Stretch",
+        "Cross-Body Shoulder Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "wrist-warm-up",
+      "name": "Wrist Warm-Up",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Wrists",
+        "Forearms"
+      ],
+      "musclesSecondary": [
+        "Wrists"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/wrist-warm-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Wrist warm-up.",
+        "nameHowTo": "Wrist warm-up. Clasp your hands together in front of you and roll your wrists in circles, one way and then the other. Keep it loose and easy."
+      },
+      "sourceNames": [
+        "Wrist Warm-Up",
+        "Wrist Warmup"
+      ]
+    },
+    {
+      "id": "chest-openers-with-rotation",
+      "name": "Chest Openers with Rotation",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Chest",
+        "Upper Back"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Back"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/chest-openers-with-rotation.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Chest openers with rotation.",
+        "nameHowTo": "Chest openers with rotation. Stand tall with your arms out in front. Open one arm out to the side and turn your chest to follow it, then come back and switch sides."
+      },
+      "sourceNames": [
+        "Chest Openers With Rotation",
+        "Chest Openers with Rotation"
+      ]
+    },
+    {
+      "id": "active-calf-and-hamstring-stretch",
+      "name": "Active Calf & Hamstring Stretch",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hamstrings",
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/active-calf-and-hamstring-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Active calf and hamstring stretch.",
+        "nameHowTo": "Active calf and hamstring stretch. Put one heel forward with your toes pointing up. Hinge at your hips and reach towards that foot, then stand up and swap legs. Keep your front leg straight."
+      },
+      "sourceNames": [
+        "Active Calf & Hamstring Stretch"
+      ]
+    },
+    {
+      "id": "deep-side-to-side-lunge",
+      "name": "Deep Side to Side Lunge",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Adductors",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Quads"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/deep-side-to-side-lunge.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Deep side to side lunge.",
+        "nameHowTo": "Deep side to side lunge. Stand with your feet wide. Shift your weight onto one leg and sink low into a side lunge, then move across to the other side. Keep your chest up."
+      },
+      "sourceNames": [
+        "Deep Side to Side Lunge",
+        "Side to Side Lunge"
+      ]
+    },
+    {
+      "id": "lunge-with-thoracic-rotation",
+      "name": "Lunge with Thoracic Rotation",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Upper Back"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/lunge-with-thoracic-rotation.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Lunge with thoracic rotation.",
+        "nameHowTo": "Lunge with thoracic rotation. Step into a lunge and put the opposite hand on the floor inside your front foot. Reach your other arm up to the ceiling, turning your chest to follow it, then lower and repeat."
+      },
+      "sourceNames": [
+        "Lunge with Thoracic Rotation",
+        "Lunge with Thoracic Rotation (L/R)"
+      ]
+    },
+    {
+      "id": "roll-down",
+      "name": "Roll Down",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Spine",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/roll-down.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Roll down.",
+        "nameHowTo": "Roll down. Stand tall and tuck your chin. Roll down slowly, one part of your spine at a time, until your hands reach towards the floor. Then roll back up to standing."
+      },
+      "sourceNames": [
+        "Roll Down"
+      ]
+    },
+    {
+      "id": "full-lunge-leg-rolls",
+      "name": "Full Lunge Leg Rolls",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/full-lunge-leg-rolls.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Full lunge leg rolls.",
+        "nameHowTo": "Full lunge leg rolls. Step into a deep lunge with your hands on the floor. Roll onto the outside edge of your front foot so that knee drops out, then roll back. Swap legs halfway."
+      },
+      "sourceNames": [
+        "Full Lunge Leg Rolls"
+      ]
+    },
+    {
+      "id": "malasana-squat",
+      "name": "Malasana Squat",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hips",
+        "Adductors"
+      ],
+      "musclesSecondary": [
+        "Quads"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/malasana-squat.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Malasana squat.",
+        "nameHowTo": "Malasana squat. Sink into a deep squat with your feet wide and your heels down. Press your palms together and use your elbows to ease your knees apart. Keep your chest lifted."
+      },
+      "sourceNames": [
+        "Malasana Squat"
+      ]
+    },
+    {
+      "id": "90-90-flip-hip-mobility",
+      "name": "90/90 Flip: Hip Mobility",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/90-90-flip-hip-mobility.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Ninety ninety flip.",
+        "nameHowTo": "Ninety ninety flip. Sit with both knees bent at right angles, one leg in front of you and one to the side. Lift your knees and swing them over to the other side so the legs swap. Keep your chest tall."
+      },
+      "sourceNames": [
+        "90/90 Flip: Hip Mobility"
+      ]
+    },
+    {
+      "id": "pendulum-hamstring-stretch",
+      "name": "Pendulum Hamstring Stretch",
+      "sides": "none",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Hips"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/pendulum-hamstring-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pendulum hamstring stretch.",
+        "nameHowTo": "Pendulum hamstring stretch. Stand on one leg and swing the other forward and back like a pendulum, keeping it straight. Let the swing grow little by little, and swap legs halfway. Hold a wall if you need it."
+      },
+      "sourceNames": [
+        "Pendulum Hamstring Stretch"
+      ]
+    },
+    {
+      "id": "side-stretch",
+      "name": "Side Stretch",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Obliques"
+      ],
+      "musclesSecondary": [
+        "Lats"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/side-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Side stretch.",
+        "nameHowTo": "Side stretch. Stand tall with your feet hip-width apart. Reach one arm up and over your head, leaning to the opposite side until you feel it down your side. Hold and breathe slowly."
+      },
+      "sourceNames": [
+        "Side Stretch",
+        "Side Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "cat-to-cow-stretch",
+      "name": "Cat to Cow Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Spine"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/cat-to-cow-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Cat to cow stretch.",
+        "nameHowTo": "Cat to cow stretch. On your hands and knees, breathe in as you let your stomach drop and lift your chest. Breathe out as you round your back up towards the ceiling and tuck your chin. Keep it slow."
+      },
+      "sourceNames": [
+        "Cat to Cow Stretch"
+      ]
+    },
+    {
+      "id": "plank-to-downward-dog",
+      "name": "Plank to Downward Dog",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Shoulders",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Core"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/plank-to-downward-dog.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Plank to downward dog.",
+        "nameHowTo": "Plank to downward dog. From a high plank, lift your hips up and back so your body makes an upside-down V. Ease your heels towards the floor, pause, then come back down to plank."
+      },
+      "sourceNames": [
+        "Plank to Downward Dog"
+      ]
+    },
+    {
+      "id": "childs-pose",
+      "name": "Child's Pose",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/childs-pose.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Child's pose.",
+        "nameHowTo": "Child's pose. Kneel, sit back on your heels and fold forward. Stretch your arms out in front of you and rest your forehead on the floor. Let your back soften and breathe slowly."
+      },
+      "sourceNames": [
+        "Child's Pose"
+      ]
+    },
+    {
+      "id": "knees-to-chest-stretch",
+      "name": "Knees to Chest Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/knees-to-chest-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Knees to chest stretch.",
+        "nameHowTo": "Knees to chest stretch. Lie on your back and hug both knees into your chest. Let your lower back relax into the floor. You can rock gently from side to side."
+      },
+      "sourceNames": [
+        "Knees to Chest Stretch"
+      ]
+    },
+    {
+      "id": "overhead-lat-stretch",
+      "name": "Overhead Lat Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Lats"
+      ],
+      "musclesSecondary": [
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/overhead-lat-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Overhead lat stretch.",
+        "nameHowTo": "Overhead lat stretch. Reach both arms overhead and hold one wrist with the other hand. Lean gently to the side to stretch down your back and side, then switch sides."
+      },
+      "sourceNames": [
+        "Overhead Lat Stretch"
+      ]
+    },
+    {
+      "id": "seated-hamstring-stretch",
+      "name": "Seated Hamstring Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Lower Back"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/seated-hamstring-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Seated hamstring stretch.",
+        "nameHowTo": "Seated hamstring stretch. Sit with your legs straight out in front. Keep your back long and hinge forward from your hips, reaching for your toes. Stop where you feel the stretch and hold."
+      },
+      "sourceNames": [
+        "Seated Hamstring Stretch"
+      ]
+    },
+    {
+      "id": "seated-lower-back-stretch",
+      "name": "Seated Lower Back Stretch",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/seated-lower-back-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Seated lower back stretch.",
+        "nameHowTo": "Seated lower back stretch. Sit tall with your legs out. Bend one knee and cross that foot over the other leg. Hug the knee and turn your chest towards it, looking over your shoulder."
+      },
+      "sourceNames": [
+        "Seated Lower Back Stretch",
+        "Seated Lower Back Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "figure-4-stretch",
+      "name": "Figure 4 Stretch",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Hips"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/figure-4-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Figure four stretch.",
+        "nameHowTo": "Figure four stretch. Lying face up, bend both knees and plant your feet. Cross one ankle over the opposite knee, then thread your hands behind the bottom thigh and draw it towards you. Hold and feel it in your hip."
+      },
+      "sourceNames": [
+        "Figure 4 Stretch",
+        "Figure 4 Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "hip-flexor-stretch",
+      "name": "Hip Flexor Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Hip Flexors"
+      ],
+      "musclesSecondary": [
+        "Quads"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/hip-flexor-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hip flexor stretch.",
+        "nameHowTo": "Hip flexor stretch. Kneel on one knee with the other foot flat in front. Tuck your hips under and shift forward until you feel a stretch at the front of your back hip. Swap sides halfway."
+      },
+      "sourceNames": [
+        "Hip Flexor Stretch"
+      ]
+    },
+    {
+      "id": "spinal-twist",
+      "name": "Spinal Twist",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Obliques"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/spinal-twist.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Spinal twist.",
+        "nameHowTo": "Spinal twist. Lie on your back with your arms out wide. Bring one knee across your body towards the floor and turn your head the other way. Keep both shoulders down and breathe."
+      },
+      "sourceNames": [
+        "Spinal Twist",
+        "Spinal Twist (L/R)"
+      ]
+    },
+    {
+      "id": "cobra",
+      "name": "Cobra",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Spine",
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Lower Back"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/cobra.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Cobra.",
+        "nameHowTo": "Cobra. Lie face down with your hands under your shoulders. Press up gently to lift your chest, keeping your hips on the floor and your shoulders down. Hold, then lower slowly."
+      },
+      "sourceNames": [
+        "Cobra"
+      ]
+    },
+    {
+      "id": "deep-squat-and-thoracic-rotation",
+      "name": "Deep Squat + Thoracic Rotation",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Upper Back"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/deep-squat-and-thoracic-rotation.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Deep squat with thoracic rotation.",
+        "nameHowTo": "Deep squat with thoracic rotation. Sink into a deep squat. Put one hand on the floor and reach the other arm up to the ceiling, turning your chest. Bring it down and switch sides."
+      },
+      "sourceNames": [
+        "Deep Squat + Thoracic Rotation"
+      ]
+    },
+    {
+      "id": "pigeon-pose",
+      "name": "Pigeon Pose",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": "Mobility",
+      "musclesPrimary": [
+        "Glutes",
+        "Hips"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/pigeon-pose.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pigeon pose.",
+        "nameHowTo": "Pigeon pose. From all fours, bring one knee forward behind your wrist and stretch the other leg back. Lower your hips and fold forward over your front leg if it feels good. Breathe into the stretch."
+      },
+      "sourceNames": [
+        "Pigeon Pose",
+        "Pigeon Pose (L/R)"
+      ]
+    },
+    {
+      "id": "seated-butterfly-stretch",
+      "name": "Seated Butterfly Stretch",
+      "sides": "none",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Adductors"
+      ],
+      "musclesSecondary": [
+        "Hips"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/seated-butterfly-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Seated butterfly stretch.",
+        "nameHowTo": "Seated butterfly stretch. Sit tall with the soles of your feet together and your knees falling out. Hold your feet and gently bounce your knees towards the floor. Keep your back straight."
+      },
+      "sourceNames": [
+        "Seated Butterfly Stretch"
+      ]
+    },
+    {
+      "id": "bodyweight-row",
+      "name": "Bodyweight Row",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Pull",
+      "musclesPrimary": [
+        "Upper Back"
+      ],
+      "musclesSecondary": [
+        "Biceps",
+        "Rear Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [
+        "Gymnastic Rings / Low Bar"
+      ],
+      "level": "beginner",
+      "status": "not-yet",
+      "image": "img/moves/bodyweight-row.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bodyweight row.",
+        "nameHowTo": "Bodyweight row. Lie under a low bar or rings and grip with straight arms, body in one line. Pull your chest up to the bar, squeezing your shoulder blades, then lower slowly."
+      },
+      "sourceNames": [
+        "Bodyweight Row"
+      ]
+    },
+    {
+      "id": "bulgarian-split-squats",
+      "name": "Bulgarian Split Squats",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Squat",
+      "musclesPrimary": [
+        "Quads",
+        "Glutes"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [
+        "Elevated Surface"
+      ],
+      "level": "intermediate",
+      "status": "not-yet",
+      "image": "img/moves/bulgarian-split-squats.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bulgarian split squats.",
+        "nameHowTo": "Bulgarian split squats. Stand in front of a bench and rest one foot on it behind you. Lower into a lunge on your front leg, then push back up. Swap legs halfway."
+      },
+      "sourceNames": [
+        "Bulgarian Split Squats"
+      ]
+    },
+    {
+      "id": "calf-raises",
+      "name": "Calf Raises",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "legs",
+      "pattern": "Accessory",
+      "musclesPrimary": [
+        "Calves"
+      ],
+      "musclesSecondary": [],
+      "area": "Lower Body",
+      "equipment": [
+        "None / Step"
+      ],
+      "level": "beginner",
+      "status": "not-yet",
+      "image": "img/moves/calf-raises.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Calf raises.",
+        "nameHowTo": "Calf raises. Stand tall, on a step if you have one. Rise up onto your tiptoes as high as you can, pause, then lower your heels slowly."
+      },
+      "sourceNames": [
+        "Calf Raises"
+      ]
+    },
+    {
+      "id": "chin-up",
+      "name": "Chin Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Pull",
+      "musclesPrimary": [
+        "Lats",
+        "Biceps"
+      ],
+      "musclesSecondary": [
+        "Back",
+        "Forearms"
+      ],
+      "area": "Upper Body",
+      "equipment": [
+        "Pull-up Bar"
+      ],
+      "level": "intermediate",
+      "status": "not-yet",
+      "image": "img/moves/chin-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Chin up.",
+        "nameHowTo": "Chin up. Hang from a bar with your palms facing you, hands shoulder-width apart. Pull up until your chin is over the bar, then lower all the way down with control."
+      },
+      "sourceNames": [
+        "Chin Up"
+      ]
+    },
+    {
+      "id": "dips",
+      "name": "Dips",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Triceps"
+      ],
+      "musclesSecondary": [
+        "Chest",
+        "Shoulders"
+      ],
+      "area": "Upper Body",
+      "equipment": [
+        "Parallel Bars / Elevated Surface"
+      ],
+      "level": "intermediate",
+      "status": "not-yet",
+      "image": "img/moves/dips.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Dips.",
+        "nameHowTo": "Dips. Support yourself on parallel bars or a sturdy edge with straight arms. Bend your elbows to lower your body, then press back up. Keep your shoulders down."
+      },
+      "sourceNames": [
+        "Dips"
+      ]
+    },
+    {
+      "id": "handstand-push-up",
+      "name": "Handstand Push Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "push",
+      "pattern": "Push",
+      "musclesPrimary": [
+        "Shoulders"
+      ],
+      "musclesSecondary": [
+        "Triceps",
+        "Traps"
+      ],
+      "area": "Upper Body",
+      "equipment": [
+        "Wall (optional)"
+      ],
+      "level": "advanced",
+      "status": "not-yet",
+      "image": "img/moves/handstand-push-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Handstand push up.",
+        "nameHowTo": "Handstand push up. Kick up into a handstand against a wall. Bend your elbows to lower your head towards the floor, then press back up. Only try this when you're ready."
+      },
+      "sourceNames": [
+        "Handstand Push Up"
+      ]
+    },
+    {
+      "id": "hanging-leg-raise",
+      "name": "Hanging Leg Raise",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": "Core",
+      "musclesPrimary": [
+        "Abs"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors",
+        "Grip Strength"
+      ],
+      "area": "Core",
+      "equipment": [
+        "Pull-up Bar"
+      ],
+      "level": "intermediate",
+      "status": "not-yet",
+      "image": "img/moves/hanging-leg-raise.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Hanging leg raise.",
+        "nameHowTo": "Hanging leg raise. Hang from a bar with straight arms. Brace your stomach and lift your legs up in front of you, then lower them slowly without swinging."
+      },
+      "sourceNames": [
+        "Hanging Leg Raise"
+      ]
+    },
+    {
+      "id": "pull-up",
+      "name": "Pull Up",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": "Pull",
+      "musclesPrimary": [
+        "Lats"
+      ],
+      "musclesSecondary": [
+        "Biceps",
+        "Forearms"
+      ],
+      "area": "Upper Body",
+      "equipment": [
+        "Pull-up Bar"
+      ],
+      "level": "intermediate",
+      "status": "not-yet",
+      "image": "img/moves/pull-up.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pull up.",
+        "nameHowTo": "Pull up. Hang from a bar with your palms facing away, hands a little wider than your shoulders. Pull up until your chin clears the bar, then lower slowly to a full hang."
+      },
+      "sourceNames": [
+        "Pull Up"
+      ]
+    },
+    {
+      "id": "quadruped-twister",
+      "name": "Quadruped Twister",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [],
+      "musclesSecondary": [],
+      "area": null,
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/quadruped-twister.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Quadruped twister.",
+        "nameHowTo": "Quadruped twister. Start on all fours with your knees lifted just off the floor. Twist your hips and kick one leg through underneath you towards the opposite side, then come back and switch."
+      },
+      "sourceNames": [
+        "Quadruped Twister"
+      ]
+    },
+    {
+      "id": "plank-punches-with-leg-extension",
+      "name": "Plank Punches with Leg Extension",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "core",
+      "pattern": null,
+      "musclesPrimary": [
+        "Core"
+      ],
+      "musclesSecondary": [
+        "Shoulders",
+        "Glutes"
+      ],
+      "area": "Core",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/plank-punches-with-leg-extension.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Plank punches with leg extension.",
+        "nameHowTo": "Plank punches with leg extension. Hold a high plank. Punch one arm forward and lift the opposite leg straight back at the same time. Put them down and switch. Keep your hips level."
+      },
+      "sourceNames": [
+        "Plank Punches with Leg Extension"
+      ]
+    },
+    {
+      "id": "reverse-plank",
+      "name": "Reverse Plank",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "pull",
+      "pattern": null,
+      "musclesPrimary": [
+        "Glutes",
+        "Lower Back"
+      ],
+      "musclesSecondary": [
+        "Hamstrings",
+        "Shoulders"
+      ],
+      "area": "Back",
+      "equipment": [],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/reverse-plank.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Reverse plank.",
+        "nameHowTo": "Reverse plank. Sit with your legs out straight and your hands on the floor behind you. Press through your hands and raise your hips until you're in one straight line, chest up. Hold it there."
+      },
+      "sourceNames": [
+        "Reverse Plank"
+      ]
+    }
+  ]
+}

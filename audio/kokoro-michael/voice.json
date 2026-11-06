@@ -1,0 +1,716 @@
+{
+ "id": "kokoro-michael",
+ "engine": "kokoro-82m-v1.0",
+ "kokoroVoice": "am_michael",
+ "reads": "nameOnly",
+ "clips": {
+  "kneeling-push-ups": {
+   "text": "Kneeling push-ups.",
+   "secs": 1.22
+  },
+  "commando-plank": {
+   "text": "Commando plank.",
+   "secs": 1.17
+  },
+  "wide-grip-push-ups": {
+   "text": "Wide grip push-ups.",
+   "secs": 1.37
+  },
+  "diamond-push-ups": {
+   "text": "Diamond push-ups.",
+   "secs": 1.29
+  },
+  "pike-push-ups": {
+   "text": "Pike push-ups.",
+   "secs": 1.02
+  },
+  "archer-push-ups": {
+   "text": "Archer push-ups.",
+   "secs": 1.16
+  },
+  "kneeling-archer-push-ups": {
+   "text": "Kneeling archer push-ups.",
+   "secs": 1.59
+  },
+  "kneeling-push-ups-to-down-dog": {
+   "text": "Kneeling push-ups to down dog.",
+   "secs": 1.99
+  },
+  "reverse-plank-tricep-dips": {
+   "text": "Reverse plank tricep dips.",
+   "secs": 1.8
+  },
+  "single-leg-push-ups": {
+   "text": "Single leg push-ups.",
+   "secs": 1.38
+  },
+  "single-leg-push-ups--left": {
+   "text": "Single leg push-ups. Left side.",
+   "secs": 2.4
+  },
+  "single-leg-push-ups--right": {
+   "text": "Single leg push-ups. Right side.",
+   "secs": 2.48
+  },
+  "wave-push-up": {
+   "text": "Wave push-up.",
+   "secs": 1.07
+  },
+  "airplane-push-ups": {
+   "text": "Airplane push-ups.",
+   "secs": 1.27
+  },
+  "hindu-push-ups": {
+   "text": "Hindu push-ups.",
+   "secs": 1.16
+  },
+  "kneeling-pseudo-push-ups": {
+   "text": "Kneeling pseudo push-ups.",
+   "secs": 1.56
+  },
+  "kneeling-push-ups-hands-off": {
+   "text": "Kneeling push-ups, hands off.",
+   "secs": 1.76
+  },
+  "mountain-climber-to-push-ups-from-knees": {
+   "text": "Mountain climber to push-ups from knees.",
+   "secs": 2.31
+  },
+  "scapular-push-ups": {
+   "text": "Scapular push-ups.",
+   "secs": 1.27
+  },
+  "walkouts-to-push-ups": {
+   "text": "Walkouts to push-ups.",
+   "secs": 1.42
+  },
+  "assisted-one-arm-push-ups": {
+   "text": "Assisted one-arm push-ups.",
+   "secs": 1.84
+  },
+  "assisted-one-arm-push-ups--left": {
+   "text": "Assisted one-arm push-ups. Left side.",
+   "secs": 2.83
+  },
+  "assisted-one-arm-push-ups--right": {
+   "text": "Assisted one-arm push-ups. Right side.",
+   "secs": 2.86
+  },
+  "narrow-grip-kneeling-push-ups": {
+   "text": "Narrow grip kneeling push-ups.",
+   "secs": 1.77
+  },
+  "narrow-grip-push-ups": {
+   "text": "Narrow grip push-ups.",
+   "secs": 1.42
+  },
+  "prayer-pulse": {
+   "text": "Prayer pulse.",
+   "secs": 0.87
+  },
+  "pseudo-push-ups": {
+   "text": "Pseudo push-ups.",
+   "secs": 1.13
+  },
+  "push-ups": {
+   "text": "Push-ups.",
+   "secs": 0.81
+  },
+  "superman": {
+   "text": "Superman.",
+   "secs": 0.91
+  },
+  "bird-dogs": {
+   "text": "Bird dogs.",
+   "secs": 1.02
+  },
+  "back-bow-with-alternating-heel-taps": {
+   "text": "Back bow with alternating heel taps.",
+   "secs": 2.3
+  },
+  "hip-thrust": {
+   "text": "Hip thrust.",
+   "secs": 0.93
+  },
+  "back-bow-with-heel-taps": {
+   "text": "Back bow with heel taps.",
+   "secs": 1.62
+  },
+  "elbow-to-knee-bird-dogs": {
+   "text": "Elbow to knee bird dogs.",
+   "secs": 1.69
+  },
+  "elbow-to-knee-bird-dogs--left": {
+   "text": "Elbow to knee bird dogs. Left side.",
+   "secs": 2.64
+  },
+  "elbow-to-knee-bird-dogs--right": {
+   "text": "Elbow to knee bird dogs. Right side.",
+   "secs": 2.72
+  },
+  "reverse-forearm-plank": {
+   "text": "Reverse forearm plank.",
+   "secs": 1.45
+  },
+  "glute-bridge": {
+   "text": "Glute bridge.",
+   "secs": 1.07
+  },
+  "bodyweight-squat": {
+   "text": "Bodyweight squat.",
+   "secs": 1.17
+  },
+  "sumo-squat": {
+   "text": "Sumo squat.",
+   "secs": 1.05
+  },
+  "reverse-glute-raise": {
+   "text": "Reverse glute raise.",
+   "secs": 1.45
+  },
+  "donkey-kicks": {
+   "text": "Donkey kicks.",
+   "secs": 1.03
+  },
+  "donkey-kicks--left": {
+   "text": "Donkey kicks. Left side.",
+   "secs": 1.86
+  },
+  "donkey-kicks--right": {
+   "text": "Donkey kicks. Right side.",
+   "secs": 1.81
+  },
+  "lizard-lunge": {
+   "text": "Lizard lunge.",
+   "secs": 1.09
+  },
+  "lizard-lunge--left": {
+   "text": "Lizard lunge. Left side.",
+   "secs": 1.91
+  },
+  "lizard-lunge--right": {
+   "text": "Lizard lunge. Right side.",
+   "secs": 1.89
+  },
+  "5-oclock-lunges": {
+   "text": "Five o'clock lunges.",
+   "secs": 1.52
+  },
+  "5-oclock-lunges--left": {
+   "text": "Five o'clock lunges. Left side.",
+   "secs": 2.48
+  },
+  "5-oclock-lunges--right": {
+   "text": "Five o'clock lunges. Right side.",
+   "secs": 2.53
+  },
+  "alternating-forward-lunge": {
+   "text": "Alternating forward lunge.",
+   "secs": 1.72
+  },
+  "glute-bridges-with-abduction": {
+   "text": "Glute bridges with abduction.",
+   "secs": 1.73
+  },
+  "hip-thrust-to-knee-strike": {
+   "text": "Hip thrust to knee strike.",
+   "secs": 1.47
+  },
+  "hip-thrust-to-knee-strike--left": {
+   "text": "Hip thrust to knee strike. Left side.",
+   "secs": 2.46
+  },
+  "hip-thrust-to-knee-strike--right": {
+   "text": "Hip thrust to knee strike. Right side.",
+   "secs": 2.51
+  },
+  "side-lunges": {
+   "text": "Side lunges.",
+   "secs": 1.1
+  },
+  "side-lunges--left": {
+   "text": "Side lunges. Left side.",
+   "secs": 1.98
+  },
+  "side-lunges--right": {
+   "text": "Side lunges. Right side.",
+   "secs": 1.88
+  },
+  "squats-with-kickback": {
+   "text": "Squats with kickback.",
+   "secs": 1.27
+  },
+  "alternating-glute-bridge-hold": {
+   "text": "Alternating glute bridge hold.",
+   "secs": 2.0
+  },
+  "curtsey-lunges": {
+   "text": "Curtsey lunges.",
+   "secs": 1.11
+  },
+  "curtsey-lunges--left": {
+   "text": "Curtsey lunges. Left side.",
+   "secs": 1.99
+  },
+  "curtsey-lunges--right": {
+   "text": "Curtsey lunges. Right side.",
+   "secs": 1.99
+  },
+  "glute-bridge-hold": {
+   "text": "Glute bridge hold.",
+   "secs": 1.32
+  },
+  "pivot-lunge": {
+   "text": "Pivot lunge.",
+   "secs": 0.95
+  },
+  "pivot-lunge--left": {
+   "text": "Pivot lunge. Left side.",
+   "secs": 1.81
+  },
+  "pivot-lunge--right": {
+   "text": "Pivot lunge. Right side.",
+   "secs": 1.74
+  },
+  "prisoner-squat": {
+   "text": "Prisoner squat.",
+   "secs": 1.08
+  },
+  "side-step-squats": {
+   "text": "Side step squats.",
+   "secs": 1.36
+  },
+  "backward-lunges": {
+   "text": "Backward lunges.",
+   "secs": 1.17
+  },
+  "backward-lunges--left": {
+   "text": "Backward lunges. Left side.",
+   "secs": 2.08
+  },
+  "backward-lunges--right": {
+   "text": "Backward lunges. Right side.",
+   "secs": 2.06
+  },
+  "glute-bridge-hold-with-knee-to-chest": {
+   "text": "Glute bridge hold with knee to chest.",
+   "secs": 2.2
+  },
+  "squat-with-calf-raise": {
+   "text": "Squat with calf raise.",
+   "secs": 1.39
+  },
+  "elbow-plank": {
+   "text": "Elbow plank.",
+   "secs": 1.02
+  },
+  "leg-raises": {
+   "text": "Leg raises.",
+   "secs": 1.02
+  },
+  "dead-bug": {
+   "text": "Dead bug.",
+   "secs": 0.85
+  },
+  "sit-up": {
+   "text": "Sit up.",
+   "secs": 0.76
+  },
+  "spider-and-cross-plank": {
+   "text": "Spider and cross plank.",
+   "secs": 1.53
+  },
+  "windshield-wipers": {
+   "text": "Windshield wipers.",
+   "secs": 1.35
+  },
+  "airplane-plank": {
+   "text": "Airplane plank.",
+   "secs": 1.09
+  },
+  "kayak-abs": {
+   "text": "Kayak abs.",
+   "secs": 1.02
+  },
+  "flutter-kicks": {
+   "text": "Flutter kicks.",
+   "secs": 1.0
+  },
+  "heel-taps": {
+   "text": "Heel taps.",
+   "secs": 0.97
+  },
+  "l-crunch": {
+   "text": "L-crunch.",
+   "secs": 0.9
+  },
+  "l-crunch--left": {
+   "text": "L-crunch. Left side.",
+   "secs": 1.55
+  },
+  "l-crunch--right": {
+   "text": "L-crunch. Right side.",
+   "secs": 1.6
+  },
+  "modified-diagonal-mountain-climber": {
+   "text": "Modified diagonal mountain climber.",
+   "secs": 2.34
+  },
+  "seated-knee-tucks": {
+   "text": "Seated knee tucks.",
+   "secs": 1.25
+  },
+  "wood-chops": {
+   "text": "Wood chops.",
+   "secs": 1.01
+  },
+  "wood-chops--left": {
+   "text": "Wood chops. Left side.",
+   "secs": 1.61
+  },
+  "wood-chops--right": {
+   "text": "Wood chops. Right side.",
+   "secs": 1.63
+  },
+  "side-plank": {
+   "text": "Side plank.",
+   "secs": 0.98
+  },
+  "side-plank--left": {
+   "text": "Side plank. Left side.",
+   "secs": 1.68
+  },
+  "side-plank--right": {
+   "text": "Side plank. Right side.",
+   "secs": 1.6
+  },
+  "standing-side-crunch": {
+   "text": "Standing side crunch.",
+   "secs": 1.42
+  },
+  "standing-side-crunch--left": {
+   "text": "Standing side crunch. Left side.",
+   "secs": 2.46
+  },
+  "standing-side-crunch--right": {
+   "text": "Standing side crunch. Right side.",
+   "secs": 2.48
+  },
+  "v-sit-bicycles": {
+   "text": "V sit bicycles.",
+   "secs": 1.41
+  },
+  "overhead-sit-ups": {
+   "text": "Overhead sit ups.",
+   "secs": 1.28
+  },
+  "shoulder-taps": {
+   "text": "Shoulder taps.",
+   "secs": 1.06
+  },
+  "suitcase-sit-up": {
+   "text": "Suitcase sit up.",
+   "secs": 1.18
+  },
+  "extended-suitcase-crunch": {
+   "text": "Extended suitcase crunch.",
+   "secs": 1.76
+  },
+  "high-plank-walk-out": {
+   "text": "High plank walk out.",
+   "secs": 1.42
+  },
+  "plank-to-kick-back": {
+   "text": "Plank to kick back.",
+   "secs": 1.21
+  },
+  "raised-scorpion": {
+   "text": "Raised scorpion.",
+   "secs": 1.19
+  },
+  "raised-scorpion--left": {
+   "text": "Raised scorpion. Left side.",
+   "secs": 2.01
+  },
+  "raised-scorpion--right": {
+   "text": "Raised scorpion. Right side.",
+   "secs": 1.94
+  },
+  "scissor-kicks": {
+   "text": "Scissor kicks.",
+   "secs": 1.0
+  },
+  "hollow-body-hold": {
+   "text": "Hollow body hold.",
+   "secs": 1.41
+  },
+  "burpee-walk": {
+   "text": "Burpee walk.",
+   "secs": 1.02
+  },
+  "burpees": {
+   "text": "Burpees.",
+   "secs": 0.84
+  },
+  "squat-to-walkout": {
+   "text": "Squat to walkout.",
+   "secs": 1.23
+  },
+  "shadow-boxing": {
+   "text": "Shadow boxing.",
+   "secs": 1.15
+  },
+  "high-knees": {
+   "text": "High knees.",
+   "secs": 0.92
+  },
+  "squat-jumps": {
+   "text": "Squat jumps.",
+   "secs": 1.04
+  },
+  "jump-plank": {
+   "text": "Jump plank.",
+   "secs": 1.0
+  },
+  "butt-kicks": {
+   "text": "Butt kicks.",
+   "secs": 0.88
+  },
+  "mountain-climber": {
+   "text": "Mountain climber.",
+   "secs": 1.15
+  },
+  "4-point-box-jumps": {
+   "text": "Four point box jumps.",
+   "secs": 1.62
+  },
+  "plank-jack-shoulder-taps": {
+   "text": "Plank jack shoulder taps.",
+   "secs": 1.58
+  },
+  "dynamic-side-bends": {
+   "text": "Dynamic side bends.",
+   "secs": 1.49
+  },
+  "standing-hip-rotation": {
+   "text": "Standing hip rotation.",
+   "secs": 1.52
+  },
+  "standing-hip-rotation--left": {
+   "text": "Standing hip rotation. Left side.",
+   "secs": 2.58
+  },
+  "standing-hip-rotation--right": {
+   "text": "Standing hip rotation. Right side.",
+   "secs": 2.6
+  },
+  "elbow-rotations": {
+   "text": "Elbow rotations.",
+   "secs": 1.35
+  },
+  "cross-body-shoulder-stretch": {
+   "text": "Cross-body shoulder stretch.",
+   "secs": 1.57
+  },
+  "cross-body-shoulder-stretch--left": {
+   "text": "Cross-body shoulder stretch. Left side.",
+   "secs": 2.54
+  },
+  "cross-body-shoulder-stretch--right": {
+   "text": "Cross-body shoulder stretch. Right side.",
+   "secs": 2.58
+  },
+  "wrist-warm-up": {
+   "text": "Wrist warm-up.",
+   "secs": 1.06
+  },
+  "chest-openers-with-rotation": {
+   "text": "Chest openers with rotation.",
+   "secs": 1.88
+  },
+  "active-calf-and-hamstring-stretch": {
+   "text": "Active calf and hamstring stretch.",
+   "secs": 2.03
+  },
+  "deep-side-to-side-lunge": {
+   "text": "Deep side to side lunge.",
+   "secs": 1.74
+  },
+  "lunge-with-thoracic-rotation": {
+   "text": "Lunge with thoracic rotation.",
+   "secs": 1.96
+  },
+  "lunge-with-thoracic-rotation--left": {
+   "text": "Lunge with thoracic rotation. Left side.",
+   "secs": 3.11
+  },
+  "lunge-with-thoracic-rotation--right": {
+   "text": "Lunge with thoracic rotation. Right side.",
+   "secs": 3.11
+  },
+  "roll-down": {
+   "text": "Roll down.",
+   "secs": 0.9
+  },
+  "full-lunge-leg-rolls": {
+   "text": "Full lunge leg rolls.",
+   "secs": 1.56
+  },
+  "malasana-squat": {
+   "text": "Malasana squat.",
+   "secs": 1.34
+  },
+  "90-90-flip-hip-mobility": {
+   "text": "Ninety ninety flip.",
+   "secs": 1.35
+  },
+  "pendulum-hamstring-stretch": {
+   "text": "Pendulum hamstring stretch.",
+   "secs": 1.72
+  },
+  "side-stretch": {
+   "text": "Side stretch.",
+   "secs": 1.03
+  },
+  "side-stretch--left": {
+   "text": "Side stretch. Left side.",
+   "secs": 1.76
+  },
+  "side-stretch--right": {
+   "text": "Side stretch. Right side.",
+   "secs": 1.74
+  },
+  "cat-to-cow-stretch": {
+   "text": "Cat to cow stretch.",
+   "secs": 1.29
+  },
+  "plank-to-downward-dog": {
+   "text": "Plank to downward dog.",
+   "secs": 1.54
+  },
+  "childs-pose": {
+   "text": "Child's pose.",
+   "secs": 1.13
+  },
+  "knees-to-chest-stretch": {
+   "text": "Knees to chest stretch.",
+   "secs": 1.48
+  },
+  "overhead-lat-stretch": {
+   "text": "Overhead lat stretch.",
+   "secs": 1.44
+  },
+  "seated-hamstring-stretch": {
+   "text": "Seated hamstring stretch.",
+   "secs": 1.49
+  },
+  "seated-lower-back-stretch": {
+   "text": "Seated lower back stretch.",
+   "secs": 1.57
+  },
+  "seated-lower-back-stretch--left": {
+   "text": "Seated lower back stretch. Left side.",
+   "secs": 2.58
+  },
+  "seated-lower-back-stretch--right": {
+   "text": "Seated lower back stretch. Right side.",
+   "secs": 2.63
+  },
+  "figure-4-stretch": {
+   "text": "Figure four stretch.",
+   "secs": 1.33
+  },
+  "figure-4-stretch--left": {
+   "text": "Figure four stretch. Left side.",
+   "secs": 2.2
+  },
+  "figure-4-stretch--right": {
+   "text": "Figure four stretch. Right side.",
+   "secs": 2.28
+  },
+  "hip-flexor-stretch": {
+   "text": "Hip flexor stretch.",
+   "secs": 1.3
+  },
+  "spinal-twist": {
+   "text": "Spinal twist.",
+   "secs": 1.13
+  },
+  "spinal-twist--left": {
+   "text": "Spinal twist. Left side.",
+   "secs": 1.95
+  },
+  "spinal-twist--right": {
+   "text": "Spinal twist. Right side.",
+   "secs": 1.93
+  },
+  "cobra": {
+   "text": "Cobra.",
+   "secs": 0.7
+  },
+  "deep-squat-and-thoracic-rotation": {
+   "text": "Deep squat with thoracic rotation.",
+   "secs": 2.21
+  },
+  "pigeon-pose": {
+   "text": "Pigeon pose.",
+   "secs": 1.05
+  },
+  "pigeon-pose--left": {
+   "text": "Pigeon pose. Left side.",
+   "secs": 1.81
+  },
+  "pigeon-pose--right": {
+   "text": "Pigeon pose. Right side.",
+   "secs": 1.76
+  },
+  "seated-butterfly-stretch": {
+   "text": "Seated butterfly stretch.",
+   "secs": 1.67
+  },
+  "bodyweight-row": {
+   "text": "Bodyweight row.",
+   "secs": 1.08
+  },
+  "bulgarian-split-squats": {
+   "text": "Bulgarian split squats.",
+   "secs": 1.6
+  },
+  "calf-raises": {
+   "text": "Calf raises.",
+   "secs": 1.01
+  },
+  "chin-up": {
+   "text": "Chin up.",
+   "secs": 0.8
+  },
+  "dips": {
+   "text": "Dips.",
+   "secs": 0.67
+  },
+  "handstand-push-up": {
+   "text": "Handstand push up.",
+   "secs": 1.3
+  },
+  "hanging-leg-raise": {
+   "text": "Hanging leg raise.",
+   "secs": 1.23
+  },
+  "pull-up": {
+   "text": "Pull up.",
+   "secs": 0.72
+  },
+  "quadruped-twister": {
+   "text": "Quadruped twister.",
+   "secs": 1.27
+  },
+  "plank-punches-with-leg-extension": {
+   "text": "Plank punches with leg extension.",
+   "secs": 2.13
+  },
+  "reverse-plank": {
+   "text": "Reverse plank.",
+   "secs": 1.08
+  }
+ }
+}
