@@ -37,7 +37,7 @@ function voiceLabel(id) {
 
 // ---- Settings ----
 
-export function render(app, { confirm = false } = {}) {
+export function render(app, { confirm = false, restoring = null, undoing = false } = {}) {
   audio.stopSample();
   const st = store.get();
   const s = st.settings;
@@ -92,7 +92,9 @@ export function render(app, { confirm = false } = {}) {
 
       <button class="reset" data-reset>Reset my progress</button>
     </section>
-    ${confirm ? resetSheet(st.stage, done) : ''}`;
+    ${confirm ? resetSheet(st.stage, done) : ''}
+    ${restoring ? restoreSheet(restoring) : ''}
+    ${undoing ? undoSheet() : ''}`;
 
   store.keepData().then(kept => {
     const el = app.querySelector('[data-kept]');
@@ -126,6 +128,21 @@ export function render(app, { confirm = false } = {}) {
   on('[data-backup]', async () => {
     if (await backup.backUp()) { again(); showToast('<span class="label">Backed up</span>', 2500); }
   });
+  // RESTORE: pick a file, check it, then the confirm sheet (04g).
+  on('[data-restore]', () => {
+    const input = Object.assign(document.createElement('input'), { type: 'file', accept: 'application/json,.json' });
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const { body, error } = await backup.readBackup(file);
+      if (error) { showToast(`<p>${error}</p>`); return; }
+      const y = scrollY; render(app, { restoring: body }); scrollTo(0, y);
+    });
+    input.click();
+  });
+  on('[data-do-restore]', e => { e.currentTarget.disabled = true; backup.restore(pendingRestore); });
+  on('[data-undo]', () => { const y = scrollY; render(app, { undoing: true }); scrollTo(0, y); });
+  on('[data-do-undo]', e => { e.currentTarget.disabled = true; backup.undoRestore(); });
   on('[data-reset]', () => { const y = scrollY; render(app, { confirm: true }); scrollTo(0, y); });
   on('[data-keep]', again);
   on('[data-clear]', () => { store.resetStage(st.stage); resetView(); go('#/'); });
@@ -136,18 +153,71 @@ export function render(app, { confirm = false } = {}) {
 // will go between this and Reset my progress.
 function dataSection() {
   const last = backup.lastBackup();
+  const undo = backup.undoOffer();
   return `
       <h2 class="label red s-sec">Data</h2>
       <div class="s-card backup-card">
-        <div><p class="s-name">Last backup</p>${last?.file ? `<p class="bk-file">${last.file}</p>` : ''}</div>
+        <div><p class="s-name">Last backup</p>${last?.file ? `<p class="bk-file">${esc(last.file)}</p>` : ''}</div>
         <span class="bk-when">${backup.sinceText(last?.at)}</span>
       </div>
       <div class="bk-btns">
         <button class="bk-btn solid" data-backup>Back up</button>
         <button class="bk-btn" data-restore>Restore</button>
       </div>
+      ${undo ? `
+      <button class="s-row undo-row" data-undo>
+        <span><span class="s-name">Undo restore</span><span class="bk-file">Puts back what was here before ${undo.before}</span></span>
+        <span class="label muted">${undo.daysLeft} day${undo.daysLeft === 1 ? '' : 's'} left</span>
+      </button>` : ''}
       <p class="label muted s-kept" data-kept>&nbsp;</p>
       <p class="s-help">A backup is one small file with your progress and settings. Your feedback key isn't included.</p>`;
+}
+
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
+
+// Restore this backup? (04g): the file next to what's on the phone now.
+// KEEP is the solid, safe choice.
+let pendingRestore = null;
+function restoreSheet(body) {
+  pendingRestore = body;
+  const file = backup.summarize(body.data);
+  const now = backup.summarize(backup.currentData());
+  const saved = body.exportedAt && !isNaN(new Date(body.exportedAt)) ? `Saved ${backup.dateText(body.exportedAt)}` : 'Saved';
+  const ver = body.appVersion ? ` · V${esc(body.appVersion)}` : '';
+  return `
+    <div class="scrim"></div>
+    <div class="sheet restore-sheet">
+      <p class="label red">Restore</p>
+      <h2 class="sheet-title big">Restore this backup?</h2>
+      <div class="rs-card">
+        <p class="label muted">From the file</p>
+        <p>${saved}${ver}</p>
+        <p>${esc(file.progress)}</p>
+        <p>${esc(file.settings)}</p>
+      </div>
+      <div class="rs-card now">
+        <p class="label muted">On this phone now</p>
+        <p>${esc(now.progress)}</p>
+        ${now.workouts > file.workouts ? '<p class="red">This phone has newer progress than the file.</p>' : ''}
+      </div>
+      <p class="sheet-text">Restoring replaces everything on this phone. You can undo it from Settings for 7 days.</p>
+      <button class="cta centre" data-keep>Keep what's on this phone</button>
+      <button class="cta outline" data-do-restore>Restore backup</button>
+    </div>`;
+}
+
+// Undo restore: a short confirm.
+function undoSheet() {
+  const undo = backup.undoOffer();
+  return `
+    <div class="scrim"></div>
+    <div class="sheet restore-sheet">
+      <p class="label red">Undo restore</p>
+      <h2 class="sheet-title">Put back what was here before ${undo?.before || 'the restore'}?</h2>
+      <p class="sheet-text">This replaces what's on the phone now with your data from just before the restore.</p>
+      <button class="cta centre" data-keep>Keep what's on this phone</button>
+      <button class="cta outline" data-do-undo>Undo restore</button>
+    </div>`;
 }
 
 // A volume slider row (Q04). Greyed out, like "Voice reads out", when what it

@@ -1,7 +1,8 @@
 // Starts the app and shows the right screen for the address (#/...).
 import { loadData } from './data.js';
 import { keepData } from './store.js';
-import { hideToast } from './ui.js';
+import { hideToast, showToast } from './ui.js';
+import * as backup from './backup.js';
 import * as audio from './audio.js';
 import * as home from './screens/home.js';
 import * as details from './screens/details.js';
@@ -42,10 +43,13 @@ function route() {
   r.show(m);
 }
 
+backup.pruneUndo(); // an Undo restore snapshot lasts 7 days
 keepData(); // ask the browser to keep progress and settings (see store.js)
 await Promise.all([loadData(), audio.init()]);
 addEventListener('hashchange', route);
 route();
+const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
+if (flash) showToast(`<p>${flash}</p>`);
 
 // ---- Updates ----
 // A new release installs in the background and waits (see sw.js). When one is
