@@ -1,13 +1,21 @@
 // RepRoom service worker: keeps the whole app on the phone so it works offline.
 //
-// - The app itself (pages, code, fonts, data) is saved when the app installs.
-//   It's served from the phone straight away, and quietly refreshed from the
-//   web in the background, so an update shows up the next time you open it.
-// - Every voice listed in audio/voices.json is saved too, clip by clip.
-//   New voices added to that list are picked up the next time the app opens.
+// - Each release is one VERSION. Its files (pages, code, fonts, data) are saved
+//   together when that version installs, and served from the phone, so the app
+//   never mixes files from two releases.
+// - VERSION is stamped by publish.ps1 with a fingerprint of the app's files, so
+//   every release changes this file. The phone sees that, downloads the new
+//   version in the background, and it waits. The app then shows
+//   "New version · tap to update"; tapping it switches over and reloads.
+// - Every voice listed in audio/voices.json is saved too, clip by clip, in its
+//   own cache that's kept across releases. New voices are picked up the next
+//   time the app opens.
 //
-// Bump VERSION when files are added to or removed from SHELL.
-const VERSION = 'reproom-v1';
+// Don't edit VERSION by hand: publish.ps1 replaces 'reproom-dev' on the way out.
+// While it's 'reproom-dev' (running locally), files come from the network first,
+// so edits show up on a plain reload.
+const VERSION = 'reproom-9f58f61787';
+const DEV = VERSION === 'reproom-dev';
 const AUDIO = 'reproom-audio-v1';
 
 const SHELL = [
@@ -26,9 +34,13 @@ const SHELL = [
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(VERSION);
-    await c.addAll(SHELL);
+    // 'reload' skips the browser's HTTP cache, so this version gets fresh files.
+    await c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })));
     await saveVoices();
-    self.skipWaiting();
+    // A new version normally waits until the app says "update" (see below).
+    // One-off: the first release before the update bar existed ('reproom-v1')
+    // can't show it, so take over from that one straight away.
+    if (await caches.has('reproom-v1')) self.skipWaiting();
   })());
 });
 
@@ -40,8 +52,10 @@ self.addEventListener('activate', e => {
 });
 
 // The app asks for this each time it opens, to pick up new voices.
+// It also sends 'skip-waiting' when you tap the update bar.
 self.addEventListener('message', e => {
   if (e.data === 'save-voices') e.waitUntil(saveVoices());
+  if (e.data === 'skip-waiting') self.skipWaiting();
 });
 
 // Save every clip of every voice that isn't saved yet.
@@ -76,16 +90,34 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
   if (url.pathname.endsWith('.mp3')) e.respondWith(audioResponse(req));
-  else e.respondWith(staleWhileRevalidate(req));
+  else e.respondWith(DEV ? networkFirst(req) : cacheFirst(req));
 });
 
-// Serve from the phone, refresh from the web in the background.
-async function staleWhileRevalidate(req) {
+// Release: serve this version's saved copy. Anything not saved yet comes from
+// the web and is saved into this version.
+async function cacheFirst(req) {
   const c = await caches.open(VERSION);
   const hit = await c.match(req, { ignoreSearch: true });
-  const fresh = fetch(req).then(res => { if (res.ok) c.put(req, res.clone()); return res; }).catch(() => null);
-  if (hit) { fresh; return hit; }
-  return (await fresh) || (req.mode === 'navigate' ? c.match('index.html') : Response.error());
+  if (hit) return hit;
+  try {
+    const res = await fetch(req);
+    if (res.ok) c.put(req, res.clone());
+    return res;
+  } catch (err) {
+    return (req.mode === 'navigate' && await c.match('index.html')) || Response.error();
+  }
+}
+
+// Local development: always the latest file, the saved copy only when offline.
+async function networkFirst(req) {
+  const c = await caches.open(VERSION);
+  try {
+    const res = await fetch(req, { cache: 'no-cache' });
+    if (res.ok) c.put(req, res.clone());
+    return res;
+  } catch (err) {
+    return (await c.match(req, { ignoreSearch: true })) || Response.error();
+  }
 }
 
 // Voice clips: from the phone if saved. Audio players often ask for part of a
