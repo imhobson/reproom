@@ -21,7 +21,7 @@ const AUDIO = 'reproom-audio-v1';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/main.js', 'js/version.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js',
+  'js/main.js', 'js/version.js', 'js/backup.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js',
   'js/screens/home.js', 'js/screens/details.js', 'js/screens/info.js', 'js/screens/player.js',
   'js/screens/summary.js', 'js/screens/settings.js',
   'data/workouts.json', 'data/moves.json', 'audio/voices.json',

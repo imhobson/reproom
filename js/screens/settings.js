@@ -5,7 +5,8 @@ import * as store from '../store.js';
 import * as audio from '../audio.js';
 import * as sounds from '../sounds.js';
 import { sym } from '../symbols.js';
-import { pad2, go } from '../ui.js';
+import * as backup from '../backup.js';
+import { pad2, go, showToast } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { resetView } from './home.js';
 
@@ -87,8 +88,9 @@ export function render(app, { confirm = false } = {}) {
         ${volRow('fxVol', 'Effects volume', s.fxVol, s.sfx === 'off' || !s.allSounds)}
       </div>
 
+      ${dataSection()}
+
       <button class="reset" data-reset>Reset my progress</button>
-      <p class="label muted s-kept" data-kept>&nbsp;</p>
     </section>
     ${confirm ? resetSheet(st.stage, done) : ''}`;
 
@@ -121,9 +123,31 @@ export function render(app, { confirm = false } = {}) {
       if (key === 'fxVol') audio.sampleFxVolume(); else audio.sampleVoiceVolume();
     });
   });
+  on('[data-backup]', async () => {
+    if (await backup.backUp()) { again(); showToast('<span class="label">Backed up</span>', 2500); }
+  });
   on('[data-reset]', () => { const y = scrollY; render(app, { confirm: true }); scrollTo(0, y); });
   on('[data-keep]', again);
   on('[data-clear]', () => { store.resetStage(st.stage); resetView(); go('#/'); });
+}
+
+// DATA (Q02, board 04f): last backup, BACK UP / RESTORE, the "Data kept on
+// this phone" line and what a backup holds. The Feedback row (prompt 04)
+// will go between this and Reset my progress.
+function dataSection() {
+  const last = backup.lastBackup();
+  return `
+      <h2 class="label red s-sec">Data</h2>
+      <div class="s-card backup-card">
+        <div><p class="s-name">Last backup</p>${last?.file ? `<p class="bk-file">${last.file}</p>` : ''}</div>
+        <span class="bk-when">${backup.sinceText(last?.at)}</span>
+      </div>
+      <div class="bk-btns">
+        <button class="bk-btn solid" data-backup>Back up</button>
+        <button class="bk-btn" data-restore>Restore</button>
+      </div>
+      <p class="label muted s-kept" data-kept>&nbsp;</p>
+      <p class="s-help">A backup is one small file with your progress and settings. Your feedback key isn't included.</p>`;
 }
 
 // A volume slider row (Q04). Greyed out, like "Voice reads out", when what it
