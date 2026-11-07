@@ -29,6 +29,20 @@ function save() {
 
 export const get = () => state;
 
+// "Keep my data" (Q01): ask the browser not to clear RepRoom's storage when
+// space runs low. Asked once per app start, and not at all once it's granted.
+// Resolves to true when the data is kept, false otherwise.
+let keptCheck = null;
+export function keepData() {
+  return keptCheck ||= (async () => {
+    if (!navigator.storage) return false;
+    try {
+      if (navigator.storage.persisted && await navigator.storage.persisted()) return true;
+      return navigator.storage.persist ? await navigator.storage.persist() : false;
+    } catch (e) { return false; }
+  })();
+}
+
 // A day counts as done in a stage if it was finished at any intensity,
 // so switching intensity keeps every tick.
 export function isDone(stage, day) {

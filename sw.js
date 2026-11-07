@@ -14,7 +14,7 @@
 // Don't edit VERSION by hand: publish.ps1 replaces 'reproom-dev' on the way out.
 // While it's 'reproom-dev' (running locally), files come from the network first,
 // so edits show up on a plain reload.
-const VERSION = 'reproom-9f58f61787';
+const VERSION = 'reproom-3ca3ee71ba';
 const DEV = VERSION === 'reproom-dev';
 const AUDIO = 'reproom-audio-v1';
 

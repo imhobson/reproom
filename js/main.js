@@ -1,5 +1,6 @@
 // Starts the app and shows the right screen for the address (#/...).
 import { loadData } from './data.js';
+import { keepData } from './store.js';
 import { hideToast } from './ui.js';
 import * as audio from './audio.js';
 import * as home from './screens/home.js';
@@ -40,6 +41,7 @@ function route() {
   r.show(m);
 }
 
+keepData(); // ask the browser to keep progress and settings (see store.js)
 await Promise.all([loadData(), audio.init()]);
 addEventListener('hashchange', route);
 route();

@@ -74,8 +74,14 @@ export function render(app, { confirm = false } = {}) {
       </div>
 
       <button class="reset" data-reset>Reset my progress</button>
+      <p class="label muted s-kept" data-kept>&nbsp;</p>
     </section>
     ${confirm ? resetSheet(st.stage, done) : ''}`;
+
+  store.keepData().then(kept => {
+    const el = app.querySelector('[data-kept]');
+    if (el) el.textContent = kept ? 'Data kept on this phone' : 'Data may be cleared by the browser';
+  });
 
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   const again = () => { const y = scrollY; render(app); scrollTo(0, y); };
