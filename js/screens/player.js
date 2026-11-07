@@ -235,7 +235,9 @@ function view() {
     };
   }
 
-  const heroAmber = step.type === 'move' && sec === 'main';
+  // Player background state, in one place: grey while getting ready or resting,
+  // a colour while a move runs. Paused keeps the state it paused in.
+  const bgState = P.phase !== 'move' ? 'ready' : sec === 'main' ? 'main' : 'warm';
   const isRest = P.phase === 'rest';
   const left = workoutLeft();
   const minsLeft = left < 60 ? 'Under <span class="num">1</span> min left' : `<span class="num">${Math.ceil(left / 60)}</span> min left`;
@@ -244,8 +246,8 @@ function view() {
     `<i class="${s.type === 'rest' ? 'r' : ''} ${i < P.idx ? 'd' : i === P.idx ? 'c' : ''}"></i>`).join('');
 
   return `
-    <section class="player ${paused ? 'paused' : ''}">
-      <div class="stage-art ${heroAmber ? 'amber' : ''}">
+    <section class="player ${paused ? 'paused' : ''}" data-state="${bgState}">
+      <div class="stage-art">
         <div class="top">
           <button class="icon-btn light" data-x aria-label="End workout">${sym('close')}</button>
           <div class="icons">

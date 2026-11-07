@@ -20,6 +20,7 @@
   --ink: #141517;
   --red: #B3161E;
   --amber: #F0A70A;
+  --warm: #F2CD7B;   /* active warm-up / cool-down move (7 Nov rule) */
   --field: #E8E5DC;
   --line: #C9C5BA;
   --muted: #4A4A4A;
@@ -180,7 +181,10 @@ button:disabled { cursor: default; }
 /* Player */
 .player { padding-bottom: 32px; }
 .stage-art { position: relative; height: 361px; background: var(--field); padding: 44px var(--gutter) 0; }
-.stage-art.amber { background: var(--amber); }
+/* The background shows the state (7 Nov rule), set once on .player[data-state]:
+   ready = grey (Get ready, Next up, Rest), main = amber, warm = warm amber. */
+.player[data-state="main"] .stage-art { background: var(--amber); }
+.player[data-state="warm"] .stage-art { background: var(--warm); }
 .stage-art .top { position: relative; z-index: 2; }
 .stage-art .art { position: absolute; left: 50%; top: 123px; width: 184px; height: 184px; transform: translateX(-50%); }
 .player.paused .stage-art::after { content: ''; position: absolute; inset: 0; background: rgba(20, 21, 23, 0.42); z-index: 1; }
