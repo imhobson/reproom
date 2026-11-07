@@ -1,26 +1,27 @@
 // RepRoom service worker: keeps the whole app on the phone so it works offline.
 //
-// - Each release is one VERSION. Its files (pages, code, fonts, data) are saved
-//   together when that version installs, and served from the phone, so the app
-//   never mixes files from two releases.
-// - VERSION is stamped by publish.ps1 with a fingerprint of the app's files, so
-//   every release changes this file. The phone sees that, downloads the new
-//   version in the background, and it waits. The app then shows
-//   "New version · tap to update"; tapping it switches over and reloads.
+// - Each release is one version, set in js/version.js (APP_VERSION). Its files
+//   (pages, code, fonts, data) are saved together in one cache named after it
+//   when that version installs, and served from the phone, so the app never
+//   mixes files from two releases. A new APP_VERSION = a fresh cache.
+// - The phone re-checks this file and js/version.js for changes. When the
+//   version changes, it downloads the new one in the background, and it waits.
+//   The app then shows "New version · tap to update"; tapping it switches over
+//   and reloads.
 // - Every voice listed in audio/voices.json is saved too, clip by clip, in its
 //   own cache that's kept across releases. New voices are picked up the next
 //   time the app opens.
 //
-// Don't edit VERSION by hand: publish.ps1 replaces 'reproom-dev' on the way out.
-// While it's 'reproom-dev' (running locally), files come from the network first,
-// so edits show up on a plain reload.
-const VERSION = 'reproom-1ab31bbfea';
-const DEV = VERSION === 'reproom-dev';
+// Running locally (localhost or a LAN address), files come from the network
+// first, so edits show up on a plain reload without bumping the version.
+importScripts('js/version.js');
+const VERSION = 'reproom-' + self.APP_VERSION;
+const DEV = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(location.hostname);
 const AUDIO = 'reproom-audio-v1';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/main.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js',
+  'js/main.js', 'js/version.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js',
   'js/screens/home.js', 'js/screens/details.js', 'js/screens/info.js', 'js/screens/player.js',
   'js/screens/summary.js', 'js/screens/settings.js',
   'data/workouts.json', 'data/moves.json', 'audio/voices.json',
@@ -37,10 +38,7 @@ self.addEventListener('install', e => {
     // 'reload' skips the browser's HTTP cache, so this version gets fresh files.
     await c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })));
     await saveVoices();
-    // A new version normally waits until the app says "update" (see below).
-    // One-off: the first release before the update bar existed ('reproom-v1')
-    // can't show it, so take over from that one straight away.
-    if (await caches.has('reproom-v1')) self.skipWaiting();
+    // A new version waits until the app says "update" (see below).
   })());
 });
 

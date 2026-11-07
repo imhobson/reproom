@@ -13,11 +13,20 @@ import { resetView } from './home.js';
 let backTo = '#/';
 export function setBack(hash) { backTo = hash; }
 
-const head = title => `
+const head = (title, right = '') => `
   <div class="s-head">
     <button class="icon-btn" data-back aria-label="Back">${sym('arrowLeft')}</button>
     <h1 class="s-title">${title}</h1>
+    ${right}
   </div>`;
+
+// "V1.3.0 · 7 NOV" from js/version.js (Q06).
+const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+function versionTag() {
+  const [, m, d] = (self.APP_DATE || '').split('-').map(Number);
+  const date = m ? ` · ${d} ${MONTHS[m - 1]}` : '';
+  return `<span class="label s-ver">V${self.APP_VERSION || '?'}${date}</span>`;
+}
 
 function voiceLabel(id) {
   if (id === 'off') return 'Off';
@@ -39,7 +48,7 @@ export function render(app, { confirm = false } = {}) {
 
   app.innerHTML = `
     <section class="screen settings">
-      ${head('Settings')}
+      ${head('Settings', versionTag())}
       <h2 class="label red s-sec">Stage</h2>
       <div class="s-card stage-card">
         <div><p class="s-name">Stage</p><p class="label muted"><span class="num">${done}</span><span class="slash">/</span><span class="num">${DAYS_PER_STAGE}</span> done</p></div>

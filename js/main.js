@@ -27,11 +27,12 @@ const routes = [
 ];
 
 let prevHash = '#/';
+let settingsFrom = '#/'; // where Settings was opened from
+const inSettings = h => h.startsWith('#/settings');
 function route() {
   hideToast();
   // Settings' back arrow returns to wherever Settings was opened from.
-  const inSettings = h => h.startsWith('#/settings');
-  if (inSettings(location.hash) && !inSettings(prevHash)) settings.setBack(prevHash || '#/');
+  if (inSettings(location.hash) && !inSettings(prevHash)) settings.setBack(settingsFrom = prevHash || '#/');
   prevHash = location.hash;
   if (!location.hash.startsWith('#/play/')) player.leave();
   showUpdateBar();
@@ -48,10 +49,15 @@ route();
 
 // ---- Updates ----
 // A new release installs in the background and waits (see sw.js). When one is
-// waiting, the bar at the top offers it. It stays hidden in the player so a
-// workout is never cut short; it comes back once you leave the player.
+// waiting, the bar at the bottom offers it (Q07). It stays hidden on player
+// screens, and in Settings opened from a paused workout, because updating
+// reloads the app and would end the workout. It shows on the next other screen.
+function midWorkout() {
+  const h = location.hash;
+  return h.startsWith('#/play/') || (inSettings(h) && settingsFrom.startsWith('#/play/'));
+}
 function showUpdateBar() {
-  updateBar.hidden = !waitingSW || location.hash.startsWith('#/play/');
+  updateBar.hidden = !waitingSW || midWorkout();
   document.body.classList.toggle('has-update', !updateBar.hidden); // push the page below the bar
 }
 
@@ -90,7 +96,9 @@ if ('serviceWorker' in navigator) {
     reloading = true;
     location.reload();
   });
-  navigator.serviceWorker.register('sw.js').then(async reg => {
+  // updateViaCache 'none': each check fetches sw.js and js/version.js fresh,
+  // so a bumped version is seen straight away.
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(async reg => {
     watchForUpdates(reg);
     const ready = await navigator.serviceWorker.ready;
     ready.active?.postMessage('save-voices'); // picks up any newly added voice
