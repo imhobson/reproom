@@ -3,6 +3,7 @@
 import * as data from '../data.js';
 import * as store from '../store.js';
 import * as audio from '../audio.js';
+import * as sounds from '../sounds.js';
 import { sym } from '../symbols.js';
 import { pad2, go } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
@@ -32,7 +33,9 @@ export function render(app, { confirm = false } = {}) {
   const s = st.settings;
   const voiceOff = s.voice === 'off';
   const done = store.doneCount(st.stage);
-  const sfxLabel = s.sfx === 'off' ? 'Off' : (audio.PACK_LIST.find(p => p.id === s.sfx)?.label || 'Classic');
+  const sfxLabel = s.sfx === 'off' ? 'Off'
+    : s.tick === 'classic' && s.chime === 'classic' ? 'Classic'
+    : `${sounds.tickById(s.tick).label} · ${sounds.chimeById(s.chime).label}`;
 
   app.innerHTML = `
     <section class="screen settings">
@@ -144,83 +147,113 @@ function resetSheet(stage, done) {
 }
 
 // ---- Pickers (04a voice, 04b sound effects) ----
+// A picker is one or more lists. Each list: { key, title, options, current(),
+// onPick(id), onSample(id, onProgress, onEnd), dim() }. Rows are radio rows
+// (44px min) with an optional play button.
 
-function picker(app, { title, intro, section, options, current, foot, top = '', onPick, onSample }) {
-  let playing = null; // id of the option whose sample is playing
+function picker(app, { title, intro, lists, foot, after = '' }) {
+  let playing = null; // "<list key>:<option id>" whose sample is playing
+  const row = (l, o) => {
+    const k = `${l.key}:${o.id}`;
+    const on = playing === k;
+    return `
+      <div class="p-opt ${o.id === l.current() ? 'sel' : ''}" data-pick="${k}" role="radio" aria-checked="${o.id === l.current()}">
+        <span class="box"></span>
+        <span class="p-txt"><span class="o-name">${o.label}</span>${o.desc ? `<span class="p-desc">${o.desc}</span>` : ''}</span>
+        ${o.sample ? `<button class="p-play ${on ? 'on' : ''}" data-sample="${k}" aria-label="${on ? 'Stop sample' : `Play ${o.label}`}">${sym(on ? 'pause' : 'play')}</button>` : ''}
+        ${on ? `<div class="p-prog"><span class="bar"><span data-prog></span></span><span class="label muted">Playing</span></div>` : ''}
+      </div>`;
+  };
+  const find = k => { const [lk, id] = k.split(':'); return [lists.find(l => l.key === lk), id]; };
   const draw = () => {
     app.innerHTML = `
       <section class="screen picker">
         ${head(title)}
         ${intro ? `<p class="s-help intro">${intro}</p>` : ''}
-        ${top}
-        <h2 class="label red s-sec">${section}</h2>
-        <div class="p-list">
-          ${options.map(o => `
-            <div class="p-opt ${o.id === current() ? 'sel' : ''}" data-pick="${o.id}">
-              <span class="box"></span>
-              <span class="p-txt"><span class="o-name">${o.label}</span>${o.desc ? `<span class="p-desc">${o.desc}</span>` : ''}</span>
-              ${o.sample ? `<button class="p-play ${playing === o.id ? 'on' : ''}" data-sample="${o.id}" aria-label="${playing === o.id ? 'Stop sample' : 'Play sample'}">${sym(playing === o.id ? 'pause' : 'play')}</button>` : ''}
-              ${playing === o.id ? `<div class="p-prog"><span class="bar"><span data-prog></span></span><span class="label muted">Playing</span></div>` : ''}
-            </div>`).join('')}
-        </div>
+        ${lists.map(l => `
+          ${l.title ? `<h2 class="label red s-sec">${l.title}</h2>` : '<div class="s-gap"></div>'}
+          <div class="p-list ${l.dim?.() ? 'dim' : ''}" role="radiogroup">${l.options.map(o => row(l, o)).join('')}</div>`).join('')}
         ${foot ? `<p class="s-help">${foot}</p>` : ''}
+        ${after}
       </section>`;
     app.querySelector('[data-back]').addEventListener('click', () => { audio.stopSample(); go('#/settings'); });
     app.querySelectorAll('[data-pick]').forEach(el => el.addEventListener('click', e => {
       if (e.target.closest('[data-sample]')) return;
-      onPick(el.dataset.pick); draw();
+      const [l, id] = find(el.dataset.pick);
+      l.onPick(id); draw();
     }));
     app.querySelectorAll('[data-sample]').forEach(b => b.addEventListener('click', () => {
-      const id = b.dataset.sample;
-      if (playing === id) { audio.stopSample(); playing = null; draw(); return; }
-      playing = id; draw();
-      onSample(id,
+      const k = b.dataset.sample;
+      if (playing === k) { audio.stopSample(); playing = null; draw(); return; }
+      playing = k; draw();
+      const [l, id] = find(k);
+      l.onSample(id,
         f => { const p = app.querySelector('[data-prog]'); if (p) p.style.width = `${f * 100}%`; },
-        () => { if (playing === id) { playing = null; draw(); } });
+        () => { if (playing === k) { playing = null; draw(); } });
     }));
   };
   draw();
 }
 
 export function renderVoice(app) {
-  const options = [
-    { id: 'off', label: 'Off', desc: 'No voice. Sound effects still play.' },
-    { id: 'phone', label: 'Phone voice', desc: 'Built into your phone', sample: true },
-    ...audio.voiceList().map(v => ({ id: v.id, label: v.label, desc: v.style || '', sample: true })),
-  ];
   picker(app, {
     title: 'Voice',
     intro: 'The voice reads out each move as it comes up. Tap play to hear a sample.',
-    section: 'Choose a voice',
-    options,
-    current: () => store.get().settings.voice,
+    lists: [{
+      key: 'voice',
+      title: 'Choose a voice',
+      options: [
+        { id: 'off', label: 'Off', desc: 'No voice. Sound effects still play.' },
+        { id: 'phone', label: 'Phone voice', desc: 'Built into your phone', sample: true },
+        ...audio.voiceList().map(v => ({ id: v.id, label: v.label, desc: v.style || '', sample: true })),
+      ],
+      current: () => store.get().settings.voice,
+      onPick: id => store.setSetting('voice', id),
+      onSample: (id, p, e) => audio.sampleVoice(id, p, e),
+    }],
     foot: 'Every voice is saved on your phone, so it works offline mid-workout.',
-    onPick: id => store.setSetting('voice', id),
-    onSample: (id, p, e) => audio.sampleVoice(id, p, e),
   });
 }
 
+// Sound effects (04b, Q05): Off, then a TICK list and a CHIME list. Picking a
+// tick or a chime turns sound effects back on if they were off.
 export function renderSfx(app) {
-  const options = [
-    ...audio.PACK_LIST.map(p => ({ ...p, sample: true })),
-    { id: 'off', label: 'Off', desc: 'No ticks or chimes. The voice still plays.' },
-  ];
+  const s = () => store.get().settings;
+  const off = () => s().sfx === 'off';
   const ticks = '<span class="tk"><i></i><i></i><i></i></span>';
-  const top = `
+  const when = `
     <h2 class="label red s-sec">When they play</h2>
     <div class="when">
       <div class="w-row"><span class="s-name">Move starts</span><span class="w-cue"><span class="label">3 · 2 · 1</span>${ticks}<span class="label gochip">GO</span></span></div>
       <div class="w-row"><span class="s-name">Move ends</span><span class="w-cue"><span class="label">3 · 2 · 1</span>${ticks}<span class="dia"></span><span class="label">Chime</span></span></div>
     </div>
-    <p class="s-help">Every pack plays at the same moments. Only the sounds change.</p>`;
+    <p class="s-help">The tick plays before every move starts and ends. GO always sounds the same.</p>`;
+  const pickSound = (key, id) => { store.setSetting(key, id); store.setSetting('sfx', 'on'); };
   picker(app, {
     title: 'Sound effects',
-    top,
-    section: 'Choose a pack',
-    options,
-    current: () => store.get().settings.sfx,
-    foot: 'Play runs the full cue: three ticks and GO, then three ticks and the chime.',
-    onPick: id => store.setSetting('sfx', id),
-    onSample: (id, p, e) => audio.sampleCue(id, p, e),
+    lists: [
+      {
+        key: 'sfx',
+        options: [{ id: 'off', label: 'Off', desc: 'No ticks or chimes. The voice still plays.' }],
+        current: () => (off() ? 'off' : null),
+        onPick: () => store.setSetting('sfx', 'off'),
+      },
+      {
+        key: 'tick', title: 'Tick', dim: off,
+        options: sounds.TICKS.map(t => ({ id: t.id, label: t.label, desc: t.desc, sample: true })),
+        current: () => s().tick,
+        onPick: id => pickSound('tick', id),
+        onSample: (id, p, e) => audio.sampleCue('tick', id, p, e),
+      },
+      {
+        key: 'chime', title: 'Chime', dim: off,
+        options: sounds.CHIMES.map(c => ({ id: c.id, label: c.label, desc: c.desc, sample: true })),
+        current: () => s().chime,
+        onPick: id => pickSound('chime', id),
+        onSample: (id, p, e) => audio.sampleCue('chime', id, p, e),
+      },
+    ],
+    foot: 'Play runs the end-of-move cue: three ticks, then the chime, with your other pick.',
+    after: when,
   });
 }

@@ -315,6 +315,10 @@ button:disabled { cursor: default; }
 .p-list { display: grid; gap: 2px; }
 .p-opt { background: var(--field); padding: 10px 10px 10px 14px; min-height: 64px; display: grid; grid-template-columns: 22px 1fr auto; align-items: center; column-gap: 14px; cursor: pointer; }
 .p-opt.sel { background: var(--amber); }
+/* Tick and chime lists while Sound effects is Off: picks still shown, faded */
+.p-list.dim .p-opt.sel { background: var(--field); }
+.p-list.dim .o-name, .p-list.dim .p-desc { color: var(--faint); }
+.s-gap { height: 18px; }
 .p-opt .box { width: 22px; height: 22px; border: 2px solid var(--ink); position: relative; }
 .p-opt.sel .box::after { content: ''; position: absolute; inset: 4px; background: var(--ink); }
 .p-txt { display: flex; flex-direction: column; }

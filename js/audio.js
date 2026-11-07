@@ -4,6 +4,7 @@
 // (e.g. one that lowers Spotify instead of pausing it).
 import * as store from './store.js';
 import * as data from './data.js';
+import * as sounds from './sounds.js';
 
 let ctx = null;          // Web Audio context, made on the first tap
 let muted = false;       // the player's quick mute
@@ -58,48 +59,19 @@ export function pause() {
 export function resume() { if (ctx && ctx.state === 'suspended') ctx.resume(); }
 export function stopAll() { stopVoice(); }
 
-// ---- Sound effects: pack "Classic" (see docs/RepRoom-audio-spec.txt) ----
+// ---- Sound effects (see docs/RepRoom-audio-spec.txt and js/sounds.js) ----
+// The tick and the chime are chosen in Settings > Sound effects; GO is fixed.
 
-function tone({ freq, freqEnd = freq, type = 'sine', dur, vol = 0.5, at = 0, attack = 0.004, dest = fxBus }) {
-  const t = ctx.currentTime + at;
-  const o = ctx.createOscillator();
-  const g = ctx.createGain();
-  o.type = type;
-  o.frequency.setValueAtTime(freq, t);
-  if (freqEnd !== freq) o.frequency.exponentialRampToValueAtTime(freqEnd, t + dur);
-  g.gain.setValueAtTime(0.0001, t);
-  g.gain.exponentialRampToValueAtTime(vol, t + attack);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.connect(g).connect(dest);
-  o.start(t);
-  o.stop(t + dur + 0.02);
-}
+const myTick = () => sounds.tickById(settings().tick);
+const myChime = () => sounds.chimeById(settings().chime);
 
-const PACKS = {
-  classic: {
-    // short click, about 1 kHz, 0.04s
-    tick: (at, dest) => tone({ freq: 1000, type: 'square', dur: 0.04, vol: 0.18, at, dest }),
-    // low, about 0.7s
-    go: (at, dest) => { tone({ freq: 180, freqEnd: 120, type: 'triangle', dur: 0.7, vol: 0.7, at, attack: 0.01, dest });
-      tone({ freq: 360, freqEnd: 240, dur: 0.35, vol: 0.15, at, dest }); },
-    // bright, about 2 kHz, 0.2s
-    chime: (at, dest) => { tone({ freq: 2000, dur: 0.2, vol: 0.35, at, dest });
-      tone({ freq: 3000, dur: 0.15, vol: 0.12, at, dest }); },
-  },
-};
-// Packs in the Sound effects picker. Only Classic exists in this build.
-export const PACK_LIST = [
-  { id: 'classic', label: 'Classic', desc: 'Crisp ticks, a low GO, a bright chime' },
-];
-
-function fx(name, at = 0) {
+function fx(play, at = 0) {
   if (!ctx || !effectsOn()) return;
-  const pack = PACKS[settings().sfx] || PACKS.classic;
-  pack[name](at);
+  play(ctx, at, fxBus);
 }
-export const tick = () => fx('tick');
-export const go = () => fx('go');
-export const chime = (after = 0) => fx('chime', after);
+export const tick = () => fx(myTick().play);
+export const go = () => fx(sounds.go);
+export const chime = (after = 0) => fx(myChime().play, after);
 
 // ---- Samples for the pickers (play even when sounds are off: you asked) ----
 // Each returns { stop }, and calls onProgress(0..1) then onEnd().
@@ -116,16 +88,19 @@ function progressLoop(secs, onProgress, onEnd) {
   return () => clearInterval(id);
 }
 
-// The full cue: three ticks and GO, then three ticks and the chime.
-export function sampleCue(packId, onProgress, onEnd) {
+// The end-of-move cue with one choice swapped in: three ticks 1s apart, then
+// the chime 1.1s after the last tick (as in a workout). kind is 'tick' or
+// 'chime'; the other half stays as the current pick.
+export function sampleCue(kind, id, onProgress, onEnd) {
   stopSample();
   unlock();
-  const pack = PACKS[packId] || PACKS.classic;
+  const t = kind === 'tick' ? sounds.tickById(id) : myTick();
+  const c = kind === 'chime' ? sounds.chimeById(id) : myChime();
   const bus = ctx.createGain();
   bus.connect(fxBus);
-  [0, 1, 2].forEach(t => pack.tick(t, bus)); pack.go(2.6, bus);
-  [4.6, 5.6, 6.6].forEach(t => pack.tick(t, bus)); pack.chime(7.7, bus);
-  const stopLoop = progressLoop(8, onProgress, () => { sample = null; onEnd(); });
+  [0, 1, 2].forEach(at => t.play(ctx, at, bus));
+  c.play(ctx, 3.1, bus);
+  const stopLoop = progressLoop(3.1 + c.secs + 0.1, onProgress, () => { sample = null; onEnd(); });
   sample = { stop: () => { stopLoop(); bus.disconnect(); } };
 }
 
@@ -135,10 +110,10 @@ export function sampleFxVolume() {
   stopSample();
   unlock();
   setFxVolume();
-  const pack = PACKS[settings().sfx] || PACKS.classic;
   const bus = ctx.createGain();
   bus.connect(fxBus);
-  pack.tick(0, bus); pack.chime(0.5, bus);
+  myTick().play(ctx, 0, bus);
+  myChime().play(ctx, 0.5, bus);
   sample = { stop: () => bus.disconnect() };
 }
 

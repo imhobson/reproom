@@ -14,13 +14,13 @@
 // Don't edit VERSION by hand: publish.ps1 replaces 'reproom-dev' on the way out.
 // While it's 'reproom-dev' (running locally), files come from the network first,
 // so edits show up on a plain reload.
-const VERSION = 'reproom-4308dc9db8';
+const VERSION = 'reproom-1ab31bbfea';
 const DEV = VERSION === 'reproom-dev';
 const AUDIO = 'reproom-audio-v1';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/main.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js',
+  'js/main.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js',
   'js/screens/home.js', 'js/screens/details.js', 'js/screens/info.js', 'js/screens/player.js',
   'js/screens/summary.js', 'js/screens/settings.js',
   'data/workouts.json', 'data/moves.json', 'audio/voices.json',
