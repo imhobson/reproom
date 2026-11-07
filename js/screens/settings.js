@@ -70,7 +70,9 @@ export function render(app, { confirm = false } = {}) {
           </div>
           ${voiceOff ? '<p class="s-note">Choose a voice to use this.</p>' : ''}
         </div>
+        ${volRow('voiceVol', 'Voice volume', s.voiceVol, voiceOff || !s.allSounds)}
         <button class="s-row" data-go="#/settings/sound-effects"><span class="s-name">Sound effects</span><span class="s-val">${sfxLabel} ${sym('arrowRight')}</span></button>
+        ${volRow('fxVol', 'Effects volume', s.fxVol, s.sfx === 'off' || !s.allSounds)}
       </div>
 
       <button class="reset" data-reset>Reset my progress</button>
@@ -94,9 +96,33 @@ export function render(app, { confirm = false } = {}) {
   on('[data-int]', e => { store.setIntensity(e.currentTarget.dataset.int); resetView(); again(); });
   on('[data-all]', () => { store.setSetting('allSounds', !s.allSounds); again(); });
   on('[data-go]', e => go(e.currentTarget.dataset.go));
+  // Volume sliders: the number follows your finger; letting go saves it and
+  // plays a short sample at the new level.
+  app.querySelectorAll('[data-vol]').forEach(r => {
+    const key = r.dataset.vol;
+    r.addEventListener('input', () => {
+      r.style.setProperty('--v', `${r.value}%`);
+      app.querySelector(`[data-volnum="${key}"]`).textContent = r.value;
+    });
+    r.addEventListener('change', () => {
+      store.setSetting(key, +r.value);
+      if (key === 'fxVol') audio.sampleFxVolume(); else audio.sampleVoiceVolume();
+    });
+  });
   on('[data-reset]', () => { const y = scrollY; render(app, { confirm: true }); scrollTo(0, y); });
   on('[data-keep]', again);
   on('[data-clear]', () => { store.resetStage(st.stage); resetView(); go('#/'); });
+}
+
+// A volume slider row (Q04). Greyed out, like "Voice reads out", when what it
+// controls is off.
+function volRow(key, label, value = 100, off = false) {
+  return `
+    <div class="s-row col vol ${off ? 'dis' : ''}">
+      <div class="vol-top"><span class="s-name">${label}</span><span class="vol-num" data-volnum="${key}">${value}</span></div>
+      <input type="range" class="slider" min="0" max="100" step="1" value="${value}" data-vol="${key}"
+        style="--v:${value}%" aria-label="${label}" ${off ? 'disabled' : ''}>
+    </div>`;
 }
 
 function resetSheet(stage, done) {

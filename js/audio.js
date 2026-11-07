@@ -11,9 +11,20 @@ let voices = [];         // from audio/voices.json
 const clipLists = {};    // voice id -> its voice.json clips
 let clip = null;         // the voice clip playing now
 
+let fxBus = null;        // master gain for every sound effect (Effects volume)
+
 const settings = () => store.get().settings;
 const soundOn = () => settings().allSounds && !muted;
 const effectsOn = () => soundOn() && settings().sfx !== 'off';
+
+// Volume sliders (0–100) to loudness (0–1). Squared, so the slider feels even
+// to the ear: at 50 it sounds about half as loud, not barely quieter.
+const level = pct => Math.pow(Math.max(0, Math.min(100, pct)) / 100, 2);
+const voiceLevel = () => level(settings().voiceVol ?? 100);
+const fxLevel = () => level(settings().fxVol ?? 100);
+
+// Called when the Effects volume slider moves.
+export function setFxVolume() { if (fxBus) fxBus.gain.setValueAtTime(fxLevel(), ctx.currentTime); }
 
 // ---- Setup ----
 
@@ -24,7 +35,12 @@ export const voiceList = () => voices;
 
 // Call from a tap (e.g. LET'S GO) so the phone allows sound.
 export function unlock() {
-  if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+  if (!ctx) {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    fxBus = ctx.createGain();
+    fxBus.gain.value = fxLevel();
+    fxBus.connect(ctx.destination);
+  }
   if (ctx.state === 'suspended') ctx.resume();
 }
 
@@ -44,7 +60,7 @@ export function stopAll() { stopVoice(); }
 
 // ---- Sound effects: pack "Classic" (see docs/RepRoom-audio-spec.txt) ----
 
-function tone({ freq, freqEnd = freq, type = 'sine', dur, vol = 0.5, at = 0, attack = 0.004, dest = ctx.destination }) {
+function tone({ freq, freqEnd = freq, type = 'sine', dur, vol = 0.5, at = 0, attack = 0.004, dest = fxBus }) {
   const t = ctx.currentTime + at;
   const o = ctx.createOscillator();
   const g = ctx.createGain();
@@ -106,11 +122,37 @@ export function sampleCue(packId, onProgress, onEnd) {
   unlock();
   const pack = PACKS[packId] || PACKS.classic;
   const bus = ctx.createGain();
-  bus.connect(ctx.destination);
+  bus.connect(fxBus);
   [0, 1, 2].forEach(t => pack.tick(t, bus)); pack.go(2.6, bus);
   [4.6, 5.6, 6.6].forEach(t => pack.tick(t, bus)); pack.chime(7.7, bus);
   const stopLoop = progressLoop(8, onProgress, () => { sample = null; onEnd(); });
   sample = { stop: () => { stopLoop(); bus.disconnect(); } };
+}
+
+// Played when you let go of a volume slider, at the new level.
+// Effects: one tick then the chime. Voice: "Push-ups" in the chosen voice.
+export function sampleFxVolume() {
+  stopSample();
+  unlock();
+  setFxVolume();
+  const pack = PACKS[settings().sfx] || PACKS.classic;
+  const bus = ctx.createGain();
+  bus.connect(fxBus);
+  pack.tick(0, bus); pack.chime(0.5, bus);
+  sample = { stop: () => bus.disconnect() };
+}
+
+export async function sampleVoiceVolume() {
+  stopSample();
+  unlock();
+  const v = settings().voice;
+  if (v === 'off') return;
+  const clips = v === 'phone' ? {} : await clipsFor(v);
+  if (!clips['push-ups']) { speak(data.move('push-ups').voice.nameOnly); sample = { stop: () => speechSynthesis.cancel() }; return; }
+  const a = new Audio(`audio/${v}/push-ups.mp3`);
+  a.volume = voiceLevel();
+  a.play().catch(() => {});
+  sample = { stop: () => a.pause() };
 }
 
 const SAMPLE_MOVE = 'kneeling-push-ups';
@@ -129,6 +171,7 @@ export async function sampleVoice(voiceId, onProgress, onEnd) {
   const name = clips[SAMPLE_MOVE] ? SAMPLE_MOVE : Object.keys(clips)[0];
   if (!name) { done(); return; }
   const a = new Audio(`audio/${voiceId}/${name}.mp3`);
+  a.volume = voiceLevel();
   a.ontimeupdate = () => a.duration && onProgress(a.currentTime / a.duration);
   a.onended = () => { onProgress(1); done(); };
   a.play().catch(done);
@@ -165,6 +208,7 @@ function speak(text) {
   const v = all.find(x => x.lang === 'en-GB') || all.find(x => x.lang.startsWith('en'));
   if (v) u.voice = v;
   u.lang = v ? v.lang : 'en-GB';
+  u.volume = voiceLevel();
   speechSynthesis.speak(u);
 }
 
@@ -184,6 +228,7 @@ export async function sayMove(step) {
   const name = clipName(step);
   if (!clips[name]) { speak(phoneText(step)); return; } // missing clip: phone voice
   const a = new Audio(`audio/${v}/${name}.mp3`);
+  a.volume = voiceLevel();
   clip = a;
   a.onended = () => { if (clip === a) clip = null; };
   a.play().catch(() => { if (clip === a) { clip = null; speak(phoneText(step)); } });
