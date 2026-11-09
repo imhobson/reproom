@@ -11,6 +11,7 @@ import * as player from './screens/player.js';
 import * as summary from './screens/summary.js';
 import * as settings from './screens/settings.js';
 import * as feedback from './screens/feedback.js';
+import * as cueLog from './screens/cuelog.js';
 import * as fb from './feedback.js';
 
 const app = document.getElementById('app');
@@ -28,6 +29,7 @@ const routes = [
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },
   { re: /^#\/settings\/feedback$/, show: () => feedback.render(app, workoutNow) },
+  { re: /^#\/settings\/cue-log$/, show: () => cueLog.render(app) },
 ];
 
 let prevHash = '#/';

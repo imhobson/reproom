@@ -16,6 +16,7 @@ import { howToHtml } from './info.js';
 import * as audio from '../audio.js';
 import * as weights from '../weights.js';
 import { WEIGHT_DEFAULT_REPS, WEIGHT_KG_STEP } from '../config.js';
+import * as cuelog from '../cuelog.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 const REPS_MIN = 1, REPS_MAX = 50, KG_MAX = 60;
@@ -59,6 +60,7 @@ function start(day) {
   audio.setMuted(false);
   audio.resume();
   audio.preload(steps);
+  cuelog.begin(`Day ${pad2(day)} · ${workout.name}`);
   enterStep(0);
 }
 
@@ -71,8 +73,11 @@ function enterStep(i) {
     // Once, as Get ready / Next up starts. Straight after a move ends by
     // itself, wait for the finish chime first so they don't talk over each other.
     clearTimeout(P.voiceTimer);
-    if (P.afterChime) P.voiceTimer = setTimeout(() => { if (P && P.running) audio.sayMove(step); }, VOICE_AFTER_CHIME_MS);
-    else audio.sayMove(step);
+    const name = stepName(step);
+    if (P.afterChime) {
+      const plan = P.planStart + VOICE_AFTER_CHIME_MS;
+      P.voiceTimer = setTimeout(() => { if (P && P.running) audio.sayMove(step, cuelog.cue('voice', name, plan, false)); }, VOICE_AFTER_CHIME_MS);
+    } else audio.sayMove(step, cuelog.cue('voice', name, P.planStart, false));
   } else setPhase('rest', step.secs);
   P.afterChime = false;
 }
@@ -119,6 +124,12 @@ function setPhase(phase, secs) {
   P.phase = phase;
   P.left = P.total = secs * 1000;
   P.sinceStart = 0;
+  // Cue log plan (wall clock): a phase that follows one that ran out by
+  // itself is planned from where that one was planned to end, so drift adds
+  // up; anything else (a tap, the start) plans from now.
+  P.planStart = P.natural && P.planEnd != null ? P.planEnd : Date.now();
+  P.planEnd = P.planStart + P.total;
+  P.natural = false;
   draw();
 }
 
@@ -159,7 +170,9 @@ function prev() {
 function tick() {
   if (!P || !P.running) return;
   const now = performance.now();
-  const dt = Math.min(now - (P.last || now), 1000);
+  const gap = now - (P.last || now);
+  if (gap > 1500) cuelog.note('gap', `Timer tick ${(gap / 1000).toFixed(1)}s after the last`);
+  const dt = Math.min(gap, 1000);
   P.last = now;
   if (P.phase === 'set') { P.elapsed += dt; update(); return; } // no timer on a set
   const before = P.left;
@@ -167,26 +180,46 @@ function tick() {
   P.elapsed += dt;
   P.sinceStart += dt;
   cues(before, P.left);
-  if (P.left <= 0) advance();
-  else update();
+  if (P.left <= 0) {
+    // The tick that ends a phase is up to TICK_MS past zero. Carry that into
+    // the next phase, so the workout doesn't slip a little at every step.
+    const over = -P.left;
+    P.natural = true;
+    advance();
+    if (P && P.phase !== 'set') { P.left -= over; P.sinceStart += over; }
+  } else update();
 }
 
 // Sound effects at the moments in docs/RepRoom-audio-spec.txt. They only
 // play when a timer runs down by itself, not when you press NEXT or SKIP.
+// With the cue log on, each moment is logged on its own; when one late timer
+// tick passes two of them, only one sound plays and the other shows as missing.
 function cues(before, after) {
   const crossed = t => before > t && after <= t;
+  const name = P.phase === 'rest' ? 'Rest' : stepName(P.steps[P.idx]);
+  const log = (kind, ts, why, at = 0) => ts.forEach((t, i) =>
+    cuelog.cue(kind, `${name} · ${t / 1000}s left`, P.planEnd - t + at * 1000, true,
+      i ? { miss: 'merged' } : why ? { [why === 'off' ? 'off' : 'ctx']: why } : {}, at * 1000));
+  const ticks = list => {
+    const hit = list.filter(crossed);
+    if (hit.length) log('tick', hit, audio.tick());
+  };
   if (P.phase === 'preview') {
     // ticks at 3, 2 and 1s left, then GO as the move timer starts
-    if ([3000, 2000, 1000].some(crossed)) audio.tick();
-    if (crossed(0)) audio.go();
+    ticks([3000, 2000, 1000]);
+    if (crossed(0)) log('go', [0], audio.go());
   } else if (P.phase === 'move') {
     // ticks as the timer shows 00:02, 00:01 and 00:00, then the chime ~1.1s later
-    if ([2000, 1000].some(crossed)) audio.tick();
-    if (crossed(0)) { audio.tick(); audio.chime(1.1); P.afterChime = true; }
+    ticks([2000, 1000]);
+    if (crossed(0)) {
+      log('tick', [0], audio.tick());
+      log('chime', [0], audio.chime(1.1), 1.1);
+      P.afterChime = true;
+    }
   } else if (P.phase === 'rest' && P.steps[P.idx].section === 'weights') {
     // a weights rest leads straight into the next set: 3 ticks, then GO
-    if ([3000, 2000, 1000].some(crossed)) audio.tick();
-    if (crossed(0)) audio.go();
+    ticks([3000, 2000, 1000]);
+    if (crossed(0)) log('go', [0], audio.go());
   }
 }
 
@@ -211,8 +244,9 @@ function startTimer() {
 function stopTimer() { clearInterval(timer); timer = null; }
 
 function setRunning(run) {
+  if (run !== P.running) cuelog.note(run ? 'play' : 'pause', run ? 'Play' : 'Pause');
   P.running = run;
-  if (run) { audio.unlock(); audio.resume(); startTimer(); }
+  if (run) { P.planEnd = Date.now() + P.left; audio.unlock(); audio.resume(); startTimer(); }
   else { audio.pause(); stopTimer(); }
   draw();
 }
@@ -230,6 +264,7 @@ function finish() {
   stopTimer();
   audio.stopAll();
   letSleep();
+  cuelog.end('Finished', P.elapsed);
   const secs = Math.round(P.elapsed / 1000);
   const moves = P.steps.filter(s => s.type === 'move').length;
   const kcal = kcalSoFar();
@@ -259,6 +294,7 @@ function endWorkout() {
   }
   audio.stopAll();
   letSleep();
+  cuelog.end('Ended early', P.elapsed);
   ended.add(P.id);
   P = null;
   session.clear();
@@ -606,11 +642,12 @@ function update() {
 function wire() {
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   on('[data-pp]', () => setRunning(!P.running));
-  on('[data-next]', next);
-  on('[data-skip]', advance);
-  on('[data-prev]', prev);
-  on('[data-finish]', finish);
-  on('[data-add30]', () => { P.left += 30000; P.total += 30000; update(); });
+  const tap = (label, fn) => () => { cuelog.note('tap', label); fn(); };
+  on('[data-next]', tap('NEXT', next));
+  on('[data-skip]', tap('SKIP', advance));
+  on('[data-prev]', tap('PREV', prev));
+  on('[data-finish]', tap('FINISH', finish));
+  on('[data-add30]', tap('+30 SEC', () => { P.left += 30000; P.total += 30000; P.planEnd += 30000; update(); }));
   on('[data-mute]', () => { P.muted = !P.muted; audio.setMuted(P.muted); draw(); });
   on('[data-progress]', () => { if (P.running) setRunning(false); });
   on('[data-settings]', () => { if (P.running) setRunning(false); go('#/settings'); });

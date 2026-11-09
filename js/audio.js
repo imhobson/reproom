@@ -5,6 +5,7 @@
 import * as store from './store.js';
 import * as data from './data.js';
 import * as sounds from './sounds.js';
+import * as cuelog from './cuelog.js';
 
 let ctx = null;          // Web Audio context, made on the first tap
 let muted = false;       // the player's quick mute
@@ -65,9 +66,13 @@ export function stopAll() { stopVoice(); }
 const myTick = () => sounds.tickById(settings().tick);
 const myChime = () => sounds.chimeById(settings().chime);
 
+// Returns why a sound didn't play (for the cue log): 'off', 'no audio', or
+// the audio context's state when it isn't running; null when it played.
 function fx(play, at = 0) {
-  if (!ctx || !effectsOn()) return;
+  if (!ctx) return 'no audio';
+  if (!effectsOn()) return 'off';
   play(ctx, at, fxBus);
+  return ctx.state === 'running' ? null : ctx.state;
 }
 export const tick = () => fx(myTick().play);
 export const go = () => fx(sounds.go);
@@ -175,8 +180,8 @@ async function clipsFor(voiceId) {
   return clipLists[voiceId];
 }
 
-function speak(text) {
-  if (!('speechSynthesis' in window)) return;
+function speak(text, logEntry = null) {
+  if (!('speechSynthesis' in window)) { cuelog.skipped(logEntry, 'no phone voice'); return; }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   const all = speechSynthesis.getVoices();
@@ -184,6 +189,7 @@ function speak(text) {
   if (v) u.voice = v;
   u.lang = v ? v.lang : 'en-GB';
   u.volume = voiceLevel();
+  if (logEntry) u.onstart = () => cuelog.started(logEntry, 'phone voice');
   speechSynthesis.speak(u);
 }
 
@@ -193,20 +199,22 @@ function phoneText(step) {
   return step.side ? `${base} ${step.side === 'left' ? 'Left' : 'Right'} side.` : base;
 }
 
-// Read out a move, once, as its preview starts.
-export async function sayMove(step) {
+// Read out a move, once, as its preview starts. logEntry (cue log, when it's
+// on) gets the moment the voice really starts.
+export async function sayMove(step, logEntry = null) {
   stopVoice();
   const v = settings().voice;
-  if (!soundOn() || v === 'off') return;
-  if (v === 'phone') { speak(phoneText(step)); return; }
+  if (!soundOn() || v === 'off') { cuelog.skipped(logEntry, 'voice off'); return; }
+  if (v === 'phone') { speak(phoneText(step), logEntry); return; }
   const clips = await clipsFor(v);
   const name = clipName(step);
-  if (!clips[name]) { speak(phoneText(step)); return; } // missing clip: phone voice
+  if (!clips[name]) { speak(phoneText(step), logEntry); return; } // missing clip: phone voice
   const a = new Audio(`audio/${v}/${name}.mp3`);
   a.volume = voiceLevel();
   clip = a;
   a.onended = () => { if (clip === a) clip = null; };
-  a.play().catch(() => { if (clip === a) { clip = null; speak(phoneText(step)); } });
+  if (logEntry) a.addEventListener('playing', () => cuelog.started(logEntry, 'clip'), { once: true });
+  a.play().catch(() => { if (clip === a) { clip = null; speak(phoneText(step), logEntry); } });
 }
 
 // Just a few words in the phone voice, e.g. "Right side." between the two

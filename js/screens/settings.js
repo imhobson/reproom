@@ -9,6 +9,7 @@ import * as backup from '../backup.js';
 import { pad2, go, showToast } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { resetView } from './home.js';
+import * as cuelog from '../cuelog.js';
 
 // Where the back arrow on Settings goes (Home, or a paused workout).
 let backTo = '#/';
@@ -28,8 +29,12 @@ const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', '
 function versionTag() {
   const [, m, d] = (self.APP_DATE || '').split('-').map(Number);
   const date = m ? ` · ${d} ${MONTHS[m - 1]}` : '';
-  return `<span class="label s-ver">V${self.APP_VERSION || '?'}${date}</span>`;
+  return `<span class="label s-ver" data-ver>V${self.APP_VERSION || '?'}${date}</span>`;
 }
+
+// Tapping the version 5 times (within 3s) turns the cue log on or off (F11
+// pocket test). While it's on, a Cue log row shows under Feedback.
+let verTaps = [];
 
 function voiceLabel(id) {
   if (id === 'off') return 'Off';
@@ -93,6 +98,7 @@ export function render(app, { confirm = false, restoring = null, undoing = false
       ${dataSection()}
 
       <button class="s-row fb-row" data-go="#/settings/feedback"><span class="s-name">Feedback</span><span class="s-val">${sym('arrowRight')}</span></button>
+      ${cuelog.enabled() ? `<button class="s-row" style="margin-top:2px" data-go="#/settings/cue-log"><span class="s-name">Cue log</span><span class="s-val"><span class="label muted">Debug</span> ${sym('arrowRight')}</span></button>` : ''}
 
       <button class="reset" data-reset>Reset my progress</button>
     </section>
@@ -108,6 +114,15 @@ export function render(app, { confirm = false, restoring = null, undoing = false
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   const again = () => { const y = scrollY; render(app); scrollTo(0, y); };
   on('[data-back]', () => go(backTo));
+  on('[data-ver]', () => {
+    const now = Date.now();
+    verTaps = [...verTaps.filter(x => now - x < 3000), now];
+    if (verTaps.length < 5) return;
+    verTaps = [];
+    cuelog.setEnabled(!cuelog.enabled());
+    again();
+    showToast(`<span class="label">Cue log ${cuelog.enabled() ? 'on' : 'off'}</span>`, 2500);
+  });
   on('[data-stage]', e => {
     const n = st.stage + +e.currentTarget.dataset.stage;
     store.jumpToStage(Math.min(MAX_STAGE, Math.max(1, n)));
