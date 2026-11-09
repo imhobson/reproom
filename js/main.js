@@ -11,6 +11,7 @@ import * as player from './screens/player.js';
 import * as summary from './screens/summary.js';
 import * as settings from './screens/settings.js';
 import * as feedback from './screens/feedback.js';
+import * as fb from './feedback.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -57,6 +58,13 @@ addEventListener('hashchange', route);
 route();
 const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
 if (flash) showToast(`<p>${flash}</p>`);
+
+// Feedback (F15): send any notes still queued when the app opens and when
+// the phone gets signal back. Never during a workout (the Feedback page
+// retries too when it opens).
+const retryFeedback = () => { if (!midWorkout()) fb.retryQueued(); };
+retryFeedback();
+addEventListener('online', retryFeedback);
 
 // ---- Updates ----
 // A new release installs in the background and waits (see sw.js). When one is

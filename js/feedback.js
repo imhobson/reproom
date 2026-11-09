@@ -4,7 +4,10 @@
 // secret that must never end up in a backup file on Drive, and the notes
 // live in the inbox sheet once sent. Restore only touches BACKUP_KEYS, so a
 // restore leaves both alone.
+import { FEEDBACK_URL } from './config.js';
+
 export const KEY_STORE = 'reproom.feedbackKey';   // the key, pasted once on the phone
+export const KEY_BAD_STORE = 'reproom.feedbackKeyBad'; // '1' when the server said "bad key"
 export const NOTES_STORE = 'reproom.feedback';    // recent notes, queued or sent
 
 export const TYPES = ['Not sure', 'Bug', 'Idea', 'QoL'];
@@ -17,8 +20,20 @@ export function getKey() {
   try { return localStorage.getItem(KEY_STORE) || ''; } catch (e) { return ''; }
 }
 export function setKey(key) {
-  try { localStorage.setItem(KEY_STORE, key); } catch (e) { /* storage unavailable */ }
+  try {
+    localStorage.setItem(KEY_STORE, key);
+    localStorage.removeItem(KEY_BAD_STORE); // a new key gets a fresh chance
+  } catch (e) { /* storage unavailable */ }
 }
+// The server refused the key ("bad key"): Feedback opens the Connect box
+// with "Key not recognised", and nothing is sent until a key is saved.
+export function keyBad() {
+  try { return localStorage.getItem(KEY_BAD_STORE) === '1'; } catch (e) { return false; }
+}
+function markKeyBad() {
+  try { localStorage.setItem(KEY_BAD_STORE, '1'); } catch (e) { /* storage unavailable */ }
+}
+const usableKey = () => (keyBad() ? '' : getKey());
 
 // ---- Notes ----
 // Each note: { clientId, written, type, note, context, status, backlogId }
@@ -69,7 +84,106 @@ export const recent = (count = 10) => notes().slice(-count).reverse();
 export function statusOf(n) {
   if (n.status === 'filed') return [`Filed · ${n.backlogId || '?'}`, 'filed'];
   if (n.status === 'sent') return ['Sent', 'sent'];
-  return getKey() ? ['Waiting for signal', 'waiting'] : ['Waiting to connect', 'waiting'];
+  return usableKey() ? ['Waiting for signal', 'waiting'] : ['Waiting to connect', 'waiting'];
+}
+
+// ---- Sending ----
+// Notes are saved first (addNote), then sent. Retrying is safe: the server
+// ignores a clientId it already has. Sent as text/plain on purpose, so the
+// browser makes a "simple" request with no CORS preflight.
+
+const TIMEOUT_MS = 20000;
+const STATUS_DAYS = 30;  // status checks cover sent notes from the last 30 days
+const MAX_IDS = 50;      // the server's limit per status check
+
+// The Feedback page listens, to redraw Recent when a status changes.
+let listener = null;
+export function onChange(fn) { listener = fn; }
+const changed = () => { try { listener?.(); } catch (e) { /* page gone */ } };
+
+async function call(url, opts = {}) {
+  const ctl = new AbortController();
+  const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+  try {
+    const r = await fetch(url, { ...opts, signal: ctl.signal, cache: 'no-store' });
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
+
+function update(clientId, fields) {
+  const list = notes();
+  const n = list.find(x => x.clientId === clientId);
+  if (!n) return;
+  Object.assign(n, fields);
+  saveNotes(list);
+}
+
+// Sends one note. Returns 'sent', 'bad key' or 'failed' (no signal, or the
+// server had a problem: the note stays queued for the next retry).
+const inFlight = new Set();
+export async function send(n) {
+  const key = usableKey();
+  if (!key || !FEEDBACK_URL || inFlight.has(n.clientId)) return 'failed';
+  inFlight.add(n.clientId);
+  try {
+    const { clientId, written, type, note, context } = n;
+    const res = await call(FEEDBACK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ clientId, written, type, note, context, key }),
+    });
+    if (res?.ok) { update(clientId, { status: 'sent' }); changed(); return 'sent'; }
+    if (res?.error === 'bad key') { markKeyBad(); changed(); return 'bad key'; }
+    return 'failed';
+  } catch (e) {
+    return 'failed';
+  } finally {
+    inFlight.delete(n.clientId);
+  }
+}
+
+// Sends every queued note, oldest first. Stops at the first failure (no
+// signal) or a bad key. Callers keep this out of workouts.
+let flushing = null;
+export function retryQueued() {
+  if (flushing) return flushing;
+  flushing = (async () => {
+    if (navigator.onLine === false) return;
+    for (const n of notes().filter(x => x.status === 'queued')) {
+      if ((await send(n)) !== 'sent') break;
+    }
+  })().catch(() => {}).finally(() => { flushing = null; });
+  return flushing;
+}
+
+// Asks the sheet about sent notes from the last 30 days and marks any that
+// Claude has filed, with their backlog ID.
+export async function checkStatuses() {
+  const key = usableKey();
+  if (!key || !FEEDBACK_URL || navigator.onLine === false) return;
+  const since = Date.now() - STATUS_DAYS * 86400000;
+  const ids = notes()
+    .filter(n => n.status === 'sent' && !(Date.parse(n.written) < since))
+    .slice(-MAX_IDS)
+    .map(n => n.clientId);
+  if (!ids.length) return;
+  try {
+    const url = `${FEEDBACK_URL}?key=${encodeURIComponent(key)}&ids=${ids.map(encodeURIComponent).join(',')}`;
+    const res = await call(url);
+    if (res?.error === 'bad key') { markKeyBad(); changed(); return; }
+    if (!res?.ok || !res.notes) return;
+    let any = false;
+    const list = notes();
+    for (const n of list) {
+      const s = res.notes[n.clientId];
+      if (n.status === 'sent' && s && String(s.status).toLowerCase() === 'filed') {
+        n.status = 'filed';
+        n.backlogId = String(s.backlogId || '');
+        any = true;
+      }
+    }
+    if (any) { saveNotes(list); changed(); }
+  } catch (e) { /* no signal: try again next time the page opens */ }
 }
 
 // ---- The context line sent with a note ----

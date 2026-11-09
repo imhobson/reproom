@@ -22,13 +22,17 @@ let draft = '';
 
 // ---- Parts ----
 
+// The Connect box shows with no key, after CHANGE, or when the key was refused.
+const connectOpen = () => !fb.getKey() || changing || fb.keyBad();
+
 function connectedTag() {
-  if (!fb.getKey() || changing) return '';
+  if (connectOpen()) return '';
   return `<span class="label fb-conn">Connected · <button class="fb-change" data-change>Change</button></span>`;
 }
 
 function connectBox() {
-  if (fb.getKey() && !changing) return '';
+  if (!connectOpen()) return '';
+  const err = keyError || (fb.keyBad() ? 'Key not recognised' : '');
   return `
     <h2 class="label red s-sec">Connect</h2>
     <div class="s-card fb-connect">
@@ -37,8 +41,8 @@ function connectBox() {
           autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Feedback key">
         <button class="fb-save" data-save-key>Save</button>
       </div>
-      ${keyError ? `<p class="fb-err">${esc(keyError)}</p>` : ''}
-      ${changing ? '<button class="fb-cancel label" data-cancel-key>Cancel</button>' : ''}
+      ${err ? `<p class="fb-err">${esc(err)}</p>` : ''}
+      ${changing && !fb.keyBad() ? '<button class="fb-cancel label" data-cancel-key>Cancel</button>' : ''}
     </div>
     <p class="s-help">The key is made once in the sheet's Apps Script (makeKey). It stays on this phone and isn't in backups.</p>`;
 }
@@ -93,7 +97,7 @@ function draw() {
       <button class="cta centre fb-send" data-send ${draft.trim() ? '' : 'disabled'}>Send to backlog</button>
 
       <h2 class="label red s-sec">Recent</h2>
-      ${recentList()}
+      <div data-recent>${recentList()}</div>
     </section>`;
 
   const q = s => app.querySelector(s);
@@ -109,9 +113,10 @@ function draw() {
     const k = q('[data-key]').value.trim();
     if (!k) { keyError = 'Paste the key first'; again(); return; }
     fb.setKey(k);
-    changing = false; keyError = '';
+    changing = false; keyError = ''; drawnBad = false;
     again();
     showToast('<span class="label">Key saved</span>', 2500);
+    if (!workout) fb.retryQueued().then(fb.checkStatuses); // anything waiting to connect goes now
   };
   on('[data-save-key]', saveKey);
   q('[data-key]')?.addEventListener('keydown', e => { if (e.key === 'Enter') saveKey(); });
@@ -152,15 +157,30 @@ function draw() {
   });
   fit();
 
-  // Send: save to the queue on the phone first (step 3 adds the sending).
+  // Send: save to the queue on the phone first, then try to send it. This
+  // one note is sent even from a paused workout, because you asked for it;
+  // older queued notes wait until you're out of the workout.
   on('[data-send]', () => {
     if (!draft.trim()) return;
-    fb.addNote({ type, note: draft.trim(), context: fb.contextLine(workout, attach) });
+    const n = fb.addNote({ type, note: draft.trim(), context: fb.contextLine(workout, attach) });
     draft = ''; type = 'Not sure';
     again();
     showToast('<span class="label">Saved</span>', 2000);
+    fb.send(n);
   });
 }
+
+// A status changed (sent, filed, or the key was refused) while the page is
+// open: redraw Recent only, so typing isn't interrupted. A refused key needs
+// the Connect box, so that redraws the page (the draft is kept).
+let drawnBad = false;
+function statusChanged() {
+  if (!app || location.hash !== '#/settings/feedback') return;
+  if (fb.keyBad() !== drawnBad) { drawnBad = fb.keyBad(); const y = scrollY; draw(); scrollTo(0, y); return; }
+  const el = app.querySelector('[data-recent]');
+  if (el) el.innerHTML = recentList();
+}
+fb.onChange(statusChanged);
 
 export function render(el, w) {
   app = el;
@@ -168,5 +188,9 @@ export function render(el, w) {
   attach = true;
   changing = false;
   keyError = '';
+  drawnBad = fb.keyBad();
   draw();
+  // Opening the page retries queued notes, then checks what's been filed.
+  // Not from a paused workout: no retries during a workout.
+  if (!workout) fb.retryQueued().then(fb.checkStatuses);
 }
