@@ -2,6 +2,7 @@
 // workout's cues: when each was planned and when it really played.
 // See js/cuelog.js for how the plan is worked out.
 import * as cuelog from '../cuelog.js';
+import * as keepalive from '../keepalive.js';
 import { go } from '../ui.js';
 import { head } from './settings.js';
 
@@ -13,7 +14,7 @@ const t = ms => {
 };
 const secs = ms => `${ms < 0 ? '−' : '+'}${(Math.abs(ms) / 1000).toFixed(2)}s`;
 const KIND = { voice: 'VOICE', tick: 'TICK', go: 'GO', chime: 'CHIME', screen: 'SCREEN', freeze: 'PAGE',
-  gap: 'TIMER', pause: 'PAUSE', play: 'PLAY', tap: 'TAP' };
+  gap: 'TIMER', pause: 'PAUSE', play: 'PLAY', tap: 'TAP', keep: 'AWAKE' };
 
 function row(e) {
   const cue = cuelog.CUE_KINDS.includes(e.k);
@@ -44,7 +45,7 @@ export function render(app) {
     body = `
       <div class="s-card cl-sum">
         <p class="s-name">${esc(r.name)}</p>
-        <p class="label muted">${new Date(r.w0).toLocaleString()} · V${esc(r.version)}</p>
+        <p class="label muted">${new Date(r.w0).toLocaleString()} · V${esc(r.version)}${r.keep ? ` · Awake: ${esc(modeLabel(r.keep))}` : ''}</p>
         <p class="cl-verdict ${r.end && s.pass ? '' : 'bad'}">${verdict}</p>
         <p>Worst: ${secs(s.worst)} · screen off ${s.hidden}× · slow timer ticks ${s.gaps}</p>
         ${r.end ? `<p>${esc(r.end.how)} after ${t(r.end.at)} on the clock (paused ${t(s.paused)}). The workout's timer counted ${t(r.end.elapsed)}${
@@ -52,11 +53,26 @@ export function render(app) {
       </div>
       <ul class="cl-list">${r.entries.map(row).join('')}</ul>`;
   }
+  const cur = keepalive.mode();
   app.innerHTML = `
     <section class="screen settings cuelog">
       ${head('Cue log')}
-      <p class="s-help intro">Each cue of the last workout: when it played, and how far off plan (+ late, − early). Late by more than 1s or missing is in red.</p>
+      <h2 class="label red s-sec">Keep awake in a pocket</h2>
+      <div class="p-list" role="radiogroup">${keepalive.MODES.map(m => `
+        <div class="p-opt ${m.id === cur ? 'sel' : ''}" data-keep-mode="${m.id}" role="radio" aria-checked="${m.id === cur}">
+          <span class="box"></span>
+          <span class="p-txt"><span class="o-name">${m.label}</span><span class="p-desc">${m.desc}</span></span>
+        </div>`).join('')}</div>
+      <p class="s-help">Used from the next workout you start.</p>
+      <h2 class="label red s-sec">Last workout</h2>
+      <p class="s-help">Each cue: when it played, and how far off plan (+ late, − early). Late by more than 1s or missing is in red.</p>
       ${body}
     </section>`;
   app.querySelector('[data-back]').addEventListener('click', () => go('#/settings'));
+  app.querySelectorAll('[data-keep-mode]').forEach(el => el.addEventListener('click', () => {
+    keepalive.setMode(el.dataset.keepMode);
+    const y = scrollY; render(app); scrollTo(0, y);
+  }));
 }
+
+const modeLabel = id => keepalive.MODES.find(m => m.id === id)?.label || id;

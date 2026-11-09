@@ -17,6 +17,7 @@ import * as audio from '../audio.js';
 import * as weights from '../weights.js';
 import { WEIGHT_DEFAULT_REPS, WEIGHT_KG_STEP } from '../config.js';
 import * as cuelog from '../cuelog.js';
+import * as keepalive from '../keepalive.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 const REPS_MIN = 1, REPS_MAX = 50, KG_MAX = 60;
@@ -60,7 +61,9 @@ function start(day) {
   audio.setMuted(false);
   audio.resume();
   audio.preload(steps);
-  cuelog.begin(`Day ${pad2(day)} · ${workout.name}`);
+  cuelog.begin(`Day ${pad2(day)} · ${workout.name}`, keepalive.mode());
+  keepalive.start();
+  mediaSession();
   enterStep(0);
 }
 
@@ -167,12 +170,14 @@ function prev() {
   enterStep(isDo(P.steps[P.idx]) ? P.idx : 0);
 }
 
+// The timer counts real time (performance.now), however late a tick comes:
+// a slowed or frozen page never makes the workout longer. (Until V1.7.2 each
+// tick counted at most 1s, so a page frozen in a pocket stood still.)
 function tick() {
   if (!P || !P.running) return;
   const now = performance.now();
-  const gap = now - (P.last || now);
-  if (gap > 1500) cuelog.note('gap', `Timer tick ${(gap / 1000).toFixed(1)}s after the last`);
-  const dt = Math.min(gap, 1000);
+  const dt = now - (P.last || now);
+  if (dt > 1500) cuelog.note('gap', `Timer tick ${(dt / 1000).toFixed(1)}s after the last`);
   P.last = now;
   if (P.phase === 'set') { P.elapsed += dt; update(); return; } // no timer on a set
   const before = P.left;
@@ -180,14 +185,19 @@ function tick() {
   P.elapsed += dt;
   P.sinceStart += dt;
   cues(before, P.left);
-  if (P.left <= 0) {
-    // The tick that ends a phase is up to TICK_MS past zero. Carry that into
-    // the next phase, so the workout doesn't slip a little at every step.
+  // The tick that ends a phase is past zero (by up to TICK_MS, or much more
+  // after a long gap). Carry that into the next phase, so the workout doesn't
+  // slip at every step. After a long gap this passes over whole phases at
+  // once, silently, and lands where the workout should be by now.
+  let n = 0;
+  while (P && P.running && P.phase !== 'set' && P.left <= 0 && n++ < 500) {
     const over = -P.left;
     P.natural = true;
+    if (n > 1) cuelog.note('gap', `Passed over a phase to catch up (${(over / 1000).toFixed(1)}s behind)`);
     advance();
     if (P && P.phase !== 'set') { P.left -= over; P.sinceStart += over; }
-  } else update();
+  }
+  if (P && n === 0) update();
 }
 
 // Sound effects at the moments in docs/RepRoom-audio-spec.txt. They only
@@ -246,9 +256,56 @@ function stopTimer() { clearInterval(timer); timer = null; }
 function setRunning(run) {
   if (run !== P.running) cuelog.note(run ? 'play' : 'pause', run ? 'Play' : 'Pause');
   P.running = run;
-  if (run) { P.planEnd = Date.now() + P.left; audio.unlock(); audio.resume(); startTimer(); }
-  else { audio.pause(); stopTimer(); }
+  if (run) { P.planEnd = Date.now() + P.left; audio.unlock(); audio.resume(); keepalive.start(); startTimer(); }
+  else { audio.pause(); keepalive.pause(); stopTimer(); }
   draw();
+}
+
+// ---- Lock screen and headphones (Media Session) ----
+// With the keep-alive audio element playing, Android shows a media
+// notification on the lock screen: the move as the title, the workout under
+// it. Play / pause there (and the headphone button) is PAUSE; next is NEXT
+// (SKIP on a rest); previous is PREV. With a sheet open (End workout?, Exercise
+// info), play closes it and carries on, like No, keep going.
+const MS = 'mediaSession' in navigator ? navigator.mediaSession : null;
+const msAction = (name, fn) => { try { MS.setActionHandler(name, fn); } catch (e) { /* not supported */ } };
+
+function mediaSession() {
+  if (!MS) return;
+  const remote = (label, fn) => () => { if (!P) return; cuelog.note('tap', `Lock screen: ${label}`); fn(); };
+  msAction('play', remote('Play', () => {
+    if (P.sheet === 'end') keepGoing();
+    else if (P.sheet === 'info') { closeInfo(); setRunning(true); }
+    else if (!P.running) setRunning(true);
+  }));
+  msAction('pause', remote('Pause', () => { if (P.running) setRunning(false); }));
+  msAction('nexttrack', remote('Next', () => {
+    if (P.sheet || P.phase === 'set') return; // a weight set ends with DONE on screen
+    if (P.phase === 'rest') advance(); else next();
+  }));
+  msAction('previoustrack', remote('Prev', () => { if (!P.sheet) prev(); }));
+}
+
+function clearMediaSession() {
+  if (!MS) return;
+  ['play', 'pause', 'nexttrack', 'previoustrack'].forEach(a => msAction(a, null));
+  MS.metadata = null;
+  MS.playbackState = 'none';
+}
+
+// Called on every redraw: what the lock screen shows.
+let msTitle = '';
+function mediaInfo() {
+  if (!MS || !P) return;
+  const step = P.steps[P.idx];
+  const title = P.phase === 'rest' ? 'Rest' : stepName(step);
+  const artist = `Day ${pad2(P.day)} · ${P.workout.name}`;
+  if (title + artist !== msTitle && 'MediaMetadata' in window) {
+    msTitle = title + artist;
+    MS.metadata = new MediaMetadata({ title, artist, album: 'RepRoom',
+      artwork: [{ src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }] });
+  }
+  MS.playbackState = P.running ? 'playing' : 'paused';
 }
 
 // The weight sets saved with DONE, in the order they were done:
@@ -264,6 +321,8 @@ function finish() {
   stopTimer();
   audio.stopAll();
   letSleep();
+  keepalive.stop();
+  clearMediaSession();
   cuelog.end('Finished', P.elapsed);
   const secs = Math.round(P.elapsed / 1000);
   const moves = P.steps.filter(s => s.type === 'move').length;
@@ -294,6 +353,8 @@ function endWorkout() {
   }
   audio.stopAll();
   letSleep();
+  keepalive.stop();
+  clearMediaSession();
   cuelog.end('Ended early', P.elapsed);
   ended.add(P.id);
   P = null;
@@ -554,6 +615,7 @@ function draw() {
   readKgField(); // keep a kg that's typed but not yet confirmed (e.g. on Pause)
   app.innerHTML = view();
   wire();
+  mediaInfo();
 }
 
 // ---- The phone's back button (B02) ----
@@ -731,7 +793,9 @@ export function snapshot() {
 // Leaving the player any other way (e.g. the phone's back button) pauses it.
 export function leave() {
   disarm(); // back on other screens works as normal
-  if (P && P.running) { P.running = false; stopTimer(); }
+  if (P && P.running) { P.running = false; stopTimer(); cuelog.note('pause', 'Pause (left the player)'); }
   audio.pause();
+  keepalive.pause();
+  if (MS && P) MS.playbackState = 'paused';
   letSleep();
 }

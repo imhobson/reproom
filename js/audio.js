@@ -34,6 +34,7 @@ export async function init() {
   try { voices = await fetch('audio/voices.json').then(r => r.json()); } catch (e) { voices = []; }
 }
 export const voiceList = () => voices;
+export const context = () => ctx; // for the pocket keep-alive tone (keepalive.js)
 
 // Call from a tap (e.g. LET'S GO) so the phone allows sound.
 export function unlock() {

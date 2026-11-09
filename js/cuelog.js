@@ -46,9 +46,10 @@ export function last() {
 const since = () => Date.now() - run.w0;
 
 // A workout starts: a fresh log.
-export function begin(name) {
+// keep: the keep-alive mode the workout ran with (keepalive.js).
+export function begin(name, keep = '') {
   if (!on) { run = null; return; }
-  run = { name, w0: Date.now(), p0: performance.now(), version: self.APP_VERSION, entries: [] };
+  run = { name, keep, w0: Date.now(), p0: performance.now(), version: self.APP_VERSION, entries: [] };
   save();
 }
 
