@@ -4,6 +4,8 @@ import { sym } from '../symbols.js';
 import { pad2, go } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { result } from './player.js';
+import * as data from '../data.js';
+import * as weights from '../weights.js';
 import { resetView } from './home.js';
 
 export function render(app) {
@@ -15,6 +17,17 @@ export function render(app) {
     blocks += `<i class="${d === r.day ? 'now' : store.isDone(r.stage, d) ? 'd' : ''}"></i>`;
   }
   const cont = r.stageJustCompleted;
+  // Weights (F12, board 12c): one card for the move, under the stats.
+  const wm = r.weights && data.move(r.weights.move);
+  const wCard = wm ? `
+      <div class="wcard">
+        <span class="ico">${sym('dumbbell')}</span>
+        <div>
+          <p class="label red">Weights</p>
+          <p class="nm">${wm.name}</p>
+          ${weights.describe(r.weights.sets).map(l => `<p class="wsum">${l}</p>`).join('')}
+        </div>
+      </div>` : '';
 
   app.innerHTML = `
     <section class="screen summary">
@@ -35,7 +48,7 @@ export function render(app) {
         <div><p class="label">kcal</p><p class="num big">${r.kcal}</p></div>
         <div><p class="label">Moves</p><p class="num big">${r.moves}</p></div>
         <div><p class="label">Focus</p><p class="focus">${r.focus}</p></div>
-      </div>
+      </div>${wCard}
       <div class="stage-row">
         <p class="label">Stage <span class="num">${pad2(r.stage)}</span></p>
         <p class="label"><span class="num">${store.doneCount(r.stage)}</span><span class="slash">/</span><span class="num">${DAYS_PER_STAGE}</span> done</p>

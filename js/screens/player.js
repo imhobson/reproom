@@ -199,6 +199,14 @@ function setRunning(run) {
   draw();
 }
 
+// The weight sets saved with DONE, in the order they were done:
+// { move, sets: [{ set, side, reps, kg }] }, or null if none.
+function weightsDone() {
+  const idx = Object.keys(P.wdone).map(Number).sort((a, b) => a - b);
+  if (!idx.length) return null;
+  return { move: P.steps[idx[0]].move, sets: idx.map(i => ({ ...P.wdone[i] })) };
+}
+
 function finish() {
   clearTimeout(P.voiceTimer);
   stopTimer();
@@ -208,9 +216,10 @@ function finish() {
   const moves = P.steps.filter(s => s.type === 'move').length;
   const kcal = kcalSoFar();
   const wasComplete = store.stageComplete(P.stage);
-  store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal });
+  const weights = weightsDone();
+  store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal, weights });
   lastResult = {
-    stage: P.stage, day: P.day, name: P.workout.name, secs, moves, kcal,
+    stage: P.stage, day: P.day, name: P.workout.name, secs, moves, kcal, weights,
     focus: focusOf(P.workout),
     stageJustCompleted: !wasComplete && store.stageComplete(P.stage),
   };
@@ -222,6 +231,13 @@ function finish() {
 function endWorkout() {
   clearTimeout(P.voiceTimer);
   stopTimer();
+  // Weight sets already done are kept (logged as an early end; day unticked).
+  const weights = weightsDone();
+  if (weights) {
+    const moves = P.steps.slice(0, P.idx).filter(s => s.type === 'move').length;
+    store.logEarly({ stage: P.stage, day: P.day, intensity: P.intensity,
+      secs: Math.round(P.elapsed / 1000), moves, kcal: kcalSoFar(), weights });
+  }
   audio.stopAll();
   letSleep();
   P = null;
@@ -446,7 +462,9 @@ function endSheet() {
     <div class="sheet end">
       <p class="label red"><span class="pz">${sym('pause')}</span>Paused at <span class="num">${mmss(P.elapsed / 1000)}</span></p>
       <h2 class="sheet-title">End workout?</h2>
-      <p class="sheet-text">If you end now, this workout's progress is lost and the day stays unticked.</p>
+      <p class="sheet-text">${weightsDone()
+        ? "If you end now, the day stays unticked. The weight sets you've done are kept."
+        : "If you end now, this workout's progress is lost and the day stays unticked."}</p>
       <button class="cta centre" data-keep>No, keep going</button>
       <button class="cta outline-red" data-end>Yes, end it</button>
     </div>`;

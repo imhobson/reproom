@@ -112,7 +112,8 @@ export function summarize(data) {
   const ticks = st.ticks?.[stage] || {};
   let done = 0;
   for (let d = 1; d <= DAYS_PER_STAGE; d++) if (ticks[d]?.length) done++;
-  const workouts = Array.isArray(st.log) ? st.log.length : 0;
+  // Finished workouts only: an early end (logged for its weight sets) isn't one.
+  const workouts = Array.isArray(st.log) ? st.log.filter(e => !e?.early).length : 0;
   const set = st.settings || {};
   const vid = set.voice || 'kokoro-michael';
   const voice = vid === 'off' ? 'Voice off'

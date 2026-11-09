@@ -74,9 +74,10 @@ function oneLine(sets) {
 export function describe(sets) {
   if (!sets?.length) return [];
   if (!sets.some(s => s.side)) return [oneLine(sets)];
-  const l = oneLine(sets.filter(s => s.side === 'left'));
-  const r = oneLine(sets.filter(s => s.side === 'right'));
-  return l === r ? [l] : [`L ${l}`, `R ${r}`];
+  const ls = sets.filter(s => s.side === 'left'), rs = sets.filter(s => s.side === 'right');
+  const l = ls.length ? oneLine(ls) : null, r = rs.length ? oneLine(rs) : null;
+  if (l === r) return [l];
+  return [l && `L ${l}`, r && `R ${r}`].filter(Boolean); // one side only after an early end
 }
 
 // The mono line under each move on Workout details:
