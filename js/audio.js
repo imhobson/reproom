@@ -267,10 +267,10 @@ export async function sayMove(step, logEntry = null) {
 
 // Just a few words in the phone voice, e.g. "Right side." between the two
 // sides of a weight set (F12). Off when the voice is off.
-export function sayText(text) {
+export function sayText(text, logEntry = null) {
   stopVoice();
-  if (!soundOn() || settings().voice === 'off') return;
-  speak(text);
+  if (!soundOn() || settings().voice === 'off') { cuelog.skipped(logEntry, 'voice off'); return; }
+  speak(text, logEntry);
 }
 
 // Load a workout's clips ahead so they start on time.

@@ -4,7 +4,7 @@
 // The routines, their order and their card text are in config.js (RUN_ROUTINES).
 import * as data from '../data.js';
 import { sym } from '../symbols.js';
-import { go, showToast } from '../ui.js';
+import { go } from '../ui.js';
 import { head } from './settings.js';
 
 const dot = '<span class="dot">·</span>';
@@ -38,8 +38,5 @@ export function render(app) {
   app.querySelector('[data-back]').addEventListener('click', () => go('#/'));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
   // Progress isn't built yet: the icon does nothing (as on Home).
-  app.querySelectorAll('[data-routine]').forEach(b => b.addEventListener('click', () => {
-    // Workout details for a routine (board 16b) is build step 4.
-    showToast('<p>Routine details come in the next build step.</p>', 2500);
-  }));
+  app.querySelectorAll('[data-routine]').forEach(b => b.addEventListener('click', () => go(`#/run/${b.dataset.routine}`)));
 }

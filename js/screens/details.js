@@ -10,6 +10,58 @@ import { WEIGHT_SETS, WEIGHT_REST_SECS } from '../config.js';
 
 const SEC_SYM = { warmup: 'warmup', main: 'barbell', cooldown: 'cooldown' };
 
+// Workout details for a run routine (F11, board 16b): the same screen with
+// the routine's colour and symbol in the header, RUN ROUTINE · <GROUP>, one
+// section headed with the group and no switch, and no WEIGHTS. Walk backs are
+// rows like Rest (not tappable), with the back arrow.
+export function renderRoutine(app, id) {
+  const r = data.routine(id);
+  if (!r) { go('#/run'); return; }
+  const k = r.group; // the one section the routine fills: warmup / main / cooldown
+  const s = data.stats(r);
+  const rows = (r.sections[k] || []).map((step, i) => {
+    if (step.type === 'rest') {
+      return `<li class="row rest"><span class="ico">${sym(step.walkBack ? 'arrowLeft' : 'moon')}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></li>`;
+    }
+    return `<li><button class="row ${k === 'main' ? 'main' : ''}" data-step="${k}.${i}">`
+      + `<span class="ico">${sym('figureSmall')}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></button></li>`;
+  }).join('');
+  const go_ = `<button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button>`;
+
+  app.innerHTML = `
+    <section class="details">
+      <div class="hero-top ${r.tile}">
+        <div class="top">
+          <button class="icon-btn light" data-back aria-label="Back">${sym('arrowLeft')}</button>
+          <div class="icons">
+            <button class="icon-btn light" data-progress aria-label="Progress">${sym('progress')}</button>
+            <button class="icon-btn light" data-settings aria-label="Settings">${sym('gear')}</button>
+          </div>
+        </div>
+        <div class="hero-sym">${sym(r.sym)}</div>
+      </div>
+      <div class="pad">
+        <p class="label red">Run routine · ${r.groupLabel}</p>
+        <h1 class="w-name">${r.name}</h1>
+        <p class="meta label"><span class="num">${s.mins}</span> min<span class="dot">·</span><span class="num">${s.moves}</span> moves<span class="dot">·</span><span class="num">${s.kcal}</span> kcal</p>
+        ${go_}
+        <section class="dsec">
+          <div class="dsec-head">
+            <span class="hs">${sym(r.sym)}</span>
+            <p class="label">${r.groupLabel} · <span class="num">${s.mins}</span> min</p>
+          </div>
+          <ul class="rows">${rows}</ul>
+        </section>
+      </div>
+      <div class="pinned">${go_}</div>
+    </section>`;
+
+  app.querySelector('[data-back]').addEventListener('click', () => go('#/run'));
+  app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
+  app.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { audio.unlock(); go(`#/play/${id}`); }));
+  app.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => go(`#/run/${id}/move/${b.dataset.step}`)));
+}
+
 export function render(app, day) {
   const st = store.get();
   const workout = data.workoutFor(st.intensity, day);

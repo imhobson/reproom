@@ -139,6 +139,7 @@ button:disabled { cursor: default; }
 /* Hero area at the top of Workout details and Exercise info */
 .hero-top { position: relative; height: 300px; background: var(--field); padding: 28px var(--gutter) 0; }
 .hero-top.amber { background: var(--amber); }
+.hero-top.warm { background: var(--warm); }  /* run warm-up / cool-down routines (F11) */
 .hero-top.tall { height: 340px; }
 .hero-sym { width: 120px; height: 120px; margin: 4px auto 0; }
 .hero-fig { width: 164px; height: 164px; margin: 6px auto 0; }

@@ -20,12 +20,15 @@ export function howToHtml(m) {
     <section class="isec"><h3 class="label red">Tips</h3>${tips}</section>`;
 }
 
+// day: a workout's day, or a run routine's id (F11).
 export function render(app, day, ref) {
   const st = store.get();
-  const workout = data.workoutFor(st.intensity, day);
+  const isRun = typeof day === 'string';
+  const workout = isRun ? data.routine(day) : data.workoutFor(st.intensity, day);
+  const back = isRun ? `#/run/${day}` : `#/workout/${day}`;
   const [sec, i] = ref.split('.');
   const step = workout?.sections[sec]?.[+i];
-  if (!step || step.type !== 'move') { go(`#/workout/${day}`); return; }
+  if (!step || step.type !== 'move') { go(back); return; }
   const m = data.move(step.move);
   const need = m.equipment.length ? `
     <section class="isec"><h3 class="label red">You'll need</h3>
@@ -45,13 +48,13 @@ export function render(app, day, ref) {
         <div class="hero-fig">${sym('figureFloor')}</div>
       </div>
       <div class="pad">
-        <p class="label red">${sectionLabel(sec)} · <span class="num">${clock(step.secs)}</span></p>
+        <p class="label red">${isRun ? workout.groupLabel : sectionLabel(sec)} · <span class="num">${clock(step.secs)}</span></p>
         <h1 class="w-name">${stepName(step)}</h1>
         ${howToHtml(m)}
         ${need}
       </div>
     </section>`;
 
-  app.querySelector('[data-back]').addEventListener('click', () => go(`#/workout/${day}`));
+  app.querySelector('[data-back]').addEventListener('click', () => go(back));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
 }

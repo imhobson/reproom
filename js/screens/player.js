@@ -11,7 +11,7 @@ import * as data from '../data.js';
 import * as store from '../store.js';
 import * as session from '../session.js';
 import { sym } from '../symbols.js';
-import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
+import { pad2, go, clock, stepName, sectionLabel, showToast } from '../ui.js';
 import { howToHtml } from './info.js';
 import * as audio from '../audio.js';
 import * as weights from '../weights.js';
@@ -20,6 +20,10 @@ import * as cuelog from '../cuelog.js';
 import * as keepalive from '../keepalive.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
+// A run routine's sections are labelled with its group (Warm-up / Drills /
+// Cool-down), in the kicker and the strip (F11).
+const secShort = sec => (P?.run ? P.run.groupLabel : SHORT[sec] || sec);
+const secLong = sec => (P?.run ? P.run.groupLabel : sectionLabel(sec));
 const REPS_MIN = 1, REPS_MAX = 50, KG_MAX = 60;
 const GO_CHIP_MS = 2500; // how long GO! stays on screen after a move starts
 const TICK_MS = 100;
@@ -34,15 +38,23 @@ export const result = () => lastResult;
 
 // ---- Starting, timing and moving between steps ----
 
-function start(day) {
+// The thing to play: a workout (key = its day) or a run routine (key = its
+// id, F11). A routine has the same shape as a workout; it has no stage or
+// day, no warm-up / cool-down switches and no weights.
+const isRunKey = key => typeof key === 'string';
+const playable = key => (isRunKey(key) ? data.routine(key) : data.workoutFor(store.get().intensity, key));
+
+function start(key) {
   const st = store.get();
-  const workout = data.workoutFor(st.intensity, day);
-  const sess = session.forDay(day);
+  const run = isRunKey(key) ? data.routine(key) : null;
+  const day = run ? null : key;
+  const workout = playable(key);
+  const sess = session.forDay(key);
   // Weights: on or off as saved; the move picked on Workout details, or the
   // one done longest ago if the player was opened some other way.
-  const wOn = !!st.settings.weightsOn;
+  const wOn = !run && !!st.settings.weightsOn;
   if (wOn && !data.move(sess.weight)) sess.weight = weights.pickDefault();
-  const on = { ...sess.on, weights: wOn ? sess.weight : null };
+  const on = run ? { warmup: true, cooldown: true, weights: null } : { ...sess.on, weights: wOn ? sess.weight : null };
   const steps = data.playSteps(workout, on);
   const moveIdx = steps.map((s, i) => (s.type === 'move' ? i : -1)).filter(i => i >= 0);
   // The last step with something to do: a move, or a weight set when the
@@ -50,7 +62,7 @@ function start(day) {
   const lastDo = steps.map((s, i) => (s.type !== 'rest' ? i : -1)).filter(i => i >= 0).pop();
   const st2 = data.stats(workout, on);
   P = {
-    id: ++playId, day, stage: st.stage, intensity: st.intensity, workout, steps, stats: st2,
+    id: ++playId, key, run, day, stage: run ? null : st.stage, intensity: st.intensity, workout, steps, stats: st2,
     firstMove: moveIdx[0], lastMove: lastDo,
     weightsOn: !!on.weights,
     wvals: {}, // weight step index -> { reps, kg } on screen
@@ -61,7 +73,7 @@ function start(day) {
   audio.setMuted(false);
   audio.resume();
   audio.preload(steps);
-  cuelog.begin(`Day ${pad2(day)} · ${workout.name}`, keepalive.mode());
+  cuelog.begin(run ? workout.name : `Day ${pad2(day)} · ${workout.name}`, keepalive.mode());
   keepalive.start();
   mediaSession();
   enterStep(0);
@@ -81,7 +93,17 @@ function enterStep(i) {
       const plan = P.planStart + VOICE_AFTER_CHIME_MS;
       P.voiceTimer = setTimeout(() => { if (P && P.running) audio.sayMove(step, cuelog.cue('voice', name, plan, false)); }, VOICE_AFTER_CHIME_MS);
     } else audio.sayMove(step, cuelog.cue('voice', name, P.planStart, false));
-  } else setPhase('rest', step.secs);
+  } else {
+    setPhase('rest', step.secs);
+    // A walk back (F11) is announced, after the finish chime: "Walk back."
+    // (phone voice for now; there's no recorded clip).
+    if (step.walkBack) {
+      clearTimeout(P.voiceTimer);
+      const plan = P.planStart + (P.afterChime ? VOICE_AFTER_CHIME_MS : 0);
+      const say = () => { if (P && P.running && P.idx === i) audio.sayText('Walk back.', cuelog.cue('voice', 'Walk back', plan, false)); };
+      if (P.afterChime) P.voiceTimer = setTimeout(say, VOICE_AFTER_CHIME_MS); else say();
+    }
+  }
   P.afterChime = false;
 }
 
@@ -206,7 +228,7 @@ function tick() {
 // tick passes two of them, only one sound plays and the other shows as missing.
 function cues(before, after) {
   const crossed = t => before > t && after <= t;
-  const name = P.phase === 'rest' ? 'Rest' : stepName(P.steps[P.idx]);
+  const name = stepName(P.steps[P.idx]);
   const log = (kind, ts, why, at = 0) => ts.forEach((t, i) =>
     cuelog.cue(kind, `${name} · ${t / 1000}s left`, P.planEnd - t + at * 1000, true,
       i ? { miss: 'merged' } : why ? { [why === 'off' ? 'off' : 'ctx']: why } : {}, at * 1000));
@@ -243,7 +265,7 @@ async function keepAwake() {
 function letSleep() { if (wake) { wake.release(); wake = null; } }
 // The phone drops the lock when the app goes to the background; take it back on return.
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && P && location.hash.startsWith('#/play/')) keepAwake();
+  if (document.visibilityState === 'visible' && P && !P.run && location.hash.startsWith('#/play/')) keepAwake();
 });
 
 function startTimer() {
@@ -298,8 +320,8 @@ let msTitle = '';
 function mediaInfo() {
   if (!MS || !P) return;
   const step = P.steps[P.idx];
-  const title = P.phase === 'rest' ? 'Rest' : stepName(step);
-  const artist = `Day ${pad2(P.day)} · ${P.workout.name}`;
+  const title = stepName(step);
+  const artist = P.run ? P.run.name : `Day ${pad2(P.day)} · ${P.workout.name}`;
   if (title + artist !== msTitle && 'MediaMetadata' in window) {
     msTitle = title + artist;
     MS.metadata = new MediaMetadata({ title, artist, album: 'RepRoom',
@@ -327,6 +349,17 @@ function finish() {
   const secs = Math.round(P.elapsed / 1000);
   const moves = P.steps.filter(s => s.type === 'move').length;
   const kcal = kcalSoFar();
+  if (P.run) {
+    // A run routine never ticks a day. Its log entry and summary (board 16d)
+    // are build step 5; until then it goes back to the Run screen.
+    ended.add(P.id);
+    P = null;
+    session.clear();
+    go('#/run');
+    // After the route change (which hides any toast).
+    setTimeout(() => showToast('<p>Done. The summary comes in the next build step.</p>', 3000), 100);
+    return;
+  }
   const wasComplete = store.stageComplete(P.stage);
   const weights = weightsDone();
   store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal, weights });
@@ -356,10 +389,11 @@ function endWorkout() {
   keepalive.stop();
   clearMediaSession();
   cuelog.end('Ended early', P.elapsed);
+  const back = P.run ? '#/run' : '#/'; // a routine goes back to the Run screen
   ended.add(P.id);
   P = null;
   session.clear();
-  go('#/');
+  go(back);
 }
 
 // ---- Numbers shown on screen ----
@@ -404,6 +438,7 @@ function view() {
   const isFirst = P.phase === 'preview' && P.idx === P.firstMove;
   const isSet = P.phase === 'set';
   const isWeight = step.type === 'weight';
+  const isWalk = P.phase === 'rest' && !!step.walkBack; // F11 walk back (board 16c)
   const paused = !P.running;
   // "Set 2 of 3", or "Set 2 of 3 · Left" for Kneeling row
   const setText = s => `Set ${s.set} of ${s.sets}${s.side ? ` · ${s.side === 'left' ? 'Left' : 'Right'}` : ''}`;
@@ -411,21 +446,21 @@ function view() {
   let chip = '', chipCls = '';
   if (paused) { chip = 'Paused'; chipCls = 'light'; }
   else if (P.phase === 'preview') chip = isFirst ? 'Get ready' : 'Next up';
-  else if (P.phase === 'rest') chip = 'Rest';
+  else if (P.phase === 'rest') chip = isWalk ? 'Walk back' : 'Rest';
   else if (isSet) chip = setText(step);
   else if (isLast) chip = 'Last move';
   else if (P.sinceStart < GO_CHIP_MS) { chip = 'GO!'; chipCls = 'go'; }
 
   const kick = paused ? 'Paused'
     : P.phase === 'preview' ? (isFirst ? 'First move' : 'Starting soon')
-    : P.phase === 'rest' ? 'Rest'
+    : P.phase === 'rest' ? (isWalk ? 'Walk back' : 'Rest')
     : isLast ? 'Last move' : '';
   const kicker = isSet ? `Weights · Set ${step.set} of ${step.sets}`
-    : `${sectionLabel(sec)}${kick ? ` · ${kick}` : ''}`;
+    : `${secLong(sec)}${kick ? ` · ${kick}` : ''}`;
 
   const cdLabel = paused ? 'Paused'
     : P.phase === 'preview' ? (isFirst ? 'Get ready' : 'Starts in')
-    : P.phase === 'rest' ? 'Rest left' : 'Time left';
+    : P.phase === 'rest' ? (isWalk ? 'Walk back left' : 'Rest left') : 'Time left';
 
   // What the card at the bottom points to.
   const nextIdx = P.idx + 1;
@@ -444,9 +479,11 @@ function view() {
   } else {
     const label = P.phase === 'preview' && !isFirst ? 'After this' : 'Up next';
     const rest = nextStep.type === 'rest';
+    // A repeated drill shows its rep: "0:20 · 1 of 2" (F11).
+    const rep = nextStep.reps > 1 ? ` · ${nextStep.rep} of ${nextStep.reps}` : '';
     card = {
-      label, name: stepName(nextStep), sub: clock(nextStep.secs), idx: rest ? null : nextIdx,
-      ico: sym(rest ? 'moon' : 'figureSmall'), icoCls: !rest && nextStep.section === 'main' ? 'amber' : '',
+      label, name: stepName(nextStep), sub: clock(nextStep.secs) + rep, idx: rest ? null : nextIdx,
+      ico: sym(rest ? (nextStep.walkBack ? 'arrowLeft' : 'moon') : 'figureSmall'), icoCls: !rest && nextStep.section === 'main' ? 'amber' : '',
     };
   }
 
@@ -473,11 +510,11 @@ function view() {
           </div>
         </div>
         ${chip ? `<p class="chip ${chipCls}">${chip}</p>` : ''}
-        <div class="art">${sym(isRest ? 'moon' : isWeight ? 'dumbbell' : 'figure')}</div>
+        <div class="art ${isWalk ? 'walk' : ''}">${sym(isWalk ? 'arrowLeft' : isRest ? 'moon' : isWeight ? 'dumbbell' : 'figure')}</div>
       </div>
       <div class="pad p-head">
         <p class="label red p-kicker">${kicker}</p>
-        <h1 class="p-name">${isRest ? 'Rest' : isSet ? data.move(step.move).name : stepName(step)}</h1>
+        <h1 class="p-name">${isRest ? stepName(step) : isSet ? data.move(step.move).name : stepName(step)}</h1>
       </div>
       <div class="pad p-low">
         ${isSet ? setControls(step, paused) : `<div class="stepbar"><span data-bar style="width:${(P.left / P.total) * 100}%"></span></div>
@@ -488,7 +525,7 @@ function view() {
         </div>
         <div class="controls">
           ${isRest
-            ? `<button class="ctl" data-add30>+30 sec</button>`
+            ? `<button class="ctl" data-add30>${isWalk ? '+10 sec' : '+30 sec'}</button>`
             : `<button class="ctl" data-prev ${P.idx === 0 && P.phase === 'preview' ? 'disabled' : ''}>Prev</button>`}
           <button class="ctl pp ${paused ? 'play' : ''}" data-pp aria-label="${paused ? 'Play' : 'Pause'}">${sym(paused ? 'play' : 'pause')}</button>
           ${isRest ? `<button class="ctl" data-skip>Skip</button>`
@@ -500,7 +537,7 @@ function view() {
           <span><span class="label red">${card.label}</span><span class="nm">${card.name}</span><span class="num sub">${card.sub}</span></span>
         </button>
         <div class="prog">
-          <p class="label">${SHORT[sec]} · Step <span class="num">${P.idx + 1}</span> / <span class="num">${P.steps.length}</span></p>
+          <p class="label">${secShort(sec)} · Step <span class="num">${P.idx + 1}</span> / <span class="num">${P.steps.length}</span></p>
           <p class="label muted" data-minsleft>${minsLeft}</p>
         </div>
         <div class="blocks">${blocks}</div>
@@ -583,6 +620,7 @@ function endSheet() {
       <h2 class="sheet-title">End workout?</h2>
       <p class="sheet-text">${weightsDone()
         ? "If you end now, the day stays unticked. The weight sets you've done are kept."
+        : P.run ? "If you end now, this routine's progress is lost."
         : "If you end now, this workout's progress is lost and the day stays unticked."}</p>
       <button class="cta centre" data-keep>No, keep going</button>
       <button class="cta outline-red" data-end>Yes, end it</button>
@@ -709,7 +747,12 @@ function wire() {
   on('[data-skip]', tap('SKIP', advance));
   on('[data-prev]', tap('PREV', prev));
   on('[data-finish]', tap('FINISH', finish));
-  on('[data-add30]', tap('+30 SEC', () => { P.left += 30000; P.total += 30000; P.planEnd += 30000; update(); }));
+  // +30 SEC on a rest, +10 SEC on a walk back (F11).
+  on('[data-add30]', () => {
+    const ms = P.steps[P.idx].walkBack ? 10000 : 30000;
+    cuelog.note('tap', `+${ms / 1000} SEC`);
+    P.left += ms; P.total += ms; P.planEnd += ms; update();
+  });
   on('[data-mute]', () => { P.muted = !P.muted; audio.setMuted(P.muted); draw(); });
   on('[data-progress]', () => { if (P.running) setRunning(false); });
   on('[data-settings]', () => { if (P.running) setRunning(false); go('#/settings'); });
@@ -756,14 +799,17 @@ function wire() {
 
 // ---- Called by the router ----
 
-export function render(el, day) {
+// key: a workout's day, or a run routine's id (F11).
+export function render(el, key) {
   app = el;
   if (isEnded()) return; // being stepped over (see popstate above)
-  keepAwake();
-  if (!P || P.day !== day) {
-    const w = data.workoutFor(store.get().intensity, day);
-    if (!w || !w.complete) { go('#/'); return; }
-    start(day);
+  // Run routines don't keep the screen awake, so it can turn off in a pocket
+  // (8 Nov rule, once the pocket test passed). Workouts keep it on.
+  if (!isRunKey(key)) keepAwake();
+  if (!P || P.key !== key) {
+    const w = playable(key);
+    if (!w || (!isRunKey(key) && !w.complete)) { go(isRunKey(key) ? '#/run' : '#/'); return; }
+    start(key);
     startTimer();
   } else {
     draw();
@@ -780,9 +826,10 @@ export function snapshot() {
   const step = P.steps[P.idx];
   return {
     stage: P.stage, day: P.day,
+    routine: P.run ? P.run.name : null, // F11: "Run drills" instead of stage and day
     intensity: data.intensity(P.intensity)?.label || P.intensity,
-    section: SHORT[step.section] || step.section,
-    name: step.type === 'rest' ? 'Rest' : (data.move(step.move)?.name || step.move),
+    section: secShort(step.section),
+    name: step.type === 'rest' ? stepName(step) : (data.move(step.move)?.name || step.move),
     moveId: step.type === 'move' || step.type === 'weight' ? step.move : null,
     side: step.side || null,
     phase: P.phase, // preview (Get ready / Next up), move or rest

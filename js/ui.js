@@ -10,7 +10,7 @@ export const clock = secs => `${Math.floor(secs / 60)}:${pad2(secs % 60)}`;
 
 // Move name as shown in lists, with the side if it has one.
 export function stepName(step) {
-  if (step.type === 'rest') return 'Rest';
+  if (step.type === 'rest') return step.walkBack ? 'Walk back' : 'Rest'; // walk back: F11 run drills
   const m = move(step.move);
   const name = m ? m.name : step.move;
   return step.side ? `${name} (${step.side})` : name;

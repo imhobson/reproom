@@ -24,9 +24,12 @@ const routes = [
   { re: /^#?\/?$/, show: () => home.render(app) },
   { re: /^#\/workout\/(\d+)$/, show: m => details.render(app, +m[1]) },
   { re: /^#\/workout\/(\d+)\/move\/(\w+\.\d+)$/, show: m => info.render(app, +m[1], m[2]) },
-  { re: /^#\/play\/(\d+)$/, show: m => player.render(app, +m[1]) },
+  // A workout plays at #/play/<day>, a run routine at #/play/<routine id> (F11).
+  { re: /^#\/play\/(\d+|run-[\w-]+)$/, show: m => player.render(app, /^\d+$/.test(m[1]) ? +m[1] : m[1]) },
   { re: /^#\/summary$/, show: () => summary.render(app) },
   { re: /^#\/run$/, show: () => run.render(app) },
+  { re: /^#\/run\/(run-[\w-]+)$/, show: m => details.renderRoutine(app, m[1]) },
+  { re: /^#\/run\/(run-[\w-]+)\/move\/(\w+\.\d+)$/, show: m => info.render(app, m[1], m[2]) },
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },

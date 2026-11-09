@@ -197,5 +197,7 @@ export function contextLine(workout, attached) {
   let move = w.moveId ? `${w.name} (${w.moveId})` : w.name;
   if (w.side) move += ` · ${w.side} side`;
   const phase = w.phase === 'preview' ? (w.stepNo === 1 ? ' · Get ready' : ' · Next up') : '';
-  return `Stage ${p2(w.stage)} · Day ${p2(w.day)} · ${w.intensity} · ${w.section} · ${move}${phase} · step ${w.stepNo}/${w.steps} · ${v}`;
+  // A run routine (F11) has no stage, day or intensity: "Run drills · Drills · A-skips ..."
+  const where = w.routine ? w.routine : `Stage ${p2(w.stage)} · Day ${p2(w.day)} · ${w.intensity}`;
+  return `${where} · ${w.section} · ${move}${phase} · step ${w.stepNo}/${w.steps} · ${v}`;
 }
