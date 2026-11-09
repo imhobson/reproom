@@ -162,6 +162,7 @@ export async function sampleVoice(voiceId, onProgress, onEnd) {
 // ---- Voice ----
 
 function stopVoice() {
+  voiceSeq++; // a sayMove still loading its clip won't start it
   if (clip) { clip.pause(); clip = null; }
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
@@ -200,16 +201,62 @@ function phoneText(step) {
   return step.side ? `${base} ${step.side === 'left' ? 'Left' : 'Right'} side.` : base;
 }
 
+// Voice clips decoded for Web Audio, for when the screen is off (see sayMove).
+// "<voice>/<clip>" -> Promise<AudioBuffer>
+const buffers = new Map();
+function bufferFor(v, name) {
+  const k = `${v}/${name}`;
+  if (!buffers.has(k)) {
+    const p = fetch(`audio/${k}.mp3`).then(r => r.arrayBuffer()).then(b => ctx.decodeAudioData(b));
+    p.catch(() => buffers.delete(k)); // try again next time
+    buffers.set(k, p);
+  }
+  return buffers.get(k);
+}
+
+// Play a decoded clip through Web Audio, straight to the speaker (not the
+// effects bus), at the voice volume. Returns a handle stopVoice can pause.
+function playBuffer(buf, logEntry) {
+  const src = ctx.createBufferSource();
+  const g = ctx.createGain();
+  src.buffer = buf;
+  g.gain.value = voiceLevel();
+  src.connect(g).connect(ctx.destination);
+  const h = { pause: () => { try { src.stop(); } catch (e) { /* not started */ } } };
+  src.onended = () => { if (clip === h) clip = null; };
+  src.start();
+  cuelog.started(logEntry, ctx.state === 'running' ? 'clip via Web Audio' : `clip via Web Audio (audio ${ctx.state})`);
+  return h;
+}
+
+let voiceSeq = 0; // each sayMove gets a number, so a slow one can't talk over a newer one
+
 // Read out a move, once, as its preview starts. logEntry (cue log, when it's
 // on) gets the moment the voice really starts.
+//
+// With the screen off (phone locked in a pocket), Chrome lets an <audio>
+// element "play" without a sound reaching the speaker, while Web Audio keeps
+// sounding (pocket test, 9 Nov). So then the clip goes through Web Audio.
+// With the screen on it stays an <audio> element, which makes Spotify dip
+// under the voice.
 export async function sayMove(step, logEntry = null) {
   stopVoice();
+  const seq = ++voiceSeq;
   const v = settings().voice;
   if (!soundOn() || v === 'off') { cuelog.skipped(logEntry, 'voice off'); return; }
   if (v === 'phone') { speak(phoneText(step), logEntry); return; }
   const clips = await clipsFor(v);
   const name = clipName(step);
   if (!clips[name]) { speak(phoneText(step), logEntry); return; } // missing clip: phone voice
+  if (document.visibilityState === 'hidden' && ctx) {
+    try {
+      const buf = await bufferFor(v, name);
+      if (seq !== voiceSeq) return; // a newer cue (or a stop) came first
+      clip = playBuffer(buf, logEntry);
+      return;
+    } catch (e) { /* fall back to the element */ }
+  }
+  if (seq !== voiceSeq) return;
   const a = new Audio(`audio/${v}/${name}.mp3`);
   a.volume = voiceLevel();
   clip = a;
@@ -234,6 +281,8 @@ export async function preload(steps) {
   for (const s of steps) {
     if (s.type !== 'move' && !s.preview) continue; // moves, and the first weight set
     const n = clipName(s);
-    if (clips[n]) { const a = new Audio(); a.preload = 'auto'; a.src = `audio/${v}/${n}.mp3`; }
+    if (!clips[n]) continue;
+    const a = new Audio(); a.preload = 'auto'; a.src = `audio/${v}/${n}.mp3`;
+    if (ctx) bufferFor(v, n).catch(() => {}); // decoded too, for the screen-off voice
   }
 }

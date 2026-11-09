@@ -6,12 +6,12 @@
 // sound isn't frozen, so while a workout runs we play a sound you can't hear.
 //
 // Two ways, picked on the Cue log screen while the cue log is on (default:
-// media). Which one stays is decided by the phone test:
+// webaudio, since the V1.7.3 phone test):
 //   media    – a looping <audio> element. Also gives the lock screen and
-//              headphone controls (Media Session, see player.js). Risk: Android
-//              may treat it as music and pause Spotify instead of ducking it.
+//              headphone controls (Media Session, see player.js). Phone test:
+//              Spotify stayed dipped for the whole workout, so not the default.
 //   webaudio – a Web Audio tone. No lock-screen controls, but Web Audio
-//              doesn't take Android's audio focus, so Spotify should be left alone.
+//              doesn't take Android's audio focus, so Spotify is left alone.
 //   off      – nothing (as V1.7.2).
 //
 // The sound is a 25 Hz sine at −60 dB: below what ears hear at that level and
@@ -22,14 +22,14 @@ import * as cuelog from './cuelog.js';
 
 const KEY = 'reproom.keepAlive';
 export const MODES = [
-  { id: 'media', label: 'Audio element', desc: 'Lock-screen and headphone controls. May pause Spotify.' },
-  { id: 'webaudio', label: 'Web Audio', desc: 'No lock-screen controls. Should leave Spotify alone.' },
+  { id: 'webaudio', label: 'Web Audio', desc: 'Spotify only dips for the voice. No lock-screen controls.' },
+  { id: 'media', label: 'Audio element', desc: 'Lock-screen controls, but Spotify stays dipped all workout.' },
   { id: 'off', label: 'Off', desc: 'Nothing keeps the page awake (as V1.7.2).' },
 ];
 
 export function mode() {
   try { const m = localStorage.getItem(KEY); if (MODES.some(x => x.id === m)) return m; } catch (e) { /* ignore */ }
-  return 'media';
+  return 'webaudio';
 }
 export function setMode(m) {
   stop();

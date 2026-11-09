@@ -28,7 +28,7 @@ function row(e) {
     <li class="cl-row ${cue ? '' : 'ev'} ${bad ? 'bad' : ''}">
       <span class="num cl-t">${t(e.at ?? e.plan)}</span>
       <span class="label cl-k">${KIND[e.k] || esc(e.k)}</span>
-      <span class="cl-l">${esc(e.l)}${e.vis === 'h' ? ' <span class="label muted">· off</span>' : ''}</span>
+      <span class="cl-l">${esc(e.l)}${e.vis === 'h' ? ' <span class="label muted">· off</span>' : ''}${e.how ? ` <span class="label muted">· ${esc(e.how)}</span>` : ''}</span>
       <span class="num cl-d">${flag}</span>
     </li>`;
 }
