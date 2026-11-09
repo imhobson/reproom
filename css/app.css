@@ -199,17 +199,24 @@ button:disabled { cursor: default; }
    the kicker and name under it; the lower group (.p-low: step bar, clock row,
    buttons or the weight set's boxes, Up next card, step line and blocks) is
    pushed to the bottom, so a name running onto two lines grows into the gap
-   and nothing below it moves. Too short a screen: the page scrolls. */
-.player { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
+   and nothing below it moves. Too short a screen: the page scrolls.
+   The image area is sized to the screen so that the most there can be below
+   it fits: a two-line name over the weight set's boxes (about 491px with the
+   bottom padding; 496 leaves a little spare). 361px on a tall screen, down to
+   280px; it stays the same height for the whole workout. (V1.6.3 kept it at
+   361, and on a Pixel, about 806px tall, a two-line name pushed the buttons down.) */
+.player { --art-h: clamp(280px, calc(100vh - 496px), 361px); --art-h: clamp(280px, calc(100dvh - 496px), 361px);
+  display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
   padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
 .p-low { margin-top: auto; }
-.stage-art { flex: none; position: relative; height: 361px; background: var(--field); padding: 44px var(--gutter) 0; }
+.stage-art { flex: none; position: relative; height: var(--art-h); background: var(--field); padding: 44px var(--gutter) 0; }
 /* The background shows the state (7 Nov rule), set once on .player[data-state]:
    ready = grey (Get ready, Next up, Rest), main = amber, warm = warm amber. */
 .player[data-state="main"] .stage-art { background: var(--amber); }
 .player[data-state="warm"] .stage-art { background: var(--warm); }
 .stage-art .top { position: relative; z-index: 2; }
-.stage-art .art { position: absolute; left: 50%; top: 123px; width: 184px; height: 184px; transform: translateX(-50%); }
+/* the figure scales with the image area: 184px at full height, keeping 54px under it */
+.stage-art .art { position: absolute; left: 50%; top: 123px; width: calc(var(--art-h) - 177px); height: calc(var(--art-h) - 177px); transform: translateX(-50%); }
 .player.paused .stage-art::after { content: ''; position: absolute; inset: 0; background: rgba(20, 21, 23, 0.42); z-index: 1; }
 .chip { position: absolute; left: var(--gutter); top: 104px; z-index: 2; height: 43px; padding: 0 12px; display: flex; align-items: center;
   background: var(--ink); color: var(--paper); font-family: var(--head); font-weight: 800; font-size: 28px; letter-spacing: -0.01em; text-transform: uppercase; }
