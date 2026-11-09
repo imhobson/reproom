@@ -10,6 +10,7 @@ import * as info from './screens/info.js';
 import * as player from './screens/player.js';
 import * as summary from './screens/summary.js';
 import * as settings from './screens/settings.js';
+import * as feedback from './screens/feedback.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -25,15 +26,21 @@ const routes = [
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },
+  { re: /^#\/settings\/feedback$/, show: () => feedback.render(app, workoutNow) },
 ];
 
 let prevHash = '#/';
 let settingsFrom = '#/'; // where Settings was opened from
+let workoutNow = null;   // the paused workout, when Settings was opened from the player
 const inSettings = h => h.startsWith('#/settings');
 function route() {
   hideToast();
   // Settings' back arrow returns to wherever Settings was opened from.
-  if (inSettings(location.hash) && !inSettings(prevHash)) settings.setBack(settingsFrom = prevHash || '#/');
+  if (inSettings(location.hash) && !inSettings(prevHash)) {
+    settings.setBack(settingsFrom = prevHash || '#/');
+    // From the player, Feedback carries the workout (Settings paused it first).
+    workoutNow = settingsFrom.startsWith('#/play/') ? player.snapshot() : null;
+  }
   prevHash = location.hash;
   if (!location.hash.startsWith('#/play/')) player.leave();
   showUpdateBar();

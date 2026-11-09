@@ -14,7 +14,9 @@ import { resetView } from './home.js';
 let backTo = '#/';
 export function setBack(hash) { backTo = hash; }
 
-const head = (title, right = '') => `
+// The header of Settings and its sub-pages: back button, title, and an
+// optional item on the right.
+export const head = (title, right = '') => `
   <div class="s-head">
     <button class="icon-btn" data-back aria-label="Back">${sym('arrowLeft')}</button>
     <h1 class="s-title">${title}</h1>
@@ -90,6 +92,8 @@ export function render(app, { confirm = false, restoring = null, undoing = false
 
       ${dataSection()}
 
+      <button class="s-row fb-row" data-go="#/settings/feedback"><span class="s-name">Feedback</span><span class="s-val">${sym('arrowRight')}</span></button>
+
       <button class="reset" data-reset>Reset my progress</button>
     </section>
     ${confirm ? resetSheet(st.stage, done) : ''}
@@ -149,8 +153,8 @@ export function render(app, { confirm = false, restoring = null, undoing = false
 }
 
 // DATA (Q02, board 04f): last backup, BACK UP / RESTORE, the "Data kept on
-// this phone" line and what a backup holds. The Feedback row (prompt 04)
-// will go between this and Reset my progress.
+// this phone" line and what a backup holds. The Feedback row (F15) comes
+// after it, before Reset my progress.
 function dataSection() {
   const last = backup.lastBackup();
   const undo = backup.undoOffer();

@@ -383,6 +383,24 @@ export function render(el, day) {
   }
 }
 
+// Where the workout is right now, for Feedback (F15). Settings pauses the
+// workout first, so this doesn't change while Feedback is open.
+// null when no workout is loaded.
+export function snapshot() {
+  if (!P) return null;
+  const step = P.steps[P.idx];
+  return {
+    stage: P.stage, day: P.day,
+    intensity: data.intensity(P.intensity)?.label || P.intensity,
+    section: SHORT[step.section] || step.section,
+    name: step.type === 'rest' ? 'Rest' : (data.move(step.move)?.name || step.move),
+    moveId: step.type === 'move' ? step.move : null,
+    side: step.side || null,
+    phase: P.phase, // preview (Get ready / Next up), move or rest
+    stepNo: P.idx + 1, steps: P.steps.length,
+  };
+}
+
 // Leaving the player any other way (e.g. the phone's back button) pauses it.
 export function leave() {
   if (P && P.running) { P.running = false; stopTimer(); }
