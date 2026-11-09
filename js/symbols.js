@@ -67,6 +67,10 @@ const shapes = {
     + `<path d="M5 5.1 6.5 6.6 5 8.1 3.5 6.6Z" fill="var(--amber)"/>`,
   arrowRight:`<path d="M0.8 4.1h4.6V1.6L9.2 5 5.4 8.4V5.9H0.8Z" fill="currentColor"/>`,
   arrowLeft: `<path d="M9.2 4.1H4.6V1.6L0.8 5l3.8 3.4V5.9h4.6Z" fill="currentColor"/>`,
+  // Runner mid-stride (F11): run routines, and the Run drills tile.
+  runner: r(5.7, 0.6, 1.7, 1.7)
+    + `<path d="M5.7 3.2 4.5 6M3.2 3.6 5.4 3.4 7.4 4.8M4.5 6 6.4 7.2 5.9 9.2M4.5 6 3.5 7.8 1.3 8"`
+    + ` fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square"/>`,
 };
 
 export function sym(name, cls = '') {

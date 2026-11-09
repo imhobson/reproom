@@ -711,6 +711,94 @@
   "reverse-plank": {
    "text": "Reverse plank.",
    "secs": 1.08
+  },
+  "leg-swings-front-to-back": {
+   "text": "Leg swings, front to back.",
+   "secs": 1.6
+  },
+  "leg-swings-front-to-back--left": {
+   "text": "Leg swings, front to back. Left side.",
+   "secs": 2.58
+  },
+  "leg-swings-front-to-back--right": {
+   "text": "Leg swings, front to back. Right side.",
+   "secs": 2.6
+  },
+  "leg-swings-side-to-side": {
+   "text": "Leg swings, side to side.",
+   "secs": 1.73
+  },
+  "leg-swings-side-to-side--left": {
+   "text": "Leg swings, side to side. Left side.",
+   "secs": 2.73
+  },
+  "leg-swings-side-to-side--right": {
+   "text": "Leg swings, side to side. Right side.",
+   "secs": 2.82
+  },
+  "pogo-hops": {
+   "text": "Pogo hops.",
+   "secs": 1.05
+  },
+  "a-march": {
+   "text": "A-march.",
+   "secs": 0.88
+  },
+  "a-skips": {
+   "text": "A-skips.",
+   "secs": 0.91
+  },
+  "b-skips": {
+   "text": "B-skips.",
+   "secs": 0.92
+  },
+  "carioca": {
+   "text": "Carioca.",
+   "secs": 0.93
+  },
+  "carioca--left": {
+   "text": "Carioca. Left side.",
+   "secs": 1.56
+  },
+  "carioca--right": {
+   "text": "Carioca. Right side.",
+   "secs": 1.58
+  },
+  "straight-leg-run": {
+   "text": "Straight-leg run.",
+   "secs": 1.12
+  },
+  "bounding": {
+   "text": "Bounding.",
+   "secs": 0.7
+  },
+  "strides": {
+   "text": "Strides.",
+   "secs": 0.83
+  },
+  "standing-calf-stretch": {
+   "text": "Standing calf stretch.",
+   "secs": 1.36
+  },
+  "standing-calf-stretch--left": {
+   "text": "Standing calf stretch. Left side.",
+   "secs": 2.39
+  },
+  "standing-calf-stretch--right": {
+   "text": "Standing calf stretch. Right side.",
+   "secs": 2.39
+  },
+  "standing-quad-stretch": {
+   "text": "Standing quad stretch.",
+   "secs": 1.44
+  },
+  "standing-quad-stretch--left": {
+   "text": "Standing quad stretch. Left side.",
+   "secs": 2.45
+  },
+  "standing-quad-stretch--right": {
+   "text": "Standing quad stretch. Right side.",
+   "secs": 2.48
   }
  }
 }
