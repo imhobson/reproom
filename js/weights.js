@@ -1,12 +1,9 @@
 // Weights (F12): the optional dumbbell set after the main workout.
-// What was done last time, which move to offer first, the time estimate,
-// and the one-line description of a set list ("3 × 10 · 12 kg").
+// What was done last time, which move to offer first, and the one-line
+// description of a set list ("3 × 10 · 12 kg").
 import * as data from './data.js';
 import * as store from './store.js';
 import { sinceText } from './backup.js';
-import { WEIGHT_SETS, WEIGHT_REST_SECS, WEIGHT_SET_SECS_ESTIMATE } from './config.js';
-
-const sideList = m => (m.sides === 'lr' ? ['left', 'right'] : [null]);
 
 // The move's name in lists: Kneeling row reads "Kneeling row (each arm)".
 export const listName = m => (m.sides === 'lr' ? `${m.name} (each arm)` : m.name);
@@ -33,13 +30,28 @@ export function pickDefault() {
   return best;
 }
 
-// Estimated seconds for Workout details: the Next up before set 1, every set
-// (each side counts as a set for Kneeling row) and the rests between sets.
-export function estimateSecs(moveId) {
-  const m = data.move(moveId);
-  if (!m) return 0;
-  const sets = WEIGHT_SETS * sideList(m).length;
-  return data.defaults().previewSecs + sets * WEIGHT_SET_SECS_ESTIMATE + (WEIGHT_SETS - 1) * WEIGHT_REST_SECS;
+// Last time's set for this move, set number and side (null side for a move
+// without sides): { reps, kg } or null. Set 1 starts from it.
+export function lastSet(moveId, set, side = null) {
+  const l = last(moveId);
+  return l?.sets.find(s => s.set === set && (s.side || null) === side) || null;
+}
+
+// Last time on one side, as one line ("3 × 10 · 12 kg"), or null.
+export function lastSideLine(moveId, side = null) {
+  const l = last(moveId);
+  const sets = l?.sets.filter(s => (s.side || null) === side);
+  return sets?.length ? oneLine(sets) : null;
+}
+
+// A typed kg: comma or point, rounded to the nearest step, kept in range.
+// '' -> null (empty), not a number -> undefined (keep what was there).
+export function parseKg(text, step, max) {
+  const t = String(text).replace(',', '.').trim();
+  if (t === '') return null;
+  const n = parseFloat(t);
+  if (!Number.isFinite(n)) return undefined;
+  return Math.min(max, Math.max(0, Math.round(n / step) * step));
 }
 
 // 12 -> "12", 12.5 -> "12.5"
@@ -74,5 +86,3 @@ export function lastLine(moveId) {
   if (!l) return 'Not done yet';
   return `Last · ${describe(l.sets).join(' · ')} · ${sinceText(l.at)}`;
 }
-
-export { sideList };

@@ -16,7 +16,7 @@ export function stepName(step) {
   return step.side ? `${name} (${step.side})` : name;
 }
 
-const SECTION_LABELS = { warmup: 'Warm-up', main: 'Main workout', cooldown: 'Cool-down' };
+const SECTION_LABELS = { warmup: 'Warm-up', main: 'Main workout', weights: 'Weights', cooldown: 'Cool-down' };
 export const sectionLabel = k => SECTION_LABELS[k];
 
 let toastTimer = null;

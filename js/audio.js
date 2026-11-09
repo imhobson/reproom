@@ -209,13 +209,21 @@ export async function sayMove(step) {
   a.play().catch(() => { if (clip === a) { clip = null; speak(phoneText(step)); } });
 }
 
+// Just a few words in the phone voice, e.g. "Right side." between the two
+// sides of a weight set (F12). Off when the voice is off.
+export function sayText(text) {
+  stopVoice();
+  if (!soundOn() || settings().voice === 'off') return;
+  speak(text);
+}
+
 // Load a workout's clips ahead so they start on time.
 export async function preload(steps) {
   const v = settings().voice;
   if (v === 'off' || v === 'phone') return;
   const clips = await clipsFor(v);
   for (const s of steps) {
-    if (s.type !== 'move') continue;
+    if (s.type !== 'move' && !s.preview) continue; // moves, and the first weight set
     const n = clipName(s);
     if (clips[n]) { const a = new Audio(); a.preload = 'auto'; a.src = `audio/${v}/${n}.mp3`; }
   }

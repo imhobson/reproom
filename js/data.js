@@ -1,6 +1,6 @@
 // Loads data/workouts.json and data/moves.json (read-only) and works out
 // lengths, move counts and kcal from the steps.
-import { KCAL_PER_MIN } from './config.js';
+import { KCAL_PER_MIN, WEIGHT_SETS, WEIGHT_REST_SECS, WEIGHT_SET_SECS_ESTIMATE } from './config.js';
 
 let W = null; // workouts.json
 let M = null; // moves by id
@@ -28,28 +28,56 @@ export function workoutFor(intensityId, day) {
 
 export const SECTIONS = ['warmup', 'main', 'cooldown'];
 
+// The weight set (F12) as steps: set 1, rest, set 2, rest, set 3. A move
+// with sides (Kneeling row) has two set steps per set, left then right.
+// A set step is { type: 'weight', move, set, sets, side, secs, preview }:
+// secs is only an estimate (sets are counted in reps, not timed), and only
+// the very first set step has the 10s Next up before it.
+export function weightSteps(moveId) {
+  const m = M[moveId];
+  if (!m) return [];
+  const sides = m.sides === 'lr' ? ['left', 'right'] : [null];
+  const out = [];
+  for (let set = 1; set <= WEIGHT_SETS; set++) {
+    for (const side of sides) {
+      const st = { type: 'weight', move: moveId, set, sets: WEIGHT_SETS, secs: WEIGHT_SET_SECS_ESTIMATE };
+      if (side) st.side = side;
+      if (!out.length) st.preview = true;
+      out.push(st);
+    }
+    if (set < WEIGHT_SETS) out.push({ type: 'rest', secs: WEIGHT_REST_SECS });
+  }
+  return out;
+}
+
 // The steps that will play, in order, given which sections are switched on.
+// on.weights = the dumbbell move's id when weights are on (null when off):
+// its steps go after the main workout, before the cool-down.
 export function playSteps(workout, on = { warmup: true, cooldown: true }) {
   const out = [];
   for (const s of SECTIONS) {
     if (s !== 'main' && on[s] === false) continue;
     for (const step of workout.sections[s] || []) out.push({ ...step, section: s });
+    if (s === 'main' && on.weights) for (const step of weightSteps(on.weights)) out.push({ ...step, section: 'weights' });
   }
   return out;
 }
 
-// Seconds a step takes, including the preview before a move.
-export const stepSecs = step => step.secs + (step.type === 'move' ? W.defaults.previewSecs : 0);
+// Seconds a step takes, including the preview before a move (or the first set).
+export const stepSecs = step => step.secs + (step.type === 'move' || step.preview ? W.defaults.previewSecs : 0);
 
 export function sectionSecs(workout, s) {
   return (workout.sections[s] || []).reduce((t, st) => t + stepSecs(st), 0);
 }
 
-// extraSecs: time added on top of the workout's steps, e.g. the weights
-// estimate (F12). It counts towards minutes and kcal, not moves.
-export function stats(workout, on, extraSecs = 0) {
+// Estimated seconds for the weight set: the Next up, every set (each side
+// counts as a set) and the rests between sets.
+export const weightSecs = moveId => weightSteps(moveId).reduce((t, st) => t + stepSecs(st), 0);
+
+// Weights count towards minutes and kcal, but not moves.
+export function stats(workout, on) {
   const steps = playSteps(workout, on);
-  const secs = steps.reduce((t, st) => t + stepSecs(st), 0) + extraSecs;
+  const secs = steps.reduce((t, st) => t + stepSecs(st), 0);
   const moves = steps.filter(st => st.type === 'move').length;
   const kcal = workout.kcal != null ? workout.kcal : Math.round((secs / 60) * KCAL_PER_MIN);
   return { secs, mins: Math.round(secs / 60), moves, steps: steps.length, kcal };

@@ -18,8 +18,8 @@ export function render(app, day) {
   // Weights (F12): the switch is remembered for every workout; the pick isn't.
   const wOn = !!st.settings.weightsOn;
   if (!data.move(sess.weight)) sess.weight = weights.pickDefault();
-  const wSecs = weights.estimateSecs(sess.weight);
-  const s = data.stats(workout, sess.on, wOn ? wSecs : 0);
+  const wSecs = data.weightSecs(sess.weight);
+  const s = data.stats(workout, { ...sess.on, weights: wOn ? sess.weight : null });
 
   const sectionHtml = k => {
     const off = k !== 'main' && sess.on[k] === false;

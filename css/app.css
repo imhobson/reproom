@@ -225,6 +225,26 @@ button:disabled { cursor: default; }
 .ctl.pp .sym { width: 22px; height: 22px; }
 .ctl.pp.play { background: var(--amber); color: var(--ink); }
 .ctl.finish { background: var(--amber); }
+/* Weight set (F12, board 08c): REPS and KG EACH steppers, no timer */
+.wsteps { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 26px; }
+.wbox { background: var(--field); padding: 8px 8px 10px; min-width: 0; }
+.wbox .label { color: var(--muted); }
+.wctl { display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+.wpm { width: 44px; height: 44px; flex: none; background: var(--paper); font-family: var(--head); font-weight: 700; font-size: 24px; line-height: 1; }
+.wpm:disabled { color: var(--line); }
+.wv { flex: 1; min-width: 0; text-align: center; font-size: 44px; line-height: 1; letter-spacing: -0.02em; }
+/* the kg number is a field: tap it to type; ink underline */
+.wkg { width: 100%; height: 50px; padding: 0; border: 0; border-bottom: 3px solid var(--ink); border-radius: 0;
+  background: none; color: var(--ink); outline: none; }
+.wkg::placeholder { color: var(--ink); opacity: 1; }
+.wkg:focus { border-bottom-color: var(--red); }
+.wkg[data-len="3"] { font-size: 36px; }
+.wkg[data-len="4"] { font-size: 30px; }
+.wline { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 10px; margin-top: 12px;
+  font-size: 10px; letter-spacing: 0.06em; color: var(--muted); }
+.wline .num { font-size: 13px; letter-spacing: 0; }
+.wline + .controls { margin-top: 14px; }
+.ctl.finish:disabled { background: var(--field); }
 .upnext { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 12px; padding: 10px 8px; background: var(--field); text-align: left; }
 .upnext .ico { width: 44px; height: 44px; flex: none; background: var(--paper); display: grid; place-items: center; }
 .upnext .ico .sym { width: 24px; height: 24px; }
