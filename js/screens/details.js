@@ -5,6 +5,8 @@ import * as session from '../session.js';
 import { sym } from '../symbols.js';
 import * as audio from '../audio.js';
 import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
+import * as weights from '../weights.js';
+import { WEIGHT_SETS, WEIGHT_REST_SECS } from '../config.js';
 
 const SEC_SYM = { warmup: 'warmup', main: 'barbell', cooldown: 'cooldown' };
 
@@ -13,7 +15,11 @@ export function render(app, day) {
   const workout = data.workoutFor(st.intensity, day);
   if (!workout || !workout.complete) { go('#/'); return; }
   const sess = session.forDay(day);
-  const s = data.stats(workout, sess.on);
+  // Weights (F12): the switch is remembered for every workout; the pick isn't.
+  const wOn = !!st.settings.weightsOn;
+  if (!data.move(sess.weight)) sess.weight = weights.pickDefault();
+  const wSecs = weights.estimateSecs(sess.weight);
+  const s = data.stats(workout, sess.on, wOn ? wSecs : 0);
 
   const sectionHtml = k => {
     const off = k !== 'main' && sess.on[k] === false;
@@ -38,6 +44,30 @@ export function render(app, day) {
       </section>`;
   };
 
+  // Numbers in a mono line get the number font, as in every other label.
+  const nums = t => t.replace(/\d+(\.\d+)?/g, '<span class="num">$&</span>');
+
+  const weightsHtml = () => {
+    const rows = data.weightMoves().map(m => {
+      const on = m.id === sess.weight;
+      return `<li><label class="wrow ${on ? 'on' : ''}">`
+        + `<input type="radio" name="wmove" value="${m.id}" ${on ? 'checked' : ''}>`
+        + `<span class="ico amber">${sym('dumbbell')}</span>`
+        + `<span class="wtxt"><span class="nm">${weights.listName(m)}</span>`
+        + `<span class="label wlast">${nums(weights.lastLine(m.id))}</span></span></label></li>`;
+    }).join('');
+    return `
+      <section class="dsec wsec ${wOn ? '' : 'off'}">
+        <div class="dsec-head">
+          <span class="hs">${sym('dumbbell')}</span>
+          <p class="label">Weights · ${wOn ? `<span class="num">${Math.round(wSecs / 60)}</span> min` : 'Off'}</p>
+          <button class="switch ${wOn ? 'on' : ''}" data-weights role="switch" aria-checked="${wOn}" aria-label="Weights"><span></span></button>
+        </div>
+        ${wOn ? `<p class="label wcap">Today's move · <span class="num">${WEIGHT_SETS}</span> sets · <span class="num">${WEIGHT_REST_SECS}</span>s rest</p>
+        <ul class="rows wrows" role="radiogroup" aria-label="Today's weights move">${rows}</ul>` : ''}
+      </section>`;
+  };
+
   app.innerHTML = `
     <section class="details">
       <div class="hero-top amber">
@@ -55,7 +85,7 @@ export function render(app, day) {
         <h1 class="w-name">${workout.name}</h1>
         <p class="meta label"><span class="num">${s.mins}</span> min<span class="dot">·</span><span class="num">${s.moves}</span> moves<span class="dot">·</span><span class="num">${s.kcal}</span> kcal</p>
         <button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button>
-        ${data.SECTIONS.map(sectionHtml).join('')}
+        ${sectionHtml('warmup')}${sectionHtml('main')}${weightsHtml()}${sectionHtml('cooldown')}
       </div>
       <div class="pinned"><button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button></div>
     </section>`;
@@ -64,12 +94,20 @@ export function render(app, day) {
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
   // The tap on LET'S GO is what lets the phone play sound.
   app.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { audio.unlock(); go(`#/play/${day}`); }));
+  const redraw = () => { const y = scrollY; render(app, day); scrollTo(0, y); };
   app.querySelectorAll('[data-toggle]').forEach(b => b.addEventListener('click', () => {
     const k = b.dataset.toggle;
     sess.on[k] = !sess.on[k];
-    const y = scrollY;
-    render(app, day);
-    scrollTo(0, y);
+    redraw();
+  }));
+  app.querySelector('[data-weights]').addEventListener('click', () => {
+    store.setSetting('weightsOn', !wOn);
+    redraw();
+  });
+  app.querySelectorAll('input[name="wmove"]').forEach(r => r.addEventListener('change', () => {
+    sess.weight = r.value;
+    redraw();
+    app.querySelector(`input[name="wmove"][value="${r.value}"]`)?.focus({ preventScroll: true });
   }));
   app.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => {
     go(`#/workout/${day}/move/${b.dataset.step}`);

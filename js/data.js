@@ -45,9 +45,11 @@ export function sectionSecs(workout, s) {
   return (workout.sections[s] || []).reduce((t, st) => t + stepSecs(st), 0);
 }
 
-export function stats(workout, on) {
+// extraSecs: time added on top of the workout's steps, e.g. the weights
+// estimate (F12). It counts towards minutes and kcal, not moves.
+export function stats(workout, on, extraSecs = 0) {
   const steps = playSteps(workout, on);
-  const secs = steps.reduce((t, st) => t + stepSecs(st), 0);
+  const secs = steps.reduce((t, st) => t + stepSecs(st), 0) + extraSecs;
   const moves = steps.filter(st => st.type === 'move').length;
   const kcal = workout.kcal != null ? workout.kcal : Math.round((secs / 60) * KCAL_PER_MIN);
   return { secs, mins: Math.round(secs / 60), moves, steps: steps.length, kcal };

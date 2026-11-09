@@ -161,6 +161,22 @@ button:disabled { cursor: default; }
 .row .t { font-size: 16px; }
 .dsec.off .row { color: var(--faint); }
 .dsec.off .row .ico { background: var(--paper); border: 1.5px solid var(--line); color: var(--faint); }
+/* Weights section (F12, board 05c): a radio list of the four moves */
+.wcap { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+.wcap .num { font-size: 13px; }
+.wrow { display: flex; align-items: center; gap: 12px; min-height: 57px; padding: 4px 8px; margin: 0 -8px; cursor: pointer; }
+.wrow.on { background: var(--field); }
+.wrow input { appearance: none; -webkit-appearance: none; width: 24px; height: 24px; flex: none; margin: 0;
+  border: 2px solid var(--ink); border-radius: 0; background: var(--paper); cursor: pointer; }
+.wrow input:checked { background: var(--amber); box-shadow: inset 0 0 0 3px var(--paper); }
+.wrow input:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.wrow .ico { width: 48px; height: 48px; flex: none; background: var(--field); display: grid; place-items: center; }
+.wrow .ico.amber { background: var(--amber); }
+.wrow .ico .sym { width: 24px; height: 24px; }
+.wtxt { flex: 1; min-width: 0; }
+.wtxt .nm { display: block; font-size: 16px; }
+.wlast { display: block; font-size: 10px; color: var(--muted); margin-top: 2px; }
+.wlast .num { font-size: 12px; }
 .pinned { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: min(390px, 100vw);
   background: var(--paper); border-top: 2px solid var(--ink); padding: 0 var(--gutter) 16px; z-index: 5; }
 

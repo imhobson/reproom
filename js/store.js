@@ -10,7 +10,7 @@ const fresh = () => ({
   ticks: {},
   // every finished workout, repeats included (for streaks and totals later)
   log: [],
-  settings: { allSounds: true, voice: 'kokoro-michael', reads: 'nameOnly', sfx: 'on', tick: 'classic', chime: 'classic', voiceVol: 100, fxVol: 100 },
+  settings: { allSounds: true, voice: 'kokoro-michael', reads: 'nameOnly', sfx: 'on', tick: 'classic', chime: 'classic', voiceVol: 100, fxVol: 100, weightsOn: false },
 });
 
 let state = load();
