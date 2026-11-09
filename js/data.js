@@ -19,6 +19,9 @@ export const intensities = () => W.intensities;
 export const intensity = id => W.intensities.find(i => i.id === id);
 export const move = id => M[id];
 
+// The dumbbell moves (F12), in moves.json order: the order of the pick list.
+export const weightMoves = () => Object.values(M).filter(m => m.category === 'weights');
+
 export function workoutFor(intensityId, day) {
   return W.workouts.find(w => w.intensity === intensityId && w.day === day) || null;
 }

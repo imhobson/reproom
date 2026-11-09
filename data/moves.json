@@ -3640,7 +3640,7 @@
         "None / Step"
       ],
       "level": "beginner",
-      "status": "not-yet",
+      "status": "in-plan",
       "image": "img/moves/calf-raises.png",
       "howTo": [],
       "mistakes": [],
@@ -3899,6 +3899,475 @@
       "sourceNames": [
         "Reverse Plank"
       ]
+    },
+    {
+      "id": "leg-swings-front-to-back",
+      "name": "Leg Swings Front to Back",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors",
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/leg-swings-front-to-back.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Leg swings, front to back.",
+        "nameHowTo": "Leg swings, front to back. Stand side-on to a wall or post and hold it for balance. Swing your outside leg forwards and backwards like a pendulum, keeping it relaxed. Let each swing grow a little bigger."
+      },
+      "sourceNames": [
+        "Leg Swings Front to Back",
+        "Leg Swings Front to Back (L/R)"
+      ]
+    },
+    {
+      "id": "leg-swings-side-to-side",
+      "name": "Leg Swings Side to Side",
+      "sides": "lr",
+      "homeSection": "warmup",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips",
+        "Adductors"
+      ],
+      "musclesSecondary": [
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/leg-swings-side-to-side.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Leg swings, side to side.",
+        "nameHowTo": "Leg swings, side to side. Face a wall or post and hold it with both hands. Swing one leg across the front of your body, then out to the side. Keep your hips facing forwards and your standing knee soft."
+      },
+      "sourceNames": [
+        "Leg Swings Side to Side",
+        "Leg Swings Side to Side (L/R)"
+      ]
+    },
+    {
+      "id": "pogo-hops",
+      "name": "Pogo Hops",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Ankles",
+        "Feet"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/pogo-hops.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Pogo hops.",
+        "nameHowTo": "Pogo hops. Stand tall with your feet hip-width apart. Bounce quickly on the balls of your feet, knees almost straight and heels just off the ground. Keep each contact short and springy, like the ground is hot."
+      },
+      "sourceNames": [
+        "Pogo Hops"
+      ]
+    },
+    {
+      "id": "a-march",
+      "name": "A-March",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hip Flexors"
+      ],
+      "musclesSecondary": [
+        "Calves",
+        "Core"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/a-march.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "A-march.",
+        "nameHowTo": "A-march. Walk forwards tall, driving one knee up to hip height as the opposite arm swings forward. Put each foot down on its ball, right under your hips. Slow, sharp and precise."
+      },
+      "sourceNames": [
+        "A-March"
+      ]
+    },
+    {
+      "id": "a-skips",
+      "name": "A-Skips",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hip Flexors",
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Core"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/a-skips.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "A-skips.",
+        "nameHowTo": "A-skips. Skip forwards, driving one knee up to hip height on each skip as the opposite arm swings. Push the ground away under your hips and stay tall. Quick and light, not high."
+      },
+      "sourceNames": [
+        "A-Skips"
+      ]
+    },
+    {
+      "id": "b-skips",
+      "name": "B-Skips",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hamstrings",
+        "Hip Flexors"
+      ],
+      "musclesSecondary": [
+        "Calves",
+        "Glutes"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/b-skips.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "B-skips.",
+        "nameHowTo": "B-skips. Skip forwards like an A-skip, but as your knee comes up, reach the lower leg out in front, then sweep it down and back under you, pawing the ground. Stay tall and relaxed."
+      },
+      "sourceNames": [
+        "B-Skips"
+      ]
+    },
+    {
+      "id": "carioca",
+      "name": "Carioca",
+      "sides": "lr",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hips",
+        "Adductors"
+      ],
+      "musclesSecondary": [
+        "Obliques",
+        "Calves"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/carioca.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Carioca.",
+        "nameHowTo": "Carioca. Travel sideways, crossing your back leg in front of your lead leg, then behind it, over and over. Let your hips turn while your shoulders stay facing forwards. Stay light on the balls of your feet."
+      },
+      "sourceNames": [
+        "Carioca",
+        "Carioca (L/R)"
+      ]
+    },
+    {
+      "id": "straight-leg-run",
+      "name": "Straight-Leg Run",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Calves"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/straight-leg-run.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Straight-leg run.",
+        "nameHowTo": "Straight-leg run. Run forwards with your legs almost straight, like scissors. Pull each foot down under your hips and land on the ball of the foot. Stay tall and keep the steps quick."
+      },
+      "sourceNames": [
+        "Straight-Leg Run"
+      ]
+    },
+    {
+      "id": "bounding",
+      "name": "Bounding",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Glutes",
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Calves",
+        "Hamstrings"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "intermediate",
+      "status": "in-plan",
+      "image": "img/moves/bounding.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bounding.",
+        "nameHowTo": "Bounding. Run forwards with long, springy strides, driving your knee forward and up and pushing hard off the back foot. Float for a moment on each step and swing your arms big to match."
+      },
+      "sourceNames": [
+        "Bounding"
+      ]
+    },
+    {
+      "id": "strides",
+      "name": "Strides",
+      "sides": "none",
+      "homeSection": "main",
+      "category": "run",
+      "pattern": null,
+      "musclesPrimary": [
+        "Quads",
+        "Hamstrings"
+      ],
+      "musclesSecondary": [
+        "Glutes",
+        "Calves"
+      ],
+      "area": "Full Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/strides.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Strides.",
+        "nameHowTo": "Strides. Build up to about ninety percent of your top speed over the first few seconds, hold it smoothly, then ease off before the end. Fast but relaxed, not a sprint. Keep your shoulders loose."
+      },
+      "sourceNames": [
+        "Strides"
+      ]
+    },
+    {
+      "id": "standing-calf-stretch",
+      "name": "Standing Calf Stretch",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Calves"
+      ],
+      "musclesSecondary": [
+        "Achilles"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/standing-calf-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Standing calf stretch.",
+        "nameHowTo": "Standing calf stretch. Put your hands on a wall and step one foot back. Keep that back leg straight and the heel down, then lean in until you feel the stretch in your calf. Hold it there."
+      },
+      "sourceNames": [
+        "Standing Calf Stretch",
+        "Standing Calf Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "standing-quad-stretch",
+      "name": "Standing Quad Stretch",
+      "sides": "lr",
+      "homeSection": "cooldown",
+      "category": "mobility",
+      "pattern": null,
+      "musclesPrimary": [
+        "Quads"
+      ],
+      "musclesSecondary": [
+        "Hip Flexors"
+      ],
+      "area": "Lower Body",
+      "equipment": [],
+      "level": "beginner",
+      "status": "in-plan",
+      "image": "img/moves/standing-quad-stretch.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Standing quad stretch.",
+        "nameHowTo": "Standing quad stretch. Stand tall, holding a wall if you need to. Bend one knee and catch your foot behind you, drawing your heel towards your glutes. Keep your knees together and your hips pushed slightly forward."
+      },
+      "sourceNames": [
+        "Standing Quad Stretch",
+        "Standing Quad Stretch (L/R)"
+      ]
+    },
+    {
+      "id": "bicep-curls",
+      "name": "Bicep curls",
+      "sides": "none",
+      "homeSection": "weights",
+      "category": "weights",
+      "pattern": null,
+      "musclesPrimary": [],
+      "musclesSecondary": [],
+      "area": null,
+      "equipment": [
+        "dumbbells"
+      ],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/bicep-curls.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Bicep curls.",
+        "nameHowTo": ""
+      },
+      "sourceNames": []
+    },
+    {
+      "id": "standing-shoulder-press",
+      "name": "Standing shoulder press",
+      "sides": "none",
+      "homeSection": "weights",
+      "category": "weights",
+      "pattern": null,
+      "musclesPrimary": [],
+      "musclesSecondary": [],
+      "area": null,
+      "equipment": [
+        "dumbbells"
+      ],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/standing-shoulder-press.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Standing shoulder press.",
+        "nameHowTo": ""
+      },
+      "sourceNames": []
+    },
+    {
+      "id": "kneeling-row",
+      "name": "Kneeling row",
+      "sides": "lr",
+      "homeSection": "weights",
+      "category": "weights",
+      "pattern": null,
+      "musclesPrimary": [],
+      "musclesSecondary": [],
+      "area": null,
+      "equipment": [
+        "dumbbells"
+      ],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/kneeling-row.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Kneeling row.",
+        "nameHowTo": ""
+      },
+      "sourceNames": []
+    },
+    {
+      "id": "lateral-raises",
+      "name": "Lateral raises",
+      "sides": "none",
+      "homeSection": "weights",
+      "category": "weights",
+      "pattern": null,
+      "musclesPrimary": [],
+      "musclesSecondary": [],
+      "area": null,
+      "equipment": [
+        "dumbbells"
+      ],
+      "level": null,
+      "status": "in-plan",
+      "image": "img/moves/lateral-raises.png",
+      "howTo": [],
+      "mistakes": [],
+      "tips": [],
+      "voice": {
+        "nameOnly": "Lateral raises.",
+        "nameHowTo": ""
+      },
+      "sourceNames": []
     }
   ]
 }

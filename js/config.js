@@ -18,3 +18,10 @@ export const START_INTENSITY = 'medium';
 // key that unlocks it is NOT in the code or the repo: it's pasted once on the
 // phone (Feedback > Connect).
 export const FEEDBACK_URL = 'https://script.google.com/macros/s/AKfycbwbBKwNrjsv-R26Pw82FTIEKPn1DeG-BfCAMKFuv1fNAS1jKKeBZzU0RVHabI_IDbnPww/exec';
+
+// Weights (F12): the optional dumbbell set after the main workout.
+export const WEIGHT_SETS = 3;               // sets per workout (each side is its own screen for Kneeling row)
+export const WEIGHT_REST_SECS = 90;         // rest between sets
+export const WEIGHT_DEFAULT_REPS = 10;      // reps on set 1 the first time on a move
+export const WEIGHT_KG_STEP = 0.5;          // − / + on KG EACH, and what a typed kg rounds to
+export const WEIGHT_SET_SECS_ESTIMATE = 45; // only for the time estimate on Workout details

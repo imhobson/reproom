@@ -26,6 +26,10 @@ function gearPath({ teeth = 8, outer = 4.7, root = 3.5, toothW = 1.9, hole = 1.4
 const shapes = {
   // Two plates on a bar: the workout / main section.
   barbell: r(0, 4.2, 10, 1.6) + r(1.1, 1.5, 2, 7) + r(6.9, 1.5, 2, 7),
+  // Dumbbell: two square weights on a short handle, with end caps. The WEIGHTS
+  // section, and the weight moves' picture until they get F09 pictograms.
+  dumbbell: r(0.6, 3.8, 0.8, 2.4) + r(1.4, 2.6, 2, 4.8) + r(3.4, 4.4, 3.2, 1.2)
+    + r(6.6, 2.6, 2, 4.8) + r(8.6, 3.8, 0.8, 2.4),
   // Standing figure: a move.
   figure: r(4.05, 0.5, 1.9, 1.9) + r(4.15, 2.75, 1.7, 3.8) + r(1.9, 3.1, 2.3, 1.05)
     + r(5.8, 3.1, 2.3, 1.05) + r(3.6, 6.45, 1.2, 3.05) + r(5.2, 6.45, 1.2, 3.05),

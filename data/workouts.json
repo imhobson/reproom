@@ -12316,7 +12316,7 @@
             "secs": 30,
             "block": 1,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12324,7 +12324,7 @@
             "secs": 30,
             "block": 1,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12334,18 +12334,39 @@
           {
             "type": "move",
             "move": "burpees",
-            "secs": 30,
+            "secs": 40,
             "block": 1,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "squat-jumps",
-            "secs": 30,
+            "secs": 40,
             "block": 1,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "burpees",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "squat-jumps",
+            "secs": 40,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12358,7 +12379,7 @@
             "secs": 30,
             "block": 2,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12367,7 +12388,7 @@
             "secs": 30,
             "block": 2,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12376,7 +12397,7 @@
             "secs": 30,
             "block": 2,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12386,28 +12407,59 @@
           {
             "type": "move",
             "move": "wave-push-up",
-            "secs": 30,
+            "secs": 40,
             "block": 2,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "single-leg-push-ups",
             "side": "left",
-            "secs": 30,
+            "secs": 40,
             "block": 2,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "single-leg-push-ups",
             "side": "right",
-            "secs": 30,
+            "secs": 40,
             "block": 2,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "wave-push-up",
+            "secs": 45,
+            "block": 2,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "single-leg-push-ups",
+            "side": "left",
+            "secs": 45,
+            "block": 2,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "single-leg-push-ups",
+            "side": "right",
+            "secs": 45,
+            "block": 2,
+            "round": 3,
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12446,7 +12498,7 @@
           {
             "type": "move",
             "move": "wide-grip-push-ups",
-            "secs": 30,
+            "secs": 40,
             "block": 3,
             "round": 2,
             "rounds": 2
@@ -12454,7 +12506,7 @@
           {
             "type": "move",
             "move": "plank-to-kick-back",
-            "secs": 30,
+            "secs": 40,
             "block": 3,
             "round": 2,
             "rounds": 2
@@ -12462,7 +12514,7 @@
           {
             "type": "move",
             "move": "narrow-grip-push-ups",
-            "secs": 30,
+            "secs": 40,
             "block": 3,
             "round": 2,
             "rounds": 2
@@ -12478,7 +12530,7 @@
             "secs": 30,
             "block": 4,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12486,7 +12538,7 @@
             "secs": 30,
             "block": 4,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12496,18 +12548,39 @@
           {
             "type": "move",
             "move": "reverse-plank-tricep-dips",
-            "secs": 30,
+            "secs": 35,
             "block": 4,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "kayak-abs",
-            "secs": 30,
+            "secs": 35,
             "block": 4,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "reverse-plank-tricep-dips",
+            "secs": 40,
+            "block": 4,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "kayak-abs",
+            "secs": 40,
+            "block": 4,
+            "round": 3,
+            "rounds": 3
           }
         ],
         "cooldown": [
@@ -12558,11 +12631,11 @@
         ]
       },
       "summary": {
-        "steps": 40,
-        "moves": 33,
-        "rests": 7,
-        "totalSecs": 1530,
-        "minutes": 25.5
+        "steps": 50,
+        "moves": 40,
+        "rests": 10,
+        "totalSecs": 2080,
+        "minutes": 34.7
       }
     },
     {
@@ -12571,19 +12644,341 @@
       "day": 14,
       "name": "Strength & Stability Sesh",
       "kcal": null,
-      "complete": false,
-      "checkNote": "Blank in the sheet: moves still to be added.",
+      "complete": true,
       "sections": {
-        "warmup": [],
-        "main": [],
-        "cooldown": []
+        "warmup": [
+          {
+            "type": "move",
+            "move": "elbow-rotations",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "pendulum-hamstring-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-hip-rotation",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-hip-rotation",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "deep-side-to-side-lunge",
+            "secs": 30
+          }
+        ],
+        "main": [
+          {
+            "type": "move",
+            "move": "butt-kicks",
+            "secs": 30,
+            "block": 1,
+            "round": 1,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "burpee-walk",
+            "secs": 30,
+            "block": 1,
+            "round": 1,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "butt-kicks",
+            "secs": 40,
+            "block": 1,
+            "round": 2,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "burpee-walk",
+            "secs": 40,
+            "block": 1,
+            "round": 2,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "butt-kicks",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "burpee-walk",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "squat-with-calf-raise",
+            "secs": 30,
+            "block": 2,
+            "round": 1,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "walkouts-to-push-ups",
+            "secs": 30,
+            "block": 2,
+            "round": 1,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "squat-with-calf-raise",
+            "secs": 40,
+            "block": 2,
+            "round": 2,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "walkouts-to-push-ups",
+            "secs": 40,
+            "block": 2,
+            "round": 2,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "squat-with-calf-raise",
+            "secs": 45,
+            "block": 2,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "walkouts-to-push-ups",
+            "secs": 45,
+            "block": 2,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "airplane-push-ups",
+            "secs": 40,
+            "block": 3,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "assisted-one-arm-push-ups",
+            "side": "left",
+            "secs": 40,
+            "block": 3,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "assisted-one-arm-push-ups",
+            "side": "right",
+            "secs": 40,
+            "block": 3,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "plank-jack-shoulder-taps",
+            "secs": 40,
+            "block": 3,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "airplane-push-ups",
+            "secs": 45,
+            "block": 3,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "assisted-one-arm-push-ups",
+            "side": "left",
+            "secs": 45,
+            "block": 3,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "assisted-one-arm-push-ups",
+            "side": "right",
+            "secs": 45,
+            "block": 3,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "plank-jack-shoulder-taps",
+            "secs": 45,
+            "block": 3,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "side-plank",
+            "side": "left",
+            "secs": 45,
+            "block": 4,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "side-plank",
+            "side": "right",
+            "secs": 45,
+            "block": 4,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "flutter-kicks",
+            "secs": 45,
+            "block": 4,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "side-plank",
+            "side": "left",
+            "secs": 45,
+            "block": 4,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "side-plank",
+            "side": "right",
+            "secs": 45,
+            "block": 4,
+            "round": 2,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "flutter-kicks",
+            "secs": 45,
+            "block": 4,
+            "round": 2,
+            "rounds": 2
+          }
+        ],
+        "cooldown": [
+          {
+            "type": "move",
+            "move": "spinal-twist",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "spinal-twist",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "knees-to-chest-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "seated-hamstring-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "cat-to-cow-stretch",
+            "secs": 45
+          },
+          {
+            "type": "move",
+            "move": "childs-pose",
+            "secs": 45
+          }
+        ]
       },
       "summary": {
-        "steps": 0,
-        "moves": 0,
-        "rests": 0,
-        "totalSecs": 0,
-        "minutes": 0.0
+        "steps": 46,
+        "moves": 37,
+        "rests": 9,
+        "totalSecs": 2070,
+        "minutes": 34.5
       }
     },
     {
@@ -12629,7 +13024,7 @@
             "secs": 30,
             "block": 1,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12637,7 +13032,7 @@
             "secs": 30,
             "block": 1,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12645,7 +13040,7 @@
             "secs": 30,
             "block": 1,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12655,25 +13050,85 @@
           {
             "type": "move",
             "move": "high-knees",
-            "secs": 30,
+            "secs": 40,
             "block": 1,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "butt-kicks",
-            "secs": 30,
+            "secs": 40,
             "block": 1,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "squat-jumps",
-            "secs": 30,
+            "secs": 40,
             "block": 1,
             "round": 2,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "high-knees",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "butt-kicks",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "squat-jumps",
+            "secs": 45,
+            "block": 1,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "high-plank-walk-out",
+            "secs": 40,
+            "block": 2,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "lunge-with-thoracic-rotation",
+            "side": "left",
+            "secs": 40,
+            "block": 2,
+            "round": 1,
+            "rounds": 2
+          },
+          {
+            "type": "move",
+            "move": "lunge-with-thoracic-rotation",
+            "side": "right",
+            "secs": 40,
+            "block": 2,
+            "round": 1,
             "rounds": 2
           },
           {
@@ -12684,38 +13139,7 @@
           {
             "type": "move",
             "move": "high-plank-walk-out",
-            "secs": 30,
-            "block": 2,
-            "round": 1,
-            "rounds": 2
-          },
-          {
-            "type": "move",
-            "move": "lunge-with-thoracic-rotation",
-            "side": "left",
-            "secs": 30,
-            "block": 2,
-            "round": 1,
-            "rounds": 2
-          },
-          {
-            "type": "move",
-            "move": "lunge-with-thoracic-rotation",
-            "side": "right",
-            "secs": 30,
-            "block": 2,
-            "round": 1,
-            "rounds": 2
-          },
-          {
-            "type": "rest",
-            "secs": 30,
-            "inferred": true
-          },
-          {
-            "type": "move",
-            "move": "high-plank-walk-out",
-            "secs": 30,
+            "secs": 45,
             "block": 2,
             "round": 2,
             "rounds": 2
@@ -12724,7 +13148,7 @@
             "type": "move",
             "move": "lunge-with-thoracic-rotation",
             "side": "left",
-            "secs": 30,
+            "secs": 45,
             "block": 2,
             "round": 2,
             "rounds": 2
@@ -12733,7 +13157,7 @@
             "type": "move",
             "move": "lunge-with-thoracic-rotation",
             "side": "right",
-            "secs": 30,
+            "secs": 45,
             "block": 2,
             "round": 2,
             "rounds": 2
@@ -12749,7 +13173,7 @@
             "secs": 30,
             "block": 3,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
@@ -12757,7 +13181,7 @@
             "secs": 30,
             "block": 3,
             "round": 1,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12767,18 +13191,39 @@
           {
             "type": "move",
             "move": "wide-grip-push-ups",
-            "secs": 30,
+            "secs": 45,
             "block": 3,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
           },
           {
             "type": "move",
             "move": "modified-diagonal-mountain-climber",
-            "secs": 30,
+            "secs": 45,
             "block": 3,
             "round": 2,
-            "rounds": 2
+            "rounds": 3
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "inferred": true
+          },
+          {
+            "type": "move",
+            "move": "wide-grip-push-ups",
+            "secs": 45,
+            "block": 3,
+            "round": 3,
+            "rounds": 3
+          },
+          {
+            "type": "move",
+            "move": "modified-diagonal-mountain-climber",
+            "secs": 45,
+            "block": 3,
+            "round": 3,
+            "rounds": 3
           },
           {
             "type": "rest",
@@ -12804,7 +13249,7 @@
           {
             "type": "move",
             "move": "glute-bridge-hold",
-            "secs": 30,
+            "secs": 45,
             "block": 4,
             "round": 1,
             "rounds": 2
@@ -12817,7 +13262,7 @@
           {
             "type": "move",
             "move": "extended-suitcase-crunch",
-            "secs": 30,
+            "secs": 40,
             "block": 4,
             "round": 2,
             "rounds": 2
@@ -12825,7 +13270,7 @@
           {
             "type": "move",
             "move": "glute-bridges-with-abduction",
-            "secs": 30,
+            "secs": 40,
             "block": 4,
             "round": 2,
             "rounds": 2
@@ -12833,7 +13278,7 @@
           {
             "type": "move",
             "move": "glute-bridge-hold",
-            "secs": 30,
+            "secs": 45,
             "block": 4,
             "round": 2,
             "rounds": 2
@@ -12875,11 +13320,11 @@
         ]
       },
       "summary": {
-        "steps": 40,
-        "moves": 33,
-        "rests": 7,
-        "totalSecs": 1530,
-        "minutes": 25.5
+        "steps": 47,
+        "moves": 38,
+        "rests": 9,
+        "totalSecs": 2050,
+        "minutes": 34.2
       }
     },
     {
@@ -13977,6 +14422,407 @@
         "rests": 0,
         "totalSecs": 0,
         "minutes": 0.0
+      }
+    }
+  ],
+  "routines": [
+    {
+      "id": "run-warm-up",
+      "kind": "run",
+      "group": "warmup",
+      "name": "Run warm-up",
+      "kcal": null,
+      "complete": true,
+      "sections": {
+        "warmup": [
+          {
+            "type": "move",
+            "move": "leg-swings-front-to-back",
+            "side": "left",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "leg-swings-front-to-back",
+            "side": "right",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "leg-swings-side-to-side",
+            "side": "left",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "leg-swings-side-to-side",
+            "side": "right",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "standing-hip-rotation",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-hip-rotation",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "lunge-with-thoracic-rotation",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "lunge-with-thoracic-rotation",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "deep-side-to-side-lunge",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "active-calf-and-hamstring-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "calf-raises",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "pogo-hops",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "high-knees",
+            "secs": 20
+          },
+          {
+            "type": "move",
+            "move": "butt-kicks",
+            "secs": 20
+          }
+        ],
+        "main": [],
+        "cooldown": []
+      },
+      "summary": {
+        "steps": 14,
+        "moves": 14,
+        "rests": 0,
+        "totalSecs": 490,
+        "minutes": 8.2
+      }
+    },
+    {
+      "id": "run-drills",
+      "kind": "run",
+      "group": "main",
+      "name": "Run drills",
+      "kcal": null,
+      "complete": true,
+      "sections": {
+        "warmup": [],
+        "main": [
+          {
+            "type": "move",
+            "move": "a-march",
+            "secs": 20,
+            "rep": 1,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "a-march",
+            "secs": 20,
+            "rep": 2,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "a-skips",
+            "secs": 20,
+            "rep": 1,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "a-skips",
+            "secs": 20,
+            "rep": 2,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "b-skips",
+            "secs": 20,
+            "rep": 1,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "b-skips",
+            "secs": 20,
+            "rep": 2,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "carioca",
+            "side": "left",
+            "secs": 20
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "carioca",
+            "side": "right",
+            "secs": 20
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "straight-leg-run",
+            "secs": 20,
+            "rep": 1,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "straight-leg-run",
+            "secs": 20,
+            "rep": 2,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "bounding",
+            "secs": 20,
+            "rep": 1,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "bounding",
+            "secs": 20,
+            "rep": 2,
+            "reps": 2
+          },
+          {
+            "type": "rest",
+            "secs": 10,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "strides",
+            "secs": 20,
+            "rep": 1,
+            "reps": 4
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "strides",
+            "secs": 20,
+            "rep": 2,
+            "reps": 4
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "strides",
+            "secs": 20,
+            "rep": 3,
+            "reps": 4
+          },
+          {
+            "type": "rest",
+            "secs": 30,
+            "walkBack": true
+          },
+          {
+            "type": "move",
+            "move": "strides",
+            "secs": 20,
+            "rep": 4,
+            "reps": 4
+          }
+        ],
+        "cooldown": []
+      },
+      "summary": {
+        "steps": 31,
+        "moves": 16,
+        "rests": 15,
+        "totalSecs": 690,
+        "minutes": 11.5
+      }
+    },
+    {
+      "id": "run-cool-down",
+      "kind": "run",
+      "group": "cooldown",
+      "name": "Run cool-down",
+      "kcal": null,
+      "complete": true,
+      "sections": {
+        "warmup": [],
+        "main": [],
+        "cooldown": [
+          {
+            "type": "move",
+            "move": "standing-calf-stretch",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-calf-stretch",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-quad-stretch",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "standing-quad-stretch",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "hip-flexor-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "seated-hamstring-stretch",
+            "secs": 40
+          },
+          {
+            "type": "move",
+            "move": "figure-4-stretch",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "figure-4-stretch",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "pigeon-pose",
+            "side": "left",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "pigeon-pose",
+            "side": "right",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "seated-butterfly-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "knees-to-chest-stretch",
+            "secs": 30
+          },
+          {
+            "type": "move",
+            "move": "childs-pose",
+            "secs": 30
+          }
+        ]
+      },
+      "summary": {
+        "steps": 13,
+        "moves": 13,
+        "rests": 0,
+        "totalSecs": 530,
+        "minutes": 8.8
       }
     }
   ]
