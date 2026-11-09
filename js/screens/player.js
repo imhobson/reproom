@@ -519,20 +519,51 @@ function draw() {
 }
 
 // ---- The phone's back button (B02) ----
-// While the player is open, one extra history entry (the "guard") sits on top
-// of the player's own, both at the same address. Back takes the guard off with
-// no hashchange, so we stay here: we put it back and do what X does (pause,
-// End workout?), or close the sheet that's open. So back never leaves a
-// workout, and in the installed app it never reaches the bottom of the
-// history (which would close the app).
+// Back in the player does what X does (pause, End workout?), or closes the
+// sheet that's open. So back never leaves a workout, and in the installed app
+// it never reaches the bottom of the history (which would close the app).
+//
+// On Android Chrome this uses a CloseWatcher, which is what the phone's back
+// goes to first while one is open. (V1.6.1 used an extra history entry, but
+// Chrome skips history entries a page adds without a tap, so the second back
+// in a row left the app.) Browsers without CloseWatcher (e.g. iPhone) fall
+// back to the history entry: an extra "guard" entry on top of the player's
+// own, same address, put back each time back takes it off.
+const HAS_CW = typeof window.CloseWatcher === 'function';
+let watcher = null;
 let playId = 0;          // one per workout started, kept in the history entries
 const ended = new Set(); // workouts finished or ended in this page load
 
 function guard() {
   const s = history.state;
+  if (HAS_CW) {
+    // Mark the player's entry (so it's stepped over once the workout is
+    // over, see below), and listen for back.
+    if (!s || s.play !== P.id) history.replaceState({ play: P.id }, '', location.href);
+    arm();
+    return;
+  }
   if (s && s.play === P.id && s.guard) return; // already on our guard
   history.replaceState({ play: P.id }, '', location.href);
   history.pushState({ play: P.id, guard: true }, '', location.href);
+}
+
+function arm() {
+  if (watcher) return;
+  const w = watcher = new CloseWatcher();
+  w.addEventListener('close', () => {
+    if (watcher === w) watcher = null;
+    if (!P || !location.hash.startsWith('#/play/')) return;
+    onBack();
+    arm(); // ready for the next back
+  });
+}
+function disarm() { if (watcher) { const w = watcher; watcher = null; w.destroy(); } }
+
+function onBack() {
+  if (P.sheet === 'end') keepGoing();
+  else if (P.sheet === 'info') closeInfo();
+  else askEnd();
 }
 
 // A finished or ended workout's entries (back from the summary, or from Home
@@ -543,14 +574,13 @@ const isEnded = () => !P && ended.has(history.state?.play);
 
 addEventListener('popstate', () => {
   if (isEnded()) { history.back(); return; }
-  // Only when we've landed on this workout's own entry under the guard.
-  // (Setting location.hash fires popstate too, with no state: not a back.)
+  if (HAS_CW) return;
+  // Fallback only: when we've landed on this workout's own entry under the
+  // guard. (Setting location.hash fires popstate too, with no state: not a back.)
   const s = history.state;
   if (!P || !s || s.play !== P.id || s.guard) return;
   history.pushState({ play: P.id, guard: true }, '', location.href);
-  if (P.sheet === 'end') keepGoing();
-  else if (P.sheet === 'info') closeInfo();
-  else askEnd();
+  onBack();
 });
 
 function askEnd() { P.wasRunning = P.running; P.sheet = 'end'; setRunning(false); }
@@ -661,6 +691,7 @@ export function snapshot() {
 
 // Leaving the player any other way (e.g. the phone's back button) pauses it.
 export function leave() {
+  disarm(); // back on other screens works as normal
   if (P && P.running) { P.running = false; stopTimer(); }
   audio.pause();
   letSleep();
