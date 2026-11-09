@@ -29,7 +29,7 @@ const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', '
 function versionTag() {
   const [, m, d] = (self.APP_DATE || '').split('-').map(Number);
   const date = m ? ` · ${d} ${MONTHS[m - 1]}` : '';
-  return `<span class="label s-ver" data-ver>V${self.APP_VERSION || '?'}${date}</span>`;
+  return `<button class="label s-ver" data-ver aria-label="Version">V${self.APP_VERSION || '?'}${date}</button>`;
 }
 
 // Tapping the version 5 times (within 3s) turns the cue log on or off (F11
