@@ -195,8 +195,15 @@ button:disabled { cursor: default; }
 .soon { color: var(--faint); font-size: 16px; }
 
 /* Player */
-.player { padding-bottom: 32px; }
-.stage-art { position: relative; height: 361px; background: var(--field); padding: 44px var(--gutter) 0; }
+/* Q09: a column at least the screen's height. The image stays at the top with
+   the kicker and name under it; the lower group (.p-low: step bar, clock row,
+   buttons or the weight set's boxes, Up next card, step line and blocks) is
+   pushed to the bottom, so a name running onto two lines grows into the gap
+   and nothing below it moves. Too short a screen: the page scrolls. */
+.player { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom)); }
+.p-low { margin-top: auto; }
+.stage-art { flex: none; position: relative; height: 361px; background: var(--field); padding: 44px var(--gutter) 0; }
 /* The background shows the state (7 Nov rule), set once on .player[data-state]:
    ready = grey (Get ready, Next up, Rest), main = amber, warm = warm amber. */
 .player[data-state="main"] .stage-art { background: var(--amber); }
@@ -245,12 +252,15 @@ button:disabled { cursor: default; }
 .wline .num { font-size: 13px; letter-spacing: 0; }
 .wline + .controls { margin-top: 14px; }
 .ctl.finish:disabled { background: var(--field); }
-.upnext { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 12px; padding: 10px 8px; background: var(--field); text-align: left; }
+/* Fixed height, room for a two-line name; longer names end in an ellipsis (Q09). */
+.upnext { display: flex; align-items: center; gap: 12px; width: 100%; height: 96px; margin-top: 12px; padding: 10px 8px; background: var(--field); text-align: left; overflow: hidden; }
+.upnext > span:last-child { min-width: 0; }
 .upnext .ico { width: 44px; height: 44px; flex: none; background: var(--paper); display: grid; place-items: center; }
 .upnext .ico .sym { width: 24px; height: 24px; }
 .upnext .ico.amber { background: var(--amber); }
 .upnext .label, .upnext .nm, .upnext .sub { display: block; }
-.upnext .nm { font-size: 17px; font-weight: 500; line-height: 1.2; margin-top: 2px; }
+.upnext .nm { font-size: 17px; font-weight: 500; line-height: 1.2; margin-top: 2px;
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
 .upnext .sub { font-size: 13px; }
 .prog { display: flex; justify-content: space-between; margin-top: 12px; }
 .blocks { display: flex; gap: 2px; margin-top: 6px; height: 10px; align-items: flex-end; }

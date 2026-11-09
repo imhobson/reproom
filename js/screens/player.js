@@ -378,9 +378,11 @@ function view() {
         ${chip ? `<p class="chip ${chipCls}">${chip}</p>` : ''}
         <div class="art">${sym(isRest ? 'moon' : isWeight ? 'dumbbell' : 'figure')}</div>
       </div>
-      <div class="pad">
+      <div class="pad p-head">
         <p class="label red p-kicker">${kicker}</p>
         <h1 class="p-name">${isRest ? 'Rest' : isSet ? data.move(step.move).name : stepName(step)}</h1>
+      </div>
+      <div class="pad p-low">
         ${isSet ? setControls(step, paused) : `<div class="stepbar"><span data-bar style="width:${(P.left / P.total) * 100}%"></span></div>
         <div class="clock-row">
           <div class="side"><p class="num v" data-elapsed>${mmss(P.elapsed / 1000)}</p><p class="label">Elapsed</p></div>
