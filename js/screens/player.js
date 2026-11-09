@@ -133,9 +133,27 @@ function advance() {
   enterStep(P.idx + 1);
 }
 
+// NEXT (B03): one tap = one whole move. During Get ready / Next up it skips
+// that move too, straight to whatever comes after it (the next move's Next up,
+// or a rest); on the last move's Next up it goes to the summary. On the Next
+// up before weight set 1 it still opens the set. While a move runs it's the
+// same as the timer running out. No ticks or GO either way.
+function next() {
+  const step = P.steps[P.idx];
+  if (P.phase !== 'preview' || step.type === 'weight') { advance(); return; }
+  clearTimeout(P.voiceTimer);
+  audio.stopAll(); // don't let the skipped move's name talk over what's next
+  if (P.idx === P.lastMove || P.idx + 1 >= P.steps.length) { finish(); return; }
+  enterStep(P.idx + 1);
+}
+
+// PREV mirrors NEXT (B03): back one whole move, to its Next up, passing over
+// rests. A weight set counts as a move (set 2 back to set 1, right side back
+// to left). With no move before this one, back to its own Get ready.
+const isDo = s => s.type === 'move' || s.type === 'weight';
 function prev() {
-  if (P.idx > 0) enterStep(P.idx - 1);
-  else enterStep(0);
+  for (let j = P.idx - 1; j >= 0; j--) if (isDo(P.steps[j])) { enterStep(j); return; }
+  enterStep(isDo(P.steps[P.idx]) ? P.idx : 0);
 }
 
 function tick() {
@@ -515,7 +533,7 @@ function update() {
 function wire() {
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   on('[data-pp]', () => setRunning(!P.running));
-  on('[data-next]', advance);
+  on('[data-next]', next);
   on('[data-skip]', advance);
   on('[data-prev]', prev);
   on('[data-finish]', finish);
