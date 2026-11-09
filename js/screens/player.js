@@ -48,7 +48,7 @@ function start(day) {
   const lastDo = steps.map((s, i) => (s.type !== 'rest' ? i : -1)).filter(i => i >= 0).pop();
   const st2 = data.stats(workout, on);
   P = {
-    day, stage: st.stage, intensity: st.intensity, workout, steps, stats: st2,
+    id: ++playId, day, stage: st.stage, intensity: st.intensity, workout, steps, stats: st2,
     firstMove: moveIdx[0], lastMove: lastDo,
     weightsOn: !!on.weights,
     wvals: {}, // weight step index -> { reps, kg } on screen
@@ -241,6 +241,7 @@ function finish() {
     focus: focusOf(P.workout),
     stageJustCompleted: !wasComplete && store.stageComplete(P.stage),
   };
+  ended.add(P.id);
   P = null;
   session.clear();
   go('#/summary');
@@ -258,6 +259,7 @@ function endWorkout() {
   }
   audio.stopAll();
   letSleep();
+  ended.add(P.id);
   P = null;
   session.clear();
   go('#/');
@@ -516,6 +518,45 @@ function draw() {
   wire();
 }
 
+// ---- The phone's back button (B02) ----
+// While the player is open, one extra history entry (the "guard") sits on top
+// of the player's own, both at the same address. Back takes the guard off with
+// no hashchange, so we stay here: we put it back and do what X does (pause,
+// End workout?), or close the sheet that's open. So back never leaves a
+// workout, and in the installed app it never reaches the bottom of the
+// history (which would close the app).
+let playId = 0;          // one per workout started, kept in the history entries
+const ended = new Set(); // workouts finished or ended in this page load
+
+function guard() {
+  const s = history.state;
+  if (s && s.play === P.id && s.guard) return; // already on our guard
+  history.replaceState({ play: P.id }, '', location.href);
+  history.pushState({ play: P.id, guard: true }, '', location.href);
+}
+
+// A finished or ended workout's entries (back from the summary, or from Home
+// after Yes, end it): step over them, so back goes to where the workout was
+// started from instead of starting it again. popstate fires for each entry,
+// even the ones that share an address (where hashchange doesn't).
+const isEnded = () => !P && ended.has(history.state?.play);
+
+addEventListener('popstate', () => {
+  if (isEnded()) { history.back(); return; }
+  // Only when we've landed on this workout's own entry under the guard.
+  // (Setting location.hash fires popstate too, with no state: not a back.)
+  const s = history.state;
+  if (!P || !s || s.play !== P.id || s.guard) return;
+  history.pushState({ play: P.id, guard: true }, '', location.href);
+  if (P.sheet === 'end') keepGoing();
+  else if (P.sheet === 'info') closeInfo();
+  else askEnd();
+});
+
+function askEnd() { P.wasRunning = P.running; P.sheet = 'end'; setRunning(false); }
+function keepGoing() { P.sheet = null; if (P.wasRunning) setRunning(true); else draw(); }
+function closeInfo() { P.sheet = null; draw(); }
+
 // Every tick: only the numbers and bar change, unless the chip needs to go.
 function update() {
   const q = s => app.querySelector(s);
@@ -541,8 +582,8 @@ function wire() {
   on('[data-mute]', () => { P.muted = !P.muted; audio.setMuted(P.muted); draw(); });
   on('[data-progress]', () => { if (P.running) setRunning(false); });
   on('[data-settings]', () => { if (P.running) setRunning(false); go('#/settings'); });
-  on('[data-x]', () => { P.wasRunning = P.running; P.sheet = 'end'; setRunning(false); });
-  on('[data-keep]', () => { P.sheet = null; if (P.wasRunning) setRunning(true); else draw(); });
+  on('[data-x]', askEnd);
+  on('[data-keep]', keepGoing);
   on('[data-end]', endWorkout);
   on('[data-card]', e => {
     const i = e.currentTarget.dataset && P.steps[P.idx + 1] && P.steps[P.idx + 1].type === 'move' ? P.idx + 1 : null;
@@ -550,7 +591,7 @@ function wire() {
     P.sheet = 'info'; P.sheetStep = i;
     setRunning(false);
   });
-  on('[data-close]', () => { P.sheet = null; draw(); });
+  on('[data-close]', closeInfo);
   // Weight set (F12)
   on('[data-done]', doneSet);
   on('[data-reps]', e => {
@@ -586,6 +627,7 @@ function wire() {
 
 export function render(el, day) {
   app = el;
+  if (isEnded()) return; // being stepped over (see popstate above)
   keepAwake();
   if (!P || P.day !== day) {
     const w = data.workoutFor(store.get().intensity, day);
@@ -596,6 +638,7 @@ export function render(el, day) {
     draw();
     if (P.running) startTimer(); else audio.pause();
   }
+  guard();
 }
 
 // Where the workout is right now, for Feedback (F15). Settings pauses the

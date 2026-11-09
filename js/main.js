@@ -38,9 +38,12 @@ function route() {
   hideToast();
   // Settings' back arrow returns to wherever Settings was opened from.
   if (inSettings(location.hash) && !inSettings(prevHash)) {
-    settings.setBack(settingsFrom = prevHash || '#/');
     // From the player, Feedback carries the workout (Settings paused it first).
-    workoutNow = settingsFrom.startsWith('#/play/') ? player.snapshot() : null;
+    workoutNow = prevHash.startsWith('#/play/') ? player.snapshot() : null;
+    // A player address with no workout in it (one already finished or ended,
+    // reached with the phone's back button) goes back to Home instead.
+    settingsFrom = prevHash.startsWith('#/play/') && !workoutNow ? '#/' : prevHash || '#/';
+    settings.setBack(settingsFrom);
   }
   prevHash = location.hash;
   if (!location.hash.startsWith('#/play/')) player.leave();
