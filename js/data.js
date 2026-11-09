@@ -1,6 +1,6 @@
 // Loads data/workouts.json and data/moves.json (read-only) and works out
 // lengths, move counts and kcal from the steps.
-import { KCAL_PER_MIN, WEIGHT_SETS, WEIGHT_REST_SECS, WEIGHT_SET_SECS_ESTIMATE } from './config.js';
+import { KCAL_PER_MIN, WEIGHT_SETS, WEIGHT_REST_SECS, WEIGHT_SET_SECS_ESTIMATE, RUN_ROUTINES } from './config.js';
 
 let W = null; // workouts.json
 let M = null; // moves by id
@@ -25,6 +25,16 @@ export const weightMoves = () => Object.values(M).filter(m => m.category === 'we
 export function workoutFor(intensityId, day) {
   return W.workouts.find(w => w.intensity === intensityId && w.day === day) || null;
 }
+
+// Run routines (F11): from workouts.json's routines list, with the Run screen
+// details from config (RUN_ROUTINES). A routine has the same shape as a
+// workout (sections with one group filled), so stats() and playSteps() work on it.
+export function routine(id) {
+  const r = (W.routines || []).find(x => x.id === id);
+  const c = RUN_ROUTINES.find(x => x.id === id);
+  return r && c ? { ...r, ...c, kind: 'run' } : null;
+}
+export const routines = () => RUN_ROUTINES.map(c => routine(c.id)).filter(Boolean);
 
 export const SECTIONS = ['warmup', 'main', 'cooldown'];
 

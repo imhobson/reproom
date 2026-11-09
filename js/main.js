@@ -12,6 +12,7 @@ import * as summary from './screens/summary.js';
 import * as settings from './screens/settings.js';
 import * as feedback from './screens/feedback.js';
 import * as cueLog from './screens/cuelog.js';
+import * as run from './screens/run.js';
 import * as fb from './feedback.js';
 
 const app = document.getElementById('app');
@@ -25,6 +26,7 @@ const routes = [
   { re: /^#\/workout\/(\d+)\/move\/(\w+\.\d+)$/, show: m => info.render(app, +m[1], m[2]) },
   { re: /^#\/play\/(\d+)$/, show: m => player.render(app, +m[1]) },
   { re: /^#\/summary$/, show: () => summary.render(app) },
+  { re: /^#\/run$/, show: () => run.render(app) },
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },

@@ -82,6 +82,11 @@ export function render(app) {
       ${hero}
       ${info}
       ${today != null && day !== today ? `<button class="back-current label">${sym('arrowLeft')}Back to current</button>` : ''}
+      <a class="run-row" href="#/run" aria-label="Run routines: warm-up, drills, cool-down">
+        <span class="rr-tile">${sym('runner')}</span>
+        <span class="rr-txt"><span class="label">Run routines</span><span class="rr-sub">Warm-up · Drills · Cool-down</span></span>
+        <span class="rr-go">${sym('arrowRight')}</span>
+      </a>
     </section>`;
 
   wire(app, { stage, day });

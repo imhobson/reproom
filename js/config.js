@@ -25,3 +25,18 @@ export const WEIGHT_REST_SECS = 90;         // rest between sets
 export const WEIGHT_DEFAULT_REPS = 10;      // reps on set 1 the first time on a move
 export const WEIGHT_KG_STEP = 0.5;          // − / + on KG EACH, and what a typed kg rounds to
 export const WEIGHT_SET_SECS_ESTIMATE = 45; // only for the time estimate on Workout details
+
+// Run routines (F11): the three on the Run screen, in this order. id is the
+// routine's id in workouts.json (its steps, name and group come from there).
+//   groupLabel – the label on the Run screen, Workout details, the player strip
+//   sym    – the group's symbol; tile: 'warm' (warm amber) or 'amber'
+//   desc   – the one line on the Run screen card
+//   focus  – the summary's Focus stat
+export const RUN_ROUTINES = [
+  { id: 'run-warm-up', groupLabel: 'Warm-up', sym: 'warmup', tile: 'warm', focus: 'Warm-up',
+    desc: 'Leg swings, hips, lunges and hops. Standing only.' },
+  { id: 'run-drills', groupLabel: 'Drills', sym: 'runner', tile: 'amber', focus: 'Running form',
+    desc: 'A-skips, B-skips, carioca, bounding and strides.' },
+  { id: 'run-cool-down', groupLabel: 'Cool-down', sym: 'cooldown', tile: 'warm', focus: 'Stretch',
+    desc: 'Calf, quad, hamstring and hip stretches.' },
+];
