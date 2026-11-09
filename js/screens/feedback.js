@@ -1,15 +1,52 @@
 // Feedback (04e, F15): a Settings sub-page with only the back button.
 // Opened from a paused workout, it carries where the workout is.
+//
+// Top to bottom: header (with CONNECTED · CHANGE once a key is saved), the
+// caption, CONNECT (only with no key, or after CHANGE), ATTACHED, TYPE,
+// NOTE, SEND TO BACKLOG, RECENT.
 import { head } from './settings.js';
-import { pad2, go } from '../ui.js';
+import { pad2, go, showToast } from '../ui.js';
+import * as fb from '../feedback.js';
 
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);
 
-let attach = true; // the ATTACHED switch; on each time the page opens
+// Page state. The draft and its type survive leaving the page (until the
+// app closes); the switch and the Connect box reset each time it opens.
+let app = null;
+let workout = null;  // where the paused workout is, or null
+let attach = true;   // the ATTACHED switch
+let changing = false; // the Connect box is open over a saved key
+let keyError = '';   // e.g. "Key not recognised"
+let type = 'Not sure';
+let draft = '';
+
+// ---- Parts ----
+
+function connectedTag() {
+  if (!fb.getKey() || changing) return '';
+  return `<span class="label fb-conn">Connected · <button class="fb-change" data-change>Change</button></span>`;
+}
+
+function connectBox() {
+  if (fb.getKey() && !changing) return '';
+  return `
+    <h2 class="label red s-sec">Connect</h2>
+    <div class="s-card fb-connect">
+      <div class="fb-key-row">
+        <input class="fb-key" data-key type="text" placeholder="Paste your feedback key"
+          autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Feedback key">
+        <button class="fb-save" data-save-key>Save</button>
+      </div>
+      ${keyError ? `<p class="fb-err">${esc(keyError)}</p>` : ''}
+      ${changing ? '<button class="fb-cancel label" data-cancel-key>Cancel</button>' : ''}
+    </div>
+    <p class="s-help">The key is made once in the sheet's Apps Script (makeKey). It stays on this phone and isn't in backups.</p>`;
+}
 
 // "Day 06 · High" / "Main · Push-ups · step 12 / 50"
-function attachedCard(w) {
-  if (!w) return `<div class="s-card fb-attach"><p class="fb-none">Not in a workout</p></div>`;
+function attachedCard() {
+  if (!workout) return `<div class="s-card fb-attach"><p class="fb-none">Not in a workout</p></div>`;
+  const w = workout;
   const name = w.side ? `${w.name} (${w.side})` : w.name;
   return `
     <div class="s-card fb-attach">
@@ -21,25 +58,115 @@ function attachedCard(w) {
     </div>`;
 }
 
-export function render(app, workout) {
-  attach = true;
+function recentList() {
+  const list = fb.recent(10);
+  if (!list.length) return '<p class="s-help">No notes yet.</p>';
+  return `<ul class="fb-recent">${list.map(n => {
+    const [text, cls] = fb.statusOf(n);
+    const first = n.note.split('\n').find(l => l.trim()) || n.note;
+    return `<li><span class="fb-line">${esc(first)}</span><span class="label fb-st ${cls}">${esc(text)}</span></li>`;
+  }).join('')}</ul>`;
+}
+
+// ---- Drawing ----
+
+function draw() {
   app.innerHTML = `
     <section class="screen settings feedback">
-      ${head('Feedback')}
+      ${head('Feedback', connectedTag())}
       <p class="s-help intro">Anything you notice. Claude files it into the backlog every night.</p>
 
+      ${connectBox()}
+
       <h2 class="label red s-sec">Attached</h2>
-      ${attachedCard(workout)}
+      ${attachedCard()}
+
+      <h2 class="label red s-sec">Type</h2>
+      <div class="fb-chips" role="radiogroup" aria-label="Type">
+        ${fb.TYPES.map(t => `<button class="fb-chip ${t === type ? 'sel' : ''}" data-type="${t}" role="radio" aria-checked="${t === type}">${t}</button>`).join('')}
+      </div>
+
+      <h2 class="label red s-sec">Note</h2>
+      <textarea class="fb-note" data-note maxlength="${fb.MAX_NOTE}" placeholder="What's on your mind?" aria-label="Note">${esc(draft)}</textarea>
+      <div class="fb-under"><span class="label muted">Tip: use the mic on your keyboard</span><span class="label muted" data-left></span></div>
+
+      <button class="cta centre fb-send" data-send ${draft.trim() ? '' : 'disabled'}>Send to backlog</button>
+
+      <h2 class="label red s-sec">Recent</h2>
+      ${recentList()}
     </section>`;
 
-  app.querySelector('[data-back]').addEventListener('click', () => go('#/settings'));
-  app.querySelector('[data-attach]')?.addEventListener('click', e => {
+  const q = s => app.querySelector(s);
+  const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
+  const again = () => { const y = scrollY; draw(); scrollTo(0, y); };
+
+  on('[data-back]', () => go('#/settings'));
+
+  // Connect
+  on('[data-change]', () => { changing = true; keyError = ''; again(); q('[data-key]')?.focus(); });
+  on('[data-cancel-key]', () => { changing = false; keyError = ''; again(); });
+  const saveKey = () => {
+    const k = q('[data-key]').value.trim();
+    if (!k) { keyError = 'Paste the key first'; again(); return; }
+    fb.setKey(k);
+    changing = false; keyError = '';
+    again();
+    showToast('<span class="label">Key saved</span>', 2500);
+  };
+  on('[data-save-key]', saveKey);
+  q('[data-key]')?.addEventListener('keydown', e => { if (e.key === 'Enter') saveKey(); });
+
+  // Attached
+  on('[data-attach]', e => {
     attach = !attach;
     const b = e.currentTarget;
     b.classList.toggle('on', attach);
     b.setAttribute('aria-checked', attach);
   });
+
+  // Type chips
+  on('[data-type]', e => {
+    type = e.currentTarget.dataset.type;
+    app.querySelectorAll('[data-type]').forEach(b => {
+      const sel = b.dataset.type === type;
+      b.classList.toggle('sel', sel);
+      b.setAttribute('aria-checked', sel);
+    });
+  });
+
+  // Note: grows as you type; SEND is off while it's empty. Near the limit,
+  // a count of what's left shows on the right.
+  const note = q('[data-note]');
+  const send = q('[data-send]');
+  const left = q('[data-left]');
+  const fit = () => {
+    note.style.height = 'auto';
+    note.style.height = `${Math.max(120, note.scrollHeight + 4)}px`; // +4: the 2px border, top and bottom
+    const n = fb.MAX_NOTE - note.value.length;
+    left.textContent = n <= 200 ? `${n} left` : '';
+  };
+  note.addEventListener('input', () => {
+    draft = note.value;
+    send.disabled = !draft.trim();
+    fit();
+  });
+  fit();
+
+  // Send: save to the queue on the phone first (step 3 adds the sending).
+  on('[data-send]', () => {
+    if (!draft.trim()) return;
+    fb.addNote({ type, note: draft.trim(), context: fb.contextLine(workout, attach) });
+    draft = ''; type = 'Not sure';
+    again();
+    showToast('<span class="label">Saved</span>', 2000);
+  });
 }
 
-// Whether the workout goes with the note (used when sending).
-export const attached = () => attach;
+export function render(el, w) {
+  app = el;
+  workout = w;
+  attach = true;
+  changing = false;
+  keyError = '';
+  draw();
+}
