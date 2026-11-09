@@ -6,6 +6,7 @@ import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { pad2, showToast, go } from '../ui.js';
 
 let viewDay = null; // the day being looked at; null = today
+let stripLeft = null; // where the day strip was scrolled to (kept across redraws)
 
 export function render(app) {
   const st = store.get();
@@ -90,21 +91,25 @@ function wire(app, { stage, day }) {
   const strip = app.querySelector('.strip');
   const tilesEl = [...strip.children];
 
-  // Show the week the viewed day is in (on the last week, keep it in view
-  // and slide along to the next stages, as in design 03).
+  // Q08: the viewed day is the middle of the 7 squares in view, 3 either
+  // side (days 01-03 stop at the start; centring days 26-28 brings the
+  // Stage tiles in, and day 28 stops where the strip ends). Home redraws on
+  // every tap, so put the strip back where it was, then scroll smoothly from
+  // there. Opening the app: straight to it, no slide.
   const step = () => tilesEl[1].offsetLeft - tilesEl[0].offsetLeft;
-  const idx = day - 1;
-  const weekStart = Math.floor(idx / 7) * 7;
-  const start = weekStart >= 21 ? Math.max(weekStart, idx - 4) : weekStart;
+  const target = Math.max(0, day - 1 - 3) * step();
   strip.style.scrollBehavior = 'auto';
-  strip.scrollLeft = start * step();
+  strip.scrollLeft = stripLeft ?? target;
   strip.style.scrollBehavior = '';
+  if (stripLeft != null) strip.scrollTo({ left: target, behavior: 'smooth' });
+  stripLeft = strip.scrollLeft;
 
   // Week label follows the strip as you swipe. The stage captions only
   // get room when the stage tiles are in view.
   const weekEl = app.querySelector('[data-week]');
   const wrap = app.querySelector('.strip-wrap');
   const onScroll = () => {
+    stripLeft = strip.scrollLeft;
     const first = Math.round(strip.scrollLeft / step());
     weekEl.textContent = Math.min(4, Math.floor((first + 3) / 7) + 1);
     wrap.classList.toggle('has-caps', first + 7 > DAYS_PER_STAGE && tilesEl.length > DAYS_PER_STAGE);
