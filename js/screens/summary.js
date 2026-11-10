@@ -47,7 +47,7 @@ export function render(app) {
       <div class="stats">
         <div><p class="label">Duration</p><p class="num big">${mmss(r.secs)}</p></div>
         <div><p class="label">kcal</p><p class="num big">${r.kcal}</p></div>
-        <div><p class="label">Moves</p><p class="num big">${r.moves}</p></div>
+        <div><p class="label">Moves${r.skipped ? ` · ${r.skipped} skipped` : ''}</p><p class="num big">${r.movesDone ?? r.moves}<span class="of"> / ${r.moves}</span></p></div>
         <div><p class="label">Focus</p><p class="focus">${r.focus}</p></div>
       </div>${wCard}
       <div class="stage-row">

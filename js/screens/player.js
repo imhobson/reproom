@@ -19,6 +19,7 @@ import * as weights from '../weights.js';
 import { WEIGHT_DEFAULT_REPS, WEIGHT_KG_STEP } from '../config.js';
 import * as cuelog from '../cuelog.js';
 import * as keepalive from '../keepalive.js';
+import * as track from '../track.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 // A run routine's sections are labelled with its group (Warm-up / Drills /
@@ -65,9 +66,12 @@ function start(key) {
   P = {
     id: ++playId, key, run, day, stage: run ? null : st.stage, intensity: st.intensity, workout, steps, stats: st2,
     firstMove: moveIdx[0], lastMove: lastDo,
-    weightsOn: !!on.weights,
+    weightsOn: !!on.weights, on,
     wvals: {}, // weight step index -> { reps, kg } on screen
     wdone: {}, // weight step index -> { set, side, reps, kg } saved by DONE
+    // Move tracking (F14): ms each move step's timer actually ran (paused time
+    // doesn't count), ms on each weight set's screen, and the furthest step reached.
+    ran: {}, wsecs: {}, maxIdx: 0, phaseIdx: 0,
     idx: 0, phase: null, left: 0, total: 0, sinceStart: 0,
     elapsed: 0, running: true, muted: false, sheet: null, sheetStep: null,
   };
@@ -84,6 +88,7 @@ function start(key) {
 
 function enterStep(i) {
   P.idx = i;
+  P.maxIdx = Math.max(P.maxIdx, i);
   const step = P.steps[i];
   if (step.type === 'weight' && !step.preview) { enterSet(i); return; }
   if (step.type === 'move' || step.type === 'weight') {
@@ -114,6 +119,7 @@ function enterStep(i) {
 // set just done (sets 2 and 3).
 function enterSet(i) {
   P.idx = i;
+  P.maxIdx = Math.max(P.maxIdx, i);
   P.wvals[i] = startVals(i);
   setPhase('set', 0);
 }
@@ -142,6 +148,7 @@ function doneSet() {
   readKgField();
   if (v.kg == null) return;
   P.wdone[i] = { set: s.set, side: s.side || null, reps: v.reps, kg: v.kg };
+  P.wsecs[i] = P.sinceStart;
   const next = P.steps[i + 1];
   if (!next) { finish(); return; }
   if (next.type === 'weight' && next.set === s.set && next.side) audio.sayText(`${next.side === 'left' ? 'Left' : 'Right'} side.`);
@@ -149,7 +156,9 @@ function doneSet() {
 }
 
 function setPhase(phase, secs) {
+  noteRan();
   P.phase = phase;
+  P.phaseIdx = P.idx;
   P.left = P.total = secs * 1000;
   P.sinceStart = 0;
   // Cue log plan (wall clock): a phase that follows one that ran out by
@@ -204,7 +213,7 @@ function tick() {
   const dt = now - (P.last || now);
   if (dt > 1500) cuelog.note('gap', `Timer tick ${(dt / 1000).toFixed(1)}s after the last`);
   P.last = now;
-  if (P.phase === 'set') { P.elapsed += dt; update(); return; } // no timer on a set
+  if (P.phase === 'set') { P.elapsed += dt; P.sinceStart += dt; update(); return; } // no timer on a set
   const before = P.left;
   P.left -= dt;
   P.elapsed += dt;
@@ -341,6 +350,34 @@ function weightsDone() {
   return { move: P.steps[idx[0]].move, sets: idx.map(i => ({ ...P.wdone[i] })) };
 }
 
+// Move tracking (F14). As a move phase ends (any way: its timer, NEXT, PREV,
+// FINISH, the end), keep how long it ran: up to its own time, so time carried
+// into the next phase isn't counted. Run again after PREV, the longer run counts.
+function noteRan() {
+  if (!P || P.phase !== 'move') return;
+  const i = P.phaseIdx;
+  P.ran[i] = Math.max(P.ran[i] || 0, Math.min(P.sinceStart, P.total));
+}
+
+// Each move and weight step's result, for track.build: a move is done when at
+// least half its time ran (its seconds = the time it ran); otherwise skipped,
+// unless the workout was ended early before getting past it. A weight set is
+// done when DONE was pressed (its seconds = the time on the set screen).
+function stepResults(finished) {
+  noteRan();
+  const res = {};
+  P.steps.forEach((s, i) => {
+    if (s.type === 'move') {
+      const ran = P.ran[i] || 0;
+      if (ran > 0 && ran >= s.secs * 500) res[i] = ran / 1000;
+      else if (finished || i < P.maxIdx) res[i] = track.SKIP;
+    } else if (s.type === 'weight' && P.wdone[i]) res[i] = (P.wsecs[i] || 0) / 1000;
+  });
+  return res;
+}
+
+const trackOf = res => track.build(P.steps, res, P.on);
+
 function finish() {
   clearTimeout(P.voiceTimer);
   stopTimer();
@@ -367,9 +404,12 @@ function finish() {
   }
   const wasComplete = store.stageComplete(P.stage);
   const weights = weightsDone();
-  store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal, weights });
+  const res = stepResults(true);
+  const skipped = P.steps.filter((s, i) => s.type === 'move' && res[i] === track.SKIP).length;
+  store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal, weights, track: trackOf(res) });
   lastResult = {
     stage: P.stage, day: P.day, name: P.workout.name, secs, moves, kcal, weights,
+    movesDone: moves - skipped, skipped,
     focus: focusOf(P.workout),
     stageJustCompleted: !wasComplete && store.stageComplete(P.stage),
   };
@@ -382,12 +422,14 @@ function finish() {
 function endWorkout() {
   clearTimeout(P.voiceTimer);
   stopTimer();
-  // Weight sets already done are kept (logged as an early end; day unticked).
-  const weights = weightsDone();
-  if (weights) {
+  // Every workout ended early is saved (F14): its time, the moves done so far
+  // and any weight sets count in the totals; the day stays unticked and it
+  // isn't a session. A run routine saves nothing.
+  if (!P.run) {
     const moves = P.steps.slice(0, P.idx).filter(s => s.type === 'move').length;
     store.logEarly({ stage: P.stage, day: P.day, intensity: P.intensity,
-      secs: Math.round(P.elapsed / 1000), moves, kcal: kcalSoFar(), weights });
+      secs: Math.round(P.elapsed / 1000), moves, kcal: kcalSoFar(), weights: weightsDone(),
+      track: trackOf(stepResults(false)) });
   }
   audio.stopAll();
   letSleep();
@@ -624,10 +666,8 @@ function endSheet() {
     <div class="sheet end">
       <p class="label red"><span class="pz">${sym('pause')}</span>Paused at <span class="num">${mmss(P.elapsed / 1000)}</span></p>
       <h2 class="sheet-title">End workout?</h2>
-      <p class="sheet-text">${weightsDone()
-        ? "If you end now, the day stays unticked. The weight sets you've done are kept."
-        : P.run ? "If you end now, this routine's progress is lost."
-        : "If you end now, this workout's progress is lost and the day stays unticked."}</p>
+      <p class="sheet-text">${P.run ? "If you end now, this routine's progress is lost."
+        : "If you end now, the day stays unticked. The moves you've done still count towards your totals."}</p>
       <button class="cta centre" data-keep>No, keep going</button>
       <button class="cta outline-red" data-end>Yes, end it</button>
     </div>`;

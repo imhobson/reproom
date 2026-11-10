@@ -321,6 +321,7 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .stats > div { background: var(--field); padding: 14px; min-height: 77px; }
 .stats .label { color: var(--muted); }
 .stats .big { font-size: 32px; line-height: 1; margin-top: 6px; }
+.stats .big .of { font-size: 18px; color: var(--muted); }
 .stats .focus { font-family: var(--head); font-weight: 700; font-size: 18px; margin-top: 12px; }
 /* Weights card (F12, board 12c), under the stats */
 .wcard { display: flex; align-items: flex-start; gap: 12px; margin-top: 6px; background: var(--field); padding: 10px 8px; }

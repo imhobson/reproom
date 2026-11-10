@@ -74,21 +74,26 @@ export function stageUnlocked(stage) {
 // (repeats are logged too; they count towards streaks and totals later).
 // weights (F12), when the weight set was on: { move, sets: [{ set, side, reps, kg }] },
 // side null, or "left" / "right" for Kneeling row.
-export function finish({ stage, day, intensity, secs, moves, kcal, weights }) {
+// track (F14): the moves done and skipped (see track.js).
+export function finish({ stage, day, intensity, secs, moves, kcal, weights, track }) {
   const s = (state.ticks[stage] ||= {});
   const d = (s[day] ||= []);
   if (!d.includes(intensity)) d.push(intensity);
   const entry = { stage, day, intensity, secs, moves, kcal, at: new Date().toISOString() };
   if (weights) entry.weights = weights;
+  if (track) entry.track = track;
   state.log.push(entry);
   save();
 }
 
-// A workout ended early (End workout?) that has weight sets done: logged
-// with early: true so the sets count for "last time", but the day isn't
-// ticked and it isn't a finished workout (F14 rule for workouts ended early).
-export function logEarly({ stage, day, intensity, secs, moves, kcal, weights }) {
-  state.log.push({ stage, day, intensity, secs, moves, kcal, at: new Date().toISOString(), early: true, weights });
+// A workout ended early (End workout?): every one is logged (F14), with
+// early: true, its time so far, its track and any weight sets ("last time"
+// reads them). The day isn't ticked and it isn't a session.
+export function logEarly({ stage, day, intensity, secs, moves, kcal, weights, track }) {
+  const entry = { stage, day, intensity, secs, moves, kcal, at: new Date().toISOString(), early: true };
+  if (weights) entry.weights = weights;
+  if (track) entry.track = track;
+  state.log.push(entry);
   save();
 }
 
