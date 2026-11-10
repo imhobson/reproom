@@ -5,13 +5,16 @@ import * as store from '../store.js';
 import { sym } from '../symbols.js';
 import { go, clock, stepName, sectionLabel } from '../ui.js';
 import { moveArt } from '../moveimg.js';
+import * as stats from '../stats.js';
 
 const soon = '<p class="soon">Coming soon</p>';
 
 // The intro (D07) goes first: right under the name on the info screen,
 // just above HOW TO DO IT in the sheet. No intro, nothing shown.
-export function howToHtml(m) {
-  const intro = m.intro ? `<p class="intro">${m.intro}</p>` : '';
+// afterIntro: what goes between the intro and HOW TO DO IT (YOUR NUMBERS
+// on the info screen, F14; nothing in the player's sheet).
+export function howToHtml(m, afterIntro = '') {
+  const intro = (m.intro ? `<p class="intro">${m.intro}</p>` : '') + afterIntro;
   const how = m.howTo.length
     ? `<ol class="steps">${m.howTo.map((t, i) => `<li><span class="n num">${i + 1}</span><span>${t}</span></li>`).join('')}</ol>` : soon;
   const mis = m.mistakes.length
@@ -35,6 +38,7 @@ export function render(app, day, ref) {
   if (!step || step.type !== 'move') { go(back); return; }
   page(app, {
     m: data.move(step.move), colour: sec === 'main' ? 'amber' : 'warm', back,
+    numbers: !isRun, // run routines aren't tracked (F14)
     kicker: `${isRun ? workout.groupLabel : sectionLabel(sec)} · <span class="num">${clock(step.secs)}</span>`,
     title: stepName(step),
   });
@@ -45,10 +49,26 @@ export function render(app, day, ref) {
 export function renderMove(app, id) {
   const m = data.move(id);
   if (!m) { go('#/progress'); return; }
-  page(app, { m, colour: 'amber', back: '#/progress', kicker: 'Exercise info', title: m.name });
+  page(app, { m, colour: 'amber', back: '#/progress', kicker: 'Exercise info', title: m.name, numbers: true });
 }
 
-function page(app, { m, colour, back, kicker, title }) {
+// YOUR NUMBERS (F14, board 06): sets, whole minutes, and the last date it
+// was done (— when never done with a date), from stats.js.
+function numbersHtml(id) {
+  const n = stats.moveStats(id);
+  const last = n.last ? (() => { const [y, mo, d] = n.last.split('-').map(Number); return new Date(y, mo - 1, d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); })() : '—';
+  return `
+    <section class="isec yn"><h3 class="label red">Your numbers</h3>
+      <div class="yn-grid">
+        <div><p class="label">Sets</p><p class="num">${n.sets.toLocaleString('en-GB')}</p></div>
+        <div><p class="label">Time</p><p class="num">${Math.round(n.secs / 60).toLocaleString('en-GB')}<span class="u">min</span></p></div>
+        <div><p class="label">Last</p><p class="num yn-last">${last}</p></div>
+      </div>
+      ${n.est ? '<p class="yn-note">Includes estimates from before RepRoom.</p>' : ''}
+    </section>`;
+}
+
+function page(app, { m, colour, back, kicker, title, numbers = false }) {
   const need = m.equipment.length ? `
     <section class="isec"><h3 class="label red">You'll need</h3>
       <ul class="need">${m.equipment.map(e => `<li><span class="eq">${sym('barbell')}</span><span>${e}</span></li>`).join('')}</ul>
@@ -69,7 +89,7 @@ function page(app, { m, colour, back, kicker, title }) {
       <div class="pad">
         <p class="label red">${kicker}</p>
         <h1 class="w-name">${title}</h1>
-        ${howToHtml(m)}
+        ${howToHtml(m, numbers ? numbersHtml(m.id) : '')}
         ${need}
       </div>
     </section>`;

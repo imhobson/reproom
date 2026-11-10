@@ -674,3 +674,12 @@ img.mv.flip { transform: scaleX(-1); }
 .unl b.num { font-size: 16px; }
 .sc-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
 .sc-btns .cta { margin-top: 0; }
+
+/* YOUR NUMBERS on Exercise info (F14, board 06) */
+.yn-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.yn-grid > div { background: var(--field); padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.yn-grid .label { font-size: 10px; color: var(--muted); }
+.yn-grid .num { font-size: 24px; line-height: 28px; }
+.yn-grid .num.yn-last { font-size: 18px; }
+.yn-grid .u { font-family: var(--mono); font-weight: 500; font-size: 11px; margin-left: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
+.yn-note { margin-top: 8px; font-size: 13px; line-height: 18px; color: var(--muted); }
