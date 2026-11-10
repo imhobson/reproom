@@ -11,6 +11,10 @@
 // - Every voice listed in audio/voices.json is saved too, clip by clip, in its
 //   own cache that's kept across releases. New voices are picked up the next
 //   time the app opens.
+// - The move images (img/moves: still, start pose and loop for every move in
+//   data/moves.json, about 2.3 MB) are saved at install too, in their own
+//   cache named after the version (reproom-images-<version>), so they work
+//   with no signal. A new APP_VERSION saves a fresh set and drops the old one.
 //
 // Running locally (localhost or a LAN address), files come from the network
 // first, so edits show up on a plain reload without bumping the version.
@@ -18,6 +22,7 @@ importScripts('js/version.js');
 const VERSION = 'reproom-' + self.APP_VERSION;
 const DEV = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(location.hostname);
 const AUDIO = 'reproom-audio-v1';
+const IMAGES = 'reproom-images-' + self.APP_VERSION;
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
@@ -38,6 +43,7 @@ self.addEventListener('install', e => {
     const c = await caches.open(VERSION);
     // 'reload' skips the browser's HTTP cache, so this version gets fresh files.
     await c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })));
+    await saveImages();
     await saveVoices();
     // A new version waits until the app says "update" (see below).
   })());
@@ -45,7 +51,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
-    for (const k of await caches.keys()) if (k !== VERSION && k !== AUDIO) await caches.delete(k);
+    for (const k of await caches.keys()) if (k !== VERSION && k !== AUDIO && k !== IMAGES) await caches.delete(k);
     await self.clients.claim();
   })());
 });
@@ -83,19 +89,43 @@ async function saveVoices() {
   } catch (err) { /* offline: try again next time */ }
 }
 
+// Save every move's three images (F09): <id>.svg, <id>--start.svg and
+// <id>--loop.svg. A file that isn't there (a move added before its image) is
+// skipped and the app shows the old symbol; a failed download stops the
+// install, so the phone tries again later instead of keeping a gap.
+async function saveImages() {
+  const moves = await (await fetch('data/moves.json', { cache: 'reload' })).json();
+  const list = Array.isArray(moves) ? moves : moves.moves;
+  const urls = list.flatMap(m => ['', '--start', '--loop'].map(s => `img/moves/${m.id}${s}.svg`));
+  const c = await caches.open(IMAGES);
+  let next = 0;
+  const worker = async () => {
+    while (next < urls.length) {
+      const u = urls[next++];
+      if (await c.match(u)) continue;
+      const res = await fetch(u, { cache: 'reload' });
+      if (res.ok) await c.put(u, res);
+    }
+  };
+  await Promise.all(Array.from({ length: 8 }, worker));
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
   if (url.pathname.endsWith('.mp3')) e.respondWith(audioResponse(req));
-  else e.respondWith(DEV ? networkFirst(req) : cacheFirst(req));
+  else {
+    const cache = url.pathname.includes('/img/moves/') ? IMAGES : VERSION;
+    e.respondWith(DEV ? networkFirst(req, cache) : cacheFirst(req, cache));
+  }
 });
 
 // Release: serve this version's saved copy. Anything not saved yet comes from
 // the web and is saved into this version.
-async function cacheFirst(req) {
-  const c = await caches.open(VERSION);
+async function cacheFirst(req, cache = VERSION) {
+  const c = await caches.open(cache);
   const hit = await c.match(req, { ignoreSearch: true });
   if (hit) return hit;
   try {
@@ -108,8 +138,8 @@ async function cacheFirst(req) {
 }
 
 // Local development: always the latest file, the saved copy only when offline.
-async function networkFirst(req) {
-  const c = await caches.open(VERSION);
+async function networkFirst(req, cache = VERSION) {
+  const c = await caches.open(cache);
   try {
     const res = await fetch(req, { cache: 'no-cache' });
     if (res.ok) c.put(req, res.clone());
