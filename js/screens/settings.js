@@ -6,6 +6,7 @@ import * as audio from '../audio.js';
 import * as sounds from '../sounds.js';
 import { sym } from '../symbols.js';
 import * as backup from '../backup.js';
+import * as autobackup from '../autobackup.js';
 import { pad2, go, showToast } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { resetView } from './home.js';
@@ -115,6 +116,14 @@ export function render(app, { confirm = false, restoring = null, undoing = false
 
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   const again = () => { const y = scrollY; render(app); scrollTo(0, y); };
+  // Auto backup (F16): redraw Last backup and the switch when a send ends.
+  bindAuto(app);
+  autobackup.onChange(() => {
+    const box = app.querySelector('.settings [data-auto]');
+    if (!box) return; // Settings isn't on show
+    box.innerHTML = autoRows();
+    bindAuto(app);
+  });
   on('[data-back]', () => go(backTo));
   on('[data-ver]', () => {
     const now = Date.now();
@@ -192,14 +201,10 @@ export function render(app, { confirm = false, restoring = null, undoing = false
 // this phone" line and what a backup holds. The Feedback row (F15) comes
 // after it, before Reset my progress.
 function dataSection() {
-  const last = backup.lastBackup();
   const undo = backup.undoOffer();
   return `
       <h2 class="label red s-sec">Data</h2>
-      <div class="s-card backup-card">
-        <div><p class="s-name">Last backup</p>${last?.file ? `<p class="bk-file">${esc(last.file)}</p>` : ''}</div>
-        <span class="bk-when">${backup.sinceText(last?.at)}</span>
-      </div>
+      <div class="s-rows" data-auto>${autoRows()}</div>
       <div class="bk-btns">
         <button class="bk-btn solid" data-backup>Back up</button>
         <button class="bk-btn" data-restore>Restore</button>
@@ -214,7 +219,31 @@ function dataSection() {
         <span class="s-val">${sym('arrowRight')}</span>
       </button>
       <p class="label muted s-kept" data-kept>&nbsp;</p>
-      <p class="s-help">A backup is one small file with your progress and settings. Your feedback key isn't included.</p>`;
+      <p class="s-help">A backup is one small file with your progress and settings. Your feedback key isn't included. Auto backups go to RepRoom/Backups in your Drive: one a day for 30 days, and the 1st of each month kept for good.</p>`;
+}
+
+// Last backup and Auto backup to Drive (F16, board 04). Redrawn on their
+// own when an auto backup's state changes, so an open sheet stays open.
+// Last backup is the newest, manual or auto: an auto one reads "Auto, saved
+// to Drive", a manual one its file name.
+function autoRows() {
+  const last = backup.lastBackup();
+  const sub = last?.auto ? 'Auto, saved to Drive' : last?.file ? esc(last.file) : '';
+  const on = autobackup.state().on;
+  return `
+        <div class="s-card backup-card">
+          <div><p class="s-name">Last backup</p>${sub ? `<p class="bk-file">${sub}</p>` : ''}</div>
+          <span class="bk-when">${backup.sinceText(last?.at)}</span>
+        </div>
+        <div class="s-row auto-row">
+          <span><span class="s-name">Auto backup to Drive</span><span class="bk-file">${autobackup.line()}</span></span>
+          <button class="switch ${on ? 'on' : ''}" data-autobk role="switch" aria-checked="${on}" aria-label="Auto backup to Drive"><span></span></button>
+        </div>`;
+}
+function bindAuto(app) {
+  app.querySelector('[data-autobk]')?.addEventListener('click', () => {
+    autobackup.setOn(!autobackup.state().on);
+  });
 }
 
 const esc = v => String(v ?? '').replace(/[&<>"']/g, c => `&#${c.charCodeAt(0)};`);

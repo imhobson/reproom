@@ -1,6 +1,6 @@
 // Starts the app and shows the right screen for the address (#/...).
 import { loadData } from './data.js';
-import { keepData } from './store.js';
+import { keepData, onSaved } from './store.js';
 import { hideToast, showToast } from './ui.js';
 import * as backup from './backup.js';
 import * as audio from './audio.js';
@@ -14,6 +14,7 @@ import * as feedback from './screens/feedback.js';
 import * as cueLog from './screens/cuelog.js';
 import * as run from './screens/run.js';
 import * as fb from './feedback.js';
+import * as autobackup from './autobackup.js';
 import * as progress from './screens/progress.js';
 import { go } from './ui.js';
 import * as nav from './nav.js';
@@ -58,6 +59,7 @@ function route() {
   // hashchange (a tap then back straight away), so the event then has nothing to do.
   if (location.hash === shown) return;
   shown = location.hash;
+  const leftPlayer = prevHash.startsWith('#/play/') && !location.hash.startsWith('#/play/');
   hideToast();
   // Progress's back arrow returns to wherever Progress was opened from (a
   // paused workout too). Coming back from Settings keeps it.
@@ -85,7 +87,15 @@ function route() {
   const r = routes.find(x => (m = location.hash.match(x.re))) || routes[0];
   window.scrollTo(0, 0);
   r.show(m);
+  // Auto backup (F16): a save made in the player (a finished workout) is
+  // sent once the player closes, e.g. on the summary.
+  if (leftPlayer) autobackup.retry();
 }
+
+// Auto backup (F16): every save that counts marks a backup pending and tries
+// to send it. Never while the player is open.
+autobackup.setBlocked(() => midWorkout());
+onSaved(autobackup.saved);
 
 backup.pruneUndo(); // an Undo restore snapshot lasts 7 days
 keepData(); // ask the browser to keep progress and settings (see store.js)

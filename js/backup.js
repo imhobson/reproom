@@ -10,11 +10,13 @@ import { isSession } from './store.js';
 // settings.
 // NEVER add the feedback key or the feedback queue (prompt 04). The key is a
 // secret pasted once on the phone and must not end up in a file on Drive.
-// Also not here, on purpose: LAST_BACKUP_KEY and UNDO_KEY below.
+// Also not here, on purpose: LAST_BACKUP_KEY and UNDO_KEY below, and
+// reproom.autoBackup (F16, autobackup.js): like the feedback key, the auto
+// backup switch is this phone's setting, not progress.
 export const BACKUP_KEYS = ['reproom.v1'];
 
 export const SCHEMA = 1;                          // newest file shape this app reads
-export const LAST_BACKUP_KEY = 'reproom.lastBackup'; // { at, file }
+export const LAST_BACKUP_KEY = 'reproom.lastBackup'; // { at, file, auto } (auto: sent by auto backup, F16)
 export const UNDO_KEY = 'reproom.undoRestore';       // { at, data } snapshot from before a restore
 const UNDO_DAYS = 7;
 const DAY = 86400000;
@@ -59,7 +61,7 @@ export async function backUp() {
   }
   if (!done) download(file);
   try {
-    localStorage.setItem(LAST_BACKUP_KEY, JSON.stringify({ at: new Date().toISOString(), file: file.name }));
+    localStorage.setItem(LAST_BACKUP_KEY, JSON.stringify({ at: new Date().toISOString(), file: file.name, auto: false }));
   } catch (e) { /* storage unavailable */ }
   return true;
 }

@@ -29,6 +29,12 @@ function save() {
 
 export const get = () => state;
 
+// Auto backup (F16): main.js listens, and a backup to Drive follows each
+// save that counts (progress, not settings changes).
+let onSavedFn = null;
+export function onSaved(fn) { onSavedFn = fn; }
+const saved = () => { try { onSavedFn?.(); } catch (e) { /* never block a save */ } };
+
 // "Keep my data" (Q01): ask the browser not to clear RepRoom's storage when
 // space runs low. Asked once per app start, and not at all once it's granted.
 // Resolves to true when the data is kept, false otherwise.
@@ -84,6 +90,7 @@ export function finish({ stage, day, intensity, secs, moves, kcal, weights, trac
   if (track) entry.track = track;
   state.log.push(entry);
   save();
+  saved();
 }
 
 // A workout ended early (End workout?): every one is logged (F14), with

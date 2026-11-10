@@ -30,10 +30,11 @@ export function setKey(key) {
 export function keyBad() {
   try { return localStorage.getItem(KEY_BAD_STORE) === '1'; } catch (e) { return false; }
 }
-function markKeyBad() {
+// Auto backup (F16, autobackup.js) uses the same key, and marks it bad the same way.
+export function markKeyBad() {
   try { localStorage.setItem(KEY_BAD_STORE, '1'); } catch (e) { /* storage unavailable */ }
 }
-const usableKey = () => (keyBad() ? '' : getKey());
+export const usableKey = () => (keyBad() ? '' : getKey());
 
 // ---- Notes ----
 // Each note: { clientId, written, type, note, context, status, backlogId }
@@ -101,9 +102,11 @@ let listener = null;
 export function onChange(fn) { listener = fn; }
 const changed = () => { try { listener?.(); } catch (e) { /* page gone */ } };
 
-async function call(url, opts = {}) {
+// fetch with a timeout, reading the JSON reply. Auto backup (F16) passes a
+// longer timeout: a backup is bigger than a note.
+export async function call(url, opts = {}, timeout = TIMEOUT_MS) {
   const ctl = new AbortController();
-  const t = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+  const t = setTimeout(() => ctl.abort(), timeout);
   try {
     const r = await fetch(url, { ...opts, signal: ctl.signal, cache: 'no-store' });
     return await r.json();
