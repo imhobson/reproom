@@ -142,7 +142,7 @@ button:disabled { cursor: default; }
 .hero-top.warm { background: var(--warm); }  /* run warm-up / cool-down routines (F11) */
 .hero-top.tall { height: 340px; }
 .hero-sym { width: 120px; height: 120px; margin: 4px auto 0; }
-.hero-fig { width: 164px; height: 164px; margin: 6px auto 0; }
+.hero-fig { width: 164px; height: 164px; margin: 6px auto 0; color: var(--ink); }
 .pad { padding: 0 var(--gutter); }
 .details .pad > .label:first-child, .info .pad > .label:first-child { margin-top: 22px; }
 .details .w-name, .info .w-name { margin-top: 8px; }
@@ -196,10 +196,14 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .isec h3 { font-weight: 400; margin-bottom: 14px; }
 .steps, .marks, .need { list-style: none; display: grid; gap: 12px; }
 .steps li, .marks li, .need li { display: flex; align-items: center; gap: 12px; font-size: 16px; }
+/* Long lines wrap; the square, × and ◆ line up with the first line (D07). */
+.steps li, .marks li { align-items: flex-start; }
+.steps li > span:last-child, .marks li > span:last-child { min-width: 0; padding-top: 3px; line-height: 22px; }
+.intro { margin-top: 12px; font-size: 17px; line-height: 1.4; }
 .steps .n { width: 28px; height: 28px; flex: none; background: var(--ink); color: var(--paper); display: grid; place-items: center; font-size: 14px; }
 .marks .mk { width: 28px; flex: none; text-align: center; }
-.marks .x { color: var(--red); font-weight: 700; font-size: 22px; line-height: 1; }
-.marks .dia { height: 10px; width: 10px; margin: 0 9px; background: var(--amber); transform: rotate(45deg); flex: none; }
+.marks .x { color: var(--red); font-weight: 700; font-size: 22px; line-height: 1; margin-top: 3px; }
+.marks .dia { height: 10px; width: 10px; margin: 9px 9px 0; background: var(--amber); transform: rotate(45deg); flex: none; }
 .need .eq { width: 56px; height: 56px; background: var(--field); padding: 16px; flex: none; }
 .soon { color: var(--faint); font-size: 16px; }
 
@@ -302,7 +306,9 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .sheet-head .sheet-title { margin-top: 6px; }
 .sheet-art { height: 150px; background: var(--field); margin-top: 18px; display: grid; place-items: center; }
 .sheet-art.amber { background: var(--amber); }
+.sheet-art.warm { background: var(--warm); }
 .sheet-art .sym { width: 100px; height: 100px; }
+.sheet-art .mvart { width: 130px; height: 130px; color: var(--ink); }
 .sheet-foot { border-top: 2px solid var(--ink); padding: 0 var(--gutter) 16px; }
 
 /* Workout summary */

@@ -22,9 +22,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/kneeling-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your knees on the floor, so you lift less of your weight. It builds chest, shoulder and arm strength while you get your form right.",
+      "howTo": [
+        "Kneel with your hands a little wider than your shoulders, fingers pointing forward.",
+        "Walk your hands forward until you're in a straight line from knees to head.",
+        "Bend your elbows and lower your chest towards the floor.",
+        "Press the floor away to straighten your arms.",
+        "Two seconds down, one second up."
+      ],
+      "mistakes": [
+        "Bending at the hips, so your bum sticks up.",
+        "Flaring your elbows straight out to the sides."
+      ],
+      "tips": [
+        "Breathe in on the way down, out as you push up."
+      ],
       "voice": {
         "nameOnly": "Kneeling push-ups.",
         "nameHowTo": "Kneeling push-ups. Kneel with your hands a little wider than your shoulders. Keep a straight line from your knees to your head, lower your chest towards the floor, then press back up."
@@ -53,9 +65,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/commando-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You move between an elbow plank and a high plank, one arm at a time. It works your core hard while your shoulders and arms do the lifting.",
+      "howTo": [
+        "Start in a plank on your forearms, feet a little apart.",
+        "Place one hand under your shoulder and push up onto it.",
+        "Bring the other hand under its shoulder, so you're in a high plank.",
+        "Lower back down one forearm at a time.",
+        "Lead with the other arm next time. Steady, not rushed."
+      ],
+      "mistakes": [
+        "Rocking your hips from side to side.",
+        "Letting your hips sag towards the floor."
+      ],
+      "tips": [
+        "Widen your feet a little: it makes keeping your hips still much easier."
+      ],
       "voice": {
         "nameOnly": "Commando plank.",
         "nameHowTo": "Commando plank. Start in a plank on your elbows. Push up onto one hand, then the other, into a high plank. Lower back down one elbow at a time. Keep your hips steady and don't rock side to side."
@@ -83,9 +107,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/wide-grip-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your hands set wide. The wider grip puts more of the work on your chest.",
+      "howTo": [
+        "Set your hands well outside your shoulders, legs straight behind you.",
+        "Brace your stomach so your body is one straight line.",
+        "Lower your chest towards the floor.",
+        "Push back up until your arms are straight.",
+        "Slow on the way down, strong on the way up."
+      ],
+      "mistakes": [
+        "Setting your hands so wide that your shoulders hurt.",
+        "Letting your head drop before your chest."
+      ],
+      "tips": [
+        "Look at the floor just ahead of your hands to keep your neck in line."
+      ],
       "voice": {
         "nameOnly": "Wide grip push-ups.",
         "nameHowTo": "Wide grip push-ups. Set your hands well outside your shoulders, legs straight behind you. Keep your body in one line as you lower your chest towards the floor, then push back up."
@@ -114,9 +150,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/diamond-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your hands close together under your chest. It moves the work onto your triceps.",
+      "howTo": [
+        "Make a diamond shape with your thumbs and first fingers.",
+        "Place it on the floor under your chest, legs straight behind you.",
+        "Keep your elbows close to your sides as you lower down.",
+        "Press back up until your arms are straight.",
+        "Slow and controlled. Drop to your knees if your form slips."
+      ],
+      "mistakes": [
+        "Elbows flaring out wide.",
+        "Hips sagging as you tire."
+      ],
+      "tips": [
+        "If your wrists complain, turn your hands out slightly."
+      ],
       "voice": {
         "nameOnly": "Diamond push-ups.",
         "nameHowTo": "Diamond push-ups. Bring your hands together under your chest so your thumbs and fingers make a diamond. Keep your elbows close to your sides as you lower down, then press back up. Drop to your knees if you need to."
@@ -144,9 +192,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/pike-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your hips high, so your shoulders take the load. It's a step towards a handstand push-up.",
+      "howTo": [
+        "From a plank, walk your feet in and lift your hips high into an upside-down V.",
+        "Set your hands shoulder-width apart.",
+        "Bend your elbows to bring the top of your head towards the floor.",
+        "Push back up until your arms are straight.",
+        "Slow down, steady up. Keep your hips high the whole time."
+      ],
+      "mistakes": [
+        "Letting your hips drop, so it turns into a normal push-up.",
+        "Bringing your face to the floor instead of the top of your head."
+      ],
+      "tips": [
+        "Bend your knees a little if your hamstrings stop you getting your hips high."
+      ],
       "voice": {
         "nameOnly": "Pike push-ups.",
         "nameHowTo": "Pike push-ups. From a plank, walk your feet in and lift your hips high so your body makes an upside-down V. Bend your elbows to bring the top of your head towards the floor, then push back up."
@@ -175,9 +235,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/archer-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up where one arm does most of the work while the other stays straight out to the side. A big step towards a one-arm push-up.",
+      "howTo": [
+        "Set your hands very wide, fingers pointing forward or slightly out.",
+        "Lower your chest towards one hand, bending that elbow.",
+        "Keep the other arm straight as it slides out to the side.",
+        "Push back up to the middle.",
+        "Go the other way next. One side at a time, slow and smooth."
+      ],
+      "mistakes": [
+        "Bending the straight arm, so it becomes a normal push-up.",
+        "Twisting your hips towards the working side."
+      ],
+      "tips": [
+        "The further you shift your weight over the bent arm, the harder it gets."
+      ],
       "voice": {
         "nameOnly": "Archer push-ups.",
         "nameHowTo": "Archer push-ups. Set your hands very wide. Lower your chest towards one hand while the other arm stays straight out to the side, then push back up and go the other way. Keep your hips level."
@@ -205,9 +277,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/kneeling-archer-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "An archer push-up from your knees. It teaches the side-to-side shift with less weight to lift.",
+      "howTo": [
+        "Kneel with your hands set very wide.",
+        "Shift your weight towards one hand and bend that elbow.",
+        "Keep the other arm straight as you lower your chest.",
+        "Press back up to the middle.",
+        "Then go to the other side. Slow and even."
+      ],
+      "mistakes": [
+        "Letting the straight arm bend.",
+        "Bending at the hips instead of keeping a line from knees to head."
+      ],
+      "tips": [
+        "Turn the fingers of the straight arm out a little: it's easier on the elbow."
+      ],
       "voice": {
         "nameOnly": "Kneeling archer push-ups.",
         "nameHowTo": "Kneeling archer push-ups. On your knees, set your hands very wide. Shift your weight and lower towards one hand while the other arm stays straight, then press up and go the other way."
@@ -237,9 +321,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/kneeling-push-ups-to-down-dog.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A kneeling push-up followed by a push back into downward dog. It strengthens your chest and arms and stretches your shoulders and hamstrings between reps.",
+      "howTo": [
+        "Kneel with your hands a little wider than your shoulders.",
+        "Do one push-up from your knees.",
+        "Tuck your toes, lift your knees and push your hips up and back into downward dog.",
+        "Lower your knees back down to the start.",
+        "One smooth flow per rep. Don't rush the stretch."
+      ],
+      "mistakes": [
+        "Rounding your back in downward dog.",
+        "Letting the push-up get shallow as you tire."
+      ],
+      "tips": [
+        "In downward dog, push the floor away and let your head hang between your arms."
+      ],
       "voice": {
         "nameOnly": "Kneeling push-ups to down dog.",
         "nameHowTo": "Kneeling push-ups to down dog. Do one push-up from your knees. Then lift your knees and push your hips up and back into downward dog. Come back down to your knees and repeat."
@@ -268,9 +364,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/reverse-plank-tricep-dips.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold a tabletop shape and dip your hips towards the floor. It works your triceps, glutes and the backs of your shoulders.",
+      "howTo": [
+        "Sit with your knees bent, feet flat and hands behind you, fingers towards your feet.",
+        "Lift your hips into a tabletop: shins upright, torso and thighs flat.",
+        "Keep your hands and feet planted and lower your bum towards the floor.",
+        "Press through your hands and lift back up to the tabletop.",
+        "Smooth and steady, two seconds down, one up."
+      ],
+      "mistakes": [
+        "Shrugging your shoulders up to your ears.",
+        "Pointing your fingers away from your body, which strains your wrists."
+      ],
+      "tips": [
+        "Squeeze your glutes at the top to make the tabletop flat."
+      ],
       "voice": {
         "nameOnly": "Reverse plank tricep dips.",
         "nameHowTo": "Reverse plank tricep dips. Sit with your hands behind you, fingers pointing towards your feet, and lift your hips. Bend your elbows to dip down, then straighten them to press back up. Keep your hips lifted."
@@ -298,9 +406,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/single-leg-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with one foot in the air. Lifting a leg makes your core work harder to stop your hips twisting.",
+      "howTo": [
+        "Get into a push-up position, hands just wider than your shoulders.",
+        "Lift one foot a little off the floor and keep it there.",
+        "Lower your chest towards the floor.",
+        "Press back up, hips level.",
+        "Steady pace. Switch legs when the app says."
+      ],
+      "mistakes": [
+        "Lifting the leg so high that your back arches.",
+        "Letting your hips drop or twist."
+      ],
+      "tips": [
+        "Squeeze the glute of the lifted leg to keep it steady."
+      ],
       "voice": {
         "nameOnly": "Single leg push-ups.",
         "nameHowTo": "Single leg push-ups. Get into a push-up position and lift one foot off the floor. Keep it raised as you lower your chest and press back up. Keep your hips level and your stomach tight."
@@ -329,9 +449,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/wave-push-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A rolling push-up that moves through your whole body, from hips to chest and back. It builds strength and mobility in your shoulders and spine.",
+      "howTo": [
+        "Start in a high plank.",
+        "Lower your hips first, then your chest, as if rolling down to the floor.",
+        "Press up into a gentle cobra, chest forward and hips low.",
+        "Lift your hips back up to a plank.",
+        "Make it one smooth wave, not separate steps."
+      ],
+      "mistakes": [
+        "Dropping into the floor all at once.",
+        "Pushing too high into the cobra and pinching your lower back."
+      ],
+      "tips": [
+        "Breathe out as you roll down, in as you lift back to plank."
+      ],
       "voice": {
         "nameOnly": "Wave push-up.",
         "nameHowTo": "Wave push-up. From a plank, lower your hips first and then your chest, as if rolling down to the floor. Push your chest up into a gentle cobra, then lift your hips back to plank. Make it one smooth wave."
@@ -361,9 +493,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/airplane-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up followed by an arm reach out to the side. The reach makes your core work to keep you steady on one hand.",
+      "howTo": [
+        "Start in a high plank, hands just wider than your shoulders.",
+        "Lower into a push-up.",
+        "As you press back up, reach one arm out to the side like a wing.",
+        "Put that hand back down and do the next push-up.",
+        "Swap arms each rep. Controlled, not quick."
+      ],
+      "mistakes": [
+        "Turning your whole body as the arm lifts.",
+        "Rushing the push-up to get to the reach."
+      ],
+      "tips": [
+        "Widen your feet a little to make the reach steadier."
+      ],
       "voice": {
         "nameOnly": "Airplane push-ups.",
         "nameHowTo": "Airplane push-ups. Lower into a push-up. As you press back up, reach one arm out to the side like a wing. Bring it back down and repeat with the other arm."
@@ -391,9 +535,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/hindu-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A flowing push-up that swoops from downward dog into a cobra. It works your chest, shoulders and arms and opens up your spine.",
+      "howTo": [
+        "Start in downward dog with your hips high.",
+        "Bend your elbows and swoop your chest down, close to the floor.",
+        "Carry on forward and up into a cobra, arms straight.",
+        "Push your hips back up and back to downward dog.",
+        "One smooth swoop per rep."
+      ],
+      "mistakes": [
+        "Keeping your chest high, so you miss the swoop near the floor.",
+        "Letting your shoulders creep up to your ears in the cobra."
+      ],
+      "tips": [
+        "Breathe out as you swoop through, in as you push back."
+      ],
       "voice": {
         "nameOnly": "Hindu push-ups.",
         "nameHowTo": "Hindu push-ups. Start in downward dog with your hips high. Bend your elbows and swoop your chest down and forward, close to the floor, then up into a cobra. Push your hips back up to the start."
@@ -422,9 +578,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/kneeling-pseudo-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A kneeling push-up with your hands by your waist and your shoulders leaning forward. It puts extra load on the fronts of your shoulders, a step towards harder planche work.",
+      "howTo": [
+        "Kneel and place your hands by your waist, fingers turned out.",
+        "Lean your shoulders forward so they're past your hands.",
+        "Keep that lean as you lower your chest.",
+        "Press back up without losing the lean.",
+        "Slow and controlled. Small reps are fine."
+      ],
+      "mistakes": [
+        "Letting your shoulders drift back over your hands.",
+        "Elbows flaring out to the sides."
+      ],
+      "tips": [
+        "Start with only a small lean and add more as it gets easier."
+      ],
       "voice": {
         "nameOnly": "Kneeling pseudo push-ups.",
         "nameHowTo": "Kneeling pseudo push-ups. On your knees, place your hands by your waist with your fingers turned out. Lean your shoulders forward past your hands, then lower your chest and press back up."
@@ -453,9 +621,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/kneeling-push-ups-hands-off.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A kneeling push-up where you lower all the way down and lift your hands for a moment. It makes every rep start from the floor, so you can't cut it short.",
+      "howTo": [
+        "Kneel with your hands a little wider than your shoulders.",
+        "Lower your chest all the way to the floor.",
+        "Lift your hands off the floor for a moment.",
+        "Put them back down and press up.",
+        "Full range every time. Steady pace."
+      ],
+      "mistakes": [
+        "Flopping onto the floor instead of lowering with control.",
+        "Pushing up with your hips first."
+      ],
+      "tips": [
+        "Squeeze your shoulder blades together as you lift your hands."
+      ],
       "voice": {
         "nameOnly": "Kneeling push-ups, hands off.",
         "nameHowTo": "Kneeling push-ups, hands off. Do a push-up from your knees and lower all the way to the floor. Lift your hands off the ground for a moment, put them back down and press up."
@@ -484,9 +664,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/mountain-climber-to-push-ups-from-knees.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Mountain climbers and a kneeling push-up in one move. Your hands stay planted, so it keeps your heart rate up while your arms work.",
+      "howTo": [
+        "Start in a high plank, hands under your shoulders.",
+        "Drive one knee to your chest, then the other.",
+        "Drop both knees to the floor and do one push-up.",
+        "Lift your knees back to a plank and go again.",
+        "Keep it flowing, no pause between parts."
+      ],
+      "mistakes": [
+        "Letting your hips pop up during the climbers.",
+        "Doing a half push-up to get back to the climbers."
+      ],
+      "tips": [
+        "Keep your hands planted the whole time and your shoulders over them."
+      ],
       "voice": {
         "nameOnly": "Mountain climber to push-ups from knees.",
         "nameHowTo": "Mountain climber to push-ups from knees. In a high plank, drive your knees towards your chest a few times. Then drop your knees to the floor, do one push-up, and go straight back into the climbers."
@@ -514,9 +706,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/scapular-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A tiny push-up where only your shoulder blades move. It strengthens the muscles that keep your shoulders healthy for every other push.",
+      "howTo": [
+        "Hold a high plank with straight arms.",
+        "Without bending your elbows, let your chest sink so your shoulder blades squeeze together.",
+        "Push the floor away so your shoulder blades spread apart and your upper back rounds.",
+        "Keep your body straight throughout.",
+        "Slow and deliberate. The movement is only a few centimetres."
+      ],
+      "mistakes": [
+        "Bending your elbows.",
+        "Letting your hips sag as your chest drops."
+      ],
+      "tips": [
+        "Think about pushing the floor away, not lifting your body."
+      ],
       "voice": {
         "nameOnly": "Scapular push-ups.",
         "nameHowTo": "Scapular push-ups. Hold a plank with straight arms. Without bending your elbows, let your chest sink so your shoulder blades squeeze together, then push the floor away to spread them apart."
@@ -544,9 +748,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/walkouts-to-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You walk your hands out into a plank, do a push-up and walk back. It works your whole body and stretches your hamstrings.",
+      "howTo": [
+        "Stand tall, then fold forward and put your hands on the floor.",
+        "Walk your hands out until you're in a high plank.",
+        "Do one push-up.",
+        "Walk your hands back to your feet and stand up.",
+        "Steady rhythm. Bend your knees as much as you need."
+      ],
+      "mistakes": [
+        "Letting your hips sag when you reach the plank.",
+        "Walking your hands out too far, past your shoulders."
+      ],
+      "tips": [
+        "Keep your stomach tight as you walk out."
+      ],
       "voice": {
         "nameOnly": "Walkouts to push-ups.",
         "nameHowTo": "Walkouts to push-ups. From standing, fold forward and put your hands on the floor. Walk them out to a plank, do one push-up, then walk your hands back to your feet and stand up."
@@ -575,9 +791,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/assisted-one-arm-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "One arm does the main work while the other helps out wide on its fingertips. A step towards a full one-arm push-up.",
+      "howTo": [
+        "Place one hand under your chest and the other far out to the side on its fingertips.",
+        "Feet wider than usual, body in a straight line.",
+        "Lower down, letting the main arm take most of the weight.",
+        "Press back up.",
+        "Slow and controlled. Drop to your knees if you need to."
+      ],
+      "mistakes": [
+        "Pushing hard through the helping hand, so both arms share it equally.",
+        "Twisting your hips towards the working arm."
+      ],
+      "tips": [
+        "The less you press through the fingertips, the harder it is."
+      ],
       "voice": {
         "nameOnly": "Assisted one-arm push-ups.",
         "nameHowTo": "Assisted one-arm push-ups. Put one hand under your chest and the other out wide on its fingertips. Lower down, letting the main arm do most of the work, then press back up. Drop to your knees if you need to."
@@ -607,9 +835,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/narrow-grip-kneeling-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A kneeling push-up with your hands close together. It moves the work onto your triceps.",
+      "howTo": [
+        "Kneel with your hands close together, just under your shoulders.",
+        "Keep a straight line from knees to head.",
+        "Lower your chest with your elbows brushing your ribs.",
+        "Press back up.",
+        "Two seconds down, one up."
+      ],
+      "mistakes": [
+        "Elbows flaring out.",
+        "Bending at the hips."
+      ],
+      "tips": [
+        "Keep your hands under your shoulders, not under your face."
+      ],
       "voice": {
         "nameOnly": "Narrow grip kneeling push-ups.",
         "nameHowTo": "Narrow grip kneeling push-ups. On your knees, place your hands close together, just under your shoulders. Keep your elbows tucked in by your ribs as you lower your chest, then press back up."
@@ -637,9 +877,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/narrow-grip-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your hands close together under your shoulders. It puts more of the work on your triceps.",
+      "howTo": [
+        "Get into a plank with your hands close together under your shoulders.",
+        "Keep your body in one straight line.",
+        "Lower down with your elbows tight to your sides.",
+        "Push back up.",
+        "Slow on the way down, strong on the way up."
+      ],
+      "mistakes": [
+        "Elbows flaring out to the sides.",
+        "Hips sagging or lifting."
+      ],
+      "tips": [
+        "Drop to your knees as soon as your elbows start to flare."
+      ],
       "voice": {
         "nameOnly": "Narrow grip push-ups.",
         "nameHowTo": "Narrow grip push-ups. In a plank, place your hands close together under your shoulders. Keep your elbows tight to your sides as you lower down, then push back up in one straight line."
@@ -666,9 +918,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/prayer-pulse.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You press your palms together hard and pulse them up. It keeps your chest working under tension without any weight.",
+      "howTo": [
+        "Kneel tall with your palms pressed together in front of your chest.",
+        "Push your hands hard into each other.",
+        "Keep the pressure on as you pulse your hands up and back down.",
+        "Keep your shoulders down and your back straight.",
+        "Small, quick pulses. Never let the pressure go."
+      ],
+      "mistakes": [
+        "Letting the push between your hands go soft.",
+        "Shrugging your shoulders."
+      ],
+      "tips": [
+        "Breathe steadily: don't hold your breath while you squeeze."
+      ],
       "voice": {
         "nameOnly": "Prayer pulse.",
         "nameHowTo": "Prayer pulse. Sit or kneel tall and press your palms together in front of your chest. Push your hands hard into each other, then pulse them forward and back in small movements. Keep the pressure on."
@@ -696,9 +960,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/pseudo-push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up with your hands by your waist and your shoulders leaning forward. It loads the fronts of your shoulders much more than a normal push-up.",
+      "howTo": [
+        "Get into a plank with your hands by your waist, fingers turned out.",
+        "Lean forward so your shoulders are past your hands.",
+        "Keep that lean as you lower your chest.",
+        "Press back up without losing the lean.",
+        "Slow and controlled."
+      ],
+      "mistakes": [
+        "Letting your shoulders drift back over your hands.",
+        "Letting your hips sag."
+      ],
+      "tips": [
+        "Go up on your toes to make the lean easier to hold."
+      ],
       "voice": {
         "nameOnly": "Pseudo push-ups.",
         "nameHowTo": "Pseudo push-ups. In a plank, turn your fingers out and place your hands by your waist. Lean your shoulders forward past your hands, then lower your chest and press back up. Keep your body straight."
@@ -726,9 +1002,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/push-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "The classic push-up. It works your chest, shoulders, arms and core at once.",
+      "howTo": [
+        "Hands just wider than your shoulders, legs straight behind you.",
+        "Brace your stomach so your body is one straight line.",
+        "Lower your chest close to the floor.",
+        "Push back up until your arms are straight.",
+        "Two seconds down, one up."
+      ],
+      "mistakes": [
+        "Letting your hips drop.",
+        "Doing half reps that stop well short of the floor."
+      ],
+      "tips": [
+        "Keep your elbows at about 45 degrees to your body, not straight out."
+      ],
       "voice": {
         "nameOnly": "Push-ups.",
         "nameHowTo": "Push-ups. Hands just wider than your shoulders, legs straight behind you. Keep your body in one line as you lower your chest close to the floor, then push back up. Don't let your hips drop."
@@ -757,9 +1045,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/superman.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You lift your arms, chest and legs off the floor at once. It strengthens your lower back, glutes and the backs of your shoulders.",
+      "howTo": [
+        "Lie face down with your arms stretched out in front.",
+        "Lift your arms, chest and legs off the floor together.",
+        "Hold for a moment at the top.",
+        "Lower back down with control.",
+        "Lift for one second, hold for one, lower for two."
+      ],
+      "mistakes": [
+        "Craning your neck to look forward.",
+        "Kicking up fast instead of lifting slowly."
+      ],
+      "tips": [
+        "Keep looking down at the floor to protect your neck."
+      ],
       "voice": {
         "nameOnly": "Superman.",
         "nameHowTo": "Superman. Lie face down with your arms stretched out in front. Lift your arms, chest and legs off the floor together, hold for a moment, then lower with control. Keep looking down at the floor."
@@ -788,9 +1088,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/bird-dogs.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "On all fours, you reach one arm and the opposite leg out. It trains your core to keep your back steady while your limbs move.",
+      "howTo": [
+        "Start on all fours, hands under shoulders and knees under hips.",
+        "Reach one arm forward and the opposite leg back.",
+        "Stop when they're level with your back and pause.",
+        "Bring them back in, then switch sides.",
+        "Slow and controlled. Pause at the top of each rep."
+      ],
+      "mistakes": [
+        "Twisting your hips as the leg lifts.",
+        "Lifting the leg too high, so your back arches."
+      ],
+      "tips": [
+        "Imagine a glass of water on your lower back that mustn't spill."
+      ],
       "voice": {
         "nameOnly": "Bird dogs.",
         "nameHowTo": "Bird dogs. Start on all fours. Reach one arm forward and the opposite leg back until they're level with your back. Pause, bring them in, then swap sides. Keep your hips square to the floor."
@@ -817,9 +1129,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/back-bow-with-alternating-heel-taps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold your chest up off the floor and reach back to tap one heel at a time. It strengthens your back and stretches the fronts of your shoulders.",
+      "howTo": [
+        "Lie face down with your arms by your sides.",
+        "Lift your chest off the floor.",
+        "Bend one knee and reach back with that hand to tap the heel.",
+        "Put the leg down and tap the other side.",
+        "Steady rhythm. Keep your chest lifted the whole time."
+      ],
+      "mistakes": [
+        "Dropping your chest between taps.",
+        "Swinging the leg instead of bending it with control."
+      ],
+      "tips": [
+        "Squeeze your glutes to protect your lower back."
+      ],
       "voice": {
         "nameOnly": "Back bow with alternating heel taps.",
         "nameHowTo": "Back bow with alternating heel taps. Lie face down and lift your chest off the floor. Bend one knee and reach back to tap that heel with your hand, then swap sides. Keep your chest lifted the whole time."
@@ -846,9 +1170,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/hip-thrust.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A powerful glute bridge, driven up hard. It builds strong glutes and hamstrings.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Set your feet hip-width apart, close enough to touch with your fingertips.",
+        "Drive through your heels and thrust your hips up hard.",
+        "Squeeze your glutes at the top, then lower with control.",
+        "Up fast, down slow."
+      ],
+      "mistakes": [
+        "Pushing through your toes instead of your heels.",
+        "Arching your lower back at the top instead of squeezing your glutes."
+      ],
+      "tips": [
+        "Tuck your chin slightly and keep your ribs down at the top."
+      ],
       "voice": {
         "nameOnly": "Hip thrust.",
         "nameHowTo": "Hip thrust. Lie on your back with your knees bent and your feet flat. Drive through your heels and thrust your hips up hard, squeeze your glutes at the top, then lower with control."
@@ -875,9 +1211,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/back-bow-with-heel-taps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold your chest up and reach back to tap both heels at once. It strengthens your back and opens up your chest and shoulders.",
+      "howTo": [
+        "Lie face down with your arms by your sides.",
+        "Lift your chest off the floor.",
+        "Bend both knees and reach back to tap your heels with both hands.",
+        "Straighten your legs again, chest still lifted.",
+        "Steady rhythm, no bouncing."
+      ],
+      "mistakes": [
+        "Letting your chest drop as you reach.",
+        "Throwing your head back."
+      ],
+      "tips": [
+        "Keep your neck long and your gaze a little ahead of you on the floor."
+      ],
       "voice": {
         "nameOnly": "Back bow with heel taps.",
         "nameHowTo": "Back bow with heel taps. Lie face down and lift your chest off the floor. Bend both knees and reach back to tap your heels with both hands, then straighten your legs. Keep your chest lifted."
@@ -905,9 +1253,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/elbow-to-knee-bird-dogs.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A bird dog with a crunch in the middle. Bringing the elbow to the knee adds core work to the balance.",
+      "howTo": [
+        "Start on all fours.",
+        "Reach one arm forward and the opposite leg back.",
+        "Curl them in under your body until your elbow meets your knee.",
+        "Stretch back out to the long position.",
+        "Slow out, slow in. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Rushing, so you lose your balance.",
+        "Twisting your hips as the leg reaches back."
+      ],
+      "tips": [
+        "Round your back as you crunch in, flatten it as you reach out."
+      ],
       "voice": {
         "nameOnly": "Elbow to knee bird dogs.",
         "nameHowTo": "Elbow to knee bird dogs. On all fours, reach one arm forward and the opposite leg back. Then curl them in under your body until your elbow meets your knee, and stretch out again."
@@ -937,9 +1297,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/reverse-forearm-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A face-up plank on your forearms. It works your glutes, back and the backs of your shoulders.",
+      "howTo": [
+        "Sit with your legs straight out in front.",
+        "Lean back onto your forearms, elbows under your shoulders.",
+        "Lift your hips until your body is in one straight line.",
+        "Hold, squeezing your glutes.",
+        "Hold still and breathe steadily."
+      ],
+      "mistakes": [
+        "Letting your hips sag.",
+        "Letting your head hang back."
+      ],
+      "tips": [
+        "Push your heels into the floor to help lift your hips."
+      ],
       "voice": {
         "nameOnly": "Reverse forearm plank.",
         "nameHowTo": "Reverse forearm plank. Sit with your legs straight and your elbows on the floor under your shoulders, behind you. Lift your hips until your body is in one straight line, facing the ceiling, and hold. Squeeze your glutes."
@@ -966,9 +1338,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/glute-bridge.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you lift your hips with your glutes. It wakes up the glutes and is kind to your lower back.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat, close to your hips.",
+        "Arms by your sides, palms down.",
+        "Squeeze your glutes and lift your hips until you're straight from knees to shoulders.",
+        "Lower slowly back to the floor.",
+        "One second up, a squeeze at the top, two seconds down."
+      ],
+      "mistakes": [
+        "Pushing through your toes.",
+        "Arching your back to get higher."
+      ],
+      "tips": [
+        "Breathe out as you lift."
+      ],
       "voice": {
         "nameOnly": "Glute bridge.",
         "nameHowTo": "Glute bridge. Lie on your back with your knees bent and your feet flat, close to your hips. Squeeze your glutes and lift your hips until you're straight from knees to shoulders. Lower slowly."
@@ -996,9 +1380,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/bodyweight-squat.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "The basic squat. It builds strength in your thighs and glutes for every other leg move.",
+      "howTo": [
+        "Stand with your feet shoulder-width apart, toes turned out slightly.",
+        "Sit your hips back and down as if onto a chair.",
+        "Keep your chest up and your knees in line with your toes.",
+        "Push through your heels to stand.",
+        "Two seconds down, one up."
+      ],
+      "mistakes": [
+        "Knees caving in.",
+        "Heels lifting off the floor."
+      ],
+      "tips": [
+        "Reach your arms forward as you sit back to help your balance."
+      ],
       "voice": {
         "nameOnly": "Bodyweight squat.",
         "nameHowTo": "Bodyweight squat. Feet shoulder-width apart, toes turned out slightly. Sit your hips back and down as if onto a chair, keeping your chest up and your knees in line with your toes. Push through your heels to stand."
@@ -1028,9 +1424,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/sumo-squat.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A wide-stance squat. It works your inner thighs and glutes more than a normal squat.",
+      "howTo": [
+        "Stand with your feet wide and your toes turned out.",
+        "Lower your hips straight down.",
+        "Push your knees out so they stay over your toes.",
+        "Squeeze your glutes to stand.",
+        "Slow down, strong up."
+      ],
+      "mistakes": [
+        "Knees falling in past your toes.",
+        "Leaning your chest forward."
+      ],
+      "tips": [
+        "Keep your weight in your heels."
+      ],
       "voice": {
         "nameOnly": "Sumo squat.",
         "nameHowTo": "Sumo squat. Stand with your feet wide and your toes turned out. Lower your hips straight down, pushing your knees out over your toes. Keep your chest up, then squeeze your glutes to stand."
@@ -1060,9 +1468,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/reverse-glute-raise.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying face down, you lift both straight legs with your glutes. It strengthens your glutes, hamstrings and lower back.",
+      "howTo": [
+        "Lie face down with your forehead resting on your hands.",
+        "Keep your legs straight and together.",
+        "Lift both legs off the floor using your glutes.",
+        "Pause, then lower slowly.",
+        "Lift for one second, lower for two."
+      ],
+      "mistakes": [
+        "Swinging the legs up.",
+        "Lifting your chest off the floor too."
+      ],
+      "tips": [
+        "Small and controlled beats big and swinging."
+      ],
       "voice": {
         "nameOnly": "Reverse glute raise.",
         "nameHowTo": "Reverse glute raise. Lie face down with your forehead resting on your hands. Keep your legs straight and lift them both off the floor using your glutes. Pause, then lower slowly."
@@ -1089,9 +1509,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/donkey-kicks.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "On all fours, you kick one foot up to the ceiling. It isolates your glutes.",
+      "howTo": [
+        "Start on all fours, hands under shoulders and knees under hips.",
+        "Keep one knee bent at a right angle.",
+        "Kick that foot up towards the ceiling, sole facing up.",
+        "Squeeze your glute at the top, then lower.",
+        "Steady pace. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Arching your lower back as the leg goes up.",
+        "Swinging the leg rather than lifting it."
+      ],
+      "tips": [
+        "Only lift as high as you can without your back moving."
+      ],
       "voice": {
         "nameOnly": "Donkey kicks.",
         "nameHowTo": "Donkey kicks. On all fours, keep one knee bent and kick that foot up towards the ceiling, sole facing up. Squeeze your glute at the top, lower, and repeat. Keep your back flat."
@@ -1120,9 +1552,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/lizard-lunge.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A deep lunge with your foot outside your hands. It stretches your hip flexors and groin.",
+      "howTo": [
+        "From all fours, step one foot forward to the outside of that hand.",
+        "Lower your back knee to the floor.",
+        "Let your hips sink towards the floor.",
+        "Drop to your forearms if you can, and hold.",
+        "Hold and breathe slowly. Sink a little more on each breath out."
+      ],
+      "mistakes": [
+        "Letting your front knee drift past your toes.",
+        "Holding your breath."
+      ],
+      "tips": [
+        "Put a folded towel under your back knee if it's uncomfortable."
+      ],
       "voice": {
         "nameOnly": "Lizard lunge.",
         "nameHowTo": "Lizard lunge. Step one foot forward to the outside of your hands in a deep lunge, back knee down. Let your hips sink towards the floor and hold the stretch. Drop to your forearms if you can."
@@ -1151,9 +1595,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/5-oclock-lunges.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A lunge where you step back on a diagonal, like the hand of a clock. It works your legs and glutes from a different angle.",
+      "howTo": [
+        "Stand tall with your feet together.",
+        "Step one leg back and out on a diagonal.",
+        "Sink into a lunge.",
+        "Push through your front heel back to standing.",
+        "Controlled steps. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting your front knee cave in.",
+        "Leaning forward over the front leg."
+      ],
+      "tips": [
+        "Picture standing on a clock face and stepping back to the 5 or the 7."
+      ],
       "voice": {
         "nameOnly": "Five o'clock lunges.",
         "nameHowTo": "Five o'clock lunges. Stand tall. Step one leg back and out on a diagonal, like the hand of a clock, and sink into a lunge. Push back up to standing and repeat."
@@ -1184,9 +1640,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/alternating-forward-lunge.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You step forward into a lunge, one leg then the other. It builds leg strength and balance.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Step forward and lower until both knees are bent at about a right angle.",
+        "Push off the front foot back to standing.",
+        "Step forward with the other leg.",
+        "Steady rhythm, one rep each leg."
+      ],
+      "mistakes": [
+        "Taking a step so short that your front knee shoots past your toes.",
+        "Leaning your chest forward."
+      ],
+      "tips": [
+        "Lower your back knee straight down, not forward."
+      ],
       "voice": {
         "nameOnly": "Alternating forward lunge.",
         "nameHowTo": "Alternating forward lunge. Step forward and lower until both knees are bent at about a right angle. Push back to standing, then step forward with the other leg. Keep your chest tall."
@@ -1213,9 +1681,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/glute-bridges-with-abduction.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A glute bridge with your knees pushing out at the top. It works your glutes and the outsides of your hips.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Lift your hips into a bridge.",
+        "At the top, push your knees out to the sides and back in.",
+        "Lower your hips to the floor.",
+        "Steady pace, squeeze at the top."
+      ],
+      "mistakes": [
+        "Letting your hips drop as your knees open.",
+        "Letting your feet roll onto their edges."
+      ],
+      "tips": [
+        "Keep your feet flat and your heels planted."
+      ],
       "voice": {
         "nameOnly": "Glute bridges with abduction.",
         "nameHowTo": "Glute bridges with abduction. Lift into a glute bridge with your knees bent and your feet flat. At the top, push your knees out to the sides and back in, then lower your hips. Keep squeezing your glutes."
@@ -1243,9 +1723,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/hip-thrust-to-knee-strike.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A hip thrust that ends with one knee driving to your chest. It works your glutes and hip flexors together.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Thrust your hips up into a bridge.",
+        "At the top, drive one knee up towards your chest.",
+        "Put that foot down and lower your hips.",
+        "Powerful up, controlled down. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Dropping your hips when the knee comes up.",
+        "Letting the working foot slide out."
+      ],
+      "tips": [
+        "Push hard through the planted heel to stay level."
+      ],
       "voice": {
         "nameOnly": "Hip thrust to knee strike.",
         "nameHowTo": "Hip thrust to knee strike. Lie on your back with your knees bent. Lift your hips into a bridge and drive one knee up towards your chest at the top. Lower your foot and your hips, and repeat."
@@ -1275,9 +1767,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/side-lunges.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A lunge out to the side. It works your thighs, glutes and inner thighs.",
+      "howTo": [
+        "Stand with your feet together.",
+        "Take a big step out to the side.",
+        "Bend that knee and sit your hips back, keeping the other leg straight.",
+        "Push back to the middle.",
+        "Controlled pace. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting the bent knee cave inwards.",
+        "Rounding your back."
+      ],
+      "tips": [
+        "Keep both feet pointing forward."
+      ],
       "voice": {
         "nameOnly": "Side lunges.",
         "nameHowTo": "Side lunges. Stand with your feet together. Take a big step out to the side, bend that knee and sit your hips back, keeping the other leg straight. Push back to the middle and repeat."
@@ -1307,9 +1811,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/squats-with-kickback.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A squat with a kick back as you stand. It adds extra glute work to every squat.",
+      "howTo": [
+        "Stand with your feet shoulder-width apart.",
+        "Lower into a squat.",
+        "As you stand, kick one leg straight back and squeeze that glute.",
+        "Squat again and kick back with the other leg.",
+        "Steady rhythm, one kick per squat."
+      ],
+      "mistakes": [
+        "Arching your lower back as you kick.",
+        "Rushing the squat to get to the kick."
+      ],
+      "tips": [
+        "Keep your chest up as the leg goes back."
+      ],
       "voice": {
         "nameOnly": "Squats with kickback.",
         "nameHowTo": "Squats with kickback. Lower into a squat. As you stand up, kick one leg straight back and squeeze your glute. Squat again and kick back with the other leg."
@@ -1338,9 +1854,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/alternating-glute-bridge-hold.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold a glute bridge and straighten one leg at a time. It challenges your glutes to keep your hips level.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Lift your hips into a bridge and hold them there.",
+        "Straighten one leg out, then put it back down.",
+        "Straighten the other leg.",
+        "Slow leg changes. Keep your hips high and level."
+      ],
+      "mistakes": [
+        "Letting your hips dip when a leg lifts.",
+        "Letting your hips drop as you tire."
+      ],
+      "tips": [
+        "Press hard through the planted heel."
+      ],
       "voice": {
         "nameOnly": "Alternating glute bridge hold.",
         "nameHowTo": "Alternating glute bridge hold. Lift your hips into a bridge and hold them there. Straighten one leg out, put it back down, then straighten the other. Keep your hips high and level the whole time."
@@ -1369,9 +1897,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/curtsey-lunges.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You cross one leg behind you, as if curtseying. It works your glutes and the outsides of your hips.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Cross one leg behind the other and out to the side.",
+        "Bend both knees and lower down.",
+        "Push back up to standing.",
+        "Controlled pace. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Twisting your hips too far round.",
+        "Letting your front knee cave in."
+      ],
+      "tips": [
+        "Keep your hips and chest facing forward."
+      ],
       "voice": {
         "nameOnly": "Curtsey lunges.",
         "nameHowTo": "Curtsey lunges. Stand tall. Cross one leg behind the other and out to the side, as if curtseying, and bend both knees. Push back up to standing and repeat."
@@ -1399,9 +1939,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/glute-bridge-hold.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold your hips up in a glute bridge. It builds glute endurance.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Lift your hips until you're straight from knees to shoulders.",
+        "Hold there, squeezing your glutes.",
+        "Keep your weight in your heels.",
+        "Hold still and breathe steadily."
+      ],
+      "mistakes": [
+        "Letting your hips sink slowly.",
+        "Arching your lower back."
+      ],
+      "tips": [
+        "Squeeze a little harder each time you breathe out."
+      ],
       "voice": {
         "nameOnly": "Glute bridge hold.",
         "nameHowTo": "Glute bridge hold. Lie on your back with your knees bent and your feet flat. Lift your hips until you're straight from knees to shoulders, and hold. Keep squeezing your glutes and breathe steadily."
@@ -1429,9 +1981,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/pivot-lunge.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "From a wide stance, you pivot to the side into a lunge. It works your legs and trains you to turn under control.",
+      "howTo": [
+        "Stand with your feet wide.",
+        "Pivot on the balls of your feet to turn sideways.",
+        "Drop into a lunge as you turn.",
+        "Pivot back to face the front.",
+        "Smooth and steady. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Twisting your knee instead of pivoting your feet.",
+        "Letting your front knee cave in."
+      ],
+      "tips": [
+        "Turn your hips and feet together."
+      ],
       "voice": {
         "nameOnly": "Pivot lunge.",
         "nameHowTo": "Pivot lunge. From a wide stance, pivot on the balls of your feet to turn sideways and drop into a lunge. Pivot back to face the front and repeat."
@@ -1460,9 +2024,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/prisoner-squat.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A squat with your hands behind your head. It keeps your chest up and works your upper back too.",
+      "howTo": [
+        "Stand with your feet shoulder-width apart.",
+        "Put your hands behind your head, elbows wide.",
+        "Sit your hips back and down into a squat.",
+        "Stand back up.",
+        "Two seconds down, one up."
+      ],
+      "mistakes": [
+        "Pulling on your head with your hands.",
+        "Letting your elbows fold forward."
+      ],
+      "tips": [
+        "Keep your elbows open to keep your chest up."
+      ],
       "voice": {
         "nameOnly": "Prisoner squat.",
         "nameHowTo": "Prisoner squat. Put your hands behind your head, elbows wide. Sit your hips back and down into a squat, keeping your chest lifted and your elbows open, then stand back up."
@@ -1489,9 +2065,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/side-step-squats.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You step out to the side into a squat. It works your legs and gets your heart rate up.",
+      "howTo": [
+        "Stand with your feet together.",
+        "Step out to the side and lower into a squat.",
+        "Stand up and bring your feet together.",
+        "Step out the other way.",
+        "Steady rhythm."
+      ],
+      "mistakes": [
+        "Knees caving in.",
+        "Heels lifting off the floor."
+      ],
+      "tips": [
+        "Keep your chest up as you step."
+      ],
       "voice": {
         "nameOnly": "Side step squats.",
         "nameHowTo": "Side step squats. Take a step out to the side and lower into a squat. Stand up, bring your feet together, and step out the other way. Keep your chest up."
@@ -1519,9 +2107,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/backward-lunges.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You step back into a lunge. It works your legs and is easier on your knees than a forward lunge.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Step one foot back.",
+        "Lower until both knees are bent.",
+        "Push through your front heel to stand.",
+        "Controlled pace. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting your front knee drift past your toes.",
+        "Leaning forward."
+      ],
+      "tips": [
+        "Keep your front knee over your ankle."
+      ],
       "voice": {
         "nameOnly": "Backward lunges.",
         "nameHowTo": "Backward lunges. Stand tall and step one foot back, lowering until both knees are bent. Push through your front heel to come back to standing. Keep your front knee over your ankle."
@@ -1550,9 +2150,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/glute-bridge-hold-with-knee-to-chest.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold a glute bridge while bringing one knee to your chest. It works your glutes and core together.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Lift your hips into a bridge.",
+        "Bring one knee in towards your chest, then put the foot down.",
+        "Switch legs.",
+        "Slow leg changes. Keep your hips up."
+      ],
+      "mistakes": [
+        "Letting your hips drop when a foot lifts.",
+        "Twisting your hips."
+      ],
+      "tips": [
+        "Press through the planted heel to stay level."
+      ],
       "voice": {
         "nameOnly": "Glute bridge hold with knee to chest.",
         "nameHowTo": "Glute bridge hold with knee to chest. Hold your hips up in a glute bridge. Bring one knee in towards your chest, put the foot back down, then switch legs. Don't let your hips drop."
@@ -1582,9 +2194,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/squat-with-calf-raise.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A squat that finishes on your tiptoes. It works your legs and calves together.",
+      "howTo": [
+        "Stand with your feet shoulder-width apart.",
+        "Lower into a squat.",
+        "Drive up to standing and keep going onto your tiptoes.",
+        "Lower your heels and squat again.",
+        "Smooth and controlled."
+      ],
+      "mistakes": [
+        "Wobbling on your tiptoes.",
+        "Cutting the squat short."
+      ],
+      "tips": [
+        "Hold your arms out in front for balance."
+      ],
       "voice": {
         "nameOnly": "Squat with calf raise.",
         "nameHowTo": "Squat with calf raise. Lower into a squat, then drive up to standing and keep going onto your tiptoes. Lower your heels and squat again. Move with control."
@@ -1612,9 +2236,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/elbow-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "The basic plank on your forearms. It builds the core strength that keeps your body steady in every other move.",
+      "howTo": [
+        "Place your elbows under your shoulders, forearms flat on the floor.",
+        "Step your legs straight out behind you, feet hip-width apart.",
+        "Brace your stomach so you're one straight line from head to heels.",
+        "Hold, with no sagging or lifting at the hips.",
+        "Stay still and keep breathing all the way through."
+      ],
+      "mistakes": [
+        "Letting your hips sag towards the floor.",
+        "Pushing your bum up into a tent shape."
+      ],
+      "tips": [
+        "Squeeze your glutes as well as your stomach: the line gets easier to hold."
+      ],
       "voice": {
         "nameOnly": "Elbow plank.",
         "nameHowTo": "Elbow plank. Elbows under your shoulders, legs straight out behind you. Brace your stomach and hold your body in one straight line, with no sagging or lifting at the hips. Keep breathing."
@@ -1641,9 +2277,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/leg-raises.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you lift and lower straight legs. It works your lower abs and the muscles at the front of your hips.",
+      "howTo": [
+        "Lie on your back, legs straight, hands by your sides or under your hips.",
+        "Press your lower back into the floor.",
+        "Lift your legs until they point at the ceiling.",
+        "Lower them slowly and stop just before they touch the floor.",
+        "One second up, two or three seconds down."
+      ],
+      "mistakes": [
+        "Letting your lower back arch off the floor as your legs lower.",
+        "Swinging your legs up instead of lifting them."
+      ],
+      "tips": [
+        "Bend your knees a little if you can't keep your back flat."
+      ],
       "voice": {
         "nameOnly": "Leg raises.",
         "nameHowTo": "Leg raises. Lie on your back with your legs straight and your hands by your sides. Press your lower back into the floor, lift your legs until they point at the ceiling, then lower them slowly without touching down."
@@ -1670,9 +2318,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/dead-bug.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "On your back, you lower one arm and the opposite leg. It trains your core to keep your back still while your arms and legs move.",
+      "howTo": [
+        "Lie on your back with your arms pointing at the ceiling.",
+        "Lift your knees over your hips, bent at a right angle.",
+        "Lower one arm behind you and straighten the opposite leg towards the floor.",
+        "Bring them back to the middle, then switch.",
+        "Slow and controlled, about three seconds each way."
+      ],
+      "mistakes": [
+        "Letting your lower back lift off the floor.",
+        "Moving the arm and leg on the same side."
+      ],
+      "tips": [
+        "Breathe out slowly as you reach: it helps keep your back down."
+      ],
       "voice": {
         "nameOnly": "Dead bug.",
         "nameHowTo": "Dead bug. Lie on your back with your arms pointing at the ceiling and your knees bent over your hips. Lower one arm and the opposite leg towards the floor, bring them back, then switch. Keep your lower back down."
@@ -1699,9 +2359,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/sit-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "The full sit-up, from lying flat to sitting up. It works your abs through their whole range.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Cross your hands over your chest.",
+        "Curl your chest up towards your knees until you're sitting up.",
+        "Roll back down slowly, one part of your spine at a time.",
+        "Up in one second, down in two."
+      ],
+      "mistakes": [
+        "Yanking yourself up with your neck.",
+        "Dropping back down instead of rolling."
+      ],
+      "tips": [
+        "Lead with your chest, not your chin."
+      ],
       "voice": {
         "nameOnly": "Sit up.",
         "nameHowTo": "Sit up. Lie on your back with your knees bent and your feet flat. Curl your chest up towards your knees until you're sitting up, then roll back down slowly. Lead with your chest, not your neck."
@@ -1730,9 +2402,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/spider-and-cross-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you bring one knee out to the side and then across under your body. It works your whole core, including your sides.",
+      "howTo": [
+        "Start in a high plank, hands under your shoulders.",
+        "Bring one knee out to the side, towards the elbow on that side, then back.",
+        "Bring the same knee across under your body towards the opposite elbow, then back.",
+        "Repeat with the other leg.",
+        "Controlled, about one second per knee drive."
+      ],
+      "mistakes": [
+        "Lifting your hips high to make room for the knee.",
+        "Letting your shoulders drift back behind your hands."
+      ],
+      "tips": [
+        "Keep your shoulders stacked over your wrists the whole time."
+      ],
       "voice": {
         "nameOnly": "Spider and cross plank.",
         "nameHowTo": "Spider and cross plank. In a high plank, bring one knee out to the side towards the elbow on that side, then back. Next, bring it across your body towards the opposite elbow. Repeat on the other side."
@@ -1759,9 +2443,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/windshield-wipers.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you let your bent knees drop from side to side. It works your obliques and loosens your lower back.",
+      "howTo": [
+        "Lie on your back with your arms out wide, palms down.",
+        "Lift your knees over your hips, bent at a right angle.",
+        "Let your knees drop slowly to one side.",
+        "Pull them back through the middle and over to the other side.",
+        "Slow sweeps, about two seconds each way."
+      ],
+      "mistakes": [
+        "Letting your opposite shoulder lift off the floor.",
+        "Letting your knees crash down at the end of the sweep."
+      ],
+      "tips": [
+        "Only go as low as you can while both shoulders stay down."
+      ],
       "voice": {
         "nameOnly": "Windshield wipers.",
         "nameHowTo": "Windshield wipers. Lie on your back with your arms out wide and lift your knees above your hips. Let them drop slowly to one side, then sweep them across to the other. Keep your shoulders flat on the floor."
@@ -1788,9 +2484,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/airplane-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you lift one arm out to the side like a wing. Balancing on three points makes your core work hard.",
+      "howTo": [
+        "Start in a high plank, feet a little wider than your hips.",
+        "Lift one arm out to the side at shoulder height.",
+        "Put it back down under your shoulder.",
+        "Lift the other arm.",
+        "Slow and steady. Pause for a moment with the arm out."
+      ],
+      "mistakes": [
+        "Twisting your hips as the arm lifts.",
+        "Letting your hips sag."
+      ],
+      "tips": [
+        "The wider your feet, the easier it is to stay square."
+      ],
       "voice": {
         "nameOnly": "Airplane plank.",
         "nameHowTo": "Airplane plank. From a high plank, lift one arm out to the side like a wing, put it back down, then lift the other. Keep your hips square and still."
@@ -1817,9 +2525,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/kayak-abs.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting and leaning back, you twist from side to side as if paddling a kayak. It works your abs and obliques.",
+      "howTo": [
+        "Sit with your knees bent and your heels on the floor.",
+        "Lean back a little, chest up and back straight.",
+        "Hold your hands together as if gripping a paddle.",
+        "Twist to paddle on one side, then the other.",
+        "Steady rhythm, about one stroke a second."
+      ],
+      "mistakes": [
+        "Slumping into a rounded back.",
+        "Moving only your arms while your chest stays still."
+      ],
+      "tips": [
+        "Turn from your ribs so your chest follows the paddle."
+      ],
       "voice": {
         "nameOnly": "Kayak abs.",
         "nameHowTo": "Kayak abs. Sit with your knees bent and lean back a little, feet lifted. Clasp your hands and twist from side to side as if paddling a kayak. Keep your chest up."
@@ -1846,9 +2566,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/flutter-kicks.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you kick straight legs up and down in small, quick movements. It works your lower abs.",
+      "howTo": [
+        "Lie on your back with your hands under your hips.",
+        "Lift your legs a little off the floor.",
+        "Kick one leg up as the other goes down.",
+        "Keep your legs straight and the kicks small.",
+        "Quick and steady, without stopping."
+      ],
+      "mistakes": [
+        "Letting your lower back arch off the floor.",
+        "Making the kicks so big that you lose control."
+      ],
+      "tips": [
+        "Press your lower back down into your hands."
+      ],
       "voice": {
         "nameOnly": "Flutter kicks.",
         "nameHowTo": "Flutter kicks. Lie on your back with your hands under your hips. Lift your legs a little off the floor and kick them up and down in small, quick movements. Keep your lower back pressed down."
@@ -1875,9 +2607,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/heel-taps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back with your shoulders lifted, you reach from side to side to tap your heels. It works your obliques.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Lift your shoulders off the floor, arms by your sides.",
+        "Reach to one side to tap that heel.",
+        "Reach across to the other side.",
+        "Steady side to side, no pause in the middle."
+      ],
+      "mistakes": [
+        "Dropping your shoulders to the floor between taps.",
+        "Tucking your chin onto your chest."
+      ],
+      "tips": [
+        "Set your feet a little wider to make the reach harder."
+      ],
       "voice": {
         "nameOnly": "Heel taps.",
         "nameHowTo": "Heel taps. Lie on your back with your knees bent and your shoulders lifted off the floor. Reach from side to side to tap each heel with your hand. Keep your stomach tight."
@@ -1904,9 +2648,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/l-crunch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back with one leg straight up, you reach towards the raised foot. It works your abs.",
+      "howTo": [
+        "Lie on your back with one leg pointing at the ceiling.",
+        "Keep the other leg straight on the floor.",
+        "Reach your hands towards the raised foot, lifting your shoulders.",
+        "Lower your shoulders slowly.",
+        "Controlled pace. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Pulling yourself up with your neck.",
+        "Letting the raised leg drop towards you."
+      ],
+      "tips": [
+        "Breathe out as you reach up."
+      ],
       "voice": {
         "nameOnly": "L-crunch.",
         "nameHowTo": "L-crunch. Lie on your back with one leg pointing at the ceiling and the other straight on the floor. Reach your hands up towards the raised foot, lifting your shoulders, then lower slowly."
@@ -1935,9 +2691,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/modified-diagonal-mountain-climber.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A slower mountain climber where one knee steps across towards the opposite elbow. It works your core and your obliques with no jumping.",
+      "howTo": [
+        "Start in a high plank.",
+        "Step one knee across your body towards the opposite elbow.",
+        "Step it back to plank.",
+        "Do the same with the other leg.",
+        "Steady pace, no jumping."
+      ],
+      "mistakes": [
+        "Lifting your hips high as the knee comes in.",
+        "Speeding up until your form falls apart."
+      ],
+      "tips": [
+        "Turn your knee across, not just forward, to feel your sides work."
+      ],
       "voice": {
         "nameOnly": "Modified diagonal mountain climber.",
         "nameHowTo": "Modified diagonal mountain climber. In a high plank, step one knee across towards the opposite elbow, then step it back. Switch legs. Keep a steady pace, no jumping."
@@ -1964,9 +2732,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/seated-knee-tucks.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting and leaning back, you pull your knees in and push your legs back out. It works your abs.",
+      "howTo": [
+        "Sit and lean back on your hands, fingers pointing forward.",
+        "Lift your legs a little off the floor.",
+        "Pull your knees in towards your chest.",
+        "Push your legs back out straight.",
+        "Steady rhythm, feet off the floor the whole time."
+      ],
+      "mistakes": [
+        "Letting your feet touch down between reps.",
+        "Rounding your back into a slump."
+      ],
+      "tips": [
+        "Lean your chest towards your knees as they come in."
+      ],
       "voice": {
         "nameOnly": "Seated knee tucks.",
         "nameHowTo": "Seated knee tucks. Sit and lean back on your hands with your legs out and lifted. Pull your knees in towards your chest, then push your legs back out. Keep your feet off the floor."
@@ -1993,9 +2773,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/wood-chops.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Standing, you swing your hands diagonally down across your body. It works your obliques and trains your body to turn under control.",
+      "howTo": [
+        "Stand with your feet wide.",
+        "Clasp your hands above one shoulder.",
+        "Swing them down across your body towards the opposite hip, turning your chest.",
+        "Bring them back up to the start.",
+        "Strong on the way down, controlled on the way up. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Swinging with your arms alone.",
+        "Rounding your back at the bottom."
+      ],
+      "tips": [
+        "Let your back foot pivot as you chop, to take strain off your knee."
+      ],
       "voice": {
         "nameOnly": "Wood chops.",
         "nameHowTo": "Wood chops. Stand with your feet wide and clasp your hands above one shoulder. Swing them down diagonally across your body towards the opposite hip, turning your chest, then bring them back up."
@@ -2024,9 +2816,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/side-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A plank on your side, propped on one forearm. It works your obliques and the outsides of your hips.",
+      "howTo": [
+        "Lie on your side, legs straight, feet stacked.",
+        "Prop yourself up on your forearm, elbow under your shoulder.",
+        "Lift your hips so you're straight from head to feet.",
+        "Hold.",
+        "Stay still and breathe steadily."
+      ],
+      "mistakes": [
+        "Letting your hips sink towards the floor.",
+        "Rolling your chest forward."
+      ],
+      "tips": [
+        "Stagger your feet, one in front of the other, if you need more balance."
+      ],
       "voice": {
         "nameOnly": "Side plank.",
         "nameHowTo": "Side plank. Lie on your side and prop yourself up on your forearm, elbow under your shoulder. Lift your hips so you're straight from head to feet, and hold. Don't let your hips sink."
@@ -2054,9 +2858,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/standing-side-crunch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Standing on one leg, you bring your elbow and knee together at your side. It works your obliques and your balance.",
+      "howTo": [
+        "Stand tall with one hand behind your head.",
+        "Lift that knee out to the side.",
+        "Bring your elbow down to meet it, crunching through your side.",
+        "Return to standing tall.",
+        "Steady rhythm. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Leaning forward instead of crunching sideways.",
+        "Pulling on your head with your hand."
+      ],
+      "tips": [
+        "Stretch the other arm out to the side for balance."
+      ],
       "voice": {
         "nameOnly": "Standing side crunch.",
         "nameHowTo": "Standing side crunch. Stand with one hand behind your head. Lift that knee out to the side and bring your elbow down to meet it, crunching through your side. Return and repeat."
@@ -2085,9 +2901,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/v-sit-bicycles.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting in a V, you pedal your legs and twist towards each knee. It works your abs and obliques.",
+      "howTo": [
+        "Sit and lean back into a V with your feet off the floor.",
+        "Put your hands lightly behind your head.",
+        "Pedal your legs as if riding a bike.",
+        "Twist to bring each elbow towards the opposite knee.",
+        "Steady rhythm, one twist per pedal."
+      ],
+      "mistakes": [
+        "Slumping your back.",
+        "Moving your elbows without turning your chest."
+      ],
+      "tips": [
+        "Keep your chest lifted and turn from your ribs."
+      ],
       "voice": {
         "nameOnly": "V sit bicycles.",
         "nameHowTo": "V sit bicycles. Sit and lean back into a V with your feet off the floor. Pedal your legs as if riding a bike, twisting to bring each elbow towards the opposite knee. Keep your chest lifted."
@@ -2115,9 +2943,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/overhead-sit-ups.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A full sit-up with your hands behind your head. It works your abs harder than a sit-up with your hands on your chest.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Put your hands behind your head, elbows pointing forward.",
+        "Sit all the way up, opening your elbows to the sides at the top.",
+        "Roll back down slowly.",
+        "Up in one second, down in two."
+      ],
+      "mistakes": [
+        "Pulling on your head with your hands.",
+        "Letting your feet lift off the floor."
+      ],
+      "tips": [
+        "Your hands only rest there: let your stomach do the lifting."
+      ],
       "voice": {
         "nameOnly": "Overhead sit ups.",
         "nameHowTo": "Overhead sit ups. Lie on your back with your arms stretched overhead. Keep your arms by your ears as you sit all the way up, then roll back down slowly. Keep your feet on the floor."
@@ -2144,9 +2984,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/shoulder-taps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you lift one hand at a time to tap the opposite shoulder. It trains your core to stop your hips rocking.",
+      "howTo": [
+        "Hold a high plank with your feet a little apart.",
+        "Lift one hand and tap the opposite shoulder.",
+        "Put it back down under your shoulder.",
+        "Tap with the other hand.",
+        "Slow and steady. A still body beats fast taps."
+      ],
+      "mistakes": [
+        "Rocking your hips from side to side.",
+        "Rushing the taps."
+      ],
+      "tips": [
+        "Widen your feet to make it easier, bring them together to make it harder."
+      ],
       "voice": {
         "nameOnly": "Shoulder taps.",
         "nameHowTo": "Shoulder taps. Hold a high plank with your feet a little apart. Lift one hand to tap the opposite shoulder, put it back down, then switch. Keep your hips as still as you can."
@@ -2173,9 +3025,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/suitcase-sit-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You fold up from lying flat, bringing your knees and chest together like closing a suitcase. It works your whole core.",
+      "howTo": [
+        "Lie flat with your arms stretched past your head.",
+        "In one move, sit up and pull your knees in.",
+        "Bring your knees and chest together, arms reaching forward.",
+        "Unfold slowly back to lying flat.",
+        "Up in one second, down in two."
+      ],
+      "mistakes": [
+        "Flopping back to the floor.",
+        "Pulling up with your neck."
+      ],
+      "tips": [
+        "Breathe out as you fold up."
+      ],
       "voice": {
         "nameOnly": "Suitcase sit up.",
         "nameHowTo": "Suitcase sit up. Lie flat with your arms stretched past your head. In one move, fold up and bring your knees and chest together, like closing a suitcase. Unfold slowly back to the floor."
@@ -2202,9 +3066,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/extended-suitcase-crunch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A crunch with your arms overhead and your legs flat on the floor. The long arms make your abs work harder.",
+      "howTo": [
+        "Lie flat with your legs straight on the floor.",
+        "Stretch your arms overhead, by your ears.",
+        "Crunch your shoulders up, keeping your arms by your ears.",
+        "Lower slowly without resting.",
+        "Controlled pace, no swinging."
+      ],
+      "mistakes": [
+        "Swinging your arms forward to get up.",
+        "Lifting your legs off the floor."
+      ],
+      "tips": [
+        "Keep your arms by your ears: the further back they are, the harder it is."
+      ],
       "voice": {
         "nameOnly": "Extended suitcase crunch.",
         "nameHowTo": "Extended suitcase crunch. Lie with your arms overhead and your legs straight, just off the floor. Crunch up, pulling your knees in and reaching your arms forward to meet them, then stretch back out without resting."
@@ -2231,9 +3107,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/high-plank-walk-out.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You walk your hands out into a high plank and back again. It works your core and shoulders and stretches your hamstrings.",
+      "howTo": [
+        "Stand tall, then fold forward and put your hands on the floor.",
+        "Walk your hands forward into a high plank.",
+        "Hold for a moment.",
+        "Walk your hands back to your feet and stand up.",
+        "Steady rhythm."
+      ],
+      "mistakes": [
+        "Letting your hips sag as you reach the plank.",
+        "Walking your hands out past your shoulders."
+      ],
+      "tips": [
+        "Bend your knees as much as you need to reach the floor."
+      ],
       "voice": {
         "nameOnly": "High plank walk out.",
         "nameHowTo": "High plank walk out. From standing, fold down and walk your hands forward into a high plank. Hold for a moment, then walk your hands back to your feet and stand up."
@@ -2260,9 +3148,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/plank-to-kick-back.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you bring one knee in, then kick that leg back and up. It works your core and glutes.",
+      "howTo": [
+        "Start in a high plank.",
+        "Bring one knee towards your chest.",
+        "Kick that leg straight back and up.",
+        "Return to plank and switch legs.",
+        "Controlled, about one second per part."
+      ],
+      "mistakes": [
+        "Arching your back as the leg kicks up.",
+        "Lifting your hips when the knee comes in."
+      ],
+      "tips": [
+        "Squeeze your glute at the top of the kick."
+      ],
       "voice": {
         "nameOnly": "Plank to kick back.",
         "nameHowTo": "Plank to kick back. In a high plank, bring one knee towards your chest, then kick that leg straight back and up. Return to plank and repeat with the other leg."
@@ -2290,9 +3190,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/raised-scorpion.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "From downward dog, you lift one leg and bend it over into a scorpion. It works your core and shoulders and opens your hips.",
+      "howTo": [
+        "Start in downward dog with your hips high.",
+        "Lift one leg up behind you.",
+        "Bend that knee and open your hip, letting the heel reach over towards your head.",
+        "Straighten the leg and lower it back down.",
+        "Slow and controlled. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Rushing the lift, so you lose balance.",
+        "Sinking into your shoulders."
+      ],
+      "tips": [
+        "Push the floor away with your hands the whole time."
+      ],
       "voice": {
         "nameOnly": "Raised scorpion.",
         "nameHowTo": "Raised scorpion. Lie face down with your arms out wide. Lift one leg, bend the knee and twist your hips to reach that foot across towards the opposite hand. Return slowly."
@@ -2320,9 +3232,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/scissor-kicks.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you open your straight legs and cross them over each other. It works your lower abs and inner thighs.",
+      "howTo": [
+        "Lie on your back with your hands under your hips.",
+        "Lift your straight legs a little off the floor.",
+        "Open them wide, then cross one over the other.",
+        "Open again and cross with the other leg on top.",
+        "Quick and steady."
+      ],
+      "mistakes": [
+        "Letting your lower back arch.",
+        "Letting your legs drop to the floor."
+      ],
+      "tips": [
+        "The lower your legs, the harder it is. Raise them if your back lifts."
+      ],
       "voice": {
         "nameOnly": "Scissor kicks.",
         "nameHowTo": "Scissor kicks. Lie on your back with your hands under your hips and your legs straight and lifted a little. Cross one leg over the other, then switch, in a quick scissor movement. Keep your lower back down."
@@ -2350,9 +3274,21 @@
       "level": "beginner",
       "status": "not-yet",
       "image": "img/moves/hollow-body-hold.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hold a curved, banana shape on your back. It builds the core strength behind gymnastics moves.",
+      "howTo": [
+        "Lie on your back.",
+        "Press your lower back into the floor.",
+        "Lift your shoulders and your straight legs off the ground.",
+        "Reach your arms forward or overhead and hold the curve.",
+        "Stay still and breathe steadily."
+      ],
+      "mistakes": [
+        "Letting your lower back lift.",
+        "Holding your breath."
+      ],
+      "tips": [
+        "Bend your knees or bring your arms to your sides to make it easier."
+      ],
       "voice": {
         "nameOnly": "Hollow body hold.",
         "nameHowTo": "Hollow body hold. Lie on your back and press your lower back into the floor. Lift your shoulders and your straight legs off the ground, reach your arms forward, and hold that curved shape."
@@ -2381,9 +3317,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/burpee-walk.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A burpee with no jumping: you step back into a plank and step forward again. It works your whole body and keeps your heart rate up.",
+      "howTo": [
+        "Stand tall, then bend down and put your hands on the floor.",
+        "Step one foot back, then the other, into a plank.",
+        "Step them forward again one at a time.",
+        "Stand up tall.",
+        "Steady rhythm, no jumping."
+      ],
+      "mistakes": [
+        "Letting your hips sag in the plank.",
+        "Rounding your back as you reach the floor."
+      ],
+      "tips": [
+        "Keep your stomach tight as your feet step back."
+      ],
       "voice": {
         "nameOnly": "Burpee walk.",
         "nameHowTo": "Burpee walk. From standing, bend down and put your hands on the floor. Step your feet back one at a time into a plank, step them forward again and stand up. No jumping, just keep a steady rhythm."
@@ -2412,9 +3360,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/burpees.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "The classic burpee: down, back, in and up with a jump. It works your whole body and gets your heart rate up fast.",
+      "howTo": [
+        "Squat down and put your hands on the floor.",
+        "Jump your feet back into a plank.",
+        "Jump them back in towards your hands.",
+        "Jump up with your arms overhead.",
+        "Fast, but land softly and keep your form."
+      ],
+      "mistakes": [
+        "Letting your hips sag in the plank.",
+        "Landing heavily on straight legs."
+      ],
+      "tips": [
+        "Breathe out on the jump up."
+      ],
       "voice": {
         "nameOnly": "Burpees.",
         "nameHowTo": "Burpees. Squat down and put your hands on the floor. Jump your feet back into a plank, jump them back in, then jump up with your arms overhead. Land softly and go again."
@@ -2442,9 +3402,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/squat-to-walkout.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A squat that leads into a walkout to plank. It works your legs and core together.",
+      "howTo": [
+        "Lower into a squat.",
+        "Put your hands on the floor and walk them out into a plank.",
+        "Walk them back towards your feet.",
+        "Stand up from the squat.",
+        "Steady rhythm."
+      ],
+      "mistakes": [
+        "Letting your hips sag in the plank.",
+        "Standing up with a rounded back."
+      ],
+      "tips": [
+        "Push through your heels as you stand."
+      ],
       "voice": {
         "nameOnly": "Squat to walkout.",
         "nameHowTo": "Squat to walkout. Lower into a squat and put your hands on the floor. Walk your hands out into a plank, walk them back in, then stand up. Keep a steady pace."
@@ -2472,9 +3444,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/shadow-boxing.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You throw quick punches at the air. It gets your heart rate up and works your shoulders and arms.",
+      "howTo": [
+        "Stand with your feet staggered, knees soft.",
+        "Bring your hands up by your face.",
+        "Throw quick punches straight ahead, one arm then the other.",
+        "Bring each hand straight back to your face.",
+        "Quick, light and non-stop."
+      ],
+      "mistakes": [
+        "Dropping your hands between punches.",
+        "Snapping your elbows straight."
+      ],
+      "tips": [
+        "Turn your hips a little with each punch."
+      ],
       "voice": {
         "nameOnly": "Shadow boxing.",
         "nameHowTo": "Shadow boxing. Stand with your feet staggered and your hands up by your face. Throw quick punches straight ahead, one arm then the other, and stay light on your feet. Keep your guard up."
@@ -2502,9 +3486,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/high-knees.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You run on the spot, driving your knees up high. It gets your heart rate up and works your hip flexors.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Run on the spot.",
+        "Drive your knees up to hip height.",
+        "Pump your arms in time.",
+        "As fast as you can keep it tidy."
+      ],
+      "mistakes": [
+        "Leaning back.",
+        "Landing heavily on your heels."
+      ],
+      "tips": [
+        "Stay on the balls of your feet."
+      ],
       "voice": {
         "nameOnly": "High knees.",
         "nameHowTo": "High knees. Run on the spot, driving your knees up to hip height. Pump your arms and land lightly on the balls of your feet. Keep your chest tall."
@@ -2532,9 +3528,21 @@
       "level": "advanced",
       "status": "in-plan",
       "image": "img/moves/squat-jumps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A squat that explodes into a jump. It builds power in your legs.",
+      "howTo": [
+        "Stand with your feet shoulder-width apart.",
+        "Lower into a squat.",
+        "Jump up as high as you can.",
+        "Land softly with bent knees and sink straight into the next squat.",
+        "Quick and powerful."
+      ],
+      "mistakes": [
+        "Landing on straight legs.",
+        "Knees caving in on the landing."
+      ],
+      "tips": [
+        "Swing your arms up to help the jump."
+      ],
       "voice": {
         "nameOnly": "Squat jumps.",
         "nameHowTo": "Squat jumps. Lower into a squat, then jump up as high as you can. Land softly with bent knees and go straight into the next squat."
@@ -2562,9 +3570,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/jump-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you jump your feet out and in like a jumping jack. It works your core and gets your heart rate up.",
+      "howTo": [
+        "Hold a high plank.",
+        "Jump both feet out wide.",
+        "Jump them back together.",
+        "Keep going without stopping.",
+        "Quick and steady."
+      ],
+      "mistakes": [
+        "Lifting your hips as you jump.",
+        "Letting your shoulders drift back behind your hands."
+      ],
+      "tips": [
+        "Keep your hips low and your shoulders over your hands."
+      ],
       "voice": {
         "nameOnly": "Jump plank.",
         "nameHowTo": "Jump plank. Hold a high plank. Jump both feet out wide and back together, like a jumping jack. Keep your hips low and your shoulders over your hands."
@@ -2592,9 +3612,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/butt-kicks.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You jog on the spot, kicking your heels up towards your glutes. It warms up your hamstrings and gets your heart rate up.",
+      "howTo": [
+        "Stand tall.",
+        "Jog on the spot.",
+        "Kick your heels up towards your glutes.",
+        "Keep your arms moving.",
+        "Quick and light."
+      ],
+      "mistakes": [
+        "Leaning forward.",
+        "Landing heavily."
+      ],
+      "tips": [
+        "Keep your knees pointing down."
+      ],
       "voice": {
         "nameOnly": "Butt kicks.",
         "nameHowTo": "Butt kicks. Jog on the spot, kicking your heels up towards your glutes. Stay light on your feet and keep your arms moving."
@@ -2622,9 +3654,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/mountain-climber.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you drive your knees in quickly, one after the other. It works your core and gets your heart rate up.",
+      "howTo": [
+        "Start in a high plank.",
+        "Drive one knee towards your chest.",
+        "Switch legs quickly, as if running on the spot.",
+        "Keep going without stopping.",
+        "Fast, but keep your hips still."
+      ],
+      "mistakes": [
+        "Lifting your hips.",
+        "Letting your shoulders drift back."
+      ],
+      "tips": [
+        "Keep your shoulders over your hands."
+      ],
       "voice": {
         "nameOnly": "Mountain climber.",
         "nameHowTo": "Mountain climber. In a high plank, drive one knee towards your chest, then switch legs quickly, as if running on the spot. Keep your hips low and your shoulders over your hands."
@@ -2653,9 +3697,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/4-point-box-jumps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hop around a square on the floor: forward, side, back, side. It works your legs and quick footwork.",
+      "howTo": [
+        "Stand with your feet together.",
+        "Hop forward.",
+        "Hop to the side, then back, then to the other side.",
+        "Keep going around the square.",
+        "Quick and light."
+      ],
+      "mistakes": [
+        "Landing heavily.",
+        "Making the hops so big that you lose your rhythm."
+      ],
+      "tips": [
+        "Switch direction around the square halfway through."
+      ],
       "voice": {
         "nameOnly": "Four point box jumps.",
         "nameHowTo": "Four point box jumps. Jump forward, to the side, back, then to the other side, as if tracing a square on the floor. Land softly on the balls of your feet."
@@ -2683,9 +3739,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/plank-jack-shoulder-taps.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Plank jacks and shoulder taps together. It works your core and gets your heart rate up.",
+      "howTo": [
+        "Start in a high plank.",
+        "Jump your feet out and back in.",
+        "Tap each hand to the opposite shoulder.",
+        "Keep repeating.",
+        "Steady rhythm."
+      ],
+      "mistakes": [
+        "Rocking your hips during the taps.",
+        "Lifting your hips during the jacks."
+      ],
+      "tips": [
+        "Squeeze your glutes to keep your hips still."
+      ],
       "voice": {
         "nameOnly": "Plank jack shoulder taps.",
         "nameHowTo": "Plank jack shoulder taps. In a high plank, jump your feet out and back in, then tap each hand to the opposite shoulder. Keep repeating and hold your hips steady."
@@ -2712,9 +3780,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/dynamic-side-bends.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You reach up and over from side to side. It warms up the muscles down your sides and loosens your spine.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Reach one arm up and over your head.",
+        "Bend to the opposite side as you reach.",
+        "Come back up and switch sides.",
+        "Smooth and flowing, about two seconds each side."
+      ],
+      "mistakes": [
+        "Leaning forward instead of bending straight to the side.",
+        "Pushing your hips out as you bend."
+      ],
+      "tips": [
+        "Breathe out as you reach over."
+      ],
       "voice": {
         "nameOnly": "Dynamic side bends.",
         "nameHowTo": "Dynamic side bends. Stand tall with your feet hip-width apart. Reach one arm up and over your head as you bend to the opposite side, then switch. Keep your hips still and the movement smooth."
@@ -2741,9 +3821,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/standing-hip-rotation.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Balancing on one leg, you draw big slow circles with your knee. It loosens your hip and wakes up the muscles around it.",
+      "howTo": [
+        "Stand on one leg with your hands on your hips.",
+        "Lift the other knee to hip height.",
+        "Swing it out to the side.",
+        "Lower it, drawing a big slow circle.",
+        "Slow circles. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Leaning your body to make the circle bigger.",
+        "Rushing the circles."
+      ],
+      "tips": [
+        "Hold a wall if you need it."
+      ],
       "voice": {
         "nameOnly": "Standing hip rotation.",
         "nameHowTo": "Standing hip rotation. Balance on one leg with your hands on your hips. Lift the other knee to hip height, swing it out to the side and lower it, drawing a big slow circle. Hold a wall if you need to."
@@ -2772,9 +3864,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/elbow-rotations.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You circle your forearms around your elbows. It warms up your elbows and forearms before any pushing or pulling.",
+      "howTo": [
+        "Stand tall with your arms out to the sides.",
+        "Bend your elbows.",
+        "Circle your forearms around your elbows.",
+        "Switch direction halfway.",
+        "Smooth circles."
+      ],
+      "mistakes": [
+        "Circling from your shoulders instead of your elbows.",
+        "Letting your upper arms drop."
+      ],
+      "tips": [
+        "Keep your shoulders down and relaxed."
+      ],
       "voice": {
         "nameOnly": "Elbow rotations.",
         "nameHowTo": "Elbow rotations. Stand tall with your arms out to the sides. Circle your forearms around your elbows, first one way and then the other. Keep your shoulders relaxed."
@@ -2802,9 +3906,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/cross-body-shoulder-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hug one arm across your chest. It stretches the back of your shoulder.",
+      "howTo": [
+        "Stand tall.",
+        "Bring one arm straight across your chest.",
+        "Use your other hand to hug it in, just above the elbow.",
+        "Hold.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Shrugging the stretched shoulder.",
+        "Pulling on the elbow joint itself."
+      ],
+      "tips": [
+        "Turn your head away from the arm to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Cross-body shoulder stretch.",
         "nameHowTo": "Cross-body shoulder stretch. Bring one arm straight across your chest. Use your other hand to hug it in towards you, just above the elbow. Keep your shoulder down and hold the stretch."
@@ -2834,9 +3950,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/wrist-warm-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You roll your wrists in circles. It gets your wrists ready for push-ups and planks.",
+      "howTo": [
+        "Clasp your hands together in front of you.",
+        "Roll your wrists in circles one way.",
+        "Switch direction.",
+        "Keep it loose.",
+        "Smooth and easy."
+      ],
+      "mistakes": [
+        "Forcing your wrists further than they want to go.",
+        "Gripping your hands tightly together."
+      ],
+      "tips": [
+        "Spend a little longer here if push-ups usually bother your wrists."
+      ],
       "voice": {
         "nameOnly": "Wrist warm-up.",
         "nameHowTo": "Wrist warm-up. Clasp your hands together in front of you and roll your wrists in circles, one way and then the other. Keep it loose and easy."
@@ -2866,9 +3994,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/chest-openers-with-rotation.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You open one arm out to the side and turn your chest to follow it. It opens your chest and loosens your upper back.",
+      "howTo": [
+        "Stand tall with your arms out in front.",
+        "Open one arm out to the side.",
+        "Turn your chest to follow it.",
+        "Come back to the middle and switch sides.",
+        "Smooth and flowing."
+      ],
+      "mistakes": [
+        "Turning your hips with your chest.",
+        "Swinging the arm too fast."
+      ],
+      "tips": [
+        "Follow the moving hand with your eyes."
+      ],
       "voice": {
         "nameOnly": "Chest openers with rotation.",
         "nameHowTo": "Chest openers with rotation. Stand tall with your arms out in front. Open one arm out to the side and turn your chest to follow it, then come back and switch sides."
@@ -2897,9 +4037,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/active-calf-and-hamstring-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You put one heel forward and hinge towards it. It warms up the backs of your legs.",
+      "howTo": [
+        "Stand tall.",
+        "Put one heel forward with your toes pointing up.",
+        "Hinge at your hips and reach towards that foot.",
+        "Stand up and swap legs.",
+        "Smooth and flowing, about two seconds each."
+      ],
+      "mistakes": [
+        "Rounding your back to reach further.",
+        "Bending the front knee."
+      ],
+      "tips": [
+        "Push your hips back as you hinge."
+      ],
       "voice": {
         "nameOnly": "Active calf and hamstring stretch.",
         "nameHowTo": "Active calf and hamstring stretch. Put one heel forward with your toes pointing up. Hinge at your hips and reach towards that foot, then stand up and swap legs. Keep your front leg straight."
@@ -2927,9 +4079,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/deep-side-to-side-lunge.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You shift from one deep side lunge to the other. It loosens your hips and inner thighs.",
+      "howTo": [
+        "Stand with your feet wide, toes forward.",
+        "Shift your weight onto one leg and sink low into a side lunge.",
+        "Keep the other leg straight.",
+        "Move across to the other side.",
+        "Smooth and slow."
+      ],
+      "mistakes": [
+        "Letting the heel of the bent leg lift.",
+        "Rounding your back."
+      ],
+      "tips": [
+        "Point the toes of the straight leg up to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Deep side to side lunge.",
         "nameHowTo": "Deep side to side lunge. Stand with your feet wide. Shift your weight onto one leg and sink low into a side lunge, then move across to the other side. Keep your chest up."
@@ -2957,9 +4121,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/lunge-with-thoracic-rotation.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "From a lunge, you reach one arm up and turn your chest to follow it. It opens your hips and loosens your upper back.",
+      "howTo": [
+        "Step into a lunge.",
+        "Put the opposite hand on the floor inside your front foot.",
+        "Reach your other arm up to the ceiling, turning your chest to follow it.",
+        "Lower the arm.",
+        "Slow and smooth. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting your front knee cave in.",
+        "Rushing the turn."
+      ],
+      "tips": [
+        "Follow the reaching hand with your eyes."
+      ],
       "voice": {
         "nameOnly": "Lunge with thoracic rotation.",
         "nameHowTo": "Lunge with thoracic rotation. Step into a lunge and put the opposite hand on the floor inside your front foot. Reach your other arm up to the ceiling, turning your chest to follow it, then lower and repeat."
@@ -2988,9 +4164,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/roll-down.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You roll down through your spine, one part at a time. It loosens your back and stretches your hamstrings.",
+      "howTo": [
+        "Stand tall.",
+        "Tuck your chin.",
+        "Roll down slowly until your hands reach towards the floor.",
+        "Roll back up to standing.",
+        "Slow, about four seconds each way."
+      ],
+      "mistakes": [
+        "Dropping down in one go with a flat back.",
+        "Locking your knees."
+      ],
+      "tips": [
+        "Let your head and arms hang heavy as you roll down."
+      ],
       "voice": {
         "nameOnly": "Roll down.",
         "nameHowTo": "Roll down. Stand tall and tuck your chin. Roll down slowly, one part of your spine at a time, until your hands reach towards the floor. Then roll back up to standing."
@@ -3017,9 +4205,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/full-lunge-leg-rolls.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "From a deep lunge, you roll onto the outside edge of your front foot. It loosens your hips and ankles.",
+      "howTo": [
+        "Step into a deep lunge with your hands on the floor.",
+        "Roll onto the outside edge of your front foot.",
+        "Let that knee drop out.",
+        "Roll back.",
+        "Smooth and slow. Swap legs halfway."
+      ],
+      "mistakes": [
+        "Forcing the knee down.",
+        "Lifting your back knee."
+      ],
+      "tips": [
+        "Breathe out as the knee drops out."
+      ],
       "voice": {
         "nameOnly": "Full lunge leg rolls.",
         "nameHowTo": "Full lunge leg rolls. Step into a deep lunge with your hands on the floor. Roll onto the outside edge of your front foot so that knee drops out, then roll back. Swap legs halfway."
@@ -3047,9 +4247,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/malasana-squat.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A deep squat with your palms pressed together. It opens your hips and inner thighs.",
+      "howTo": [
+        "Stand with your feet wide, toes turned out.",
+        "Sink into a deep squat with your heels down.",
+        "Press your palms together.",
+        "Use your elbows to ease your knees apart.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Letting your heels lift.",
+        "Rounding your back."
+      ],
+      "tips": [
+        "Put a folded towel under your heels if they won't stay down."
+      ],
       "voice": {
         "nameOnly": "Malasana squat.",
         "nameHowTo": "Malasana squat. Sink into a deep squat with your feet wide and your heels down. Press your palms together and use your elbows to ease your knees apart. Keep your chest lifted."
@@ -3076,9 +4288,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/90-90-flip-hip-mobility.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting with your feet planted wide, you let both knees drop from side to side. It loosens your hips in both directions.",
+      "howTo": [
+        "Sit with your knees bent and your feet planted wide.",
+        "Put your hands on the floor behind you.",
+        "Let both knees drop to one side.",
+        "Lift them and drop them to the other side.",
+        "Slow and controlled."
+      ],
+      "mistakes": [
+        "Letting your feet slide in as your knees drop.",
+        "Slumping back onto your hands."
+      ],
+      "tips": [
+        "Keep your chest tall and let the hips do the moving."
+      ],
       "voice": {
         "nameOnly": "Ninety ninety flip.",
         "nameHowTo": "Ninety ninety flip. Sit with both knees bent at right angles, one leg in front of you and one to the side. Lift your knees and swing them over to the other side so the legs swap. Keep your chest tall."
@@ -3105,9 +4329,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/pendulum-hamstring-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "With your feet wide, you fold forward and swing your upper body from side to side. It stretches your hamstrings and loosens your lower back.",
+      "howTo": [
+        "Stand with your feet wide.",
+        "Fold forward from your hips and let your arms hang.",
+        "Swing your upper body towards one foot.",
+        "Swing across to the other foot.",
+        "Slow and relaxed, like a pendulum."
+      ],
+      "mistakes": [
+        "Locking your knees hard.",
+        "Swinging so fast that you lose control."
+      ],
+      "tips": [
+        "Let your head and neck hang loose."
+      ],
       "voice": {
         "nameOnly": "Pendulum hamstring stretch.",
         "nameHowTo": "Pendulum hamstring stretch. Stand on one leg and swing the other forward and back like a pendulum, keeping it straight. Let the swing grow little by little, and swap legs halfway. Hold a wall if you need it."
@@ -3134,9 +4370,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/side-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You reach one arm up and over and hold. It stretches the muscles down your side.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Reach one arm up and over your head.",
+        "Lean to the opposite side until you feel it down your side.",
+        "Hold.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Leaning forward instead of straight to the side.",
+        "Pushing your hips out too far."
+      ],
+      "tips": [
+        "Breathe into the stretched side."
+      ],
       "voice": {
         "nameOnly": "Side stretch.",
         "nameHowTo": "Side stretch. Stand tall with your feet hip-width apart. Reach one arm up and over your head, leaning to the opposite side until you feel it down your side. Hold and breathe slowly."
@@ -3164,9 +4412,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/cat-to-cow-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "On all fours, you move between an arched and a rounded back. It loosens your whole spine.",
+      "howTo": [
+        "Start on all fours.",
+        "Breathe in as you let your stomach drop and lift your chest.",
+        "Breathe out as you round your back up and tuck your chin.",
+        "Keep moving between the two.",
+        "Slow, one breath each way."
+      ],
+      "mistakes": [
+        "Moving only your neck and head.",
+        "Rushing through it."
+      ],
+      "tips": [
+        "Let your breath set the pace."
+      ],
       "voice": {
         "nameOnly": "Cat to cow stretch.",
         "nameHowTo": "Cat to cow stretch. On your hands and knees, breathe in as you let your stomach drop and lift your chest. Breathe out as you round your back up towards the ceiling and tuck your chin. Keep it slow."
@@ -3194,9 +4454,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/plank-to-downward-dog.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You move from a high plank into downward dog and back. It stretches your shoulders and hamstrings.",
+      "howTo": [
+        "Start in a high plank.",
+        "Lift your hips up and back into an upside-down V.",
+        "Ease your heels towards the floor and pause.",
+        "Come back down to plank.",
+        "Slow and smooth."
+      ],
+      "mistakes": [
+        "Rounding your back in downward dog.",
+        "Letting your hips sag in the plank."
+      ],
+      "tips": [
+        "Bend your knees in downward dog so you can keep your back long."
+      ],
       "voice": {
         "nameOnly": "Plank to downward dog.",
         "nameHowTo": "Plank to downward dog. From a high plank, lift your hips up and back so your body makes an upside-down V. Ease your heels towards the floor, pause, then come back down to plank."
@@ -3223,9 +4495,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/childs-pose.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You sit back on your heels and fold forward. It relaxes your back and shoulders.",
+      "howTo": [
+        "Kneel and sit back on your heels.",
+        "Fold forward.",
+        "Stretch your arms out in front.",
+        "Rest your forehead on the floor.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Holding tension in your shoulders.",
+        "Holding your breath."
+      ],
+      "tips": [
+        "Widen your knees and let your chest sink between them."
+      ],
       "voice": {
         "nameOnly": "Child's pose.",
         "nameHowTo": "Child's pose. Kneel, sit back on your heels and fold forward. Stretch your arms out in front of you and rest your forehead on the floor. Let your back soften and breathe slowly."
@@ -3252,9 +4536,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/knees-to-chest-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you hug your knees to your chest. It relaxes your lower back.",
+      "howTo": [
+        "Lie on your back.",
+        "Hug both knees into your chest.",
+        "Let your lower back relax into the floor.",
+        "Rock gently from side to side if you like.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Lifting your head off the floor.",
+        "Pulling your knees in hard."
+      ],
+      "tips": [
+        "Breathe into your lower back."
+      ],
       "voice": {
         "nameOnly": "Knees to chest stretch.",
         "nameHowTo": "Knees to chest stretch. Lie on your back and hug both knees into your chest. Let your lower back relax into the floor. You can rock gently from side to side."
@@ -3281,9 +4577,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/overhead-lat-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You reach overhead and lean to the side. It stretches the big muscles down your back.",
+      "howTo": [
+        "Stand tall.",
+        "Reach both arms overhead and hold one wrist.",
+        "Lean gently to the side.",
+        "Switch sides.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Leaning forward instead of straight to the side.",
+        "Shrugging your shoulders up."
+      ],
+      "tips": [
+        "Pull gently on the wrist to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Overhead lat stretch.",
         "nameHowTo": "Overhead lat stretch. Reach both arms overhead and hold one wrist with the other hand. Lean gently to the side to stretch down your back and side, then switch sides."
@@ -3310,9 +4618,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/seated-hamstring-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting with your legs out, you hinge forward towards your toes. It stretches your hamstrings.",
+      "howTo": [
+        "Sit with your legs straight out in front.",
+        "Keep your back long.",
+        "Hinge forward from your hips, reaching for your toes.",
+        "Stop where you feel the stretch and hold.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Rounding your back to reach further.",
+        "Bouncing."
+      ],
+      "tips": [
+        "Bend your knees slightly if it's too much."
+      ],
       "voice": {
         "nameOnly": "Seated hamstring stretch.",
         "nameHowTo": "Seated hamstring stretch. Sit with your legs straight out in front. Keep your back long and hinge forward from your hips, reaching for your toes. Stop where you feel the stretch and hold."
@@ -3339,9 +4659,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/seated-lower-back-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting tall, you cross one leg over and turn towards it. It stretches your lower back and outer hip.",
+      "howTo": [
+        "Sit tall with your legs out.",
+        "Bend one knee and cross that foot over the other leg.",
+        "Hug the knee and turn your chest towards it.",
+        "Look over your shoulder.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Slumping your back.",
+        "Forcing the turn with your arm."
+      ],
+      "tips": [
+        "Sit taller on each breath in, turn a little more on each breath out."
+      ],
       "voice": {
         "nameOnly": "Seated lower back stretch.",
         "nameHowTo": "Seated lower back stretch. Sit tall with your legs out. Bend one knee and cross that foot over the other leg. Hug the knee and turn your chest towards it, looking over your shoulder."
@@ -3369,9 +4701,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/figure-4-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you cross one ankle over the opposite knee and pull. It stretches your glutes and hips.",
+      "howTo": [
+        "Lie on your back with your knees bent and your feet flat.",
+        "Cross one ankle over the opposite knee.",
+        "Thread your hands behind the bottom thigh.",
+        "Draw it towards you and hold.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Lifting your head off the floor.",
+        "Pulling the leg in hard."
+      ],
+      "tips": [
+        "Push the crossed knee gently away to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Figure four stretch.",
         "nameHowTo": "Figure four stretch. Lying face up, bend both knees and plant your feet. Cross one ankle over the opposite knee, then thread your hands behind the bottom thigh and draw it towards you. Hold and feel it in your hip."
@@ -3399,9 +4743,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/hip-flexor-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Kneeling on one knee, you shift forward. It stretches the front of your hip.",
+      "howTo": [
+        "Kneel on one knee with the other foot flat in front.",
+        "Tuck your hips under.",
+        "Shift forward until you feel the stretch.",
+        "Hold.",
+        "Hold and breathe slowly. Swap sides halfway."
+      ],
+      "mistakes": [
+        "Arching your lower back.",
+        "Leaning your chest forward."
+      ],
+      "tips": [
+        "Squeeze the glute of the back leg to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Hip flexor stretch.",
         "nameHowTo": "Hip flexor stretch. Kneel on one knee with the other foot flat in front. Tuck your hips under and shift forward until you feel a stretch at the front of your back hip. Swap sides halfway."
@@ -3428,9 +4784,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/spinal-twist.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying on your back, you drop one knee across your body. It loosens your spine and lower back.",
+      "howTo": [
+        "Lie on your back with your arms out wide.",
+        "Bring one knee across your body towards the floor.",
+        "Turn your head the other way.",
+        "Keep both shoulders down.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting the opposite shoulder lift off the floor.",
+        "Pushing the knee down with your hand."
+      ],
+      "tips": [
+        "Relax a little more on each breath out and let the knee sink by itself."
+      ],
       "voice": {
         "nameOnly": "Spinal twist.",
         "nameHowTo": "Spinal twist. Lie on your back with your arms out wide. Bring one knee across your body towards the floor and turn your head the other way. Keep both shoulders down and breathe."
@@ -3459,9 +4827,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/cobra.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Lying face down, you press your chest up. It stretches your abs and opens your spine.",
+      "howTo": [
+        "Lie face down with your hands under your shoulders.",
+        "Press up gently to lift your chest.",
+        "Keep your hips on the floor and your shoulders down.",
+        "Hold, then lower slowly.",
+        "Hold and breathe slowly."
+      ],
+      "mistakes": [
+        "Pushing up so high that your lower back pinches.",
+        "Shrugging your shoulders to your ears."
+      ],
+      "tips": [
+        "Keep your elbows slightly bent and your neck long."
+      ],
       "voice": {
         "nameOnly": "Cobra.",
         "nameHowTo": "Cobra. Lie face down with your hands under your shoulders. Press up gently to lift your chest, keeping your hips on the floor and your shoulders down. Hold, then lower slowly."
@@ -3488,9 +4868,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/deep-squat-and-thoracic-rotation.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a deep squat, you reach one arm up and turn. It opens your hips and loosens your upper back.",
+      "howTo": [
+        "Sink into a deep squat.",
+        "Put one hand on the floor.",
+        "Reach the other arm up to the ceiling, turning your chest.",
+        "Bring it down and switch sides.",
+        "Slow and smooth."
+      ],
+      "mistakes": [
+        "Letting your heels lift.",
+        "Rushing the turn."
+      ],
+      "tips": [
+        "Follow the reaching hand with your eyes."
+      ],
       "voice": {
         "nameOnly": "Deep squat with thoracic rotation.",
         "nameHowTo": "Deep squat with thoracic rotation. Sink into a deep squat. Put one hand on the floor and reach the other arm up to the ceiling, turning your chest. Bring it down and switch sides."
@@ -3518,9 +4910,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/pigeon-pose.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You bring one knee forward and stretch the other leg back. It stretches your glutes and hips.",
+      "howTo": [
+        "Start on all fours.",
+        "Bring one knee forward behind your wrist.",
+        "Stretch the other leg back.",
+        "Lower your hips and fold forward if it feels good.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting your hips tip to one side.",
+        "Forcing the fold."
+      ],
+      "tips": [
+        "Put a cushion under your hip if it doesn't reach the floor."
+      ],
       "voice": {
         "nameOnly": "Pigeon pose.",
         "nameHowTo": "Pigeon pose. From all fours, bring one knee forward behind your wrist and stretch the other leg back. Lower your hips and fold forward over your front leg if it feels good. Breathe into the stretch."
@@ -3548,9 +4952,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/seated-butterfly-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Sitting with the soles of your feet together, you ease your knees down. It stretches your inner thighs.",
+      "howTo": [
+        "Sit tall.",
+        "Put the soles of your feet together.",
+        "Hold your feet and let your knees fall out.",
+        "Gently bounce your knees towards the floor.",
+        "Gentle and steady."
+      ],
+      "mistakes": [
+        "Rounding your back.",
+        "Pushing your knees down with your hands."
+      ],
+      "tips": [
+        "Move your feet further away to make it gentler."
+      ],
       "voice": {
         "nameOnly": "Seated butterfly stretch.",
         "nameHowTo": "Seated butterfly stretch. Sit tall with the soles of your feet together and your knees falling out. Hold your feet and gently bounce your knees towards the floor. Keep your back straight."
@@ -3580,9 +4996,21 @@
       "level": "beginner",
       "status": "not-yet",
       "image": "img/moves/bodyweight-row.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hang under a low bar or rings and pull your chest up. It's the main pulling move you can do without a pull-up bar, working your upper back and biceps.",
+      "howTo": [
+        "Lie under a low bar or rings and grip them with straight arms.",
+        "Keep your body in one straight line, heels on the floor.",
+        "Pull your chest up to the bar, squeezing your shoulder blades together.",
+        "Lower slowly until your arms are straight.",
+        "One second up, two seconds down."
+      ],
+      "mistakes": [
+        "Letting your hips sag as you pull.",
+        "Shrugging your shoulders up to your ears."
+      ],
+      "tips": [
+        "Walk your feet back to make it easier, forward to make it harder."
+      ],
       "voice": {
         "nameOnly": "Bodyweight row.",
         "nameHowTo": "Bodyweight row. Lie under a low bar or rings and grip with straight arms, body in one line. Pull your chest up to the bar, squeezing your shoulder blades, then lower slowly."
@@ -3613,9 +5041,21 @@
       "level": "intermediate",
       "status": "not-yet",
       "image": "img/moves/bulgarian-split-squats.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A lunge with your back foot up on a bench. It loads your front leg heavily, so it builds strength and balance one side at a time.",
+      "howTo": [
+        "Stand a stride in front of a bench, facing away from it.",
+        "Rest the top of your back foot on the bench.",
+        "Lower straight down until your front thigh is about level with the floor.",
+        "Push through your front heel to come back up.",
+        "Two seconds down, one up. Swap legs halfway."
+      ],
+      "mistakes": [
+        "Standing too close to the bench, so your front knee shoots forward.",
+        "Pushing off the back foot instead of the front leg."
+      ],
+      "tips": [
+        "Lean your chest forward a little to work your glutes more."
+      ],
       "voice": {
         "nameOnly": "Bulgarian split squats.",
         "nameHowTo": "Bulgarian split squats. Stand in front of a bench and rest one foot on it behind you. Lower into a lunge on your front leg, then push back up. Swap legs halfway."
@@ -3642,9 +5082,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/calf-raises.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You rise up onto your tiptoes and lower slowly. It strengthens your calves and ankles, which helps with running and jumping.",
+      "howTo": [
+        "Stand tall, on the edge of a step if you have one.",
+        "Rise up onto your tiptoes as high as you can.",
+        "Pause at the top.",
+        "Lower your heels slowly, below the step if you're on one.",
+        "One second up, a pause, three seconds down."
+      ],
+      "mistakes": [
+        "Bouncing at the bottom.",
+        "Rolling onto the outside edges of your feet."
+      ],
+      "tips": [
+        "Hold a wall or rail lightly for balance, not for help."
+      ],
       "voice": {
         "nameOnly": "Calf raises.",
         "nameHowTo": "Calf raises. Stand tall, on a step if you have one. Rise up onto your tiptoes as high as you can, pause, then lower your heels slowly."
@@ -3675,9 +5127,21 @@
       "level": "intermediate",
       "status": "not-yet",
       "image": "img/moves/chin-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A pull-up with your palms facing you. It works your back and puts extra load on your biceps.",
+      "howTo": [
+        "Hang from a bar with your palms facing you, hands shoulder-width apart.",
+        "Pull your shoulders down away from your ears.",
+        "Pull up until your chin is over the bar.",
+        "Lower all the way down with control.",
+        "One second up, two or three seconds down."
+      ],
+      "mistakes": [
+        "Swinging or kicking to get up.",
+        "Stopping short of a full hang at the bottom."
+      ],
+      "tips": [
+        "Jump to the top and lower slowly if you can't pull up yet."
+      ],
       "voice": {
         "nameOnly": "Chin up.",
         "nameHowTo": "Chin up. Hang from a bar with your palms facing you, hands shoulder-width apart. Pull up until your chin is over the bar, then lower all the way down with control."
@@ -3707,9 +5171,21 @@
       "level": "intermediate",
       "status": "not-yet",
       "image": "img/moves/dips.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You lower and press your body between parallel bars or a sturdy edge. It works your triceps, chest and the fronts of your shoulders.",
+      "howTo": [
+        "Support yourself on parallel bars or a sturdy edge with straight arms.",
+        "Lean forward a little and keep your shoulders down.",
+        "Bend your elbows to lower your body until they're at about a right angle.",
+        "Press back up until your arms are straight.",
+        "Two seconds down, one up."
+      ],
+      "mistakes": [
+        "Going so deep that your shoulders hurt.",
+        "Shrugging your shoulders up."
+      ],
+      "tips": [
+        "Bend your knees and let your feet help if you can't do a full dip yet."
+      ],
       "voice": {
         "nameOnly": "Dips.",
         "nameHowTo": "Dips. Support yourself on parallel bars or a sturdy edge with straight arms. Bend your elbows to lower your body, then press back up. Keep your shoulders down."
@@ -3739,9 +5215,21 @@
       "level": "advanced",
       "status": "not-yet",
       "image": "img/moves/handstand-push-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A push-up upside down against a wall. It's the hardest pushing move for your shoulders and arms.",
+      "howTo": [
+        "Put your hands on the floor a hand's width from a wall.",
+        "Kick up into a handstand with your heels resting on the wall.",
+        "Bend your elbows to lower the top of your head towards the floor.",
+        "Press back up until your arms are straight.",
+        "Slow and controlled. Only try it when pike push-ups feel strong."
+      ],
+      "mistakes": [
+        "Letting your elbows flare straight out.",
+        "Dropping down too fast."
+      ],
+      "tips": [
+        "Put a folded towel where your head lands."
+      ],
       "voice": {
         "nameOnly": "Handstand push up.",
         "nameHowTo": "Handstand push up. Kick up into a handstand against a wall. Bend your elbows to lower your head towards the floor, then press back up. Only try this when you're ready."
@@ -3771,9 +5259,21 @@
       "level": "intermediate",
       "status": "not-yet",
       "image": "img/moves/hanging-leg-raise.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hang from a bar and lift your legs. It works your abs and grip.",
+      "howTo": [
+        "Hang from a bar with straight arms.",
+        "Brace your stomach.",
+        "Lift your legs up in front of you.",
+        "Lower them slowly.",
+        "Slow and controlled, without swinging."
+      ],
+      "mistakes": [
+        "Swinging to get your legs up.",
+        "Leaning back to cheat the lift."
+      ],
+      "tips": [
+        "Bend your knees to make it easier."
+      ],
       "voice": {
         "nameOnly": "Hanging leg raise.",
         "nameHowTo": "Hanging leg raise. Hang from a bar with straight arms. Brace your stomach and lift your legs up in front of you, then lower them slowly without swinging."
@@ -3803,9 +5303,21 @@
       "level": "intermediate",
       "status": "not-yet",
       "image": "img/moves/pull-up.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You hang from a bar and pull your chin over it. It's the main move for a strong back.",
+      "howTo": [
+        "Hang from a bar with your palms facing away, hands a little wider than your shoulders.",
+        "Pull your shoulders down away from your ears.",
+        "Pull up until your chin clears the bar.",
+        "Lower slowly to a full hang.",
+        "One second up, two or three seconds down."
+      ],
+      "mistakes": [
+        "Swinging or kicking to get up.",
+        "Doing half reps that stop short of a full hang."
+      ],
+      "tips": [
+        "Jump to the top and lower slowly if you can't pull up yet."
+      ],
       "voice": {
         "nameOnly": "Pull up.",
         "nameHowTo": "Pull up. Hang from a bar with your palms facing away, hands a little wider than your shoulders. Pull up until your chin clears the bar, then lower slowly to a full hang."
@@ -3828,9 +5340,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/quadruped-twister.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "On your hands and toes with your knees hovering, you swing both knees under you from side to side. It works your core and keeps your heart rate up.",
+      "howTo": [
+        "Start on all fours, then lift your knees just off the floor.",
+        "Keep your hands under your shoulders.",
+        "Twist your hips so both knees swing under you to one side.",
+        "Come back through the middle and swing to the other side.",
+        "Quick and controlled."
+      ],
+      "mistakes": [
+        "Letting your hips lift high.",
+        "Moving your shoulders with your hips."
+      ],
+      "tips": [
+        "Keep your shoulders over your hands while your hips do the turning."
+      ],
       "voice": {
         "nameOnly": "Quadruped twister.",
         "nameHowTo": "Quadruped twister. Start on all fours with your knees lifted just off the floor. Twist your hips and kick one leg through underneath you towards the opposite side, then come back and switch."
@@ -3858,9 +5382,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/plank-punches-with-leg-extension.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "In a high plank, you punch one arm forward and lift the opposite leg. It works your core, shoulders and glutes.",
+      "howTo": [
+        "Hold a high plank.",
+        "Punch one arm forward and lift the opposite leg straight back at the same time.",
+        "Put them down.",
+        "Switch to the other arm and leg.",
+        "Controlled pace."
+      ],
+      "mistakes": [
+        "Twisting your hips.",
+        "Lifting the leg so high that your back arches."
+      ],
+      "tips": [
+        "Widen your feet to make it steadier."
+      ],
       "voice": {
         "nameOnly": "Plank punches with leg extension.",
         "nameHowTo": "Plank punches with leg extension. Hold a high plank. Punch one arm forward and lift the opposite leg straight back at the same time. Put them down and switch. Keep your hips level."
@@ -3889,9 +5425,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/reverse-plank.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A face-up plank on straight arms. It strengthens your glutes, back and shoulders and opens up your chest.",
+      "howTo": [
+        "Sit with your legs straight and your hands on the floor behind you.",
+        "Point your fingers towards your feet.",
+        "Press through your hands and lift your hips into one straight line.",
+        "Hold, chest up and glutes squeezed.",
+        "Hold still and breathe steadily."
+      ],
+      "mistakes": [
+        "Letting your hips drop.",
+        "Locking your elbows hard."
+      ],
+      "tips": [
+        "Pull your shoulders down away from your ears."
+      ],
       "voice": {
         "nameOnly": "Reverse plank.",
         "nameHowTo": "Reverse plank. Sit with your legs out straight and your hands on the floor behind you. Press through your hands and raise your hips until you're in one straight line, chest up. Hold it there."
@@ -3920,9 +5468,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/leg-swings-front-to-back.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Holding a wall, you swing one leg forward and back. It warms up your hips and hamstrings before a run.",
+      "howTo": [
+        "Stand side-on to a wall or post and hold it.",
+        "Swing your outside leg forward.",
+        "Swing it back behind you.",
+        "Let each swing grow a little bigger.",
+        "Relaxed and rhythmic. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Leaning your body with the swing.",
+        "Forcing the leg too high."
+      ],
+      "tips": [
+        "Keep your standing knee soft."
+      ],
       "voice": {
         "nameOnly": "Leg swings, front to back.",
         "nameHowTo": "Leg swings, front to back. Stand side-on to a wall or post and hold it for balance. Swing your outside leg forwards and backwards like a pendulum, keeping it relaxed. Let each swing grow a little bigger."
@@ -3951,9 +5511,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/leg-swings-side-to-side.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Facing a wall, you swing one leg across your body and out to the side. It warms up your hips and inner thighs.",
+      "howTo": [
+        "Face a wall or post and hold it with both hands.",
+        "Swing one leg across the front of your body.",
+        "Swing it out to the side.",
+        "Let each swing grow a little bigger.",
+        "Relaxed and rhythmic. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Turning your hips with the swing.",
+        "Locking your standing knee."
+      ],
+      "tips": [
+        "Keep your hips facing forward."
+      ],
       "voice": {
         "nameOnly": "Leg swings, side to side.",
         "nameHowTo": "Leg swings, side to side. Face a wall or post and hold it with both hands. Swing one leg across the front of your body, then out to the side. Keep your hips facing forwards and your standing knee soft."
@@ -3982,9 +5554,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/pogo-hops.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Quick, springy bounces on the balls of your feet. It trains your calves and ankles to be stiff and springy for running.",
+      "howTo": [
+        "Stand tall with your feet hip-width apart.",
+        "Bounce quickly on the balls of your feet.",
+        "Keep your knees almost straight and your heels just off the ground.",
+        "Keep each contact with the ground short.",
+        "Fast and springy, like the ground is hot."
+      ],
+      "mistakes": [
+        "Bending your knees, so it turns into a squat jump.",
+        "Landing on your heels."
+      ],
+      "tips": [
+        "Think about bouncing off the ground, not jumping high."
+      ],
       "voice": {
         "nameOnly": "Pogo hops.",
         "nameHowTo": "Pogo hops. Stand tall with your feet hip-width apart. Bounce quickly on the balls of your feet, knees almost straight and heels just off the ground. Keep each contact short and springy, like the ground is hot."
@@ -4012,9 +5596,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/a-march.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A slow, exaggerated march with high knees. It teaches the posture and knee drive for good running form.",
+      "howTo": [
+        "Stand tall.",
+        "Drive one knee up to hip height as the opposite arm swings forward.",
+        "Put that foot down on its ball, right under your hips.",
+        "Switch legs and walk forwards.",
+        "Slow, sharp and precise."
+      ],
+      "mistakes": [
+        "Leaning back.",
+        "Reaching the foot out in front."
+      ],
+      "tips": [
+        "Keep your foot flexed, toes pulled up, as your knee comes up."
+      ],
       "voice": {
         "nameOnly": "A-march.",
         "nameHowTo": "A-march. Walk forwards tall, driving one knee up to hip height as the opposite arm swings forward. Put each foot down on its ball, right under your hips. Slow, sharp and precise."
@@ -4043,9 +5639,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/a-skips.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "A skip with high knees and quick feet. It builds on the A-march to train quick, light steps.",
+      "howTo": [
+        "Stand tall.",
+        "Skip forwards, driving one knee up to hip height on each skip.",
+        "Swing the opposite arm forward.",
+        "Push the ground away under your hips.",
+        "Quick and light, not high."
+      ],
+      "mistakes": [
+        "Leaning back.",
+        "Skipping for height instead of rhythm."
+      ],
+      "tips": [
+        "Keep your foot flexed, toes pulled up."
+      ],
       "voice": {
         "nameOnly": "A-skips.",
         "nameHowTo": "A-skips. Skip forwards, driving one knee up to hip height on each skip as the opposite arm swings. Push the ground away under your hips and stay tall. Quick and light, not high."
@@ -4074,9 +5682,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/b-skips.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "An A-skip with a kick out and a paw back. It trains your hamstrings to pull your foot back under you, as in running.",
+      "howTo": [
+        "Skip forwards like an A-skip.",
+        "As your knee comes up, reach the lower leg out in front.",
+        "Sweep it down and back under you, pawing the ground.",
+        "Switch legs.",
+        "Stay tall and relaxed."
+      ],
+      "mistakes": [
+        "Kicking the leg out high and stiff.",
+        "Landing in front of your body."
+      ],
+      "tips": [
+        "Learn it slowly first: an A-march with a kick out."
+      ],
       "voice": {
         "nameOnly": "B-skips.",
         "nameHowTo": "B-skips. Skip forwards like an A-skip, but as your knee comes up, reach the lower leg out in front, then sweep it down and back under you, pawing the ground. Stay tall and relaxed."
@@ -4105,9 +5725,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/carioca.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You travel sideways, crossing your back leg in front and then behind. It loosens your hips and trains quick, light feet.",
+      "howTo": [
+        "Stand side-on to the way you're going.",
+        "Cross your back leg in front of your lead leg.",
+        "Step out with your lead leg, then cross your back leg behind.",
+        "Keep repeating.",
+        "Quick and light. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Turning your shoulders with your hips.",
+        "Landing flat-footed."
+      ],
+      "tips": [
+        "Let your hips turn while your shoulders stay facing forward."
+      ],
       "voice": {
         "nameOnly": "Carioca.",
         "nameHowTo": "Carioca. Travel sideways, crossing your back leg in front of your lead leg, then behind it, over and over. Let your hips turn while your shoulders stay facing forwards. Stay light on the balls of your feet."
@@ -4136,9 +5768,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/straight-leg-run.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You run with almost straight legs, like scissors. It trains your hamstrings and glutes to pull your foot down under you.",
+      "howTo": [
+        "Stand tall.",
+        "Run forwards with your legs almost straight.",
+        "Pull each foot down under your hips.",
+        "Land on the ball of the foot.",
+        "Quick steps."
+      ],
+      "mistakes": [
+        "Leaning back.",
+        "Landing in front of your body."
+      ],
+      "tips": [
+        "Pull the ground back under you with each step."
+      ],
       "voice": {
         "nameOnly": "Straight-leg run.",
         "nameHowTo": "Straight-leg run. Run forwards with your legs almost straight, like scissors. Pull each foot down under your hips and land on the ball of the foot. Stay tall and keep the steps quick."
@@ -4167,9 +5811,21 @@
       "level": "intermediate",
       "status": "in-plan",
       "image": "img/moves/bounding.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Long, springy strides with a moment of float. It builds power for running.",
+      "howTo": [
+        "Stand tall.",
+        "Push hard off your back foot.",
+        "Drive your knee forward and up.",
+        "Float for a moment, then land and push off again.",
+        "Long and springy. Swing your arms big to match."
+      ],
+      "mistakes": [
+        "Landing heavily on your heels.",
+        "Short, choppy strides."
+      ],
+      "tips": [
+        "Think about going forward, not up."
+      ],
       "voice": {
         "nameOnly": "Bounding.",
         "nameHowTo": "Bounding. Run forwards with long, springy strides, driving your knee forward and up and pushing hard off the back foot. Float for a moment on each step and swing your arms big to match."
@@ -4198,9 +5854,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/strides.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Short, fast runs that build up to near your top speed. It trains good form at speed.",
+      "howTo": [
+        "Start jogging.",
+        "Build up to about ninety percent of your top speed over the first few seconds.",
+        "Hold it smoothly.",
+        "Ease off before the end.",
+        "Fast but relaxed, not a sprint."
+      ],
+      "mistakes": [
+        "Sprinting flat out.",
+        "Tensing your shoulders and face."
+      ],
+      "tips": [
+        "Keep your shoulders loose and your hands relaxed."
+      ],
       "voice": {
         "nameOnly": "Strides.",
         "nameHowTo": "Strides. Build up to about ninety percent of your top speed over the first few seconds, hold it smoothly, then ease off before the end. Fast but relaxed, not a sprint. Keep your shoulders loose."
@@ -4227,9 +5895,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/standing-calf-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "With your hands on a wall, you lean in with one leg back. It stretches your calf.",
+      "howTo": [
+        "Put your hands on a wall.",
+        "Step one foot back.",
+        "Keep that back leg straight and the heel down.",
+        "Lean in until you feel the stretch.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Letting your heel lift.",
+        "Bending the back knee."
+      ],
+      "tips": [
+        "Point your back toes straight forward."
+      ],
       "voice": {
         "nameOnly": "Standing calf stretch.",
         "nameHowTo": "Standing calf stretch. Put your hands on a wall and step one foot back. Keep that back leg straight and the heel down, then lean in until you feel the stretch in your calf. Hold it there."
@@ -4257,9 +5937,21 @@
       "level": "beginner",
       "status": "in-plan",
       "image": "img/moves/standing-quad-stretch.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "Standing, you pull one heel towards your glutes. It stretches the front of your thigh.",
+      "howTo": [
+        "Stand tall, holding a wall if you need to.",
+        "Bend one knee and catch your foot behind you.",
+        "Draw your heel towards your glutes.",
+        "Keep your knees together and your hips pushed slightly forward.",
+        "Hold and breathe slowly. Stay on one side until the app switches."
+      ],
+      "mistakes": [
+        "Arching your back.",
+        "Letting your knee drift out."
+      ],
+      "tips": [
+        "Squeeze your glute to feel more stretch."
+      ],
       "voice": {
         "nameOnly": "Standing quad stretch.",
         "nameHowTo": "Standing quad stretch. Stand tall, holding a wall if you need to. Bend one knee and catch your foot behind you, drawing your heel towards your glutes. Keep your knees together and your hips pushed slightly forward."
@@ -4285,9 +5977,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/bicep-curls.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You curl a pair of dumbbells up to your shoulders. It builds your biceps.",
+      "howTo": [
+        "Stand tall with a dumbbell in each hand, palms facing forward.",
+        "Keep your elbows by your sides.",
+        "Curl the weights up towards your shoulders.",
+        "Lower them slowly all the way down.",
+        "One second up, two seconds down."
+      ],
+      "mistakes": [
+        "Swinging your body to lift the weight.",
+        "Letting your elbows drift forward."
+      ],
+      "tips": [
+        "Pick a weight you can lift without swinging."
+      ],
       "voice": {
         "nameOnly": "Bicep curls.",
         "nameHowTo": ""
@@ -4310,9 +6014,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/standing-shoulder-press.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You press a pair of dumbbells overhead. It builds your shoulders and triceps.",
+      "howTo": [
+        "Stand tall with a dumbbell in each hand at shoulder height, palms facing forward.",
+        "Brace your stomach.",
+        "Press the weights straight up until your arms are straight.",
+        "Lower them slowly back to your shoulders.",
+        "One second up, two seconds down."
+      ],
+      "mistakes": [
+        "Arching your lower back to push the weight up.",
+        "Pressing the weights forward instead of straight up."
+      ],
+      "tips": [
+        "Squeeze your glutes to keep your back straight."
+      ],
       "voice": {
         "nameOnly": "Standing shoulder press.",
         "nameHowTo": ""
@@ -4335,9 +6051,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/kneeling-row.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "With one knee and hand on a bench, you row a dumbbell up to your hip. It builds your upper back and biceps.",
+      "howTo": [
+        "Put one knee and the same hand on a bench, back flat.",
+        "Hold a dumbbell in the other hand, arm straight down.",
+        "Pull the weight up towards your hip, elbow close to your side.",
+        "Lower it slowly.",
+        "One second up, two seconds down. Do one side, then the other."
+      ],
+      "mistakes": [
+        "Twisting your body to lift the weight.",
+        "Rounding your back."
+      ],
+      "tips": [
+        "Squeeze your shoulder blade back at the top."
+      ],
       "voice": {
         "nameOnly": "Kneeling row.",
         "nameHowTo": ""
@@ -4360,9 +6088,21 @@
       "level": null,
       "status": "in-plan",
       "image": "img/moves/lateral-raises.svg",
-      "howTo": [],
-      "mistakes": [],
-      "tips": [],
+      "intro": "You raise a pair of dumbbells out to the sides. It builds the sides of your shoulders.",
+      "howTo": [
+        "Stand tall with a dumbbell in each hand by your sides.",
+        "Bend your elbows slightly.",
+        "Raise the weights out to the sides until your arms are level with your shoulders.",
+        "Lower them slowly.",
+        "One second up, two seconds down."
+      ],
+      "mistakes": [
+        "Swinging your body to lift the weight.",
+        "Shrugging your shoulders up."
+      ],
+      "tips": [
+        "Use a lighter weight than you think: it's a small muscle."
+      ],
       "voice": {
         "nameOnly": "Lateral raises.",
         "nameHowTo": ""

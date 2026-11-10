@@ -647,7 +647,7 @@ function infoSheet() {
           </div>
           <button class="icon-btn" data-close aria-label="Close">${sym('close')}</button>
         </div>
-        <div class="sheet-art ${step.section === 'main' ? 'amber' : ''}">${sym('figureFloor')}</div>
+        <div class="sheet-art ${step.section === 'main' ? 'amber' : 'warm'}"></div>
         ${howToHtml(m)}
       </div>
       <div class="sheet-foot"><button class="cta" data-close>Back to workout<span class="go">${sym('play')}</span></button></div>
@@ -685,6 +685,22 @@ function placeArt() {
     if (n) prefetch(file(n.move, 'loop'));
   }
   art.place(box, P.running);
+  placeSheetArt();
+}
+
+// The info sheet's image (F09): the move's loop on its colour, playing while
+// the workout is paused behind it. Kept across redraws like the one above.
+let sheetArt = null;
+function placeSheetArt() {
+  const box = P.sheet === 'info' && app.querySelector('.sheet-art');
+  if (!box) { sheetArt = null; return; }
+  const step = P.steps[P.sheetStep];
+  const key = `${P.id}:${P.sheetStep}`;
+  if (!sheetArt || sheetArt.key !== key) {
+    sheetArt = moveArt(step.move, 'loop', { right: step.side === 'right', fallback: 'figureFloor' });
+    sheetArt.key = key;
+  }
+  sheetArt.place(box, true);
 }
 
 // ---- The phone's back button (B02) ----
