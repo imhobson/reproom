@@ -11,7 +11,7 @@ import * as data from '../data.js';
 import * as store from '../store.js';
 import * as session from '../session.js';
 import { sym } from '../symbols.js';
-import { thumb } from '../moveimg.js';
+import { thumb, moveArt, prefetch, file, reducedMotion } from '../moveimg.js';
 import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
 import { howToHtml } from './info.js';
 import * as audio from '../audio.js';
@@ -71,6 +71,8 @@ function start(key) {
     idx: 0, phase: null, left: 0, total: 0, sinceStart: 0,
     elapsed: 0, running: true, muted: false, sheet: null, sheetStep: null,
   };
+  art = null;
+  if (steps[0] && steps[0].move) prefetch(file(steps[0].move, 'start'));
   audio.setMuted(false);
   audio.resume();
   audio.preload(steps);
@@ -440,7 +442,6 @@ function view() {
   const isLast = P.phase === 'move' && P.idx === P.lastMove;
   const isFirst = P.phase === 'preview' && P.idx === P.firstMove;
   const isSet = P.phase === 'set';
-  const isWeight = step.type === 'weight';
   const isWalk = P.phase === 'rest' && !!step.walkBack; // F11 walk back (board 16c)
   const paused = !P.running;
   // "Set 2 of 3", or "Set 2 of 3 · Left" for Kneeling row
@@ -515,7 +516,7 @@ function view() {
           </div>
         </div>
         ${chip ? `<p class="chip ${chipCls}">${chip}</p>` : ''}
-        <div class="art ${isWalk ? 'walk' : ''}">${sym(isWalk ? 'arrowLeft' : isRest ? 'moon' : isWeight ? 'dumbbell' : 'figure')}</div>
+        <div class="art ${isWalk ? 'walk' : ''}">${isRest ? sym(isWalk ? 'arrowLeft' : 'moon') : ''}</div>
       </div>
       <div class="pad p-head">
         <p class="label red p-kicker">${kicker}</p>
@@ -656,9 +657,36 @@ function infoSheet() {
 function draw() {
   if (!P || !app) return;
   readKgField(); // keep a kg that's typed but not yet confirmed (e.g. on Pause)
+  if (art) art.save();
   app.innerHTML = view();
   wire();
+  placeArt();
   mediaInfo();
+}
+
+// ---- The move image in the big image area (F09) ----
+// Get ready / Next up: the coming move's start pose (still). The move
+// running, or a weight set: its loop, from the start. Rest: the moon (in
+// view()). A right-side step is flipped. The image is built once per step
+// and phase and moved into each redrawn page, so a redraw (pause, the GO
+// chip going) never restarts the loop; Pause freezes it where it is and
+// Play carries on from there. The 250 ms ticks don't touch it.
+let art = null;
+function placeArt() {
+  const step = P.steps[P.idx];
+  const box = app.querySelector('.stage-art .art');
+  if (!box || P.phase === 'rest' || !step.move) return;
+  const kind = P.phase === 'preview' ? 'start' : 'loop';
+  const key = `${P.id}:${P.idx}:${kind}`;
+  if (!art || art.key !== key) {
+    art = moveArt(step.move, kind, { right: step.side === 'right', fallback: step.type === 'weight' ? 'dumbbell' : 'figure' });
+    art.key = key;
+    // Have the next images ready: this move's loop, and the next move's start.
+    if (kind === 'start') prefetch(file(step.move, reducedMotion() ? 'still' : 'loop'));
+    const n = P.steps.slice(P.idx + 1).find(s => s.move);
+    if (n) prefetch(file(n.move, 'start'));
+  }
+  art.place(box, P.running);
 }
 
 // ---- The phone's back button (B02) ----
@@ -845,6 +873,7 @@ export function snapshot() {
 // Leaving the player any other way (e.g. the phone's back button) pauses it.
 export function leave() {
   disarm(); // back on other screens works as normal
+  if (art) art.save();
   if (P && P.running) { P.running = false; stopTimer(); cuelog.note('pause', 'Pause (left the player)'); }
   audio.pause();
   keepalive.pause();

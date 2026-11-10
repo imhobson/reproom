@@ -226,6 +226,7 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .stage-art .top { position: relative; z-index: 2; }
 /* the figure scales with the image area: 184px at full height, keeping 54px under it */
 .stage-art .art { position: absolute; left: 50%; top: 123px; width: calc(var(--art-h) - 177px); height: calc(var(--art-h) - 177px); transform: translateX(-50%); }
+.stage-art .art { color: var(--ink); }
 .player.paused .stage-art::after { content: ''; position: absolute; inset: 0; background: rgba(20, 21, 23, 0.42); z-index: 1; }
 .chip { position: absolute; left: var(--gutter); top: 104px; z-index: 2; height: 43px; padding: 0 12px; display: flex; align-items: center;
   background: var(--ink); color: var(--paper); font-family: var(--head); font-weight: 800; font-size: 28px; letter-spacing: -0.01em; text-transform: uppercase; }
@@ -526,3 +527,7 @@ button.s-ver { min-height: 44px; padding: 0 0 0 16px; display: flex; align-items
 /* Move images (F09): the still fills its tile; a right-side step is flipped. */
 img.mv { display: block; width: 100%; height: 100%; }
 img.mv.flip { transform: scaleX(-1); }
+/* The live image (start pose or loop) fills its box, like the old symbol. */
+.mvart { width: 100%; height: 100%; }
+.mvart svg { display: block; width: 100%; height: 100%; }
+.mvart.flip { transform: scaleX(-1); }
