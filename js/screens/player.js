@@ -11,7 +11,7 @@ import * as data from '../data.js';
 import * as store from '../store.js';
 import * as session from '../session.js';
 import { sym } from '../symbols.js';
-import { pad2, go, clock, stepName, sectionLabel, showToast } from '../ui.js';
+import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
 import { howToHtml } from './info.js';
 import * as audio from '../audio.js';
 import * as weights from '../weights.js';
@@ -350,14 +350,16 @@ function finish() {
   const moves = P.steps.filter(s => s.type === 'move').length;
   const kcal = kcalSoFar();
   if (P.run) {
-    // A run routine never ticks a day. Its log entry and summary (board 16d)
-    // are build step 5; until then it goes back to the Run screen.
+    // A run routine is logged with kind "run" and never ticks a day (board 16d).
+    store.finishRun({ routine: P.run.id, secs, moves, kcal });
+    lastResult = {
+      run: true, name: P.run.name, done: `${P.run.groupLabel} done`,
+      secs, moves, kcal, focus: P.run.focus,
+    };
     ended.add(P.id);
     P = null;
     session.clear();
-    go('#/run');
-    // After the route change (which hides any toast).
-    setTimeout(() => showToast('<p>Done. The summary comes in the next build step.</p>', 3000), 100);
+    go('#/summary');
     return;
   }
   const wasComplete = store.stageComplete(P.stage);

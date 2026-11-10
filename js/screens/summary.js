@@ -1,4 +1,4 @@
-// Workout summary (design 12).
+// Workout summary (design 12), and a run routine's summary (board 16d).
 import * as store from '../store.js';
 import { sym } from '../symbols.js';
 import { pad2, go } from '../ui.js';
@@ -12,6 +12,7 @@ export function render(app) {
   const r = result();
   if (!r) { go('#/'); return; }
   const mmss = s => `${pad2(Math.floor(s / 60))}:${pad2(s % 60)}`;
+  if (r.run) { renderRun(app, r, mmss); return; }
   let blocks = '';
   for (let d = 1; d <= DAYS_PER_STAGE; d++) {
     blocks += `<i class="${d === r.day ? 'now' : store.isDone(r.stage, d) ? 'd' : ''}"></i>`;
@@ -63,5 +64,34 @@ export function render(app) {
     resetView();
     go('#/');
   });
+  app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
+}
+
+// A run routine (F11, board 16d): the same layout, with RUN ROUTINE ·
+// COMPLETED, "Drills done", no stage strip, and BACK TO RUN.
+function renderRun(app, r, mmss) {
+  app.innerHTML = `
+    <section class="screen summary">
+      <div class="top">
+        <p class="label red kicker">Run routine · Completed</p>
+        <div class="icons">
+          <button class="icon-btn" data-progress aria-label="Progress">${sym('progress')}</button>
+          <button class="icon-btn" data-settings aria-label="Settings">${sym('gear')}</button>
+        </div>
+      </div>
+      <div class="done-box">
+        <div class="badge">${sym('check')}</div>
+        <h1>${r.done}</h1>
+      </div>
+      <h2 class="w-name">${r.name}</h2>
+      <div class="stats">
+        <div><p class="label">Duration</p><p class="num big">${mmss(r.secs)}</p></div>
+        <div><p class="label">kcal</p><p class="num big">${r.kcal}</p></div>
+        <div><p class="label">Moves</p><p class="num big">${r.moves}</p></div>
+        <div><p class="label">Focus</p><p class="focus">${r.focus}</p></div>
+      </div>
+      <button class="cta bottom" data-run>Back to run<span class="go">${sym('arrowRight')}</span></button>
+    </section>`;
+  app.querySelector('[data-run]').addEventListener('click', () => go('#/run'));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
 }

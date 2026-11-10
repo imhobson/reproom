@@ -92,6 +92,19 @@ export function logEarly({ stage, day, intensity, secs, moves, kcal, weights }) 
   save();
 }
 
+// A finished run routine (F11): logged with kind "run". It never ticks a
+// stage day, so Home's "today" and stage progress don't move.
+export function finishRun({ routine, secs, moves, kcal }) {
+  state.log.push({ kind: 'run', routine, secs, moves, kcal, at: new Date().toISOString() });
+  save();
+}
+
+// Does a log entry count as a session (a finished calisthenics workout)?
+// Not an early end, and not a run routine (F14, 8 Nov: routines count towards
+// streak, time, kcal and moves, but add no session and no Wall tile).
+// Every count of sessions goes through this.
+export const isSession = e => !!e && !e.early && e.kind !== 'run';
+
 export function setStage(stage) {
   state.stage = stage;
   save();
