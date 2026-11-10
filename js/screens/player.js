@@ -11,6 +11,7 @@ import * as data from '../data.js';
 import * as store from '../store.js';
 import * as session from '../session.js';
 import { sym } from '../symbols.js';
+import { thumb } from '../moveimg.js';
 import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
 import { howToHtml } from './info.js';
 import * as audio from '../audio.js';
@@ -475,7 +476,8 @@ function view() {
     const v = startVals(nextIdx);
     card = {
       label: `${P.phase === 'preview' && !isFirst ? 'After this' : 'Up next'} · ${setText(nextStep)}`,
-      name: data.move(nextStep.move).name, idx: null, ico: sym('dumbbell'), icoCls: 'amber',
+      name: data.move(nextStep.move).name, idx: null, icoCls: 'amber',
+      ico: thumb(nextStep.move, { right: nextStep.side === 'right', fallback: 'dumbbell' }),
       sub: v.kg == null ? `${v.reps} reps` : `${v.reps} reps · ${weights.kg(v.kg)} kg`,
     };
   } else {
@@ -485,7 +487,8 @@ function view() {
     const rep = nextStep.reps > 1 ? ` · ${nextStep.rep} of ${nextStep.reps}` : '';
     card = {
       label, name: stepName(nextStep), sub: clock(nextStep.secs) + rep, idx: rest ? null : nextIdx,
-      ico: sym(rest ? (nextStep.walkBack ? 'arrowLeft' : 'moon') : 'figureSmall'), icoCls: !rest && nextStep.section === 'main' ? 'amber' : '',
+      ico: rest ? sym(nextStep.walkBack ? 'arrowLeft' : 'moon') : thumb(nextStep.move, { right: nextStep.side === 'right' }),
+      icoCls: rest ? '' : nextStep.section === 'main' ? 'amber' : 'warm',
     };
   }
 

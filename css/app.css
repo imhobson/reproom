@@ -164,10 +164,12 @@ button:disabled { cursor: default; }
 .row .ico { width: 48px; height: 48px; flex: none; background: var(--field); display: grid; place-items: center; }
 .row .ico .sym { width: 24px; height: 24px; }
 .row.main .ico { background: var(--amber); }
+button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down move (F09) */
 .row .nm { flex: 1; font-size: 16px; }
 .row .t { font-size: 16px; }
 .dsec.off .row { color: var(--faint); }
 .dsec.off .row .ico { background: var(--paper); border: 1.5px solid var(--line); color: var(--faint); }
+.dsec.off .row .ico img.mv { opacity: 0.35; }
 /* Weights section (F12, board 05c): a radio list of the four moves */
 .wcap { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
 .wcap .num { font-size: 13px; }
@@ -272,6 +274,7 @@ button:disabled { cursor: default; }
 .upnext .ico { width: 44px; height: 44px; flex: none; background: var(--paper); display: grid; place-items: center; }
 .upnext .ico .sym { width: 24px; height: 24px; }
 .upnext .ico.amber { background: var(--amber); }
+.upnext .ico.warm { background: var(--warm); }
 .upnext .label, .upnext .nm, .upnext .sub { display: block; }
 .upnext .nm { font-size: 17px; font-weight: 500; line-height: 1.2; margin-top: 2px;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; }
@@ -519,3 +522,7 @@ button.s-ver { min-height: 44px; padding: 0 0 0 16px; display: flex; align-items
 .rc-desc { margin-top: 4px; font-size: 13px; line-height: 1.3; color: var(--muted); }
 .rc-go { width: 44px; height: 44px; flex: none; background: var(--paper); display: grid; place-items: center; }
 .rc-go .sym { width: 16px; height: 16px; }
+
+/* Move images (F09): the still fills its tile; a right-side step is flipped. */
+img.mv { display: block; width: 100%; height: 100%; }
+img.mv.flip { transform: scaleX(-1); }

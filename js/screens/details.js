@@ -3,6 +3,7 @@ import * as data from '../data.js';
 import * as store from '../store.js';
 import * as session from '../session.js';
 import { sym } from '../symbols.js';
+import { thumb } from '../moveimg.js';
 import * as audio from '../audio.js';
 import { pad2, go, clock, stepName, sectionLabel } from '../ui.js';
 import * as weights from '../weights.js';
@@ -24,7 +25,7 @@ export function renderRoutine(app, id) {
       return `<li class="row rest"><span class="ico">${sym(step.walkBack ? 'arrowLeft' : 'moon')}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></li>`;
     }
     return `<li><button class="row ${k === 'main' ? 'main' : ''}" data-step="${k}.${i}">`
-      + `<span class="ico">${sym('figureSmall')}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></button></li>`;
+      + `<span class="ico">${thumb(step.move, { right: step.side === 'right' })}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></button></li>`;
   }).join('');
   const go_ = `<button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button>`;
 
@@ -83,7 +84,7 @@ export function render(app, day) {
         return `<li class="row rest"><span class="ico">${sym('moon')}</span><span class="nm">Rest</span><span class="t num">${clock(step.secs)}</span></li>`;
       }
       return `<li><button class="row ${k === 'main' ? 'main' : ''}" data-step="${k}.${i}" ${off ? 'disabled' : ''}>`
-        + `<span class="ico">${sym('figureSmall')}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></button></li>`;
+        + `<span class="ico">${thumb(step.move, { right: step.side === 'right' })}</span><span class="nm">${stepName(step)}</span><span class="t num">${clock(step.secs)}</span></button></li>`;
     }).join('');
     return `
       <section class="dsec ${off ? 'off' : ''}">
@@ -104,7 +105,7 @@ export function render(app, day) {
       const on = m.id === sess.weight;
       return `<li><label class="wrow ${on ? 'on' : ''}">`
         + `<input type="radio" name="wmove" value="${m.id}" ${on ? 'checked' : ''}>`
-        + `<span class="ico amber">${sym('dumbbell')}</span>`
+        + `<span class="ico amber">${thumb(m.id, { fallback: 'dumbbell' })}</span>`
         + `<span class="wtxt"><span class="nm">${weights.listName(m)}</span>`
         + `<span class="label wlast">${nums(weights.lastLine(m.id))}</span></span></label></li>`;
     }).join('');
