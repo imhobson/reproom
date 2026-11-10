@@ -10,6 +10,7 @@ import { pad2, go, showToast } from '../ui.js';
 import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { resetView } from './home.js';
 import * as cuelog from '../cuelog.js';
+import * as history from '../history.js';
 
 // Where the back arrow on Settings goes (Home, or a paused workout).
 let backTo = '#/';
@@ -44,7 +45,7 @@ function voiceLabel(id) {
 
 // ---- Settings ----
 
-export function render(app, { confirm = false, restoring = null, undoing = false } = {}) {
+export function render(app, { confirm = false, restoring = null, undoing = false, importing = null } = {}) {
   audio.stopSample();
   const st = store.get();
   const s = st.settings;
@@ -104,7 +105,8 @@ export function render(app, { confirm = false, restoring = null, undoing = false
     </section>
     ${confirm ? resetSheet(st.stage, done) : ''}
     ${restoring ? restoreSheet(restoring) : ''}
-    ${undoing ? undoSheet() : ''}`;
+    ${undoing ? undoSheet() : ''}
+    ${importing ? historySheet(importing) : ''}`;
 
   store.keepData().then(kept => {
     const el = app.querySelector('[data-kept]');
@@ -162,6 +164,25 @@ export function render(app, { confirm = false, restoring = null, undoing = false
   on('[data-do-restore]', e => { e.currentTarget.disabled = true; backup.restore(pendingRestore); });
   on('[data-undo]', () => { const y = scrollY; render(app, { undoing: true }); scrollTo(0, y); });
   on('[data-do-undo]', e => { e.currentTarget.disabled = true; backup.undoRestore(); });
+  // Import history (F14, 04h): pick the file, check it, then the sheet.
+  on('[data-import]', () => {
+    const input = Object.assign(document.createElement('input'), { type: 'file', accept: 'application/json,.json' });
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      const { doc, error } = await history.read(file);
+      if (error) { showToast(`<p>${error}</p>`); return; }
+      const y = scrollY; render(app, { importing: doc }); scrollTo(0, y);
+    });
+    input.click();
+  });
+  on('[data-do-import]', e => {
+    e.currentTarget.disabled = true;
+    const n = history.describe(pendingImport).sessions;
+    if (!store.addHistory(pendingImport)) { again(); showToast('<p>This history is already added.</p>'); return; }
+    resetView(); again();
+    showToast(`<p>History added: ${n.toLocaleString('en-GB')} sessions</p>`);
+  });
   on('[data-reset]', () => { const y = scrollY; render(app, { confirm: true }); scrollTo(0, y); });
   on('[data-keep]', again);
   on('[data-clear]', () => { store.resetStage(st.stage); resetView(); go('#/'); });
@@ -188,6 +209,10 @@ function dataSection() {
         <span><span class="s-name">Undo restore</span><span class="bk-file">Puts back what was here before ${undo.before}</span></span>
         <span class="label muted">${undo.daysLeft} day${undo.daysLeft === 1 ? '' : 's'} left</span>
       </button>` : ''}
+      <button class="s-row undo-row" data-import>
+        <span><span class="s-name">Import history</span><span class="bk-file">${importedText()}</span></span>
+        <span class="s-val">${sym('arrowRight')}</span>
+      </button>
       <p class="label muted s-kept" data-kept>&nbsp;</p>
       <p class="s-help">A backup is one small file with your progress and settings. Your feedback key isn't included.</p>`;
 }
@@ -222,6 +247,41 @@ function restoreSheet(body) {
       <p class="sheet-text">Restoring replaces everything on this phone. You can undo it from Settings for 7 days.</p>
       <button class="cta centre" data-keep>Keep what's on this phone</button>
       <button class="cta outline" data-do-restore>Restore backup</button>
+    </div>`;
+}
+
+// The Import history row's sub line: "Added 10 Nov" once a file is added.
+function importedText() {
+  const added = store.get().history?.added;
+  if (!added) return 'Sessions from before RepRoom';
+  return `Added ${new Date(added).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}`;
+}
+
+// Add your history? (04h): what the file holds, next to what's on the phone.
+let pendingImport = null;
+function historySheet(doc) {
+  pendingImport = doc;
+  const d = history.describe(doc, v => `<b class="num">${v}</b>`);
+  const n = store.get().log.filter(store.isSession).length;
+  return `
+    <div class="scrim"></div>
+    <div class="sheet restore-sheet hist-sheet">
+      <p class="label red">Import history</p>
+      <h2 class="sheet-title big">Add your history?</h2>
+      <div class="rs-card">
+        <p class="label muted">From the file</p>
+        <p>${d.total}</p>
+        ${d.dated ? `<p>${d.dated}</p>` : ''}
+        ${d.estimated ? `<p>${d.estimated}</p>` : ''}
+        <p>${d.ticks}</p>
+      </div>
+      <div class="rs-card now">
+        <p class="label muted">On this phone now</p>
+        <p><b class="num">${n}</b> workout${n === 1 ? '' : 's'} in RepRoom. Any on the same day as a Strava session are counted once.</p>
+      </div>
+      <p class="sheet-text">This adds to what's here and replaces nothing. A history file can only be added once.</p>
+      <button class="cta centre" data-do-import>Add history</button>
+      <button class="cta outline" data-keep>Cancel</button>
     </div>`;
 }
 

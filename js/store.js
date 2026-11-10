@@ -147,3 +147,44 @@ export function resetStage(stage) {
   delete state.ticks[stage];
   save();
 }
+
+// Import history (F14, board 04h): adds a reproom-history file, never
+// replaces. state.history = { ids: [file ids], added: ISO time, estimated:
+// { sessions, secs, moves: { id: [sets, secs] } } } (summed over files).
+// - each dated session goes into the log as a session entry ({ src: "strava",
+//   n, stage, day, intensity, name, secs, at: "<date>T12:00:00", track }),
+//   unless a session already in the log is on the same local date (that
+//   one stays); the log is kept in date order
+// - ticks are merged (a tick is never removed); stage only goes up
+// Returns false if this file was already added.
+export function addHistory(doc) {
+  const h = (state.history ||= { ids: [], added: null, estimated: { sessions: 0, secs: 0, moves: {} } });
+  if (h.ids.includes(doc.id)) return false;
+  h.ids.push(doc.id);
+  h.added = new Date().toISOString();
+  const est = doc.estimated || {};
+  h.estimated.sessions += est.sessions || 0;
+  h.estimated.secs += est.secs || 0;
+  for (const [id, [sets, secs]] of Object.entries(est.moves || {})) {
+    const m = (h.estimated.moves[id] ||= [0, 0]);
+    m[0] += sets; m[1] += secs;
+  }
+  const localDay = at => { const d = new Date(at); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+  const have = new Set(state.log.filter(isSession).map(e => localDay(e.at)));
+  for (const s of doc.sessions || []) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s.date) || have.has(s.date)) continue;
+    const e = { src: 'strava', n: s.n, stage: s.stage, day: s.day, intensity: s.intensity, name: s.name, secs: s.secs || 0,
+      at: `${s.date}T12:00:00`, track: { done: s.done || {}, skipped: [] } };
+    state.log.push(e);
+  }
+  state.log.sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
+  for (const [st, days] of Object.entries(doc.ticks || {})) {
+    for (const [d, ints] of Object.entries(days || {})) {
+      const day = ((state.ticks[st] ||= {})[d] ||= []);
+      for (const i of ints || []) if (!day.includes(i)) day.push(i);
+    }
+  }
+  if (Number(doc.stage) > state.stage) state.stage = Number(doc.stage);
+  save();
+  return true;
+}

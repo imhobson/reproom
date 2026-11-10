@@ -14,6 +14,7 @@ import * as feedback from './screens/feedback.js';
 import * as cueLog from './screens/cuelog.js';
 import * as run from './screens/run.js';
 import * as fb from './feedback.js';
+import * as stats from './stats.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -66,6 +67,7 @@ keepData(); // ask the browser to keep progress and settings (see store.js)
 await Promise.all([loadData(), audio.init()]);
 addEventListener('hashchange', route);
 route();
+try { console.info(stats.line()); } catch (e) { console.warn('stats', e); } // F14 step 2 check
 const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
 if (flash) showToast(`<p>${flash}</p>`);
 
