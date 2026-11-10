@@ -799,6 +799,30 @@
   "standing-quad-stretch--right": {
    "text": "Standing quad stretch. Right side.",
    "secs": 2.48
+  },
+  "bicep-curls": {
+   "text": "Bicep curls.",
+   "secs": 1.13
+  },
+  "standing-shoulder-press": {
+   "text": "Standing shoulder press.",
+   "secs": 1.45
+  },
+  "kneeling-row": {
+   "text": "Kneeling row.",
+   "secs": 0.98
+  },
+  "kneeling-row--left": {
+   "text": "Kneeling row. Left side.",
+   "secs": 1.81
+  },
+  "kneeling-row--right": {
+   "text": "Kneeling row. Right side.",
+   "secs": 1.76
+  },
+  "lateral-raises": {
+   "text": "Lateral raises.",
+   "secs": 1.24
   }
  }
 }
