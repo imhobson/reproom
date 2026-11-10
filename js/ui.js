@@ -3,7 +3,9 @@ import { move } from './data.js';
 
 export const pad2 = n => String(n).padStart(2, '0');
 
-export function go(hash) { location.hash = hash; }
+// Moving between screens replaces the history entry instead of adding one, so
+// the phone's back button never walks back through a journey (B04, nav.js).
+export function go(hash) { location.replace(hash); }
 
 // 30 -> "0:30", 75 -> "1:15"
 export const clock = secs => `${Math.floor(secs / 60)}:${pad2(secs % 60)}`;

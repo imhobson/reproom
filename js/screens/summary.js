@@ -9,6 +9,7 @@ import * as weights from '../weights.js';
 import { resetView } from './home.js';
 import * as stats from '../stats.js';
 import { grid } from '../wall.js';
+import * as nav from '../nav.js';
 
 const p2 = pad2;
 // The Wall strip (F14, boards 12, 12b, 12c): the symbol small with the new
@@ -41,6 +42,9 @@ export function render(app) {
   if (!r) { go('#/'); return; }
   const mmss = s => `${pad2(Math.floor(s / 60))}:${pad2(s % 60)}`;
   if (r.run) { renderRun(app, r, mmss); return; }
+  // The phone's back button: to Workout details, where the workout started
+  // (B02, B04). Never back into the finished workout.
+  nav.setBack(() => go(`#/workout/${r.day}`));
   let blocks = '';
   for (let d = 1; d <= DAYS_PER_STAGE; d++) {
     blocks += `<i class="${d === r.day ? 'now' : store.isDone(r.stage, d) ? 'd' : ''}"></i>`;
@@ -155,6 +159,8 @@ export function renderStage(app) {
   });
   // NOT NOW: Home, stage unchanged (the next stage is unlocked anyway).
   on('[data-home]', () => { resetView(); go('#/'); });
+  // The phone's back button does the same (prompt 09, B04).
+  nav.setBack(() => { resetView(); go('#/'); });
   on('[data-settings]', () => go('#/settings'));
 }
 
@@ -184,5 +190,7 @@ function renderRun(app, r, mmss) {
       <button class="cta bottom" data-run>Back to run<span class="go">${sym('arrowRight')}</span></button>
     </section>`;
   app.querySelector('[data-run]').addEventListener('click', () => go('#/run'));
+  // The phone's back button: to the routine's details, where it started.
+  nav.setBack(() => go(r.routine ? `#/run/${r.routine}` : '#/run'));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
 }

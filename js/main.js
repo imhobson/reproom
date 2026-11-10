@@ -16,6 +16,7 @@ import * as run from './screens/run.js';
 import * as fb from './feedback.js';
 import * as progress from './screens/progress.js';
 import { go } from './ui.js';
+import * as nav from './nav.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -50,7 +51,13 @@ let workoutNow = null;   // the paused workout, when Settings was opened from th
 const inSettings = h => h.startsWith('#/settings');
 // Progress, the Wall and a move opened from Top moves (F14).
 const inProgress = h => h.startsWith('#/progress') || h.startsWith('#/move/');
+let shown = null; // the address the screen on show was drawn for
 function route() {
+  if (nav.isLeaving()) return; // stepping over old entries to close the app (nav.js)
+  // Already drawn: nav.js draws a screen early when back comes before its
+  // hashchange (a tap then back straight away), so the event then has nothing to do.
+  if (location.hash === shown) return;
+  shown = location.hash;
   hideToast();
   // Progress's back arrow returns to wherever Progress was opened from (a
   // paused workout too). Coming back from Settings keeps it.
@@ -67,16 +74,12 @@ function route() {
     settingsFrom = prevHash.startsWith('#/play/') && !workoutNow ? '#/' : prevHash || '#/';
     settings.setBack(settingsFrom);
   }
-  // The phone's back button on Stage complete goes Home, like NOT NOW
-  // (it would land on the summary, the entry before it).
-  if (prevHash === '#/stage-complete' && location.hash === '#/summary') {
-    prevHash = '#/';
-    home.resetView();
-    location.replace('#/');
-    return;
-  }
   prevHash = location.hash;
-  if (!location.hash.startsWith('#/play/')) player.leave();
+  // The phone's back button (B04): the player has its own watcher (B02),
+  // every other screen uses nav's. Never both at once.
+  if (location.hash.startsWith('#/play/')) nav.disarm();
+  else { player.leave(); nav.arm(); }
+  nav.setBack(null); // a screen with its own back rule sets it as it draws
   showUpdateBar();
   let m = null;
   const r = routes.find(x => (m = location.hash.match(x.re))) || routes[0];
@@ -88,6 +91,7 @@ backup.pruneUndo(); // an Undo restore snapshot lasts 7 days
 keepData(); // ask the browser to keep progress and settings (see store.js)
 await Promise.all([loadData(), audio.init()]);
 addEventListener('hashchange', route);
+nav.setRouter(route);
 route();
 const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
 if (flash) showToast(`<p>${flash}</p>`);

@@ -394,7 +394,7 @@ function finish() {
     // A run routine is logged with kind "run" and never ticks a day (board 16d).
     store.finishRun({ routine: P.run.id, secs, moves, kcal });
     lastResult = {
-      run: true, name: P.run.name, done: `${P.run.groupLabel} done`,
+      run: true, routine: P.run.id, name: P.run.name, done: `${P.run.groupLabel} done`,
       secs, moves, kcal, focus: P.run.focus,
     };
     ended.add(P.id);

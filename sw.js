@@ -26,7 +26,7 @@ const IMAGES = 'reproom-images-' + self.APP_VERSION;
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
-  'js/main.js', 'js/version.js', 'js/backup.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js', 'js/feedback.js',
+  'js/main.js', 'js/version.js', 'js/nav.js', 'js/backup.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js', 'js/feedback.js',
   'js/weights.js', 'js/cuelog.js', 'js/keepalive.js', 'js/moveimg.js', 'js/track.js', 'js/stats.js', 'js/history.js', 'js/wall.js', 'js/screens/progress.js',
   'js/screens/home.js', 'js/screens/details.js', 'js/screens/info.js', 'js/screens/player.js',
   'js/screens/summary.js', 'js/screens/settings.js', 'js/screens/feedback.js', 'js/screens/cuelog.js', 'js/screens/run.js',
