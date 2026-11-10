@@ -33,7 +33,22 @@ export function render(app, day, ref) {
   const [sec, i] = ref.split('.');
   const step = workout?.sections[sec]?.[+i];
   if (!step || step.type !== 'move') { go(back); return; }
-  const m = data.move(step.move);
+  page(app, {
+    m: data.move(step.move), colour: sec === 'main' ? 'amber' : 'warm', back,
+    kicker: `${isRun ? workout.groupLabel : sectionLabel(sec)} · <span class="num">${clock(step.secs)}</span>`,
+    title: stepName(step),
+  });
+}
+
+// A move on its own (F14, from Top moves on Progress, #/move/<id>): the loop
+// on amber, the kicker "Exercise info" with no time, back to Progress.
+export function renderMove(app, id) {
+  const m = data.move(id);
+  if (!m) { go('#/progress'); return; }
+  page(app, { m, colour: 'amber', back: '#/progress', kicker: 'Exercise info', title: m.name });
+}
+
+function page(app, { m, colour, back, kicker, title }) {
   const need = m.equipment.length ? `
     <section class="isec"><h3 class="label red">You'll need</h3>
       <ul class="need">${m.equipment.map(e => `<li><span class="eq">${sym('barbell')}</span><span>${e}</span></li>`).join('')}</ul>
@@ -41,7 +56,7 @@ export function render(app, day, ref) {
 
   app.innerHTML = `
     <section class="info">
-      <div class="hero-top tall ${sec === 'main' ? 'amber' : 'warm'}">
+      <div class="hero-top tall ${colour}">
         <div class="top">
           <button class="icon-btn light" data-back aria-label="Back">${sym('arrowLeft')}</button>
           <div class="icons">
@@ -52,15 +67,15 @@ export function render(app, day, ref) {
         <div class="hero-fig"></div>
       </div>
       <div class="pad">
-        <p class="label red">${isRun ? workout.groupLabel : sectionLabel(sec)} · <span class="num">${clock(step.secs)}</span></p>
-        <h1 class="w-name">${stepName(step)}</h1>
+        <p class="label red">${kicker}</p>
+        <h1 class="w-name">${title}</h1>
         ${howToHtml(m)}
         ${need}
       </div>
     </section>`;
 
   // The move's loop on its colour (F09), with its own faint floor line.
-  moveArt(step.move, 'loop', { fallback: 'figureFloor' }).place(app.querySelector('.hero-fig'), true);
+  moveArt(m.id, 'loop', { fallback: 'figureFloor' }).place(app.querySelector('.hero-fig'), true);
 
   app.querySelector('[data-back]').addEventListener('click', () => go(back));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));

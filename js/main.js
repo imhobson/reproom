@@ -14,7 +14,8 @@ import * as feedback from './screens/feedback.js';
 import * as cueLog from './screens/cuelog.js';
 import * as run from './screens/run.js';
 import * as fb from './feedback.js';
-import * as stats from './stats.js';
+import * as progress from './screens/progress.js';
+import { go } from './ui.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -31,6 +32,9 @@ const routes = [
   { re: /^#\/run$/, show: () => run.render(app) },
   { re: /^#\/run\/(run-[\w-]+)$/, show: m => details.renderRoutine(app, m[1]) },
   { re: /^#\/run\/(run-[\w-]+)\/move\/(\w+\.\d+)$/, show: m => info.render(app, m[1], m[2]) },
+  { re: /^#\/progress$/, show: () => progress.render(app) },
+  { re: /^#\/progress\/wall$/, show: () => progress.renderWall(app) },
+  { re: /^#\/move\/([\w-]+)$/, show: m => info.renderMove(app, m[1]) },
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },
@@ -40,10 +44,19 @@ const routes = [
 
 let prevHash = '#/';
 let settingsFrom = '#/'; // where Settings was opened from
+let progressFrom = '#/'; // where Progress was opened from (F14)
 let workoutNow = null;   // the paused workout, when Settings was opened from the player
 const inSettings = h => h.startsWith('#/settings');
+// Progress, the Wall and a move opened from Top moves (F14).
+const inProgress = h => h.startsWith('#/progress') || h.startsWith('#/move/');
 function route() {
   hideToast();
+  // Progress's back arrow returns to wherever Progress was opened from (a
+  // paused workout too). Coming back from Settings keeps it.
+  if (inProgress(location.hash) && !inProgress(prevHash) && !inSettings(prevHash)) {
+    progressFrom = prevHash.startsWith('#/play/') && !player.snapshot() ? '#/' : prevHash || '#/';
+    progress.setBack(progressFrom);
+  }
   // Settings' back arrow returns to wherever Settings was opened from.
   if (inSettings(location.hash) && !inSettings(prevHash)) {
     // From the player, Feedback carries the workout (Settings paused it first).
@@ -67,7 +80,6 @@ keepData(); // ask the browser to keep progress and settings (see store.js)
 await Promise.all([loadData(), audio.init()]);
 addEventListener('hashchange', route);
 route();
-try { console.info(stats.line()); } catch (e) { console.warn('stats', e); } // F14 step 2 check
 const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
 if (flash) showToast(`<p>${flash}</p>`);
 
@@ -85,8 +97,15 @@ addEventListener('online', retryFeedback);
 // reloads the app and would end the workout. It shows on the next other screen.
 function midWorkout() {
   const h = location.hash;
-  return h.startsWith('#/play/') || (inSettings(h) && settingsFrom.startsWith('#/play/'));
+  const fromPlay = from => from.startsWith('#/play/') || (inProgress(from) && progressFrom.startsWith('#/play/'));
+  return h.startsWith('#/play/') || (inSettings(h) && fromPlay(settingsFrom)) || (inProgress(h) && progressFrom.startsWith('#/play/'));
 }
+
+// Every Progress icon opens Progress (F14). The player's own handler pauses
+// the workout first (it runs before this one).
+document.addEventListener('click', e => {
+  if (e.target.closest?.('[data-progress]')) go('#/progress');
+});
 function showUpdateBar() {
   updateBar.hidden = !waitingSW || midWorkout();
   document.body.classList.toggle('has-update', !updateBar.hidden); // push the page below the bar

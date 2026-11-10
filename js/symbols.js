@@ -61,6 +61,9 @@ const shapes = {
   // Speaker with a red cross: muted.
   speakerOff: `<path d="M0.8 3.6h1.9L5.4 1.4v7.2L2.7 6.4H0.8Z" fill="currentColor"/>`
     + `<path d="M6.6 3.5 9.2 6.5M9.2 3.5 6.6 6.5" stroke="${RED}" stroke-width="0.9"/>`,
+  // Flame with an amber heart: the streak (F14).
+  streak: `<path d="M5 0.6 7.6 4V7L6.2 9.2H3.8L2.4 7V4.4L3.6 5.8Z" fill="currentColor"/>`
+    + `<path d="M5 5 6.2 6.6 5.6 8.4H4.4L3.8 6.6Z" fill="var(--amber)"/>`,
   // Medal: finish workout.
   medal: `<path d="M2.2 0.6h2.1L5 2.6 5.7 0.6h2.1L6.4 4H3.6Z" fill="currentColor"/>`
     + `<circle cx="5" cy="6.6" r="2.9" fill="currentColor"/>`
