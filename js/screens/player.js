@@ -20,6 +20,7 @@ import { WEIGHT_DEFAULT_REPS, WEIGHT_KG_STEP } from '../config.js';
 import * as cuelog from '../cuelog.js';
 import * as keepalive from '../keepalive.js';
 import * as track from '../track.js';
+import * as stats from '../stats.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 // A run routine's sections are labelled with its group (Warm-up / Drills /
@@ -407,16 +408,37 @@ function finish() {
   const res = stepResults(true);
   const skipped = P.steps.filter((s, i) => s.type === 'move' && res[i] === track.SKIP).length;
   store.finish({ stage: P.stage, day: P.day, intensity: P.intensity, secs, moves, kcal, weights, track: trackOf(res) });
+  const stageJustCompleted = !wasComplete && store.stageComplete(P.stage);
   lastResult = {
     stage: P.stage, day: P.day, name: P.workout.name, secs, moves, kcal, weights,
     movesDone: moves - skipped, skipped,
     focus: focusOf(P.workout),
-    stageJustCompleted: !wasComplete && store.stageComplete(P.stage),
+    stageJustCompleted,
+    ...wallMoment(stageJustCompleted),
   };
   ended.add(P.id);
   P = null;
   session.clear();
   go('#/summary');
+}
+
+// The summary's Wall strip and milestones (F14): this session's number and
+// tile, and every milestone crossed since the session before it (so an
+// early end that pushed Time over a threshold shows here too). The import's
+// milestones count in both, so they're never celebrated.
+function wallMoment(stageJustCompleted) {
+  try {
+    const st = store.get();
+    let prev = st.log.length - 2;
+    while (prev >= 0 && !store.isSession(st.log[prev])) prev--;
+    const after = stats.compute(st);
+    const before = stats.milestoneValues(stats.compute(st, prev + 1));
+    if (stageJustCompleted) before.stages -= 1; // stages come from the ticks, not the log
+    return { session: after.sessions, wall: after.wall, crossed: stats.crossed(before, stats.milestoneValues(after)) };
+  } catch (e) {
+    console.warn('wall', e);
+    return {};
+  }
 }
 
 function endWorkout() {

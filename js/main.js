@@ -29,6 +29,7 @@ const routes = [
   // A workout plays at #/play/<day>, a run routine at #/play/<routine id> (F11).
   { re: /^#\/play\/(\d+|run-[\w-]+)$/, show: m => player.render(app, /^\d+$/.test(m[1]) ? +m[1] : m[1]) },
   { re: /^#\/summary$/, show: () => summary.render(app) },
+  { re: /^#\/stage-complete$/, show: () => summary.renderStage(app) },
   { re: /^#\/run$/, show: () => run.render(app) },
   { re: /^#\/run\/(run-[\w-]+)$/, show: m => details.renderRoutine(app, m[1]) },
   { re: /^#\/run\/(run-[\w-]+)\/move\/(\w+\.\d+)$/, show: m => info.render(app, m[1], m[2]) },
@@ -65,6 +66,14 @@ function route() {
     // reached with the phone's back button) goes back to Home instead.
     settingsFrom = prevHash.startsWith('#/play/') && !workoutNow ? '#/' : prevHash || '#/';
     settings.setBack(settingsFrom);
+  }
+  // The phone's back button on Stage complete goes Home, like NOT NOW
+  // (it would land on the summary, the entry before it).
+  if (prevHash === '#/stage-complete' && location.hash === '#/summary') {
+    prevHash = '#/';
+    home.resetView();
+    location.replace('#/');
+    return;
   }
   prevHash = location.hash;
   if (!location.hash.startsWith('#/play/')) player.leave();

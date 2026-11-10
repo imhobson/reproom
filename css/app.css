@@ -643,3 +643,34 @@ img.mv.flip { transform: scaleX(-1); }
 .w-come { display: flex; gap: 6px; }
 .w-come span { width: 60px; height: 60px; flex: 0 1 60px; background: var(--field); color: var(--faint); display: grid; place-items: center; }
 .w-come .sym { width: 18px; height: 18px; }
+
+/* Summary moment (F14, boards 12, 12b, 12c) */
+.wstrip { margin-top: 8px; padding: 12px 14px; background: var(--field); display: flex; align-items: center; gap: 14px; }
+.ws-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ws-txt .label { font-size: 10px; font-weight: 500; }
+.ws-n { font-family: var(--head); font-weight: 800; font-size: 22px; line-height: 24px; font-variant-numeric: tabular-nums lining-nums; }
+.ws-line { font-size: 13px; line-height: 18px; }
+.ws-line b.num { font-size: 14px; }
+.mstrip { margin-top: 6px; padding: 10px 14px; background: var(--amber); display: flex; align-items: center; gap: 12px; }
+.mstrip .ico, .unl .ico { width: 40px; height: 40px; flex: none; display: grid; place-items: center; }
+.mstrip .ico { background: var(--ink); color: var(--amber); }
+.mstrip .ico .sym { width: 26px; height: 26px; }
+.mstrip .ico path[fill="var(--amber)"] { fill: var(--ink); }
+.mstrip .label { display: block; font-size: 10px; font-weight: 500; }
+.ms-nm { display: block; font-family: var(--head); font-weight: 800; font-size: 20px; line-height: 22px; font-variant-numeric: tabular-nums lining-nums; }
+.sc-box { margin-top: 24px; height: 176px; background: var(--amber); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.sc-box .badge { width: 72px; height: 72px; background: var(--ink); color: var(--amber); padding: 13px; }
+.sc-box .badge path[fill="var(--amber)"] { fill: var(--ink); }
+.sc-box h1 { font-family: var(--head); font-weight: 800; font-size: 40px; line-height: 42px; letter-spacing: -0.02em; }
+.sc-box h1 .num { font-weight: 800; }
+.sc-box .label { font-size: 11px; font-weight: 500; }
+.stagec .stats { margin-top: 12px; }
+.stats .big .u { font-family: var(--mono); font-weight: 500; font-size: 12px; margin-left: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.sc-cmp { margin-top: 8px; font-size: 14px; line-height: 20px; }
+.sc-cmp b.num { font-size: 15px; }
+.unl { margin-top: 6px; padding: 10px 14px; background: var(--ink); color: var(--paper); display: flex; align-items: center; gap: 12px; font-size: 15px; line-height: 20px; }
+.unl .ico { background: var(--amber); color: var(--ink); }
+.unl .ico .sym { width: 20px; height: 20px; }
+.unl b.num { font-size: 16px; }
+.sc-btns { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+.sc-btns .cta { margin-top: 0; }

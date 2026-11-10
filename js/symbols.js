@@ -49,6 +49,8 @@ const shapes = {
     + `<path d="M8 0.9 8.9 1.8 8 2.7 7.1 1.8Z" fill="${RED}"/>`,
   check: `<path d="M1.2 5.2 3.9 7.9 8.8 2.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/>`,
   lock: r(2.5, 4.4, 5, 4.4) + `<path d="M3.5 4.6V3.3a1.5 1.5 0 0 1 3 0v1.3" fill="none" stroke="currentColor" stroke-width="1"/>`,
+  // Open padlock: a stage unlocked (F14, board 12b).
+  unlock: r(2.5, 4.4, 5, 4.4) + `<path d="M5.1 4.6V2.7a1.5 1.5 0 0 1 3 0v0.8" fill="none" stroke="currentColor" stroke-width="1"/>`,
   // Bar chart with a red last bar: Progress.
   progress: r(1.2, 4.6, 1.3, 3.6) + r(3.2, 3.2, 1.3, 5) + r(5.2, 4.2, 1.3, 4) + r(7.2, 1.2, 1.3, 7, RED)
     + r(0.8, 8.7, 8.4, 0.5),
