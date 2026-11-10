@@ -24,10 +24,15 @@ document.addEventListener('error', e => {
   if (t instanceof HTMLImageElement && t.classList.contains('mv')) t.outerHTML = sym(t.dataset.fallback || 'figureSmall');
 }, true);
 
-// ---- Inline images (F09 step 3): the start pose and the loop ----
-// A SMIL loop can only be paused, resumed and restarted as inline SVG, so the
-// file's text is fetched (from the images cache) and put in the page. Texts
-// are kept in memory, so a step's image is there at once on later redraws.
+// ---- Inline images (F09 step 3): the loop, played by the app ----
+// The loop files are SVG with SMIL <animate> (linear between keyTimes,
+// repeating). Chrome doesn't repaint SMIL reliably (on the phone the loop
+// started seconds late; in the desktop preview it didn't move at all), so
+// the app plays the file's own keyframes itself: it reads each <animate>
+// (values, keyTimes, dur), takes it out, and sets the attribute every frame
+// from its own clock. Same motion as the file, but it starts the moment it's
+// shown, pauses and carries on exactly, and survives a redraw. The SVG files
+// are not changed. Texts are fetched once (from the images cache) and kept.
 
 export const file = (id, kind) => `img/moves/${id}${kind === 'still' ? '' : `--${kind}`}.svg`;
 export const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -47,39 +52,88 @@ export function svgText(url) {
 }
 export const prefetch = url => { svgText(url).catch(() => {}); };
 
-// One live image: a box holding the inline SVG. Built once (per player step
-// and phase, or per info screen) and moved into each redrawn page with
-// place(), so a redraw never restarts the loop. kind: 'start', 'loop' or
-// 'still'; a loop is the still when the phone asks for reduced motion.
+// Each <animate> becomes a track: the element, the attribute, the loop
+// length, and its keyframes as lists of numbers.
+const nums = v => v.trim().split(/[\s,]+/).map(Number);
+function tracks(svg) {
+  return [...svg.querySelectorAll('animate')].map(a => {
+    const t = {
+      el: a.parentNode,
+      attr: a.getAttribute('attributeName'),
+      dur: parseFloat(a.getAttribute('dur')) * 1000,
+      times: a.getAttribute('keyTimes').split(';').map(Number),
+      values: a.getAttribute('values').split(';').map(nums),
+    };
+    a.remove();
+    return t;
+  }).filter(t => t.dur > 0 && t.times.length === t.values.length);
+}
+const fmt = n => String(Math.round(n * 100) / 100);
+function frame(t, ms) {
+  const p = (ms % t.dur) / t.dur;
+  const k = t.times;
+  let i = 0;
+  while (i < k.length - 2 && p >= k[i + 1]) i++;
+  const a = t.values[i], b = t.values[i + 1] || a;
+  const f = k[i + 1] > k[i] ? Math.min(1, Math.max(0, (p - k[i]) / (k[i + 1] - k[i]))) : 0;
+  const v = a.length === b.length ? a.map((x, j) => x + (b[j] - x) * f) : a;
+  if (t.attr === 'points') {
+    const pairs = [];
+    for (let j = 0; j + 1 < v.length; j += 2) pairs.push(`${fmt(v[j])},${fmt(v[j + 1])}`);
+    t.el.setAttribute('points', pairs.join(' '));
+  } else t.el.setAttribute(t.attr, fmt(v[0]));
+}
+
+// One frame loop for every image that's playing.
+const playing = new Set();
+let raf = 0;
+function loop() {
+  raf = 0;
+  for (const art of playing) {
+    if (!art.el.isConnected) { playing.delete(art); continue; }
+    art.draw();
+  }
+  if (playing.size) raf = requestAnimationFrame(loop);
+}
+
+// One live image: a box holding the inline SVG. Built once (per player step,
+// or per info screen) and moved into each redrawn page with place(), so a
+// redraw never restarts the loop. kind: 'start', 'loop' or 'still'; a loop
+// is the still when the phone asks for reduced motion. Its clock starts at 0
+// the first time it's placed playing.
 export function moveArt(id, kind, { right = false, fallback = 'figure' } = {}) {
   if (kind === 'loop' && reducedMotion()) kind = 'still';
   const el = document.createElement('div');
   el.className = `mvart${right ? ' flip' : ''}`;
+  let tr = [];
+  let base = 0;      // ms played before the current run
+  let since = null;  // performance.now() when the current run began; null = frozen
+  const now = () => base + (since == null ? 0 : performance.now() - since);
   const art = {
-    el, svg: null, t: 0, running: true,
-    // Remember where the loop is, before the page it's in is redrawn.
-    save() { if (art.svg && art.svg.isConnected) art.t = art.svg.getCurrentTime(); },
-    // Put it in a new box: same point in the loop, playing or frozen.
+    el, running: false,
+    draw() { const ms = now(); for (const t of tr) frame(t, ms); },
+    // Put it in a box (a new page after a redraw): same point in the loop,
+    // playing or frozen.
     place(box, running) {
-      art.running = running;
       if (el.parentNode !== box) box.replaceChildren(el);
-      apply();
+      if (running && since == null) since = performance.now();
+      if (!running && since != null) { base = now(); since = null; }
+      art.running = running;
+      art.draw();
+      if (running && tr.length) { playing.add(art); if (!raf) raf = requestAnimationFrame(loop); }
+      else playing.delete(art);
     },
   };
-  function apply() {
-    const s = art.svg;
-    if (!s || !s.isConnected || !s.setCurrentTime) return;
-    s.setCurrentTime(art.t);
-    if (art.running) s.unpauseAnimations(); else s.pauseAnimations();
-  }
   const m = data.move(id);
   if (!m || !m.image) { el.innerHTML = sym(fallback); return art; }
   const fill = t => {
     el.innerHTML = t;
-    art.svg = el.querySelector('svg');
-    if (art.svg) art.svg.removeAttribute('role'); // the name is on screen
-    if (art.svg) art.svg.setAttribute('aria-hidden', 'true');
-    apply();
+    const svg = el.querySelector('svg');
+    if (!svg) return;
+    svg.removeAttribute('role'); // the name is on screen
+    svg.setAttribute('aria-hidden', 'true');
+    tr = tracks(svg);
+    if (el.parentNode) art.place(el.parentNode, art.running);
   };
   const url = file(id, kind);
   if (texts.has(url)) fill(texts.get(url));
