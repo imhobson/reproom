@@ -77,8 +77,6 @@ export function render(app, day) {
   const sectionHtml = k => {
     const off = k !== 'main' && sess.on[k] === false;
     const mins = Math.round(data.sectionSecs(workout, k) / 60);
-    const sw = k === 'main' ? '' :
-      `<button class="switch ${off ? '' : 'on'}" data-toggle="${k}" role="switch" aria-checked="${!off}" aria-label="${sectionLabel(k)}"><span></span></button>`;
     const rows = (workout.sections[k] || []).map((step, i) => {
       if (step.type === 'rest') {
         return `<li class="row rest"><span class="ico">${sym('moon')}</span><span class="nm">Rest</span><span class="t num">${clock(step.secs)}</span></li>`;
@@ -91,7 +89,6 @@ export function render(app, day) {
         <div class="dsec-head">
           <span class="hs">${sym(SEC_SYM[k])}</span>
           <p class="label">${sectionLabel(k)} · ${off ? 'Off' : `<span class="num">${mins}</span> min`}</p>
-          ${sw}
         </div>
         <ul class="rows">${rows}</ul>
       </section>`;
@@ -114,12 +111,26 @@ export function render(app, day) {
         <div class="dsec-head">
           <span class="hs">${sym('dumbbell')}</span>
           <p class="label">Weights · ${wOn ? `<span class="num">${Math.round(wSecs / 60)}</span> min` : 'Off'}</p>
-          <button class="switch ${wOn ? 'on' : ''}" data-weights role="switch" aria-checked="${wOn}" aria-label="Weights"><span></span></button>
         </div>
         ${wOn ? `<p class="label wcap">Today's move · <span class="num">${WEIGHT_SETS}</span> sets · <span class="num">${WEIGHT_REST_SECS}</span>s rest</p>
         <ul class="rows wrows" role="radiogroup" aria-label="Today's weights move">${rows}</ul>` : ''}
       </section>`;
   };
+
+
+  // Q13: the three switches sit together at the top, under the totals and
+  // above LET'S GO, in workout order. The section heads below keep their
+  // "· Off" label but lose their switches.
+  const secMins = k => Math.round(data.sectionSecs(workout, k) / 60);
+  const opts = [
+    { k: 'warmup', sym: 'warmup', label: 'Warm-up', on: sess.on.warmup !== false, mins: secMins('warmup'), attr: 'data-toggle="warmup"' },
+    { k: 'weights', sym: 'dumbbell', label: 'Weights', on: wOn, mins: Math.round(wSecs / 60), attr: 'data-weights' },
+    { k: 'cooldown', sym: 'cooldown', label: 'Cool-down', on: sess.on.cooldown !== false, mins: secMins('cooldown'), attr: 'data-toggle="cooldown"' },
+  ];
+  const setupHtml = `<div class="setup">${opts.map(o => `<button class="setup-row" ${o.attr} role="switch" aria-checked="${o.on}" aria-label="${o.label}">`
+        + `<span class="hs">${sym(o.sym)}</span>`
+        + `<span class="label">${o.label} · ${o.on ? `<span class="num">${o.mins}</span> min` : 'Off'}</span>`
+        + `<span class="switch ${o.on ? 'on' : ''}"><span></span></span></button>`).join('')}</div>`;
 
   app.innerHTML = `
     <section class="details">
@@ -137,6 +148,7 @@ export function render(app, day) {
         <p class="label red">Stage <span class="num">${pad2(st.stage)}</span> · Day <span class="num">${pad2(day)}</span></p>
         <h1 class="w-name">${workout.name}</h1>
         <p class="meta label"><span class="num">${s.mins}</span> min<span class="dot">·</span><span class="num">${s.moves}</span> moves<span class="dot">·</span><span class="num">${s.kcal}</span> kcal</p>
+        ${setupHtml}
         <button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button>
         ${sectionHtml('warmup')}${sectionHtml('main')}${weightsHtml()}${sectionHtml('cooldown')}
       </div>

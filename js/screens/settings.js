@@ -173,6 +173,7 @@ function sideways(r) {
 export function renderDev(app, { confirm = false, restoring = null, undoing = false, importing = null } = {}) {
   const st = store.get();
   const done = store.doneCount(st.stage);
+  const pos = store.positionDay(st.stage); // Q14
   const logOn = cuelog.enabled();
 
   app.innerHTML = `
@@ -187,7 +188,15 @@ export function renderDev(app, { confirm = false, restoring = null, undoing = fa
           <button class="sq" data-stage="1" aria-label="Next stage" ${st.stage >= MAX_STAGE ? 'disabled' : ''}>+</button>
         </div>
       </div>
-      <p class="s-help">Jump to any stage, even a locked one. Jumping forward ticks off every workout in the stages before it.</p>
+      <div class="s-card stage-card">
+        <div><p class="s-name">Day</p><p class="label muted">Next workout</p></div>
+        <div class="stepper">
+          <button class="sq" data-day="-1" aria-label="Previous day" ${pos <= 1 ? 'disabled' : ''}>−</button>
+          <span class="num">${pad2(pos)}</span>
+          <button class="sq" data-day="1" aria-label="Next day" ${pos >= DAYS_PER_STAGE ? 'disabled' : ''}>+</button>
+        </div>
+      </div>
+      <p class="s-help">Set where you are. Every workout before the stage and day you set is ticked off; the days from it to the end of the stage are unticked. Your history, the Wall and Progress don't change.</p>
 
       <h2 class="label red s-sec">Launch sound</h2>
       <div class="pair small three">
@@ -236,9 +245,15 @@ export function renderDev(app, { confirm = false, restoring = null, undoing = fa
   on('[data-cuelog]', () => { cuelog.setEnabled(!cuelog.enabled()); again(); });
   on('[data-launch]', e => { store.setSetting('launch', e.currentTarget.dataset.launch); again(); });
   on('[data-launch-play]', () => launch.play());
+  // Q14: Stage − / + keeps the day; Day − / + keeps the stage (store.jumpTo).
   on('[data-stage]', e => {
     const n = st.stage + +e.currentTarget.dataset.stage;
-    store.jumpToStage(Math.min(MAX_STAGE, Math.max(1, n)));
+    store.jumpTo(Math.min(MAX_STAGE, Math.max(1, n)), pos);
+    resetView(); again();
+  });
+  on('[data-day]', e => {
+    const d = pos + +e.currentTarget.dataset.day;
+    store.jumpTo(st.stage, Math.min(DAYS_PER_STAGE, Math.max(1, d)));
     resetView(); again();
   });
   on('[data-backup]', async () => {

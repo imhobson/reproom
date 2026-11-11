@@ -140,22 +140,32 @@ export function setStage(stage) {
   save();
 }
 
-// Settings > Stage − / +: a manual override that can go to any stage.
-// Going forward ticks off every workout in all the stages before it;
-// going back un-ticks nothing.
-export function jumpToStage(stage) {
-  if (stage > state.stage) {
-    for (let s = 1; s < stage; s++) {
-      for (let d = 1; d <= DAYS_PER_STAGE; d++) {
-        const day = ((state.ticks[s] ||= {})[d] ||= []);
-        if (!day.length) day.push(state.intensity);
-      }
+// Developer > Stage and Day (Q14, Mike 11 Nov): set where you are, exactly.
+// Going to Stage S, Day D: every stage before S is ticked off in full; in S,
+// days 1 to D-1 are ticked and days D to 28 are unticked, so D is "today";
+// stages after S are left alone. Ticks that are added use the current
+// intensity. The log (sessions, the Wall, Progress) is never touched.
+// Stage − / + keeps the day number; Day − / + keeps the stage.
+export function jumpTo(stage, day) {
+  for (let s = 1; s < stage; s++) {
+    for (let d = 1; d <= DAYS_PER_STAGE; d++) {
+      const t = ((state.ticks[s] ||= {})[d] ||= []);
+      if (!t.length) t.push(state.intensity);
     }
+  }
+  const ticks = (state.ticks[stage] ||= {});
+  for (let d = 1; d <= DAYS_PER_STAGE; d++) {
+    if (d < day) { const t = (ticks[d] ||= []); if (!t.length) t.push(state.intensity); }
+    else delete ticks[d];
   }
   state.stage = stage;
   save();
   saved(); // the jump changes progress (ticks, stage), so it's backed up (F16, Mike 11 Nov)
 }
+
+// The day the Developer page shows for a stage: "today", or 28 when every
+// day is ticked.
+export const positionDay = stage => todayDay(stage) || DAYS_PER_STAGE;
 
 // Intensity changes straight away and never touches progress.
 export function setIntensity(id) {
