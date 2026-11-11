@@ -21,7 +21,12 @@
 importScripts('js/version.js');
 const VERSION = 'reproom-' + self.APP_VERSION;
 const DEV = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\])/.test(location.hostname);
-const AUDIO = 'reproom-audio-v1';
+// Clips are kept across releases and only missing ones are fetched, so a clip
+// re-made under the same name would never reach the phone. Whenever clips are
+// re-made under the same names, bump this number (v1 -> v2 was the louder,
+// re-mastered clips in 1.13.0). Activate deletes every other cache, old audio
+// caches included.
+const AUDIO = 'reproom-audio-v2';
 const IMAGES = 'reproom-images-' + self.APP_VERSION;
 
 const SHELL = [
@@ -81,7 +86,9 @@ async function saveVoices() {
       const worker = async () => {
         while (next < urls.length) {
           const u = urls[next++];
-          if (!(await audio.match(u))) await audio.add(u).catch(() => {});
+          // 'no-cache' checks with the server, so an old copy in the browser's own
+          // HTTP cache can't slip into a fresh audio cache.
+          if (!(await audio.match(u))) await audio.add(new Request(u, { cache: 'no-cache' })).catch(() => {});
         }
       };
       await Promise.all(Array.from({ length: 8 }, worker));

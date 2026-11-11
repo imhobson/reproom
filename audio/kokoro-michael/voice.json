@@ -823,6 +823,19 @@
   "lateral-raises": {
    "text": "Lateral raises.",
    "secs": 1.24
+  },
+  "phrase--rest": {
+   "text": "Rest.",
+   "secs": 0.69
+  },
+  "phrase--walk-back": {
+   "text": "Walk back.",
+   "secs": 0.89
+  },
+  "phrase--right-side": {
+   "text": "Right side.",
+   "secs": 0.96
   }
- }
+ },
+ "mastered": "11 Nov 2026: master.py, -14 LUFS, true peak about -1 dBTP"
 }

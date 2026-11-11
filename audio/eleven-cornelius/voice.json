@@ -5,6 +5,7 @@
  "model": "eleven_flash_v2_5",
  "reads": "nameOnly",
  "note": "ElevenLabs free plan: personal, non-commercial use only.",
+ "mastered": "11 Nov 2026: master.py, -14 LUFS, true peak about -1 dBTP",
  "clips": {
   "kneeling-push-ups": {
    "text": "Kneeling push-ups.",
@@ -713,6 +714,130 @@
   "reverse-plank": {
    "text": "Reverse plank.",
    "secs": 1.47
+  },
+  "leg-swings-front-to-back": {
+   "text": "Leg swings, front to back.",
+   "secs": 3.04
+  },
+  "leg-swings-front-to-back--left": {
+   "text": "Leg swings, front to back. Left side.",
+   "secs": 4.47
+  },
+  "leg-swings-front-to-back--right": {
+   "text": "Leg swings, front to back. Right side.",
+   "secs": 3.45
+  },
+  "leg-swings-side-to-side": {
+   "text": "Leg swings, side to side.",
+   "secs": 3.09
+  },
+  "leg-swings-side-to-side--left": {
+   "text": "Leg swings, side to side. Left side.",
+   "secs": 5.31
+  },
+  "leg-swings-side-to-side--right": {
+   "text": "Leg swings, side to side. Right side.",
+   "secs": 4.66
+  },
+  "pogo-hops": {
+   "text": "Pogo hops.",
+   "secs": 1.31
+  },
+  "a-march": {
+   "text": "A-march.",
+   "secs": 1.0
+  },
+  "a-skips": {
+   "text": "A-skips.",
+   "secs": 1.23
+  },
+  "b-skips": {
+   "text": "B-skips.",
+   "secs": 1.31
+  },
+  "carioca": {
+   "text": "Carioca.",
+   "secs": 1.1
+  },
+  "carioca--left": {
+   "text": "Carioca. Left side.",
+   "secs": 2.43
+  },
+  "carioca--right": {
+   "text": "Carioca. Right side.",
+   "secs": 2.54
+  },
+  "straight-leg-run": {
+   "text": "Straight-leg run.",
+   "secs": 1.55
+  },
+  "bounding": {
+   "text": "Bounding.",
+   "secs": 1.0
+  },
+  "strides": {
+   "text": "Strides.",
+   "secs": 1.1
+  },
+  "standing-calf-stretch": {
+   "text": "Standing calf stretch.",
+   "secs": 2.49
+  },
+  "standing-calf-stretch--left": {
+   "text": "Standing calf stretch. Left side.",
+   "secs": 2.96
+  },
+  "standing-calf-stretch--right": {
+   "text": "Standing calf stretch. Right side.",
+   "secs": 3.14
+  },
+  "standing-quad-stretch": {
+   "text": "Standing quad stretch.",
+   "secs": 2.25
+  },
+  "standing-quad-stretch--left": {
+   "text": "Standing quad stretch. Left side.",
+   "secs": 3.38
+  },
+  "standing-quad-stretch--right": {
+   "text": "Standing quad stretch. Right side.",
+   "secs": 3.4
+  },
+  "bicep-curls": {
+   "text": "Bicep curls.",
+   "secs": 1.73
+  },
+  "standing-shoulder-press": {
+   "text": "Standing shoulder press.",
+   "secs": 2.02
+  },
+  "kneeling-row": {
+   "text": "Kneeling row.",
+   "secs": 1.52
+  },
+  "kneeling-row--left": {
+   "text": "Kneeling row. Left side.",
+   "secs": 2.67
+  },
+  "kneeling-row--right": {
+   "text": "Kneeling row. Right side.",
+   "secs": 2.49
+  },
+  "lateral-raises": {
+   "text": "Lateral raises.",
+   "secs": 1.52
+  },
+  "phrase--rest": {
+   "text": "Rest.",
+   "secs": 0.87
+  },
+  "phrase--walk-back": {
+   "text": "Walk back.",
+   "secs": 1.05
+  },
+  "phrase--right-side": {
+   "text": "Right side.",
+   "secs": 1.1
   }
  }
 }
