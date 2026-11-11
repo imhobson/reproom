@@ -104,14 +104,15 @@ function enterStep(i) {
     } else audio.sayMove(step, cuelog.cue('voice', name, P.planStart, false));
   } else {
     setPhase('rest', step.secs);
-    // A walk back (F11) is announced, after the finish chime: "Walk back."
-    // (phone voice for now; there's no recorded clip).
-    if (step.walkBack) {
-      clearTimeout(P.voiceTimer);
-      const plan = P.planStart + (P.afterChime ? VOICE_AFTER_CHIME_MS : 0);
-      const say = () => { if (P && P.running && P.idx === i) audio.sayText('Walk back.', cuelog.cue('voice', 'Walk back', plan, false)); };
-      if (P.afterChime) P.voiceTimer = setTimeout(say, VOICE_AFTER_CHIME_MS); else say();
-    }
+    // Every rest is announced in the chosen voice: "Walk back." on a walk back
+    // (F11), "Rest." on any other (Q11: between rounds, between weight sets).
+    // After a move that ran out by itself, wait for the finish chime first;
+    // after a tap, straight away.
+    clearTimeout(P.voiceTimer);
+    const [id, text, label] = step.walkBack ? ['walk-back', 'Walk back.', 'Walk back'] : ['rest', 'Rest.', 'Rest'];
+    const plan = P.planStart + (P.afterChime ? VOICE_AFTER_CHIME_MS : 0);
+    const say = () => { if (P && P.running && P.idx === i) audio.sayPhrase(id, text, cuelog.cue('voice', label, plan, false)); };
+    if (P.afterChime) P.voiceTimer = setTimeout(say, VOICE_AFTER_CHIME_MS); else say();
   }
   P.afterChime = false;
 }
@@ -152,7 +153,12 @@ function doneSet() {
   P.wsecs[i] = P.sinceStart;
   const next = P.steps[i + 1];
   if (!next) { finish(); return; }
-  if (next.type === 'weight' && next.set === s.set && next.side) audio.sayText(`${next.side === 'left' ? 'Left' : 'Right'} side.`);
+  // Between the two sides of a set: "Right side." in the chosen voice. "Left
+  // side." has no clip (it never comes up: left goes first), so the phone voice.
+  if (next.type === 'weight' && next.set === s.set && next.side) {
+    if (next.side === 'right') audio.sayPhrase('right-side', 'Right side.');
+    else audio.sayText('Left side.');
+  }
   enterStep(i + 1);
 }
 

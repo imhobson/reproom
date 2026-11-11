@@ -6,6 +6,7 @@ import * as store from './store.js';
 import * as data from './data.js';
 import * as sounds from './sounds.js';
 import * as cuelog from './cuelog.js';
+import { FX_GAIN } from './config.js';
 
 let ctx = null;          // Web Audio context, made on the first tap
 let muted = false;       // the player's quick mute
@@ -13,7 +14,8 @@ let voices = [];         // from audio/voices.json
 const clipLists = {};    // voice id -> its voice.json clips
 let clip = null;         // the voice clip playing now
 
-let fxBus = null;        // master gain for every sound effect (Effects volume)
+let fxBus = null;        // master gain for every sound effect (Effects volume x FX_GAIN),
+                         // into a limiter so the loudest effects don't clip
 
 const settings = () => store.get().settings;
 const soundOn = () => settings().allSounds && !muted;
@@ -25,8 +27,10 @@ const level = pct => Math.pow(Math.max(0, Math.min(100, pct)) / 100, 2);
 const voiceLevel = () => level(settings().voiceVol ?? 100);
 const fxLevel = () => level(settings().fxVol ?? 100);
 
+const fxGain = () => fxLevel() * FX_GAIN; // effects boost (Q11): see config.js
+
 // Called when the Effects volume slider moves.
-export function setFxVolume() { if (fxBus) fxBus.gain.setValueAtTime(fxLevel(), ctx.currentTime); }
+export function setFxVolume() { if (fxBus) fxBus.gain.setValueAtTime(fxGain(), ctx.currentTime); }
 
 // ---- Setup ----
 
@@ -41,8 +45,17 @@ export function unlock() {
   if (!ctx) {
     ctx = new (window.AudioContext || window.webkitAudioContext)();
     fxBus = ctx.createGain();
-    fxBus.gain.value = fxLevel();
-    fxBus.connect(ctx.destination);
+    fxBus.gain.value = fxGain();
+    // A limiter on the effects only (Q11): with FX_GAIN the loudest ones (GO,
+    // the chimes) would go over full scale and crackle. The voice and the
+    // keep-alive tone go straight to the speaker, not through it.
+    const limiter = ctx.createDynamicsCompressor();
+    limiter.threshold.value = -3;
+    limiter.knee.value = 0;
+    limiter.ratio.value = 20;
+    limiter.attack.value = 0.001;
+    limiter.release.value = 0.08;
+    fxBus.connect(limiter).connect(ctx.destination);
   }
   if (ctx.state === 'suspended') ctx.resume();
 }
@@ -162,7 +175,7 @@ export async function sampleVoice(voiceId, onProgress, onEnd) {
 // ---- Voice ----
 
 function stopVoice() {
-  voiceSeq++; // a sayMove still loading its clip won't start it
+  voiceSeq++; // a sayMove or sayPhrase still loading its clip won't start it
   if (clip) { clip.pause(); clip = null; }
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
@@ -229,7 +242,7 @@ function playBuffer(buf, logEntry) {
   return h;
 }
 
-let voiceSeq = 0; // each sayMove gets a number, so a slow one can't talk over a newer one
+let voiceSeq = 0; // each sayMove / sayPhrase gets a number, so a slow one can't talk over a newer one
 
 // Read out a move, once, as its preview starts. logEntry (cue log, when it's
 // on) gets the moment the voice really starts.
@@ -248,6 +261,30 @@ export async function sayMove(step, logEntry = null) {
   const clips = await clipsFor(v);
   const name = clipName(step);
   if (!clips[name]) { speak(phoneText(step), logEntry); return; } // missing clip: phone voice
+  playClip(v, name, phoneText(step), logEntry, seq);
+}
+
+// A short phrase in the chosen voice (Q11): audio/<voice>/phrase--<id>.mp3,
+// e.g. sayPhrase('rest', 'Rest.'). Played like sayMove (screen on: <audio>;
+// screen off: Web Audio; a newer cue wins). The phone voice reads text with
+// Phone voice picked or no such clip in the voice. Off when the voice is off
+// or muted.
+export async function sayPhrase(id, text, logEntry = null) {
+  stopVoice();
+  const seq = ++voiceSeq;
+  const v = settings().voice;
+  if (!soundOn() || v === 'off') { cuelog.skipped(logEntry, 'voice off'); return; }
+  if (v === 'phone') { speak(text, logEntry); return; }
+  const clips = await clipsFor(v);
+  if (seq !== voiceSeq) return;
+  const name = `phrase--${id}`;
+  if (!clips[name]) { speak(text, logEntry); return; } // missing clip: phone voice
+  playClip(v, name, text, logEntry, seq);
+}
+
+// Play one recorded clip of voice v, unless a newer cue (seq) came first.
+// fallback is what the phone voice says if the clip won't play.
+async function playClip(v, name, fallback, logEntry, seq) {
   if (document.visibilityState === 'hidden' && ctx) {
     try {
       const buf = await bufferFor(v, name);
@@ -262,25 +299,28 @@ export async function sayMove(step, logEntry = null) {
   clip = a;
   a.onended = () => { if (clip === a) clip = null; };
   if (logEntry) a.addEventListener('playing', () => cuelog.started(logEntry, 'clip'), { once: true });
-  a.play().catch(() => { if (clip === a) { clip = null; speak(phoneText(step), logEntry); } });
+  a.play().catch(() => { if (clip === a) { clip = null; speak(fallback, logEntry); } });
 }
 
-// Just a few words in the phone voice, e.g. "Right side." between the two
-// sides of a weight set (F12). Off when the voice is off.
+// Just a few words in the phone voice, for anything with no recorded clip
+// (e.g. "Left side."; Rest, Walk back and Right side use sayPhrase). Off when
+// the voice is off.
 export function sayText(text, logEntry = null) {
   stopVoice();
   if (!soundOn() || settings().voice === 'off') { cuelog.skipped(logEntry, 'voice off'); return; }
   speak(text, logEntry);
 }
 
-// Load a workout's clips ahead so they start on time.
+// Load a workout's clips ahead so they start on time, and the phrase clips
+// (Q11), so the first "Rest." isn't late.
+const PHRASES = ['rest', 'walk-back', 'right-side'];
 export async function preload(steps) {
   const v = settings().voice;
   if (v === 'off' || v === 'phone') return;
   const clips = await clipsFor(v);
-  for (const s of steps) {
-    if (s.type !== 'move' && !s.preview) continue; // moves, and the first weight set
-    const n = clipName(s);
+  const names = steps.filter(s => s.type === 'move' || s.preview).map(clipName) // moves, and the first weight set
+    .concat(PHRASES.map(id => `phrase--${id}`));
+  for (const n of names) {
     if (!clips[n]) continue;
     const a = new Audio(); a.preload = 'auto'; a.src = `audio/${v}/${n}.mp3`;
     if (ctx) bufferFor(v, n).catch(() => {}); // decoded too, for the screen-off voice

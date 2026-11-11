@@ -3,6 +3,10 @@
 // Placeholder energy estimate while workouts.json has kcal: null.
 export const KCAL_PER_MIN = 5.3;
 
+// Sound effects (Q11): every effect plays this much louder than its level in
+// sounds.js, at the same Effects volume, through a limiter so they don't clip.
+export const FX_GAIN = 2; // effects boost over the levels in sounds.js (2 = +6 dB). Raise or lower to taste.
+
 // Days in a stage.
 export const DAYS_PER_STAGE = 28;
 
