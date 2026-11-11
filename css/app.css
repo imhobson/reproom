@@ -259,6 +259,8 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .clock-row .big { font-size: 72px; line-height: 0.95; letter-spacing: -0.02em; }
 .clock-row .r { text-align: right; }
 .controls { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 8px; margin-top: 16px; }
+.ctl-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; min-width: 0; }
+.ctl-pair .ctl { min-width: 0; padding: 0; }
 .ctl { height: 48px; border: 2px solid var(--ink); font-family: var(--body); font-weight: 600; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; }
 .ctl:disabled { border-color: var(--line); color: var(--faint); }
 .ctl.pp { background: var(--ink); color: var(--paper); display: grid; place-items: center; }

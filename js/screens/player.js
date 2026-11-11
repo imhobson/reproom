@@ -618,7 +618,7 @@ function view() {
         </div>
         <div class="controls">
           ${isRest
-            ? `<button class="ctl" data-add30>${isWalk ? '+10 sec' : '+30 sec'}</button>`
+            ? `<div class="ctl-pair"><button class="ctl" data-prev>Prev</button><button class="ctl" data-add30 aria-label="${isWalk ? 'Add 10 seconds' : 'Add 30 seconds'}">${isWalk ? '+10' : '+30'}</button></div>`
             : `<button class="ctl" data-prev ${P.idx === 0 && P.phase === 'preview' ? 'disabled' : ''}>Prev</button>`}
           <button class="ctl pp ${paused ? 'play' : ''}" data-pp aria-label="${paused ? 'Play' : 'Pause'}">${sym(paused ? 'play' : 'pause')}</button>
           ${isRest ? `<button class="ctl" data-skip>Skip</button>`
@@ -915,9 +915,14 @@ function wire() {
   const tap = (label, fn) => () => { cuelog.note('tap', label); fn(); };
   on('[data-next]', tap('NEXT', next));
   on('[data-skip]', tap('SKIP', advance));
-  on('[data-prev]', tap('PREV', prev));
+  on('[data-prev]', tap('PREV', () => {
+    // On a rest (B05) the "Rest." line or chime may still be playing: stop
+    // it, so it doesn't talk over the Next up PREV lands on.
+    if (P.phase === 'rest') { clearTimeout(P.voiceTimer); audio.stopAll(); }
+    prev();
+  }));
   on('[data-finish]', tap('FINISH', finish));
-  // +30 SEC on a rest, +10 SEC on a walk back (F11).
+  // +30 on a rest, +10 on a walk back (F11).
   on('[data-add30]', () => {
     const ms = P.steps[P.idx].walkBack ? 10000 : 30000;
     cuelog.note('tap', `+${ms / 1000} SEC`);
