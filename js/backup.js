@@ -3,7 +3,7 @@ import * as wdata from './data.js';
 import * as audio from './audio.js';
 import * as sounds from './sounds.js';
 import { DAYS_PER_STAGE } from './config.js';
-import { isSession } from './store.js';
+import { isSession, voiceId } from './store.js';
 
 // Every localStorage key a backup holds, and the only keys a restore may
 // write. Adding a key here is a conscious choice: it must be progress or
@@ -108,7 +108,7 @@ export function currentData() {
 // The one helper for describing a backup's data (or the phone's), so the
 // confirm sheet and any later screen agree. Missing values count as defaults.
 //   progress: "Stage 07 · 5 / 28 done · 173 workouts"
-//   settings: "High · Kokoro Michael · Wood block · Bell"
+//   settings: "High · Cornelius (ElevenLabs) · Wood block · Bell"
 export function summarize(data) {
   const st = data?.['reproom.v1'] || {};
   const stage = Number(st.stage) || 1;
@@ -119,7 +119,7 @@ export function summarize(data) {
   // one, and neither is a run routine (kind "run", F11).
   const workouts = Array.isArray(st.log) ? st.log.filter(isSession).length : 0;
   const set = st.settings || {};
-  const vid = set.voice || 'eleven-cornelius';
+  const vid = voiceId(set.voice || 'eleven-cornelius'); // an old backup may name a retired voice
   const voice = vid === 'off' ? 'Voice off'
     : vid === 'phone' ? 'Phone voice'
     : audio.voiceList().find(v => v.id === vid)?.label || vid;

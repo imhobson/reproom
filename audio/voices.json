@@ -4,11 +4,5 @@
   "label": "Cornelius (ElevenLabs)",
   "engine": "elevenlabs",
   "default": true
- },
- {
-  "id": "kokoro-michael",
-  "label": "Kokoro Michael",
-  "engine": "kokoro",
-  "default": false
  }
 ]

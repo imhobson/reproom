@@ -10,7 +10,8 @@
 //   and reloads.
 // - Every voice listed in audio/voices.json is saved too, clip by clip, in its
 //   own cache that's kept across releases. New voices are picked up the next
-//   time the app opens.
+//   time the app opens, and the clips of a voice taken off the list are
+//   deleted from the phone (Kokoro Michael, 1.20.0).
 // - The move images (img/moves: still, start pose and loop for every move in
 //   data/moves.json, about 2.3 MB) are saved at install too, in their own
 //   cache named after the version (reproom-images-<version>), so they work
@@ -92,6 +93,12 @@ async function saveVoices() {
         }
       };
       await Promise.all(Array.from({ length: 8 }, worker));
+    }
+    // Drop the clips of any voice that's no longer in voices.json.
+    const keep = new Set(voices.map(v => v.id));
+    for (const req of await audio.keys()) {
+      const m = new URL(req.url).pathname.match(/\/audio\/([^/]+)\/[^/]+\.mp3$/);
+      if (m && !keep.has(m[1])) await audio.delete(req);
     }
   } catch (err) { /* offline: try again next time */ }
 }

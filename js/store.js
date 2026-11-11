@@ -18,6 +18,12 @@ const fresh = () => ({
     launch: 'every' },
 });
 
+// Voices taken out of the app, and the voice a phone (or a restored backup)
+// that still has one saved gets instead. Kokoro Michael went in 1.20.0 (D11):
+// the phone voice now stands in for any line Cornelius hasn't recorded yet.
+const RETIRED_VOICES = { 'kokoro-michael': 'eleven-cornelius' };
+export const voiceId = id => RETIRED_VOICES[id] || id;
+
 let state = load();
 
 function load() {
@@ -31,6 +37,7 @@ function load() {
         if (!set.restScenes.includes('cornelius')) set.restScenes = [...set.restScenes, 'cornelius'];
         set.restCornelius = true;
       }
+      if (set && set.voice in RETIRED_VOICES) set.voice = voiceId(set.voice);
       return { ...fresh(), ...s, settings: { ...fresh().settings, ...s.settings } };
     }
   } catch (e) { /* fall through */ }
