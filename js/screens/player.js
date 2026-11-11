@@ -509,13 +509,16 @@ function view() {
   const isWalk = P.phase === 'rest' && !!step.walkBack; // F11 walk back (board 16c)
   const paused = !P.running;
   // "Set 2 of 3", or "Set 2 of 3 · Left" for Kneeling row
-  const setText = s => `Set ${s.set} of ${s.sets}${s.side ? ` · ${s.side === 'left' ? 'Left' : 'Right'}` : ''}`;
+  const sideText = s => s.side ? ` · ${s.side === 'left' ? 'Left' : 'Right'}` : '';
+  const setText = s => `Set ${s.set} of ${s.sets}${sideText(s)}`;
 
+  // The chip in the top row (Q10). A weight set's chip has no side (it
+  // wouldn't fit); the side goes in the line above the name instead.
   let chip = '', chipCls = '';
   if (paused) { chip = 'Paused'; chipCls = 'light'; }
   else if (P.phase === 'preview') chip = isFirst ? 'Get ready' : 'Next up';
   else if (P.phase === 'rest') chip = isWalk ? 'Walk back' : 'Rest';
-  else if (isSet) chip = setText(step);
+  else if (isSet) chip = `Set ${step.set} of ${step.sets}`;
   else if (isLast) chip = 'Last move';
   else if (P.sinceStart < GO_CHIP_MS) { chip = 'GO!'; chipCls = 'go'; }
 
@@ -523,7 +526,7 @@ function view() {
     : P.phase === 'preview' ? (isFirst ? 'First move' : 'Starting soon')
     : P.phase === 'rest' ? (isWalk ? 'Walk back' : 'Rest')
     : isLast ? 'Last move' : '';
-  const kicker = isSet ? `Weights · Set ${step.set} of ${step.sets}`
+  const kicker = isSet ? `Weights · ${setText(step)}`
     : `${secLong(sec)}${kick ? ` · ${kick}` : ''}`;
 
   const cdLabel = paused ? 'Paused'
@@ -580,7 +583,7 @@ function view() {
           </div>
         </div>
         ${chip ? `<p class="chip ${chipCls}">${chip}</p>` : ''}
-        <div class="art ${isWalk ? 'walk' : ''}">${isRest ? sym(isWalk ? 'arrowLeft' : 'moon') : ''}</div>
+        <div class="art ${isRest ? (isWalk ? 'walk' : '') : 'mv'}">${isRest ? sym(isWalk ? 'arrowLeft' : 'moon') : ''}</div>
       </div>
       <div class="pad p-head">
         <p class="label red p-kicker">${kicker}</p>
@@ -722,8 +725,28 @@ function draw() {
   app.innerHTML = view();
   wire();
   placeArt();
+  fitChip();
   mediaInfo();
 }
+
+// ---- The chip in the top row (Q10) ----
+// It sits between X and the icons. If it would come within 8px of the icons
+// (a long chip on a narrow phone), its type shrinks in 1px steps, never below
+// 16px. Measured once per draw; every state change redraws. The first draw can
+// come before the heading font has loaded, so it's measured again once it has.
+function fitChip() {
+  const chip = app && app.querySelector('.stage-art .chip');
+  const icons = app && app.querySelector('.stage-art .icons');
+  if (!chip || !icons) return;
+  chip.style.fontSize = '';
+  const room = icons.getBoundingClientRect().left - 8 - chip.getBoundingClientRect().left;
+  let size = parseFloat(getComputedStyle(chip).fontSize);
+  while (chip.getBoundingClientRect().width > room && size > 16) {
+    size -= 1;
+    chip.style.fontSize = `${size}px`;
+  }
+}
+if (document.fonts && document.fonts.status !== 'loaded') document.fonts.ready.then(fitChip);
 
 // ---- The move image in the big image area (F09) ----
 // The move's loop, playing from Get ready / Next up (on grey) straight on

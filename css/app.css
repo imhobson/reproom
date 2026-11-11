@@ -142,7 +142,8 @@ button:disabled { cursor: default; }
 .hero-top.warm { background: var(--warm); }  /* run warm-up / cool-down routines (F11) */
 .hero-top.tall { height: 340px; }
 .hero-sym { width: 120px; height: 120px; margin: 4px auto 0; }
-.hero-fig { width: 164px; height: 164px; margin: 6px auto 0; color: var(--ink); }
+/* Exercise info's move image (Q10): 280px, floor line 20px above the bottom of the 340px box */
+.hero-fig { width: 280px; height: 280px; margin: -4px auto 0; color: var(--ink); }
 .pad { padding: 0 var(--gutter); }
 .details .pad > .label:first-child, .info .pad > .label:first-child { margin-top: 22px; }
 .details .w-name, .info .w-name { margin-top: 8px; }
@@ -228,13 +229,21 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .player[data-state="main"] .stage-art { background: var(--amber); }
 .player[data-state="warm"] .stage-art { background: var(--warm); }
 .stage-art .top { position: relative; z-index: 2; }
-/* the figure scales with the image area: 184px at full height, keeping 54px under it */
+/* The rest moon and the walk-back arrow: they scale with the image area,
+   184px at full height, keeping 54px under them (unchanged by Q10). */
 .stage-art .art { position: absolute; left: 50%; top: 123px; width: calc(var(--art-h) - 177px); height: calc(var(--art-h) - 177px); transform: translateX(-50%); }
 .stage-art .art { color: var(--ink); }
+/* The move image (Q10, 11 Nov): one size for every move, S = (image area - 116px) / 0.85
+   square, placed so the drawing's floor line (90 of 100) sits 20px above the bottom
+   of the image area and its head (about 5 of 100) just under the top buttons.
+   288px at the full 361px, 193px at the 280px minimum. */
+.stage-art .art.mv { --s: calc((var(--art-h) - 116px) / 0.85); top: calc(var(--art-h) - 20px - var(--s) * 0.9); width: var(--s); height: var(--s); }
 .player.paused .stage-art::after { content: ''; position: absolute; inset: 0; background: rgba(20, 21, 23, 0.42); z-index: 1; }
-.chip { position: absolute; left: var(--gutter); top: 104px; z-index: 2; height: 43px; padding: 0 12px; display: flex; align-items: center;
-  background: var(--ink); color: var(--paper); font-family: var(--head); font-weight: 800; font-size: 28px; letter-spacing: -0.01em; text-transform: uppercase; }
-.chip.go { color: var(--amber); text-transform: none; font-size: 34px; }
+/* The chip sits in the top row, between X and the icons (Q10). Its type shrinks
+   in 1px steps if it would come within 8px of the icons, never below 16px (fitChip in player.js). */
+.chip { position: absolute; left: 72px; top: 44px; z-index: 2; height: 44px; padding: 0 11px; display: flex; align-items: center; white-space: nowrap;
+  background: var(--ink); color: var(--paper); font-family: var(--head); font-weight: 800; font-size: 22px; letter-spacing: -0.01em; text-transform: uppercase; }
+.chip.go { color: var(--amber); text-transform: none; font-size: 26px; }
 .chip.light { background: var(--paper); color: var(--ink); }
 .p-kicker { margin-top: 16px; }
 .p-name { font-family: var(--head); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em; margin-top: 4px; }

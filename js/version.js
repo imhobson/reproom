@@ -10,5 +10,5 @@
 // app files under an unchanged version, so it can't be forgotten.
 //
 // It's a plain script (not a module) so the service worker can load it too.
-self.APP_VERSION = '1.11.2';
+self.APP_VERSION = '1.12.0';
 self.APP_DATE = '2026-11-11';
