@@ -119,7 +119,7 @@ export function summarize(data) {
   // one, and neither is a run routine (kind "run", F11).
   const workouts = Array.isArray(st.log) ? st.log.filter(isSession).length : 0;
   const set = st.settings || {};
-  const vid = set.voice || 'kokoro-michael';
+  const vid = set.voice || 'eleven-cornelius';
   const voice = vid === 'off' ? 'Voice off'
     : vid === 'phone' ? 'Phone voice'
     : audio.voiceList().find(v => v.id === vid)?.label || vid;
