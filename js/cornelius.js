@@ -6,7 +6,8 @@
 //   restScene()              -> a runner for the Rest screen: { place(box, running), stop() }
 //   thumb()                  -> a 44px head-and-shoulders picture for Settings
 //   pickLine(moment, vars, lastId) -> { id, expr, text } or null
-//   showDialogue({ expr, text, magic, onAmber, onClose }) -> close()
+//   showDialogue({ expr, text, magic, onAmber, onClose, startAt, talkSecs, autoClose }) -> close()
+//   launchLine()             -> the launch line (I08)
 import { SVG } from './cornelius-art.js';
 import { LINES } from './cornelius-lines.js';
 
@@ -120,10 +121,15 @@ export function pickLine(moment, vars = {}, lastId = null) {
   return fresh[Math.floor(Math.random() * fresh.length)];
 }
 
+export const launchLine = () => LINES.find(l => l.moment === 'launch') || { expr: 'proud', text: "Let's do this, Michael." };
+
 // ---- Dialogue pop-up (board 12 / 12b · Proposed) ----
 // First tap finishes the typing; the next closes it. Returns close().
-export function showDialogue({ expr = 'proud', text, magic, onAmber = false, onClose } = {}) {
-  const fig = create(expr, { magic, onAmber });
+// For the launch sound (I08): startAt (seconds) holds him quiet, eyes closed,
+// until his recorded line starts; talkSecs keeps his mouth moving for the
+// clip's length; autoClose (seconds) closes it that long after he finishes.
+export function showDialogue({ expr = 'proud', text, magic, onAmber = false, onClose, startAt = 0, talkSecs = 0, autoClose = 0 } = {}) {
+  const fig = create(startAt ? 'zen' : expr, { magic: startAt ? false : magic, onAmber });
   const root = document.createElement('div');
   root.className = 'c-dlg';
   root.setAttribute('role', 'dialog');
@@ -134,25 +140,36 @@ export function showDialogue({ expr = 'proud', text, magic, onAmber = false, onC
   const line = root.querySelector('.c-line');
   document.body.appendChild(root);
 
-  let n = 0, typeT = 0, closed = false;
-  const done = () => { clearInterval(typeT); typeT = 0; line.textContent = text; fig.talking(false); root.classList.add('typed'); };
-  if (reduceMotion()) done();
-  else {
+  let n = 0, typeT = 0, waitT = 0, talkT = 0, autoT = 0, closed = false, t0 = 0;
+  const stopTalking = () => { clearTimeout(talkT); talkT = 0; fig.talking(false); };
+  const done = () => {
+    clearInterval(typeT); typeT = 0; line.textContent = text; root.classList.add('typed');
+    // with a recorded line, the mouth runs for the clip's length
+    const left = talkSecs ? talkSecs * 1000 - (performance.now() - t0) : 0;
+    if (left > 0 && !reduceMotion()) { clearTimeout(talkT); talkT = setTimeout(stopTalking, left); } else stopTalking();
+    if (autoClose) autoT = setTimeout(close, Math.max(left, 0) + autoClose * 1000);
+  };
+  const start = () => {
+    waitT = 0; t0 = performance.now();
+    if (startAt) fig.set(expr, { magic });
+    if (reduceMotion()) { done(); return; }
     fig.talking(true);
     typeT = setInterval(() => {               // about 45 characters a second
       n = Math.min(text.length, n + 1);
       line.textContent = text.slice(0, n);
       if (n >= text.length) done();
     }, 22);
-  }
+  };
+  if (startAt) waitT = setTimeout(start, startAt * 1000); else start();
   function close() {
     if (closed) return;
     closed = true;
+    clearTimeout(waitT); clearTimeout(talkT); clearTimeout(autoT);
     clearInterval(typeT);
     root.classList.add('closing');
     setTimeout(() => { fig.destroy(); root.remove(); }, 160);
     if (onClose) onClose();
   }
-  root.addEventListener('click', () => { if (typeT) done(); else close(); });
+  root.addEventListener('click', () => { if (waitT) close(); else if (typeT) done(); else close(); });
   return close;
 }

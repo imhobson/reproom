@@ -18,6 +18,7 @@ import * as autobackup from './autobackup.js';
 import * as progress from './screens/progress.js';
 import { go } from './ui.js';
 import * as nav from './nav.js';
+import * as launch from './launch.js';
 
 const app = document.getElementById('app');
 const updateBar = document.getElementById('update');
@@ -112,6 +113,7 @@ nav.setRouter(route);
 route();
 const flash = backup.takeFlash(); // e.g. "Backup restored" after a restore
 if (flash) showToast(`<p>${flash}</p>`);
+launch.onStart(); // the launch sound (I08), on a fresh start only
 
 // Feedback (F15): send any notes still queued when the app opens and when
 // the phone gets signal back. Never during a workout (the Feedback page

@@ -13,7 +13,9 @@ const fresh = () => ({
   settings: { allSounds: true, voice: 'eleven-cornelius', reads: 'nameOnly', sfx: 'on', tick: 'classic', chime: 'classic', voiceVol: 100, fxVol: 100, weightsOn: false,
     // Rest screen (I07): the scenes ticked in Settings → Rest screen ('moon' = the
     // still moon, 'cornelius' = Cornelius, F18). restCornelius: he has been added once.
-    restScenes: ['breathing', 'camp', 'beach', 'clouds', 'cabin', 'lake', 'cornelius'], restCornelius: true },
+    restScenes: ['breathing', 'camp', 'beach', 'clouds', 'cabin', 'lake', 'cornelius'], restCornelius: true,
+    // Launch sound (I08): 'every' start, 'daily' (the first start each day) or 'off'.
+    launch: 'every' },
 });
 
 let state = load();

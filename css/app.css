@@ -371,6 +371,7 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .opt.sel { background: var(--amber); }
 .opt:disabled { border-color: var(--line); color: var(--faint); background: transparent; }
 .pair.small .opt { min-height: 44px; font-weight: 600; font-size: 15px; }
+.pair.three { grid-template-columns: 1fr 1fr 1fr; } /* Developer → Launch sound (I08) */
 .s-rows { display: grid; gap: 2px; }
 .s-row { background: var(--field); min-height: 48px; padding: 0 14px; display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; }
 .s-row.col { flex-direction: column; align-items: stretch; gap: 10px; padding: 12px 14px; }

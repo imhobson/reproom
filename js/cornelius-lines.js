@@ -1,6 +1,8 @@
 // Cornelius's lines (F18). Our own words; edit freely.
 // moment: done (a finished workout) · milestone (a milestone crossed) ·
-//         symbol (the 100th tile: a Wall symbol finished) · stage (Stage complete)
+//         symbol (the 100th tile: a Wall symbol finished) · stage (Stage complete) ·
+//         launch (the launch sound, I08: matches the recorded clip phrase--launch,
+//         so change the recording too if you change these words)
 // expr:   which face he pulls (see cornelius.js EXPRESSIONS)
 // Fill-ins: {session} session number · {tilesLeft} tiles left on the symbol ·
 //           {milestone} the milestone's label, as on the summary (e.g. "250 sessions") ·
@@ -24,5 +26,6 @@ export const LINES = [
   { id: 's02', moment: 'symbol', expr: 'laughing', text: 'Ha! The Wall has a new symbol. I remember when it was one grey square.' },
   { id: 't01', moment: 'stage', expr: 'proud', text: 'Stage {stage}, done. Twenty-eight days, and you came back for every one.' },
   { id: 't02', moment: 'stage', expr: 'proud', text: 'Stage {stage} is behind you. The next one will not be kinder. Good.' },
+  { id: 'l01', moment: 'launch', expr: 'proud', text: "Let's do this, Michael." },
   { id: 't03', moment: 'stage', expr: 'laughing', text: '{days} days for Stage {stage}. The Wall grows, and so do you.' },
 ];

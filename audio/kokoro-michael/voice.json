@@ -835,6 +835,10 @@
   "phrase--right-side": {
    "text": "Right side.",
    "secs": 0.96
+  },
+  "phrase--launch": {
+   "text": "Let's do this, Michael.",
+   "secs": 1.49
   }
  },
  "mastered": "11 Nov 2026: master.py, -14 LUFS, true peak about -1 dBTP"

@@ -15,6 +15,7 @@ import * as cuelog from '../cuelog.js';
 import * as history from '../history.js';
 import * as rest from '../restscenes.js';
 import * as cornelius from '../cornelius.js';
+import * as launch from '../launch.js';
 
 // Where the back arrow on Settings goes (Home, or a paused workout).
 let backTo = '#/';
@@ -143,6 +144,15 @@ export function renderDev(app, { confirm = false, restoring = null, undoing = fa
       </div>
       <p class="s-help">Jump to any stage, even a locked one. Jumping forward ticks off every workout in the stages before it.</p>
 
+      <h2 class="label red s-sec">Launch sound</h2>
+      <div class="pair small three">
+        ${launch.MODES.map(m => `<button class="opt ${launch.mode() === m.id ? 'sel' : ''}" data-launch="${m.id}">${m.label}</button>`).join('')}
+      </div>
+      <div class="s-rows">
+        <button class="s-row" data-launch-play><span class="s-name">Play it now</span><span class="s-val">${sym('play')}</span></button>
+      </div>
+      <p class="s-help">The sting and "Let's do this, Michael." when RepRoom starts, with Cornelius when his is the voice. Once a day plays it on the first start each day only.</p>
+
       ${dataSection()}
 
       <h2 class="label red s-sec">Debug</h2>
@@ -179,6 +189,8 @@ export function renderDev(app, { confirm = false, restoring = null, undoing = fa
   on('[data-back]', () => go('#/settings'));
   on('[data-go]', e => go(e.currentTarget.dataset.go));
   on('[data-cuelog]', () => { cuelog.setEnabled(!cuelog.enabled()); again(); });
+  on('[data-launch]', e => { store.setSetting('launch', e.currentTarget.dataset.launch); again(); });
+  on('[data-launch-play]', () => launch.play());
   on('[data-stage]', e => {
     const n = st.stage + +e.currentTarget.dataset.stage;
     store.jumpToStage(Math.min(MAX_STAGE, Math.max(1, n)));

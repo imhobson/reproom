@@ -311,6 +311,36 @@ export function sayText(text, logEntry = null) {
   speak(text, logEntry);
 }
 
+// ---- Launch sound (I08) ----
+// The braam sting (sounds.js LAUNCH) through the effects, then "Let's do
+// this, Michael." in the chosen voice on the ring (phrase--launch). Played
+// with no tap: Chrome allows sound straight away for an app added to the home
+// screen. If the phone still holds sound back, it stays quiet (null) rather
+// than going off later at an odd moment.
+// Resolves to { voiceAt, lineSecs, voice } (voice: whether the line plays), or null.
+export const LAUNCH_TEXT = "Let's do this, Michael.";
+export async function launch() {
+  if (!soundOn()) return null;
+  unlock();
+  for (let i = 0; i < 8 && ctx.state !== 'running'; i++) await new Promise(r => setTimeout(r, 50));
+  if (ctx.state !== 'running') return null;
+  const v = settings().voice;
+  const withVoice = v !== 'off';
+  const withFx = effectsOn();
+  if (!withVoice && !withFx) return null;
+  if (withFx) sounds.LAUNCH.play(ctx, 0, fxBus);
+  const voiceAt = withFx ? sounds.LAUNCH.voiceAt : 0.3;
+  let lineSecs = 1.5;
+  if (withVoice && v !== 'phone') {
+    const clips = await clipsFor(v);
+    lineSecs = clips['phrase--launch']?.secs ?? lineSecs;
+    // load it ahead so it starts on the ring, not late
+    const a = new Audio(); a.preload = 'auto'; a.src = `audio/${v}/phrase--launch.mp3`;
+  }
+  if (withVoice) setTimeout(() => sayPhrase('launch', LAUNCH_TEXT), voiceAt * 1000);
+  return { voiceAt, lineSecs, voice: withVoice };
+}
+
 // Load a workout's clips ahead so they start on time, and the phrase clips
 // (Q11), so the first "Rest." isn't late.
 const PHRASES = ['rest', 'walk-back', 'right-side'];
