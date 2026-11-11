@@ -87,9 +87,10 @@ function route() {
   const r = routes.find(x => (m = location.hash.match(x.re))) || routes[0];
   window.scrollTo(0, 0);
   r.show(m);
-  // Auto backup (F16): a save made in the player (a finished workout) is
-  // sent once the player closes, e.g. on the summary.
-  if (leftPlayer) autobackup.retry();
+  // Auto backup (F16): a save made in the player is sent once the player
+  // closes (the summary, Home, Run); a pending one is retried when Settings
+  // opens (back from Feedback too, once the key is connected).
+  if (leftPlayer || location.hash === '#/settings') autobackup.retry();
 }
 
 // Auto backup (F16): every save that counts marks a backup pending and tries
@@ -112,6 +113,16 @@ if (flash) showToast(`<p>${flash}</p>`);
 const retryFeedback = () => { if (!midWorkout()) fb.retryQueued(); };
 retryFeedback();
 addEventListener('online', retryFeedback);
+
+// Auto backup (F16): retry a pending backup on start (after Restore or Undo
+// restore too), when the phone gets signal back, and when the app comes back
+// to the front. autobackup.retry() itself waits while the player is open.
+autobackup.retry();
+addEventListener('online', () => autobackup.retry());
+addEventListener('offline', autobackup.refresh); // Settings: "Waiting for signal"
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') autobackup.retry();
+});
 
 // ---- Updates ----
 // A new release installs in the background and waits (see sw.js). When one is

@@ -170,9 +170,11 @@ export function render(app, { confirm = false, restoring = null, undoing = false
     });
     input.click();
   });
-  on('[data-do-restore]', e => { e.currentTarget.disabled = true; backup.restore(pendingRestore); });
+  // Restore and Undo restore reload the app: the auto backup (F16) is marked
+  // first and sent on start.
+  on('[data-do-restore]', e => { e.currentTarget.disabled = true; autobackup.markPending(); backup.restore(pendingRestore); });
   on('[data-undo]', () => { const y = scrollY; render(app, { undoing: true }); scrollTo(0, y); });
-  on('[data-do-undo]', e => { e.currentTarget.disabled = true; backup.undoRestore(); });
+  on('[data-do-undo]', e => { e.currentTarget.disabled = true; autobackup.markPending(); backup.undoRestore(); });
   // Import history (F14, 04h): pick the file, check it, then the sheet.
   on('[data-import]', () => {
     const input = Object.assign(document.createElement('input'), { type: 'file', accept: 'application/json,.json' });
@@ -229,18 +231,27 @@ function dataSection() {
 function autoRows() {
   const last = backup.lastBackup();
   const sub = last?.auto ? 'Auto, saved to Drive' : last?.file ? esc(last.file) : '';
+  // Not connected (no usable Feedback key): off and greyed, and the row
+  // opens Feedback (04e).
+  if (!autobackup.connected()) return `${lastCard(last, sub)}
+        <button class="s-row auto-row dis" data-connect>
+          <span><span class="s-name">Auto backup to Drive</span><span class="bk-file">${autobackup.line()}</span></span>
+          <span class="switch" aria-hidden="true"><span></span></span>
+        </button>`;
   const on = autobackup.state().on;
-  return `
-        <div class="s-card backup-card">
-          <div><p class="s-name">Last backup</p>${sub ? `<p class="bk-file">${sub}</p>` : ''}</div>
-          <span class="bk-when">${backup.sinceText(last?.at)}</span>
-        </div>
+  return `${lastCard(last, sub)}
         <div class="s-row auto-row">
           <span><span class="s-name">Auto backup to Drive</span><span class="bk-file">${autobackup.line()}</span></span>
           <button class="switch ${on ? 'on' : ''}" data-autobk role="switch" aria-checked="${on}" aria-label="Auto backup to Drive"><span></span></button>
         </div>`;
 }
+const lastCard = (last, sub) => `
+        <div class="s-card backup-card">
+          <div><p class="s-name">Last backup</p>${sub ? `<p class="bk-file">${sub}</p>` : ''}</div>
+          <span class="bk-when">${backup.sinceText(last?.at)}</span>
+        </div>`;
 function bindAuto(app) {
+  app.querySelector('[data-connect]')?.addEventListener('click', () => go('#/settings/feedback'));
   app.querySelector('[data-autobk]')?.addEventListener('click', () => {
     autobackup.setOn(!autobackup.state().on);
   });

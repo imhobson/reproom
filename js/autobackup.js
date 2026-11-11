@@ -37,16 +37,19 @@ export const connected = () => !!(FEEDBACK_URL && fb.usableKey());
 let blocked = () => false;
 export function setBlocked(fn) { blocked = fn; }
 
-// Settings listens, to redraw Last backup and the switch's line.
+// Settings listens, to redraw Last backup and the switch's line. main.js
+// calls refresh() when the phone goes offline.
 let listener = null;
 export function onChange(fn) { listener = fn; }
 const changed = () => { try { listener?.(); } catch (e) { /* page gone */ } };
+export const refresh = changed;
 
 // Bumped by every save, so a save made while a send is on its way isn't
 // lost: that send then leaves pending set, and another one follows.
 let saves = 0;
 
-// Something was saved: mark it pending (while the switch is on).
+// Something was saved: mark it pending (while the switch is on). Restore
+// and Undo restore call this before they reload; the send follows on start.
 export function markPending() {
   saves++;
   if (state().on) write({ pending: true });
@@ -112,7 +115,14 @@ async function send() {
   if (again) setTimeout(retry, 0); // a newer save came in while this one was sending
 }
 
-// The line under the switch.
+// The line under the switch. Without a usable Feedback key the row is
+// greyed, the switch shows off, and a pending backup waits for the key.
 export function line() {
+  const s = state();
+  if (!connected()) return 'Connect Feedback first';
+  if (!s.on || !s.pending) return 'After every workout';
+  if (navigator.onLine === false) return 'Waiting for signal';
+  if (s.failed === 'error') return "Couldn't reach Drive. Trying again later.";
+  if (s.failed === 'signal') return 'Waiting for signal';
   return 'After every workout';
 }

@@ -30,7 +30,9 @@ function save() {
 export const get = () => state;
 
 // Auto backup (F16): main.js listens, and a backup to Drive follows each
-// save that counts (progress, not settings changes).
+// save that counts: a finished workout, an early end, a run routine, Import
+// history and Reset my progress (Restore and Undo restore: settings.js).
+// Settings changes (stage, intensity, sound) don't send one.
 let onSavedFn = null;
 export function onSaved(fn) { onSavedFn = fn; }
 const saved = () => { try { onSavedFn?.(); } catch (e) { /* never block a save */ } };
@@ -102,6 +104,7 @@ export function logEarly({ stage, day, intensity, secs, moves, kcal, weights, tr
   if (track) entry.track = track;
   state.log.push(entry);
   save();
+  saved();
 }
 
 // A finished run routine (F11): logged with kind "run". It never ticks a
@@ -109,6 +112,7 @@ export function logEarly({ stage, day, intensity, secs, moves, kcal, weights, tr
 export function finishRun({ routine, secs, moves, kcal }) {
   state.log.push({ kind: 'run', routine, secs, moves, kcal, at: new Date().toISOString() });
   save();
+  saved();
 }
 
 // Does a log entry count as a session (a finished calisthenics workout)?
@@ -153,6 +157,7 @@ export function setSetting(key, value) {
 export function resetStage(stage) {
   delete state.ticks[stage];
   save();
+  saved();
 }
 
 // Import history (F14, board 04h): adds a reproom-history file, never
@@ -193,5 +198,6 @@ export function addHistory(doc) {
   }
   if (Number(doc.stage) > state.stage) state.stage = Number(doc.stage);
   save();
+  saved();
   return true;
 }

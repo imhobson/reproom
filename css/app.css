@@ -395,6 +395,9 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .auto-row .bk-file { word-break: normal; }
 .auto-row .switch { position: relative; flex: none; }
 .auto-row .switch::after { content: ''; position: absolute; inset: -10px -6px; } /* 44px tap target */
+.auto-row.dis .s-name { color: var(--muted); }
+.auto-row.dis .switch { background: var(--line); justify-content: flex-start; opacity: 0.5; } /* off and greyed: Connect Feedback first */
+.auto-row.dis .switch span { background: var(--paper); }
 .undo-row { margin-top: 6px; min-height: 60px; padding: 8px 14px; gap: 12px; }
 .undo-row > span:first-child { display: flex; flex-direction: column; }
 .undo-row .label { white-space: nowrap; }
