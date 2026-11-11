@@ -19,6 +19,8 @@ let changing = false; // the Connect box is open over a saved key
 let keyError = '';   // e.g. "Key not recognised"
 let type = 'Not sure';
 let draft = '';
+let backTo = '#/settings'; // Settings, or Developer (its Auto backup row, Q12)
+export function setBack(hash) { backTo = hash; }
 
 // ---- Parts ----
 
@@ -104,7 +106,7 @@ function draw() {
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   const again = () => { const y = scrollY; draw(); scrollTo(0, y); };
 
-  on('[data-back]', () => go('#/settings'));
+  on('[data-back]', () => go(backTo));
 
   // Connect
   on('[data-change]', () => { changing = true; keyError = ''; again(); q('[data-key]')?.focus(); });

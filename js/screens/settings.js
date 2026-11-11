@@ -1,5 +1,6 @@
-// Settings (04, and 04d with voice off), Reset progress (04c),
-// the Voice picker (04a) and the Sound effects picker (04b).
+// Settings (04, and 04d with voice off), Developer (04u: stage jump, data,
+// cue log, Reset progress 04c), the Voice picker (04a) and the Sound effects
+// picker (04b).
 import * as data from '../data.js';
 import * as store from '../store.js';
 import * as audio from '../audio.js';
@@ -31,12 +32,8 @@ const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', '
 function versionTag() {
   const [, m, d] = (self.APP_DATE || '').split('-').map(Number);
   const date = m ? ` · ${d} ${MONTHS[m - 1]}` : '';
-  return `<button class="label s-ver" data-ver aria-label="Version">V${self.APP_VERSION || '?'}${date}</button>`;
+  return `<span class="label s-ver">V${self.APP_VERSION || '?'}${date}</span>`;
 }
-
-// Tapping the version 5 times (within 3s) turns the cue log on or off (F11
-// pocket test). While it's on, a Cue log row shows under Feedback.
-let verTaps = [];
 
 function voiceLabel(id) {
   if (id === 'off') return 'Off';
@@ -44,14 +41,15 @@ function voiceLabel(id) {
   return audio.voiceList().find(v => v.id === id)?.label || id;
 }
 
-// ---- Settings ----
+// ---- Settings (04) ----
+// Intensity, Sound and Feedback. The Stage jump, DATA, the cue log and Reset
+// my progress live on the Developer page (Q12, 04u), one row down.
 
-export function render(app, { confirm = false, restoring = null, undoing = false, importing = null } = {}) {
+export function render(app) {
   audio.stopSample();
   const st = store.get();
   const s = st.settings;
   const voiceOff = s.voice === 'off';
-  const done = store.doneCount(st.stage);
   const sfxLabel = s.sfx === 'off' ? 'Off'
     : s.tick === 'classic' && s.chime === 'classic' ? 'Classic'
     : `${sounds.tickById(s.tick).label} · ${sounds.chimeById(s.chime).label}`;
@@ -59,17 +57,6 @@ export function render(app, { confirm = false, restoring = null, undoing = false
   app.innerHTML = `
     <section class="screen settings">
       ${head('Settings', versionTag())}
-      <h2 class="label red s-sec">Stage</h2>
-      <div class="s-card stage-card">
-        <div><p class="s-name">Stage</p><p class="label muted"><span class="num">${done}</span><span class="slash">/</span><span class="num">${DAYS_PER_STAGE}</span> done</p></div>
-        <div class="stepper">
-          <button class="sq" data-stage="-1" aria-label="Previous stage" ${st.stage <= 1 ? 'disabled' : ''}>−</button>
-          <span class="num">${pad2(st.stage)}</span>
-          <button class="sq" data-stage="1" aria-label="Next stage" ${st.stage >= MAX_STAGE ? 'disabled' : ''}>+</button>
-        </div>
-      </div>
-      <p class="s-help">Jump to any stage, even a locked one. Jumping forward ticks off every workout in the stages before it.</p>
-
       <h2 class="label red s-sec">Intensity</h2>
       <div class="pair">
         ${data.intensities().map(i => `
@@ -97,48 +84,16 @@ export function render(app, { confirm = false, restoring = null, undoing = false
         ${volRow('fxVol', 'Effects volume', s.fxVol, s.sfx === 'off' || !s.allSounds)}
       </div>
 
-      ${dataSection()}
-
-      <button class="s-row fb-row" data-go="#/settings/feedback"><span class="s-name">Feedback</span><span class="s-val">${sym('arrowRight')}</span></button>
-      ${cuelog.enabled() ? `<button class="s-row" style="margin-top:2px" data-go="#/settings/cue-log"><span class="s-name">Cue log</span><span class="s-val"><span class="label muted">Debug</span> ${sym('arrowRight')}</span></button>` : ''}
-
-      <button class="reset" data-reset>Reset my progress</button>
-    </section>
-    ${confirm ? resetSheet(st.stage, done) : ''}
-    ${restoring ? restoreSheet(restoring) : ''}
-    ${undoing ? undoSheet() : ''}
-    ${importing ? historySheet(importing) : ''}`;
-
-  store.keepData().then(kept => {
-    const el = app.querySelector('[data-kept]');
-    if (el) el.textContent = kept ? 'Data kept on this phone' : 'Data may be cleared by the browser';
-  });
+      <div class="s-rows fb-row">
+        <button class="s-row" data-go="#/settings/feedback"><span class="s-name">Feedback</span><span class="s-val">${sym('arrowRight')}</span></button>
+        <button class="s-row" data-go="#/settings/developer"><span class="s-name">Developer</span><span class="s-val">${sym('arrowRight')}</span></button>
+      </div>
+      <p class="s-help">Developer: stage jump, backups, history import, cue log and reset.</p>
+    </section>`;
 
   const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
   const again = () => { const y = scrollY; render(app); scrollTo(0, y); };
-  // Auto backup (F16): redraw Last backup and the switch when a send ends.
-  bindAuto(app);
-  autobackup.onChange(() => {
-    const box = app.querySelector('.settings [data-auto]');
-    if (!box) return; // Settings isn't on show
-    box.innerHTML = autoRows();
-    bindAuto(app);
-  });
   on('[data-back]', () => go(backTo));
-  on('[data-ver]', () => {
-    const now = Date.now();
-    verTaps = [...verTaps.filter(x => now - x < 3000), now];
-    if (verTaps.length < 5) return;
-    verTaps = [];
-    cuelog.setEnabled(!cuelog.enabled());
-    again();
-    showToast(`<span class="label">Cue log ${cuelog.enabled() ? 'on' : 'off'}</span>`, 2500);
-  });
-  on('[data-stage]', e => {
-    const n = st.stage + +e.currentTarget.dataset.stage;
-    store.jumpToStage(Math.min(MAX_STAGE, Math.max(1, n)));
-    resetView(); again();
-  });
   on('[data-int]', e => { store.setIntensity(e.currentTarget.dataset.int); resetView(); again(); });
   on('[data-all]', () => { store.setSetting('allSounds', !s.allSounds); again(); });
   on('[data-go]', e => go(e.currentTarget.dataset.go));
@@ -155,6 +110,73 @@ export function render(app, { confirm = false, restoring = null, undoing = false
       if (key === 'fxVol') audio.sampleFxVolume(); else audio.sampleVoiceVolume();
     });
   });
+}
+
+// ---- Developer (04u, Q12) ----
+// STAGE (the jump), DATA (backups, Restore, Undo restore, Import history),
+// DEBUG (the cue log) and Reset my progress, with their confirm sheets
+// (04c, 04g, 04m, 04h). Back goes to Settings.
+
+export function renderDev(app, { confirm = false, restoring = null, undoing = false, importing = null } = {}) {
+  const st = store.get();
+  const done = store.doneCount(st.stage);
+  const logOn = cuelog.enabled();
+
+  app.innerHTML = `
+    <section class="screen settings developer">
+      ${head('Developer')}
+      <h2 class="label red s-sec">Stage</h2>
+      <div class="s-card stage-card">
+        <div><p class="s-name">Stage</p><p class="label muted"><span class="num">${done}</span><span class="slash">/</span><span class="num">${DAYS_PER_STAGE}</span> done</p></div>
+        <div class="stepper">
+          <button class="sq" data-stage="-1" aria-label="Previous stage" ${st.stage <= 1 ? 'disabled' : ''}>−</button>
+          <span class="num">${pad2(st.stage)}</span>
+          <button class="sq" data-stage="1" aria-label="Next stage" ${st.stage >= MAX_STAGE ? 'disabled' : ''}>+</button>
+        </div>
+      </div>
+      <p class="s-help">Jump to any stage, even a locked one. Jumping forward ticks off every workout in the stages before it.</p>
+
+      ${dataSection()}
+
+      <h2 class="label red s-sec">Debug</h2>
+      <div class="s-rows">
+        <div class="s-row"><span class="s-name">Cue log</span>
+          <button class="switch ${logOn ? 'on' : ''}" data-cuelog role="switch" aria-checked="${logOn}" aria-label="Cue log"><span></span></button></div>
+        ${logOn ? `<button class="s-row" data-go="#/settings/cue-log"><span class="s-name">Open cue log</span><span class="s-val">${sym('arrowRight')}</span></button>` : ''}
+      </div>
+      <p class="s-help">Records when each sound plays in a workout, to check timing.</p>
+
+      <button class="reset" data-reset>Reset my progress</button>
+    </section>
+    ${confirm ? resetSheet(st.stage, done) : ''}
+    ${restoring ? restoreSheet(restoring) : ''}
+    ${undoing ? undoSheet() : ''}
+    ${importing ? historySheet(importing) : ''}`;
+
+  store.keepData().then(kept => {
+    const el = app.querySelector('[data-kept]');
+    if (el) el.textContent = kept ? 'Data kept on this phone' : 'Data may be cleared by the browser';
+  });
+
+  const on = (sel, fn) => app.querySelectorAll(sel).forEach(b => b.addEventListener('click', fn));
+  const redraw = (o = {}) => { const y = scrollY; renderDev(app, o); scrollTo(0, y); };
+  const again = () => redraw();
+  // Auto backup (F16): redraw Last backup and the switch when a send ends.
+  bindAuto(app);
+  autobackup.onChange(() => {
+    const box = app.querySelector('.developer [data-auto]');
+    if (!box) return; // Developer isn't on show
+    box.innerHTML = autoRows();
+    bindAuto(app);
+  });
+  on('[data-back]', () => go('#/settings'));
+  on('[data-go]', e => go(e.currentTarget.dataset.go));
+  on('[data-cuelog]', () => { cuelog.setEnabled(!cuelog.enabled()); again(); });
+  on('[data-stage]', e => {
+    const n = st.stage + +e.currentTarget.dataset.stage;
+    store.jumpToStage(Math.min(MAX_STAGE, Math.max(1, n)));
+    resetView(); again();
+  });
   on('[data-backup]', async () => {
     if (await backup.backUp()) { again(); showToast('<span class="label">Backed up</span>', 2500); }
   });
@@ -166,14 +188,14 @@ export function render(app, { confirm = false, restoring = null, undoing = false
       if (!file) return;
       const { body, error } = await backup.readBackup(file);
       if (error) { showToast(`<p>${error}</p>`); return; }
-      const y = scrollY; render(app, { restoring: body }); scrollTo(0, y);
+      redraw({ restoring: body });
     });
     input.click();
   });
   // Restore and Undo restore reload the app: the auto backup (F16) is marked
   // first and sent on start.
   on('[data-do-restore]', e => { e.currentTarget.disabled = true; autobackup.markPending(); backup.restore(pendingRestore); });
-  on('[data-undo]', () => { const y = scrollY; render(app, { undoing: true }); scrollTo(0, y); });
+  on('[data-undo]', () => redraw({ undoing: true }));
   on('[data-do-undo]', e => { e.currentTarget.disabled = true; autobackup.markPending(); backup.undoRestore(); });
   // Import history (F14, 04h): pick the file, check it, then the sheet.
   on('[data-import]', () => {
@@ -183,7 +205,7 @@ export function render(app, { confirm = false, restoring = null, undoing = false
       if (!file) return;
       const { doc, error } = await history.read(file);
       if (error) { showToast(`<p>${error}</p>`); return; }
-      const y = scrollY; render(app, { importing: doc }); scrollTo(0, y);
+      redraw({ importing: doc });
     });
     input.click();
   });
@@ -194,14 +216,14 @@ export function render(app, { confirm = false, restoring = null, undoing = false
     resetView(); again();
     showToast(`<p>History added: ${n.toLocaleString('en-GB')} sessions</p>`);
   });
-  on('[data-reset]', () => { const y = scrollY; render(app, { confirm: true }); scrollTo(0, y); });
+  on('[data-reset]', () => redraw({ confirm: true }));
   on('[data-keep]', again);
   on('[data-clear]', () => { store.resetStage(st.stage); resetView(); go('#/'); });
 }
 
-// DATA (Q02, board 04f): last backup, BACK UP / RESTORE, the "Data kept on
-// this phone" line and what a backup holds. The Feedback row (F15) comes
-// after it, before Reset my progress.
+// DATA (Q02, board 04f; on Developer since Q12): last backup, BACK UP /
+// RESTORE, Undo restore, Import history, the "Data kept on this phone" line
+// and what a backup holds.
 function dataSection() {
   const undo = backup.undoOffer();
   return `

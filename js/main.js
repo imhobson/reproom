@@ -41,6 +41,7 @@ const routes = [
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },
+  { re: /^#\/settings\/developer$/, show: () => settings.renderDev(app) },
   { re: /^#\/settings\/feedback$/, show: () => feedback.render(app, workoutNow) },
   { re: /^#\/settings\/cue-log$/, show: () => cueLog.render(app) },
 ];
@@ -76,6 +77,9 @@ function route() {
     settingsFrom = prevHash.startsWith('#/play/') && !workoutNow ? '#/' : prevHash || '#/';
     settings.setBack(settingsFrom);
   }
+  // Feedback's back arrow returns to Settings, or to Developer when opened
+  // from its Auto backup row (Q12).
+  if (location.hash === '#/settings/feedback') feedback.setBack(prevHash === '#/settings/developer' ? prevHash : '#/settings');
   prevHash = location.hash;
   // The phone's back button (B04): the player has its own watcher (B02),
   // every other screen uses nav's. Never both at once.
@@ -89,8 +93,8 @@ function route() {
   r.show(m);
   // Auto backup (F16): a save made in the player is sent once the player
   // closes (the summary, Home, Run); a pending one is retried when Settings
-  // opens (back from Feedback too, once the key is connected).
-  if (leftPlayer || location.hash === '#/settings') autobackup.retry();
+  // or Developer opens (back from Feedback too, once the key is connected).
+  if (leftPlayer || location.hash === '#/settings' || location.hash === '#/settings/developer') autobackup.retry();
 }
 
 // Auto backup (F16): every save that counts marks a backup pending and tries

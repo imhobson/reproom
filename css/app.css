@@ -508,8 +508,6 @@ body.has-update .toast { bottom: 64px; }
 .toast .num { font-size: 15px; }
 
 /* ---- Cue log (F11 pocket test, debug only) ---- */
-/* The version is a quiet button (5 taps = cue log on / off) with a 44px target. */
-button.s-ver { min-height: 44px; padding: 0 0 0 16px; display: flex; align-items: center; cursor: default; }
 .cl-sum { display: block; padding: 14px; margin-top: 12px; }
 .cl-sum p { font-size: 14px; line-height: 1.4; margin-top: 4px; }
 .cl-verdict { font-weight: 700; font-size: 16px !important; }

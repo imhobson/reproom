@@ -68,7 +68,7 @@ export function render(app) {
       <p class="s-help">Each cue: when it played, and how far off plan (+ late, − early). Late by more than 1s or missing is in red.</p>
       ${body}
     </section>`;
-  app.querySelector('[data-back]').addEventListener('click', () => go('#/settings'));
+  app.querySelector('[data-back]').addEventListener('click', () => go('#/settings/developer'));
   app.querySelectorAll('[data-keep-mode]').forEach(el => el.addEventListener('click', () => {
     keepalive.setMode(el.dataset.keepMode);
     const y = scrollY; render(app); scrollTo(0, y);
