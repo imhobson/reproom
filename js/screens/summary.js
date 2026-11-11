@@ -10,6 +10,30 @@ import { resetView } from './home.js';
 import * as stats from '../stats.js';
 import { grid } from '../wall.js';
 import * as nav from '../nav.js';
+import * as cornelius from '../cornelius.js';
+
+// Cornelius's finish pop-up (F18): only with his voice on, only after a
+// finished workout (an early end goes Home; a run routine returns before
+// this), once per screen per workout (marked on the result, so Settings or
+// Progress and back doesn't bring him back). Opens 600ms after the screen,
+// and not at all if the screen was left by then. Text only.
+const LAST = 'reproom.corneliusLast'; // his last line, so he never repeats it (not backed up)
+function corneliusSays(r, screen, moment, vars, magic) {
+  if (store.get().settings.voice !== cornelius.VOICE_ID) return;
+  r.cornelius = r.cornelius || {};
+  if (r.cornelius[screen]) return;
+  const hash = location.hash;
+  setTimeout(() => {
+    if (location.hash !== hash || result() !== r || r.cornelius[screen]) return;
+    let last = null;
+    try { last = localStorage.getItem(LAST); } catch (e) { /* storage unavailable */ }
+    const line = cornelius.pickLine(moment, vars, last);
+    if (!line) return;
+    r.cornelius[screen] = true;
+    try { localStorage.setItem(LAST, line.id); } catch (e) { /* storage unavailable */ }
+    nav.setOverlay(cornelius.showDialogue({ expr: line.expr, text: line.text, magic, onClose: () => nav.setOverlay(null) }));
+  }, 600);
+}
 
 const p2 = pad2;
 // The Wall strip (F14, boards 12, 12b, 12c): the symbol small with the new
@@ -97,6 +121,12 @@ export function render(app) {
     go('#/');
   });
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
+
+  // Which line (F18): a finished symbol, else a milestone, else a plain done.
+  const tiles = r.wall?.tiles;
+  if (tiles === 100) corneliusSays(r, 'summary', 'symbol', {});
+  else if (r.crossed?.length) corneliusSays(r, 'summary', 'milestone', { milestone: r.crossed[0].label });
+  else corneliusSays(r, 'summary', 'done', { session: r.session, tilesLeft: tiles == null ? null : 100 - tiles });
 }
 
 // Stage complete (F14, board 12b), after the stage's 28th workout.
@@ -162,6 +192,8 @@ export function renderStage(app) {
   // The phone's back button does the same (prompt 09, B04).
   nav.setBack(() => { resetView(); go('#/'); });
   on('[data-settings]', () => go('#/settings'));
+  // Cornelius (F18): a stage line, with the days taken when they're known.
+  corneliusSays(r, 'stage', 'stage', s.days ? { stage: p2(r.stage), days: s.days } : { stage: p2(r.stage) }, true);
 }
 
 // A run routine (F11, board 16d): the same layout, with RUN ROUTINE ·

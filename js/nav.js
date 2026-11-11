@@ -34,6 +34,12 @@ let leaving = false; // Leave RepRoom? is showing
 // Set by a screen when it draws (the router clears it before each screen).
 export function setBack(fn) { ownBack = fn || null; }
 
+// A pop-up over the screen, outside #app (Cornelius, F18): back closes it
+// first. The router closes it when the screen changes.
+let overlay = null;
+export function setOverlay(fn) { overlay = fn || null; }
+export function closeOverlay() { if (overlay) { const f = overlay; overlay = null; f(); } }
+
 export function arm() {
   if (!HAS_CW || watcher || leaving) return;
   const w = watcher = new CloseWatcher();
@@ -53,6 +59,7 @@ function onBack() {
   // have run yet, so draw that screen first and go up from there.
   route();
   if (location.hash.startsWith('#/play/')) return; // the player's own (B02)
+  if (overlay) { closeOverlay(); arm(); return; }
   const app = document.getElementById('app');
   const sheetClose = app.querySelector('.sheet [data-keep]');
   const arrow = app.querySelector('[data-back]');

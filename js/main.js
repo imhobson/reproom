@@ -87,6 +87,7 @@ function route() {
   if (location.hash.startsWith('#/play/')) nav.disarm();
   else { player.leave(); nav.arm(); }
   nav.setBack(null); // a screen with its own back rule sets it as it draws
+  nav.closeOverlay(); // Cornelius's pop-up (F18) belongs to the screen it opened over
   showUpdateBar();
   let m = null;
   const r = routes.find(x => (m = location.hash.match(x.re))) || routes[0];
