@@ -27,14 +27,17 @@ export const SCENES = [
   { id: 'lake', label: 'Mountain lake', desc: 'Dawn, a canoe drifting' },
 ];
 export const MOON = { id: 'moon', label: 'Moon', desc: 'The still moon' };
-export const DEFAULT = SCENES.map(s => s.id);
+// Cornelius (F18): an 8th choice, drawn by cornelius.js. Only picked while
+// his voice is on (player.js leaves him out otherwise).
+export const CORNELIUS = { id: 'cornelius', label: 'Cornelius', desc: 'The sage, breathing slowly' };
+export const DEFAULT = [...SCENES.map(s => s.id), CORNELIUS.id];
 export const isNight = id => !!SCENES.find(s => s.id === id)?.night;
-export const label = id => (id === 'moon' ? MOON.label : SCENES.find(s => s.id === id)?.label || id);
+export const label = id => (id === 'moon' ? MOON.label : id === CORNELIUS.id ? CORNELIUS.label : SCENES.find(s => s.id === id)?.label || id);
 
 // One pick per rest: any ticked choice except the one just shown (when
 // there's another to choose). 'moon' means the still moon symbol.
 export function pick(ticked, last) {
-  const ids = (ticked || []).filter(id => id === 'moon' || SCENES.some(s => s.id === id));
+  const ids = (ticked || []).filter(id => id === 'moon' || id === CORNELIUS.id || SCENES.some(s => s.id === id));
   if (!ids.length) return 'moon';
   const pool = ids.length > 1 ? ids.filter(id => id !== last) : ids;
   return pool[Math.floor(Math.random() * pool.length)];

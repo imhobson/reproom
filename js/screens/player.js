@@ -22,6 +22,7 @@ import * as keepalive from '../keepalive.js';
 import * as track from '../track.js';
 import * as stats from '../stats.js';
 import * as rest from '../restscenes.js';
+import * as cornelius from '../cornelius.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 // A run routine's sections are labelled with its group (Warm-up / Drills /
@@ -108,7 +109,11 @@ function enterStep(i) {
     // The picture for this rest (I07): a new random pick from the ticked
     // scenes every rest, never the same one twice running when there's a
     // choice. A walk back keeps its arrow.
-    P.restScene = step.walkBack ? null : rest.pick(store.get().settings.restScenes, P.lastScene);
+    // Cornelius (F18) is only in the pick while his voice is on; if he's the
+    // only one ticked, the still moon shows.
+    const s = store.get().settings;
+    const ticked = (s.restScenes || rest.DEFAULT).filter(id => id !== 'cornelius' || s.voice === cornelius.VOICE_ID);
+    P.restScene = step.walkBack ? null : rest.pick(ticked, P.lastScene);
     if (P.restScene) P.lastScene = P.restScene;
     setPhase('rest', step.secs);
     // Every rest is announced in the chosen voice: "Walk back." on a walk back
@@ -800,7 +805,7 @@ function placeScene() {
   const key = `${P.id}:${P.idx}:${P.restScene}`;
   if (!restArt || restArt.key !== key) {
     restArt?.stop();
-    restArt = rest.scene(P.restScene);
+    restArt = P.restScene === 'cornelius' ? cornelius.restScene() : rest.scene(P.restScene);
     restArt.key = key;
   }
   restArt.place(box, P.running && !P.sheet);

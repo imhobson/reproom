@@ -11,8 +11,9 @@ const fresh = () => ({
   // every finished workout, repeats included (for streaks and totals later)
   log: [],
   settings: { allSounds: true, voice: 'eleven-cornelius', reads: 'nameOnly', sfx: 'on', tick: 'classic', chime: 'classic', voiceVol: 100, fxVol: 100, weightsOn: false,
-    // Rest screen (I07): the scenes ticked in Settings → Rest screen ('moon' = the still moon).
-    restScenes: ['breathing', 'camp', 'beach', 'clouds', 'cabin', 'lake'] },
+    // Rest screen (I07): the scenes ticked in Settings → Rest screen ('moon' = the
+    // still moon, 'cornelius' = Cornelius, F18). restCornelius: he has been added once.
+    restScenes: ['breathing', 'camp', 'beach', 'clouds', 'cabin', 'lake', 'cornelius'], restCornelius: true },
 });
 
 let state = load();
@@ -20,7 +21,16 @@ let state = load();
 function load() {
   try {
     const s = JSON.parse(localStorage.getItem(KEY));
-    if (s) return { ...fresh(), ...s, settings: { ...fresh().settings, ...s.settings } };
+    if (s) {
+      // F18: a Rest screen list saved before Cornelius gets him added once; the
+      // flag keeps him from coming back after he's unticked.
+      const set = s.settings;
+      if (set && Array.isArray(set.restScenes) && !set.restCornelius) {
+        if (!set.restScenes.includes('cornelius')) set.restScenes = [...set.restScenes, 'cornelius'];
+        set.restCornelius = true;
+      }
+      return { ...fresh(), ...s, settings: { ...fresh().settings, ...s.settings } };
+    }
   } catch (e) { /* fall through */ }
   return fresh();
 }

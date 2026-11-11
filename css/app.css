@@ -705,3 +705,75 @@ img.mv.flip { transform: scaleX(-1); }
 .yn-grid .num.yn-last { font-size: 18px; }
 .yn-grid .u { font-family: var(--mono); font-weight: 500; font-size: 11px; margin-left: 3px; text-transform: uppercase; letter-spacing: 0.06em; }
 .yn-note { margin-top: 8px; font-size: 13px; line-height: 18px; color: var(--muted); }
+
+/* ---- Cornelius (F18) ---- */
+/*    One SVG holds every part; the attributes on the <svg> pick which one shows. */
+
+.cornelius { display: block; overflow: visible; }
+.cornelius [data-b], .cornelius [data-e], .cornelius [data-m] { display: none; }
+.cornelius[data-brows="level"] [data-b="level"], .cornelius[data-brows="up"] [data-b="up"],
+.cornelius[data-brows="high"] [data-b="high"], .cornelius[data-brows="down"] [data-b="down"],
+.cornelius[data-brows="soft"] [data-b="soft"], .cornelius[data-brows="worried"] [data-b="worried"],
+.cornelius[data-eyes="open"] [data-e="open"], .cornelius[data-eyes="wide"] [data-e="wide"],
+.cornelius[data-eyes="narrow"] [data-e="narrow"], .cornelius[data-eyes="happy"] [data-e="happy"],
+.cornelius[data-eyes="closed"] [data-e="closed"], .cornelius[data-eyes="wink"] [data-e="wink"],
+.cornelius[data-mouth="closed"] [data-m="closed"], .cornelius[data-mouth="flat"] [data-m="flat"],
+.cornelius[data-mouth="smile"] [data-m="smile"], .cornelius[data-mouth="talk1"] [data-m="talk1"],
+.cornelius[data-mouth="talk2"] [data-m="talk2"], .cornelius[data-mouth="talk3"] [data-m="talk3"],
+.cornelius[data-mouth="laugh"] [data-m="laugh"], .cornelius[data-mouth="o"] [data-m="o"] { display: inline; }
+
+/* Head tilt per expression, about the neck. */
+.cornelius .c-tilt { transform-box: view-box; transform-origin: 200px 300px; transition: transform .2s; }
+.cornelius[data-expr="proud"] .c-tilt, .cornelius[data-expr="wink"] .c-tilt { transform: rotate(-3deg); }
+.cornelius[data-expr="laughing"] .c-tilt { transform: rotate(-6deg); }
+.cornelius[data-expr="surprised"] .c-tilt, .cornelius[data-expr="worried"] .c-tilt { transform: rotate(2deg); }
+.cornelius[data-expr="zen"] .c-tilt { transform: rotate(3deg); }
+
+/* Idle: breathing (chest up, head follows a beat later), headband tails sway. */
+.cornelius .c-body, .cornelius .c-head { animation: c-breathe 2.4s ease-in-out infinite; }
+.cornelius .c-head { animation-name: c-bob; animation-delay: -.25s; }
+.cornelius .c-tails { transform-box: view-box; transform-origin: 270px 152px; animation: c-sway 1.7s ease-in-out infinite; }
+/* Rest: 4s in, 4s out, the same rhythm as the Breathing scene. */
+.cornelius.slow .c-body, .cornelius.slow .c-head { animation-duration: 8s; }
+@keyframes c-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+@keyframes c-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+@keyframes c-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(4deg); } }
+
+/* Magic: the floating Wall tiles, only for proud, laughing, surprised and stage moments. */
+.cornelius .c-sparks { display: none; }
+.cornelius.magic .c-sparks { display: inline; }
+.cornelius .c-spark { transform-box: fill-box; transform-origin: center; animation: c-float 3s ease-in-out infinite; }
+.cornelius .c-spark1 { animation-delay: -.9s; } .cornelius .c-spark2 { animation-delay: -1.8s; }
+.cornelius .c-spark3 { animation-delay: -1.35s; } .cornelius .c-spark4 { animation-delay: -2.4s; }
+@keyframes c-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(8deg); } }
+/* On amber (finish screens), the amber tiles turn paper so they show. */
+.cornelius.on-amber .c-spark rect[fill="#F0A70A"] { fill: #F4F2EC; }
+
+/* Frozen: paused, or the phone's reduce-motion setting. */
+.cornelius.paused *, .cornelius.paused { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) { .cornelius * { animation: none !important; transition: none !important; } }
+
+/* Settings thumbnail (44px, like the scene thumbnails). */
+.cornelius.c-thumb { width: 44px; height: 44px; }
+
+/* ---- Rest scene: fills .stage-art on the grey, bottom-centred ---- */
+.rest-scene.c-scene { position: absolute; inset: 0; background: var(--field); overflow: hidden; }
+.rest-scene.c-scene .cornelius { position: absolute; left: 50%; bottom: 0; height: 84%; width: auto; transform: translateX(-38%); }
+
+/* ---- Dialogue pop-up (Hades style) over a finish screen ---- */
+.c-dlg { position: fixed; inset: 0; z-index: 60; background: rgba(20, 21, 23, .62); animation: c-fade .15s ease-out; }
+.c-dlg .c-por { position: absolute; left: -20px; bottom: 150px; width: min(410px, 105vw); animation: c-rise .22s ease-out; }
+.c-dlg .c-por .cornelius { width: 100%; height: auto; }
+.c-dlg .c-box { position: absolute; left: 12px; right: 12px; bottom: calc(16px + env(safe-area-inset-bottom)); min-height: 150px;
+  background: var(--paper); color: var(--ink); border: 3px solid var(--ink); padding: 26px 18px 34px; }
+.c-dlg .c-name { position: absolute; top: -17px; left: 14px; background: var(--red); color: var(--paper);
+  border: 3px solid var(--ink); padding: 4px 12px; font-family: var(--mono); font-weight: 700;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.c-dlg .c-line { font-family: var(--body); font-size: 19px; line-height: 1.45; margin: 0; }
+.c-dlg .c-tap { position: absolute; right: 14px; bottom: 10px; font-family: var(--mono); font-weight: 700;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); opacity: 0; transition: opacity .2s; }
+.c-dlg.typed .c-tap { opacity: 1; }
+.c-dlg.closing { animation: c-fade .15s ease-in reverse forwards; }
+@keyframes c-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes c-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .c-dlg, .c-dlg .c-por { animation: none !important; } }

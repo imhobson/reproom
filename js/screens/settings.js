@@ -14,6 +14,7 @@ import { resetView } from './home.js';
 import * as cuelog from '../cuelog.js';
 import * as history from '../history.js';
 import * as rest from '../restscenes.js';
+import * as cornelius from '../cornelius.js';
 
 // Where the back arrow on Settings goes (Home, or a paused workout).
 let backTo = '#/';
@@ -471,18 +472,21 @@ export function renderVoice(app) {
 // ticked. Each row has a still thumbnail of its scene.
 
 function restLabel(ids = rest.DEFAULT) {
-  const scenes = rest.SCENES.map(x => x.id);
-  if (ids.length === scenes.length && scenes.every(id => ids.includes(id))) return 'All scenes';
+  // All six scenes and Cornelius (F18) = "All scenes"; Moon is a choice of its own.
+  const all = rest.DEFAULT;
+  if (ids.length === all.length && all.every(id => ids.includes(id))) return 'All scenes';
   if (ids.length <= 2) return ids.map(rest.label).join(', ');
   return `${ids.length} picked`;
 }
 
 export function renderRest(app) {
-  const opts = [...rest.SCENES, rest.MOON];
+  const opts = [...rest.SCENES, rest.CORNELIUS, rest.MOON];
   const order = opts.map(o => o.id);
   const ticked = () => store.get().settings.restScenes || rest.DEFAULT;
   const draw = () => {
     const on = ticked();
+    // Cornelius (F18) only plays with his own voice; say so on his row.
+    const desc = o => (o.id === 'cornelius' && store.get().settings.voice !== cornelius.VOICE_ID ? 'Only with the Cornelius voice' : o.desc);
     app.innerHTML = `
       <section class="screen picker">
         ${head('Rest screen')}
@@ -491,13 +495,17 @@ export function renderRest(app) {
         <div class="p-list" role="group" aria-label="Rest screen">${opts.map(o => `
           <div class="p-opt ${on.includes(o.id) ? 'sel' : ''}" data-tick="${o.id}" role="checkbox" aria-checked="${on.includes(o.id)}" tabindex="0">
             <span class="box"></span>
-            <span class="p-txt"><span class="o-name">${o.label}</span><span class="p-desc">${o.desc}</span></span>
+            <span class="p-txt"><span class="o-name">${o.label}</span><span class="p-desc">${desc(o)}</span></span>
             <span class="p-thumb" data-thumb="${o.id}">${o.id === 'moon' ? sym('moon') : ''}</span>
           </div>`).join('')}</div>
         <p class="s-help">One always stays ticked. Walk back rests in run routines keep their arrow.</p>
       </section>`;
     app.querySelector('[data-back]').addEventListener('click', () => go('#/settings'));
-    app.querySelectorAll('[data-thumb]').forEach(el => { if (el.dataset.thumb !== 'moon') el.append(rest.thumb(el.dataset.thumb, 44)); });
+    app.querySelectorAll('[data-thumb]').forEach(el => {
+      const id = el.dataset.thumb;
+      if (id === 'cornelius') el.append(cornelius.thumb());
+      else if (id !== 'moon') el.append(rest.thumb(id, 44));
+    });
     app.querySelectorAll('[data-tick]').forEach(el => {
       const toggle = () => {
         const id = el.dataset.tick;
