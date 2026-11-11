@@ -13,6 +13,7 @@ import { DAYS_PER_STAGE, MAX_STAGE } from '../config.js';
 import { resetView } from './home.js';
 import * as cuelog from '../cuelog.js';
 import * as history from '../history.js';
+import * as rest from '../restscenes.js';
 
 // Where the back arrow on Settings goes (Home, or a paused workout).
 let backTo = '#/';
@@ -82,6 +83,11 @@ export function render(app) {
         ${volRow('voiceVol', 'Voice volume', s.voiceVol, voiceOff || !s.allSounds)}
         <button class="s-row" data-go="#/settings/sound-effects"><span class="s-name">Sound effects</span><span class="s-val">${sfxLabel} ${sym('arrowRight')}</span></button>
         ${volRow('fxVol', 'Effects volume', s.fxVol, s.sfx === 'off' || !s.allSounds)}
+      </div>
+
+      <h2 class="label red s-sec">Rest screen</h2>
+      <div class="s-rows">
+        <button class="s-row" data-go="#/settings/rest-screen"><span class="s-name">Rest screen</span><span class="s-val">${restLabel(s.restScenes)} ${sym('arrowRight')}</span></button>
       </div>
 
       <div class="s-rows fb-row">
@@ -457,6 +463,55 @@ export function renderVoice(app) {
     }],
     foot: 'Every voice is saved on your phone, so it works offline mid-workout.',
   });
+}
+
+// ---- Rest screen (04v, I07) ----
+// Tick one or more of the six scenes and the still Moon. With more than one
+// ticked, each rest picks one at random (restscenes.js). One always stays
+// ticked. Each row has a still thumbnail of its scene.
+
+function restLabel(ids = rest.DEFAULT) {
+  const scenes = rest.SCENES.map(x => x.id);
+  if (ids.length === scenes.length && scenes.every(id => ids.includes(id))) return 'All scenes';
+  if (ids.length <= 2) return ids.map(rest.label).join(', ');
+  return `${ids.length} picked`;
+}
+
+export function renderRest(app) {
+  const opts = [...rest.SCENES, rest.MOON];
+  const order = opts.map(o => o.id);
+  const ticked = () => store.get().settings.restScenes || rest.DEFAULT;
+  const draw = () => {
+    const on = ticked();
+    app.innerHTML = `
+      <section class="screen picker">
+        ${head('Rest screen')}
+        <p class="s-help intro">What plays in the picture at the top while you rest. Tick more than one and each rest picks one at random.</p>
+        <h2 class="label red s-sec">Plays on rest</h2>
+        <div class="p-list" role="group" aria-label="Rest screen">${opts.map(o => `
+          <div class="p-opt ${on.includes(o.id) ? 'sel' : ''}" data-tick="${o.id}" role="checkbox" aria-checked="${on.includes(o.id)}" tabindex="0">
+            <span class="box"></span>
+            <span class="p-txt"><span class="o-name">${o.label}</span><span class="p-desc">${o.desc}</span></span>
+            <span class="p-thumb" data-thumb="${o.id}">${o.id === 'moon' ? sym('moon') : ''}</span>
+          </div>`).join('')}</div>
+        <p class="s-help">One always stays ticked. Walk back rests in run routines keep their arrow.</p>
+      </section>`;
+    app.querySelector('[data-back]').addEventListener('click', () => go('#/settings'));
+    app.querySelectorAll('[data-thumb]').forEach(el => { if (el.dataset.thumb !== 'moon') el.append(rest.thumb(el.dataset.thumb, 44)); });
+    app.querySelectorAll('[data-tick]').forEach(el => {
+      const toggle = () => {
+        const id = el.dataset.tick;
+        const now = ticked();
+        const next = now.includes(id) ? now.filter(x => x !== id) : [...now, id];
+        if (!next.length) return; // the last one stays ticked
+        store.setSetting('restScenes', order.filter(x => next.includes(x)));
+        const y = scrollY; draw(); scrollTo(0, y);
+      };
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggle(); } });
+    });
+  };
+  draw();
 }
 
 // Sound effects (04b, Q05): Off, then a TICK list and a CHIME list. Picking a

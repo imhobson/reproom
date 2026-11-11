@@ -21,6 +21,7 @@ import * as cuelog from '../cuelog.js';
 import * as keepalive from '../keepalive.js';
 import * as track from '../track.js';
 import * as stats from '../stats.js';
+import * as rest from '../restscenes.js';
 
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 // A run routine's sections are labelled with its group (Warm-up / Drills /
@@ -77,6 +78,7 @@ function start(key) {
     elapsed: 0, running: true, muted: false, sheet: null, sheetStep: null,
   };
   art = null;
+  restArt?.stop(); restArt = null;
   if (steps[0] && steps[0].move) prefetch(file(steps[0].move, 'loop'));
   audio.setMuted(false);
   audio.resume();
@@ -103,6 +105,11 @@ function enterStep(i) {
       P.voiceTimer = setTimeout(() => { if (P && P.running) audio.sayMove(step, cuelog.cue('voice', name, plan, false)); }, VOICE_AFTER_CHIME_MS);
     } else audio.sayMove(step, cuelog.cue('voice', name, P.planStart, false));
   } else {
+    // The picture for this rest (I07): a new random pick from the ticked
+    // scenes every rest, never the same one twice running when there's a
+    // choice. A walk back keeps its arrow.
+    P.restScene = step.walkBack ? null : rest.pick(store.get().settings.restScenes, P.lastScene);
+    if (P.restScene) P.lastScene = P.restScene;
     setPhase('rest', step.secs);
     // Every rest is announced in the chosen voice: "Walk back." on a walk back
     // (F11), "Rest." on any other (Q11: between rounds, between weight sets).
@@ -523,7 +530,7 @@ function view() {
   let chip = '', chipCls = '';
   if (paused) { chip = 'Paused'; chipCls = 'light'; }
   else if (P.phase === 'preview') chip = isFirst ? 'Get ready' : 'Next up';
-  else if (P.phase === 'rest') chip = isWalk ? 'Walk back' : 'Rest';
+  else if (P.phase === 'rest') { chip = isWalk ? 'Walk back' : 'Rest'; if (!isWalk && rest.isNight(P.restScene)) chipCls = 'light'; }
   else if (isSet) chip = `Set ${step.set} of ${step.sets}`;
   else if (isLast) chip = 'Last move';
   else if (P.sinceStart < GO_CHIP_MS) { chip = 'GO!'; chipCls = 'go'; }
@@ -571,6 +578,8 @@ function view() {
   // A weight set runs on amber, like a main move.
   const bgState = isSet ? 'main' : P.phase !== 'move' ? 'ready' : sec === 'main' ? 'main' : 'warm';
   const isRest = P.phase === 'rest';
+  // A rest scene (I07) fills the image area; the still Moon is the symbol as before.
+  const hasScene = isRest && !isWalk && P.restScene && P.restScene !== 'moon';
   const left = workoutLeft();
   const minsLeft = left < 60 ? 'Under <span class="num">1</span> min left' : `<span class="num">${Math.ceil(left / 60)}</span> min left`;
 
@@ -579,7 +588,7 @@ function view() {
 
   return `
     <section class="player ${paused ? 'paused' : ''}" data-state="${bgState}">
-      <div class="stage-art">
+      <div class="stage-art"${hasScene ? ` data-scene="${P.restScene}"` : ''}>
         <div class="top">
           <button class="icon-btn light" data-x aria-label="End workout">${sym('close')}</button>
           <div class="icons">
@@ -589,7 +598,7 @@ function view() {
           </div>
         </div>
         ${chip ? `<p class="chip ${chipCls}">${chip}</p>` : ''}
-        <div class="art ${isRest ? (isWalk ? 'walk' : '') : 'mv'}">${isRest ? sym(isWalk ? 'arrowLeft' : 'moon') : ''}</div>
+        ${hasScene ? '' : `<div class="art ${isRest ? (isWalk ? 'walk' : '') : 'mv'}">${isRest ? sym(isWalk ? 'arrowLeft' : 'moon') : ''}</div>`}
       </div>
       <div class="pad p-head">
         <p class="label red p-kicker">${kicker}</p>
@@ -731,6 +740,7 @@ function draw() {
   app.innerHTML = view();
   wire();
   placeArt();
+  placeScene();
   fitChip();
   mediaInfo();
 }
@@ -777,6 +787,23 @@ function placeArt() {
   }
   art.place(box, P.running);
   placeSheetArt();
+}
+
+// ---- The rest scene (I07) ----
+// Like the move image: built once per rest and moved into each redrawn page,
+// so a redraw (pause, +30 SEC) never restarts it. Paused = frozen. It fills
+// .stage-art behind the top buttons and the chip.
+let restArt = null;
+function placeScene() {
+  const box = app.querySelector('.stage-art[data-scene]');
+  if (!box) { if (restArt) { restArt.stop(); restArt = null; } return; }
+  const key = `${P.id}:${P.idx}:${P.restScene}`;
+  if (!restArt || restArt.key !== key) {
+    restArt?.stop();
+    restArt = rest.scene(P.restScene);
+    restArt.key = key;
+  }
+  restArt.place(box, P.running && !P.sheet);
 }
 
 // The info sheet's image (F09): the move's loop on its colour, playing while

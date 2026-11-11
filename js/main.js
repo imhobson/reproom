@@ -41,6 +41,7 @@ const routes = [
   { re: /^#\/settings$/, show: () => settings.render(app) },
   { re: /^#\/settings\/voice$/, show: () => settings.renderVoice(app) },
   { re: /^#\/settings\/sound-effects$/, show: () => settings.renderSfx(app) },
+  { re: /^#\/settings\/rest-screen$/, show: () => settings.renderRest(app) },
   { re: /^#\/settings\/developer$/, show: () => settings.renderDev(app) },
   { re: /^#\/settings\/feedback$/, show: () => feedback.render(app, workoutNow) },
   { re: /^#\/settings\/cue-log$/, show: () => cueLog.render(app) },

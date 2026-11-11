@@ -238,6 +238,9 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
    of the image area and its head (about 5 of 100) just under the top buttons.
    288px at the full 361px, 193px at the 280px minimum. */
 .stage-art .art.mv { --s: calc((var(--art-h) - 116px) / 0.85); top: calc(var(--art-h) - 20px - var(--s) * 0.9); width: var(--s); height: var(--s); }
+/* Rest scenes (I07): a canvas filling the image area, under the top buttons,
+   the chip and the paused shade. The night scenes flip the chip light (player.js). */
+.stage-art .rest-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
 .player.paused .stage-art::after { content: ''; position: absolute; inset: 0; background: rgba(20, 21, 23, 0.42); z-index: 1; }
 /* The chip sits in the top row, between X and the icons (Q10). Its type shrinks
    in 1px steps if it would come within 8px of the icons, never below 16px (fitChip in player.js). */
@@ -475,6 +478,9 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .p-txt { display: flex; flex-direction: column; }
 .p-txt .o-name { font-weight: 600; font-size: 17px; }
 .p-desc { color: var(--muted); font-size: 15px; }
+.p-thumb { width: 44px; height: 44px; background: var(--field); display: grid; place-items: center; overflow: hidden; }
+.p-thumb .scene-thumb { width: 44px; height: 44px; display: block; }
+.p-thumb .sym { width: 28px; height: 28px; color: var(--ink); }
 .p-play { width: 44px; height: 44px; background: var(--ink); color: var(--paper); display: grid; place-items: center; }
 .p-play .sym { width: 18px; height: 18px; }
 .p-play.on { background: var(--paper); color: var(--ink); border: 2px solid var(--ink); }
