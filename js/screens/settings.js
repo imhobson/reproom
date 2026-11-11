@@ -117,7 +117,52 @@ export function render(app) {
       store.setSetting(key, +r.value);
       if (key === 'fxVol') audio.sampleFxVolume(); else audio.sampleVoiceVolume();
     });
+    sideways(r);
   });
+}
+
+// B06: a volume slider only moves on a sideways drag. The range input itself
+// takes no pointer events (CSS); its row does, with touch-action: pan-y, so
+// an up-and-down swipe that starts on it scrolls the page. We wait for the
+// finger to move SLIDE_DECIDE_PX: mostly sideways = take the pointer and
+// set the value from the finger's x; mostly up and down = leave it to
+// scroll. A plain tap does nothing. Arrow keys and screen readers still use
+// the input as before. Greyed-out (disabled) sliders stay dead.
+const SLIDE_DECIDE_PX = 10;
+const THUMB_PX = 28; // .slider thumb: 22px + 2 × 3px border
+function sideways(r) {
+  const row = r.closest('.s-row');
+  let g = null; // { id, x, y, drag }
+  const setFromX = x => {
+    const b = r.getBoundingClientRect();
+    const f = (x - b.left - THUMB_PX / 2) / (b.width - THUMB_PX);
+    const v = String(Math.round(Math.min(1, Math.max(0, f)) * 100));
+    if (v !== r.value) { r.value = v; r.dispatchEvent(new Event('input', { bubbles: true })); }
+  };
+  const end = () => {
+    if (g && g.drag) r.dispatchEvent(new Event('change', { bubbles: true }));
+    g = null;
+  };
+  row.addEventListener('pointerdown', e => {
+    if (r.disabled || g || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    const b = r.getBoundingClientRect();
+    if (e.clientY < b.top || e.clientY > b.bottom) return; // on the track's 44px band only
+    g = { id: e.pointerId, x: e.clientX, y: e.clientY, drag: false };
+  });
+  row.addEventListener('pointermove', e => {
+    if (!g || e.pointerId !== g.id) return;
+    if (!g.drag) {
+      const dx = Math.abs(e.clientX - g.x), dy = Math.abs(e.clientY - g.y);
+      if (Math.max(dx, dy) < SLIDE_DECIDE_PX) return;
+      if (dy >= dx) { g = null; return; } // up and down: it's a scroll
+      g.drag = true;
+      try { row.setPointerCapture(e.pointerId); } catch (err) { /* pointer already gone */ }
+    }
+    e.preventDefault();
+    setFromX(e.clientX);
+  });
+  row.addEventListener('pointerup', e => { if (g && e.pointerId === g.id) end(); });
+  row.addEventListener('pointercancel', e => { if (g && e.pointerId === g.id) end(); });
 }
 
 // ---- Developer (04u, Q12) ----
