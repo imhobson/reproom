@@ -31,8 +31,8 @@ export const get = () => state;
 
 // Auto backup (F16): main.js listens, and a backup to Drive follows each
 // save that counts: a finished workout, an early end, a run routine, Import
-// history and Reset my progress (Restore and Undo restore: settings.js).
-// Settings changes (stage, intensity, sound) don't send one.
+// history, Reset my progress and the Stage − / + jump (Restore and Undo
+// restore: settings.js). Other settings changes (intensity, sound) don't.
 let onSavedFn = null;
 export function onSaved(fn) { onSavedFn = fn; }
 const saved = () => { try { onSavedFn?.(); } catch (e) { /* never block a save */ } };
@@ -140,6 +140,7 @@ export function jumpToStage(stage) {
   }
   state.stage = stage;
   save();
+  saved(); // the jump changes progress (ticks, stage), so it's backed up (F16, Mike 11 Nov)
 }
 
 // Intensity changes straight away and never touches progress.
