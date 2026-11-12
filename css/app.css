@@ -113,6 +113,15 @@ button:disabled { cursor: default; }
 .hero .badge { width: 56px; height: 56px; background: var(--amber); color: var(--ink); padding: 12px; margin: 0 auto; }
 .hero .badge .sym { width: 100%; height: 100%; }
 .hero .done-label { margin-top: 12px; color: var(--paper); text-align: center; }
+/* I09: Cornelius day scenes (img/days/day-NN.webp, 1520x784 = the card at 2x). */
+.hero.scene { position: relative; display: block; overflow: hidden; }
+.hero.scene img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; user-select: none; -webkit-user-drag: none; }
+.hero.scene .scene-fallback { display: none; }
+.hero.scene.no-scene { display: grid; place-items: center; }
+.hero.scene.no-scene .scene-fallback { display: block; }
+.hero.scene.done.no-scene .scene-fallback { display: none; }
+.hero.scene .scene-done { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(20, 21, 23, .45); }
+.hero.scene .badge { width: 64px; height: 64px; padding: 14px; box-shadow: 0 0 0 4px var(--ink); }
 
 .w-name { font-family: var(--head); font-weight: 700; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em; margin-top: 16px; }
 .meta { margin-top: 10px; color: var(--muted); }

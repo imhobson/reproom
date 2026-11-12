@@ -17,6 +17,12 @@
 //   cache named after the version (reproom-images-<version>), so they work
 //   with no signal. A new APP_VERSION saves a fresh set and drops the old one.
 //
+// - The 28 day scenes on Home (I09, img/days/day-NN.webp, about 6.5 MB) are
+//   saved at install in their own cache (reproom-days-vN), kept across
+//   releases like the voice clips, so a new version doesn't download them
+//   again. When the pictures change, bump DAYS (v1 -> v2) so phones fetch
+//   the new set.
+//
 // Running locally (localhost or a LAN address), files come from the network
 // first, so edits show up on a plain reload without bumping the version.
 importScripts('js/version.js');
@@ -29,6 +35,9 @@ const DEV = /^(localhost|127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|\[::1\]
 // caches included.
 const AUDIO = 'reproom-audio-v2';
 const IMAGES = 'reproom-images-' + self.APP_VERSION;
+// Day scenes (I09): kept across releases; bump when the pictures change.
+const DAYS = 'reproom-days-v1';
+const DAY_COUNT = 28;
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'css/app.css',
@@ -50,6 +59,7 @@ self.addEventListener('install', e => {
     // 'reload' skips the browser's HTTP cache, so this version gets fresh files.
     await c.addAll(SHELL.map(u => new Request(u, { cache: 'reload' })));
     await saveImages();
+    await saveDays();
     await saveVoices();
     // A new version waits until the app says "update" (see below).
   })());
@@ -57,7 +67,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
-    for (const k of await caches.keys()) if (k !== VERSION && k !== AUDIO && k !== IMAGES) await caches.delete(k);
+    for (const k of await caches.keys()) if (k !== VERSION && k !== AUDIO && k !== IMAGES && k !== DAYS) await caches.delete(k);
     await self.clients.claim();
   })());
 });
@@ -124,6 +134,26 @@ async function saveImages() {
   await Promise.all(Array.from({ length: 8 }, worker));
 }
 
+// Save the 28 day scenes (I09) that aren't saved yet. A failed download is
+// skipped (Home shows the symbol instead) and fetched again when that day is
+// first shown, so one missing picture never stops an install.
+async function saveDays() {
+  const c = await caches.open(DAYS);
+  const urls = Array.from({ length: DAY_COUNT }, (_, i) => `img/days/day-${String(i + 1).padStart(2, '0')}.webp`);
+  let next = 0;
+  const worker = async () => {
+    while (next < urls.length) {
+      const u = urls[next++];
+      if (await c.match(u)) continue;
+      try {
+        const res = await fetch(u, { cache: 'reload' });
+        if (res.ok) await c.put(u, res);
+      } catch (err) { /* offline: picked up later */ }
+    }
+  };
+  await Promise.all(Array.from({ length: 4 }, worker));
+}
+
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
@@ -131,7 +161,7 @@ self.addEventListener('fetch', e => {
   if (url.origin !== location.origin) return;
   if (url.pathname.endsWith('.mp3')) e.respondWith(audioResponse(req));
   else {
-    const cache = url.pathname.includes('/img/moves/') ? IMAGES : VERSION;
+    const cache = url.pathname.includes('/img/moves/') ? IMAGES : url.pathname.includes('/img/days/') ? DAYS : VERSION;
     e.respondWith(DEV ? networkFirst(req, cache) : cacheFirst(req, cache));
   }
 });

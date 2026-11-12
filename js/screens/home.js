@@ -36,9 +36,15 @@ export function render(app) {
   }
 
   const status = done ? 'Completed' : isToday ? 'Up next' : 'Coming up';
-  const hero = done
-    ? `<div class="hero done"><div><div class="badge">${sym('check')}</div><div class="label done-label">Completed</div></div></div>`
-    : `<div class="hero ${isToday ? 'amber' : ''}">${sym('barbell')}</div>`;
+  // I09: each of the 28 days has its own Cornelius scene (img/days/day-NN.webp,
+  // the same 28 at every stage and intensity, whatever the voice). A done day
+  // keeps its scene under a dark shade with the amber check. If a picture
+  // can't load, the old symbol shows instead (barbell, or the check when done).
+  const hero = `<div class="hero scene${done ? ' done' : isToday ? ' amber' : ''}">`
+    + `<img src="img/days/day-${pad2(day)}.webp" alt="" draggable="false" decoding="async" onerror="this.closest('.hero').classList.add('no-scene');this.remove()">`
+    + `<div class="scene-fallback">${sym('barbell')}</div>`
+    + (done ? `<div class="scene-done"><div class="badge">${sym('check')}</div></div>` : '')
+    + `</div>`;
 
   let info;
   if (ready) {
