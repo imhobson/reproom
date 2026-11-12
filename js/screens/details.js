@@ -10,6 +10,9 @@ import * as weights from '../weights.js';
 import { WEIGHT_SETS, WEIGHT_REST_SECS } from '../config.js';
 
 const SEC_SYM = { warmup: 'warmup', main: 'barbell', cooldown: 'cooldown' };
+// I09: where to crop a day scene in the header band (default: the centre).
+// Day 07 has Cornelius's face at the picture's left edge.
+const SCENE_FOCUS = { 7: 'left' };
 
 // Workout details for a run routine (F11, board 16b): the same screen with
 // the routine's colour and symbol in the header, RUN ROUTINE · <GROUP>, one
@@ -132,9 +135,15 @@ export function render(app, day) {
         + `<span class="label">${o.label} · ${o.on ? `<span class="num">${o.mins}</span> min` : 'Off'}</span>`
         + `<span class="switch ${o.on ? 'on' : ''}"><span></span></span></button>`).join('')}</div>`;
 
+  // I09: the day's Cornelius scene fills the header band (the same picture as
+  // on Home). The band is narrower than the picture, so the sides are cropped;
+  // SCENE_FOCUS moves the crop for a day whose hero sits at the edge. If the
+  // picture can't load, the old amber band with the barbell shows.
+  const focus = SCENE_FOCUS[day] ? ` style="object-position: ${SCENE_FOCUS[day]} center"` : '';
   app.innerHTML = `
     <section class="details">
-      <div class="hero-top amber">
+      <div class="hero-top amber scene">
+        <img src="img/days/day-${pad2(day)}.webp" alt="" draggable="false" decoding="async"${focus} onerror="this.closest('.hero-top').classList.add('no-scene');this.remove()">
         <div class="top">
           <button class="icon-btn light" data-back aria-label="Back">${sym('arrowLeft')}</button>
           <div class="icons">

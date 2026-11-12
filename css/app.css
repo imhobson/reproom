@@ -154,6 +154,12 @@ button:disabled { cursor: default; }
 .hero-top.warm { background: var(--warm); }  /* run warm-up / cool-down routines (F11) */
 .hero-top.tall { height: 340px; }
 .hero-sym { width: 120px; height: 120px; margin: 4px auto 0; }
+/* I09: the day scene fills the Workout details band; the buttons sit on top. */
+.hero-top.scene { overflow: hidden; }
+.hero-top.scene > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; user-select: none; -webkit-user-drag: none; }
+.hero-top.scene .top { position: relative; }
+.hero-top.scene .hero-sym { display: none; }
+.hero-top.scene.no-scene .hero-sym { display: block; }
 /* Exercise info's move image (Q10): 280px, floor line 20px above the bottom of the 340px box */
 .hero-fig { width: 280px; height: 280px; margin: -4px auto 0; color: var(--ink); }
 .pad { padding: 0 var(--gutter); }
