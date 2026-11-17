@@ -70,6 +70,8 @@ const shapes = {
   medal: `<path d="M2.2 0.6h2.1L5 2.6 5.7 0.6h2.1L6.4 4H3.6Z" fill="currentColor"/>`
     + `<circle cx="5" cy="6.6" r="2.9" fill="currentColor"/>`
     + `<path d="M5 5.1 6.5 6.6 5 8.1 3.5 6.6Z" fill="var(--amber)"/>`,
+  // Q15: a drop-down's chevron (the weights move picker).
+  chevronDown: `<path d="M1.6 3.3 5 6.7 8.4 3.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/>`,
   arrowRight:`<path d="M0.8 4.1h4.6V1.6L9.2 5 5.4 8.4V5.9H0.8Z" fill="currentColor"/>`,
   arrowLeft: `<path d="M9.2 4.1H4.6V1.6L0.8 5l3.8 3.4V5.9h4.6Z" fill="currentColor"/>`,
   // Runner mid-stride (F11): run routines, and the Run drills tile.

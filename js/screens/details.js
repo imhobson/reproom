@@ -13,6 +13,9 @@ const SEC_SYM = { warmup: 'warmup', main: 'barbell', cooldown: 'cooldown' };
 // I09: where to crop a day scene in the header band (default: the centre).
 // Day 07 has Cornelius's face at the picture's left edge.
 const SCENE_FOCUS = { 7: 'left' };
+// Q15: whether the weights move sheet is open (closed whenever the screen is
+// opened afresh).
+let wSheetOpen = false;
 
 // Workout details for a run routine (F11, board 16b): the same screen with
 // the routine's colour and symbol in the header, RUN ROUTINE · <GROUP>, one
@@ -66,7 +69,8 @@ export function renderRoutine(app, id) {
   app.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => go(`#/run/${id}/move/${b.dataset.step}`)));
 }
 
-export function render(app, day) {
+export function render(app, day, { keepSheet = false } = {}) {
+  if (!keepSheet) wSheetOpen = false;
   const st = store.get();
   const workout = data.workoutFor(st.intensity, day);
   if (!workout || !workout.complete) { go('#/'); return; }
@@ -100,7 +104,11 @@ export function render(app, day) {
   // Numbers in a mono line get the number font, as in every other label.
   const nums = t => t.replace(/\d+(\.\d+)?/g, '<span class="num">$&</span>');
 
-  const weightsHtml = () => {
+  // Q15: the weights move is picked at the top, from a sheet (05d). The sheet
+  // lists the four moves with last time's sets; a tap picks one and closes it.
+  // The Weights section further down is gone (the player still runs the set
+  // after Main, as before).
+  const weightsSheet = () => {
     const rows = data.weightMoves().map(m => {
       const on = m.id === sess.weight;
       return `<li><label class="wrow ${on ? 'on' : ''}">`
@@ -110,16 +118,19 @@ export function render(app, day) {
         + `<span class="label wlast">${nums(weights.lastLine(m.id))}</span></span></label></li>`;
     }).join('');
     return `
-      <section class="dsec wsec ${wOn ? '' : 'off'}">
-        <div class="dsec-head">
-          <span class="hs">${sym('dumbbell')}</span>
-          <p class="label">Weights · ${wOn ? `<span class="num">${Math.round(wSecs / 60)}</span> min` : 'Off'}</p>
+      <div class="scrim" data-wclose></div>
+      <div class="sheet wsheet" role="dialog" aria-modal="true" aria-labelledby="wsheet-title">
+        <div class="sheet-head">
+          <div>
+            <p class="label red">Weights</p>
+            <h2 class="sheet-title" id="wsheet-title">Today's move</h2>
+          </div>
+          <button class="icon-btn" data-keep data-wclose aria-label="Close">${sym('close')}</button>
         </div>
-        ${wOn ? `<p class="label wcap">Today's move · <span class="num">${WEIGHT_SETS}</span> sets · <span class="num">${WEIGHT_REST_SECS}</span>s rest</p>
-        <ul class="rows wrows" role="radiogroup" aria-label="Today's weights move">${rows}</ul>` : ''}
-      </section>`;
+        <p class="label wcap"><span class="num">${WEIGHT_SETS}</span> sets · <span class="num">${WEIGHT_REST_SECS}</span>s rest</p>
+        <ul class="rows wrows" role="radiogroup" aria-label="Today's weights move">${rows}</ul>
+      </div>`;
   };
-
 
   // Q13: the three switches sit together at the top, under the totals and
   // above LET'S GO, in workout order. The section heads below keep their
@@ -130,10 +141,25 @@ export function render(app, day) {
     { k: 'weights', sym: 'dumbbell', label: 'Weights', on: wOn, mins: Math.round(wSecs / 60), attr: 'data-weights' },
     { k: 'cooldown', sym: 'cooldown', label: 'Cool-down', on: sess.on.cooldown !== false, mins: secMins('cooldown'), attr: 'data-toggle="cooldown"' },
   ];
-  const setupHtml = `<div class="setup">${opts.map(o => `<button class="setup-row" ${o.attr} role="switch" aria-checked="${o.on}" aria-label="${o.label}">`
+  const switchHtml = o => `<span class="switch ${o.on ? 'on' : ''}"><span></span></span>`;
+  const setupHtml = `<div class="setup">${opts.map(o => {
+    // Q15: with weights on, the Weights row also names today's move; tapping
+    // the name opens the picker sheet, the switch on the right still turns
+    // weights off.
+    if (o.k === 'weights' && o.on) {
+      const m = data.move(sess.weight);
+      return `<div class="setup-row wpick-row">`
+        + `<button class="wpick" data-wpick aria-haspopup="dialog" aria-label="Today's weights move: ${m ? weights.listName(m) : ''}. Change">`
+        + `<span class="hs">${sym(o.sym)}</span>`
+        + `<span class="wpick-txt"><span class="label">${o.label} · <span class="num">${o.mins}</span> min</span>`
+        + `<span class="wpick-nm">${m ? weights.listName(m) : ''}<span class="chev">${sym('chevronDown')}</span></span></span></button>`
+        + `<button class="wswitch" ${o.attr} role="switch" aria-checked="true" aria-label="${o.label}">${switchHtml(o)}</button></div>`;
+    }
+    return `<button class="setup-row" ${o.attr} role="switch" aria-checked="${o.on}" aria-label="${o.label}">`
         + `<span class="hs">${sym(o.sym)}</span>`
         + `<span class="label">${o.label} · ${o.on ? `<span class="num">${o.mins}</span> min` : 'Off'}</span>`
-        + `<span class="switch ${o.on ? 'on' : ''}"><span></span></span></button>`).join('')}</div>`;
+        + switchHtml(o) + `</button>`;
+  }).join('')}</div>`;
 
   // I09: the day's Cornelius scene fills the header band (the same picture as
   // on Home). The band is narrower than the picture, so the sides are cropped;
@@ -159,16 +185,17 @@ export function render(app, day) {
         <p class="meta label"><span class="num">${s.mins}</span> min<span class="dot">·</span><span class="num">${s.moves}</span> moves<span class="dot">·</span><span class="num">${s.kcal}</span> kcal</p>
         ${setupHtml}
         <button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button>
-        ${sectionHtml('warmup')}${sectionHtml('main')}${weightsHtml()}${sectionHtml('cooldown')}
+        ${sectionHtml('warmup')}${sectionHtml('main')}${sectionHtml('cooldown')}
       </div>
       <div class="pinned"><button class="cta" data-go>Let's go<span class="go">${sym('arrowRight')}</span></button></div>
+      ${wSheetOpen && wOn ? weightsSheet() : ''}
     </section>`;
 
   app.querySelector('[data-back]').addEventListener('click', () => go('#/'));
   app.querySelector('[data-settings]').addEventListener('click', () => go('#/settings'));
   // The tap on LET'S GO is what lets the phone play sound.
   app.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { audio.unlock(); go(`#/play/${day}`); }));
-  const redraw = () => { const y = scrollY; render(app, day); scrollTo(0, y); };
+  const redraw = () => { const y = scrollY; render(app, day, { keepSheet: true }); scrollTo(0, y); };
   app.querySelectorAll('[data-toggle]').forEach(b => b.addEventListener('click', () => {
     const k = b.dataset.toggle;
     sess.on[k] = !sess.on[k];
@@ -178,10 +205,14 @@ export function render(app, day) {
     store.setSetting('weightsOn', !wOn);
     redraw();
   });
+  // Q15: the picker sheet. The phone's back button closes it first (nav.js
+  // clicks the sheet's [data-keep]).
+  app.querySelector('[data-wpick]')?.addEventListener('click', () => { wSheetOpen = true; redraw(); });
+  app.querySelectorAll('[data-wclose]').forEach(b => b.addEventListener('click', () => { wSheetOpen = false; redraw(); }));
   app.querySelectorAll('input[name="wmove"]').forEach(r => r.addEventListener('change', () => {
     sess.weight = r.value;
+    wSheetOpen = false;
     redraw();
-    app.querySelector(`input[name="wmove"][value="${r.value}"]`)?.focus({ preventScroll: true });
   }));
   app.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => {
     go(`#/workout/${day}/move/${b.dataset.step}`);

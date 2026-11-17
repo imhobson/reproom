@@ -195,6 +195,18 @@ button.row:not(.main) .ico { background: var(--warm); }  /* warm-up / cool-down 
 .setup-row + .setup-row { border-top: 1px solid var(--paper); }
 .setup-row .hs { width: 14px; height: 14px; flex: none; }
 .setup-row .label { flex: 1; }
+/* Q15: the Weights row with today's move (opens the picker sheet, 05d) */
+.wpick-row { height: auto; min-height: 64px; padding: 0; gap: 0; }
+.wpick { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 8px 0 8px 12px; text-align: left; }
+.wpick-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.wpick-nm { display: flex; align-items: center; gap: 6px; font-size: 16px; }
+.wpick-nm .chev { width: 14px; height: 14px; flex: none; }
+.wpick-nm .chev .sym { width: 14px; height: 14px; }
+.wswitch { flex: none; align-self: stretch; display: grid; place-items: center; padding: 0 12px 0 10px; min-width: 66px; }
+.wsheet .wcap { margin: 14px 0 6px; }
+.wsheet .wrows { margin-bottom: 8px; }
+/* Clear of Android's gesture bar / nav buttons at the bottom (Mike, 17 Nov) */
+.sheet.wsheet { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
 /* Weights section (F12, board 05c): a radio list of the four moves */
 .wcap { font-size: 10px; color: var(--muted); margin-bottom: 6px; }
 .wcap .num { font-size: 13px; }
