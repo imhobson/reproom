@@ -54,8 +54,8 @@ export function render(app) {
   const s = st.settings;
   const voiceOff = s.voice === 'off';
   const sfxLabel = s.sfx === 'off' ? 'Off'
-    : s.tick === 'classic' && s.chime === 'classic' ? 'Classic'
-    : `${sounds.tickById(s.tick).label} · ${sounds.chimeById(s.chime).label}`;
+    : s.tick === 'classic' && s.go === 'classic' && s.chime === 'classic' ? 'Classic'
+    : `${sounds.tickById(s.tick).label} · ${sounds.goById(s.go).label} · ${sounds.chimeById(s.chime).label}`;
 
   app.innerHTML = `
     <section class="screen settings">
@@ -594,8 +594,8 @@ export function renderRest(app) {
   draw();
 }
 
-// Sound effects (04b, Q05): Off, then a TICK list and a CHIME list. Picking a
-// tick or a chime turns sound effects back on if they were off.
+// Sound effects (04b, Q05, Q16): Off, then TICK, GO and CHIME lists. Picking a
+// tick, GO or chime turns sound effects back on if they were off.
 export function renderSfx(app) {
   const s = () => store.get().settings;
   const off = () => s().sfx === 'off';
@@ -606,14 +606,14 @@ export function renderSfx(app) {
       <div class="w-row"><span class="s-name">Move starts</span><span class="w-cue"><span class="label">3 · 2 · 1</span>${ticks}<span class="label gochip">GO</span></span></div>
       <div class="w-row"><span class="s-name">Move ends</span><span class="w-cue"><span class="label">3 · 2 · 1</span>${ticks}<span class="dia"></span><span class="label">Chime</span></span></div>
     </div>
-    <p class="s-help">The tick plays before every move starts and ends. GO always sounds the same.</p>`;
+    <p class="s-help">The tick plays before every move starts and ends. GO also plays after a weights rest.</p>`;
   const pickSound = (key, id) => { store.setSetting(key, id); store.setSetting('sfx', 'on'); };
   picker(app, {
     title: 'Sound effects',
     lists: [
       {
         key: 'sfx',
-        options: [{ id: 'off', label: 'Off', desc: 'No ticks or chimes. The voice still plays.' }],
+        options: [{ id: 'off', label: 'Off', desc: 'No ticks, GO or chimes. The voice still plays.' }],
         current: () => (off() ? 'off' : null),
         onPick: () => store.setSetting('sfx', 'off'),
       },
@@ -625,6 +625,13 @@ export function renderSfx(app) {
         onSample: (id, p, e) => audio.sampleCue('tick', id, p, e),
       },
       {
+        key: 'go', title: 'GO', dim: off,
+        options: sounds.GOS.map(g => ({ id: g.id, label: g.label, desc: g.desc, sample: true })),
+        current: () => s().go,
+        onPick: id => pickSound('go', id),
+        onSample: (id, p, e) => audio.sampleCue('go', id, p, e),
+      },
+      {
         key: 'chime', title: 'Chime', dim: off,
         options: sounds.CHIMES.map(c => ({ id: c.id, label: c.label, desc: c.desc, sample: true })),
         current: () => s().chime,
@@ -632,7 +639,7 @@ export function renderSfx(app) {
         onSample: (id, p, e) => audio.sampleCue('chime', id, p, e),
       },
     ],
-    foot: 'Play runs the end-of-move cue: three ticks, then the chime, with your other pick.',
+    foot: 'Play runs the cue as in a workout: three ticks, then GO or the chime, with your other picks.',
     after: when,
   });
 }

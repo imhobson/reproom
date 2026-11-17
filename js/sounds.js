@@ -1,7 +1,7 @@
 // Every RepRoom sound effect, made in code with Web Audio (no files).
 // Each sound is one small function: (ctx, at, dest) plays it `at` seconds from
 // now into `dest` (the effects bus, so Effects volume applies).
-// To add a sound: write a function below and add it to TICKS or CHIMES.
+// To add a sound: write a function below and add it to TICKS, GOS or CHIMES.
 // Peaks are kept well under 1 so nothing clips at 100% volume.
 
 // ---- Building blocks ----
@@ -131,11 +131,77 @@ function whistle(ctx, at, dest) {
   noise(ctx, dest, { dur, vol: 0.05, at, filter: 'bandpass', freq: 2100, q: 2, attack: 0.015 });
 }
 
-// ---- GO (unchanged from V1; not choosable) ----
+// ---- GO (Q16: choosable, Mike 13 Nov) ----
+// GO plays as a move's timer starts (and after a weights rest). Classic is
+// the V1 sound, unchanged, and stays the default.
 
-export function go(ctx, at, dest) {
+// Classic (V1, unchanged): a low thump dropping 180 -> 120 Hz, 0.7s.
+function classicGo(ctx, at, dest) {
   tone(ctx, dest, { freq: 180, freqEnd: 120, type: 'triangle', dur: 0.7, vol: 0.7, at, attack: 0.01 });
   tone(ctx, dest, { freq: 360, freqEnd: 240, dur: 0.35, vol: 0.15, at });
+}
+export const go = classicGo; // kept for anything that still asks for "the" GO
+
+// Boxing bell: the start-of-round bell, two quick strikes. A 1250 Hz ring
+// with clangy partials at 2.4x and 4.1x; the second strike rings out.
+function boxingBell(ctx, at, dest) {
+  [0, 0.18].forEach((d, i) => {
+    const ring = i ? 1.1 : 0.3;
+    tone(ctx, dest, { freq: 1250, dur: ring, vol: 0.3, at: at + d, attack: 0.002 });
+    tone(ctx, dest, { freq: 1250 * 2.4, dur: ring * 0.7, vol: 0.12, at: at + d, attack: 0.002 });
+    tone(ctx, dest, { freq: 1250 * 4.1, dur: ring * 0.4, vol: 0.06, at: at + d, attack: 0.002 });
+    noise(ctx, dest, { dur: 0.01, vol: 0.2, at: at + d, filter: 'bandpass', freq: 4000, q: 1 });
+  });
+}
+
+// Whistle: a sharp starter's blast. Sine around 2300 Hz with a fast 35 Hz
+// warble, 0.55s, with breath noise. Higher and longer than the Whistle chime.
+function startWhistle(ctx, at, dest) {
+  const t = ctx.currentTime + at;
+  const dur = 0.55;
+  const o = ctx.createOscillator();
+  o.type = 'sine';
+  o.frequency.setValueAtTime(2200, t);
+  o.frequency.exponentialRampToValueAtTime(2350, t + 0.06);
+  const lfo = ctx.createOscillator();
+  lfo.frequency.value = 35;
+  const depth = ctx.createGain();
+  depth.gain.value = 60;
+  lfo.connect(depth).connect(o.frequency);
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.24, t + 0.01);
+  g.gain.setValueAtTime(0.24, t + dur - 0.05);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(dest);
+  o.start(t); lfo.start(t);
+  o.stop(t + dur + 0.02); lfo.stop(t + dur + 0.02);
+  noise(ctx, dest, { dur, vol: 0.06, at, filter: 'bandpass', freq: 2300, q: 2, attack: 0.01 });
+}
+
+// Air horn: a short brassy blast. Detuned saws on a low chord (about 300 and
+// 375 Hz) through a low-pass, 0.6s.
+function airHorn(ctx, at, dest) {
+  const t = ctx.currentTime + at;
+  const dur = 0.6;
+  const f = ctx.createBiquadFilter();
+  f.type = 'lowpass'; f.frequency.value = 2400; f.Q.value = 1;
+  const g = ctx.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.3, t + 0.02);
+  g.gain.setValueAtTime(0.3, t + dur - 0.08);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  f.connect(g).connect(dest);
+  for (const n of [300, 375]) for (const cents of [-10, 10]) {
+    const o = ctx.createOscillator();
+    o.type = 'sawtooth';
+    o.frequency.setValueAtTime(n * 0.94, t);
+    o.frequency.exponentialRampToValueAtTime(n, t + 0.05);
+    o.detune.value = cents;
+    const og = ctx.createGain(); og.gain.value = 0.25;
+    o.connect(og).connect(f);
+    o.start(t); o.stop(t + dur + 0.02);
+  }
 }
 
 // ---- Launch sting (I08: "A2 · Braam", Mike 11 Nov) ----
@@ -270,5 +336,13 @@ export const CHIMES = [
   { id: 'whistle', label: 'Whistle', desc: "Coach's whistle", play: whistle, secs: 0.4 },
 ];
 
+export const GOS = [
+  { id: 'classic', label: 'Classic', desc: 'Low thump', play: classicGo, secs: 0.7 },
+  { id: 'bell', label: 'Boxing bell', desc: 'Ding ding, round one', play: boxingBell, secs: 1.3 },
+  { id: 'whistle', label: 'Whistle', desc: "Starter's blast", play: startWhistle, secs: 0.55 },
+  { id: 'horn', label: 'Air horn', desc: 'Short and loud', play: airHorn, secs: 0.6 },
+];
+
 export const tickById = id => TICKS.find(s => s.id === id) || TICKS[0];
+export const goById = id => GOS.find(s => s.id === id) || GOS[0];
 export const chimeById = id => CHIMES.find(s => s.id === id) || CHIMES[0];

@@ -108,7 +108,7 @@ export function currentData() {
 // The one helper for describing a backup's data (or the phone's), so the
 // confirm sheet and any later screen agree. Missing values count as defaults.
 //   progress: "Stage 07 · 5 / 28 done · 173 workouts"
-//   settings: "High · Cornelius (ElevenLabs) · Wood block · Bell"
+//   settings: "High · Cornelius (ElevenLabs) · Wood block · Classic · Bell" (tick · GO · chime)
 export function summarize(data) {
   const st = data?.['reproom.v1'] || {};
   const stage = Number(st.stage) || 1;
@@ -124,7 +124,7 @@ export function summarize(data) {
     : vid === 'phone' ? 'Phone voice'
     : audio.voiceList().find(v => v.id === vid)?.label || vid;
   const sfx = set.sfx === 'off' ? ['Effects off']
-    : [sounds.tickById(set.tick).label, sounds.chimeById(set.chime).label];
+    : [sounds.tickById(set.tick).label, sounds.goById(set.go).label, sounds.chimeById(set.chime).label];
   const intensity = wdata.intensity(st.intensity || 'medium')?.label || st.intensity;
   return {
     stage, done, workouts,

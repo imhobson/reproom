@@ -75,9 +75,10 @@ export function resume() { if (ctx && ctx.state === 'suspended') ctx.resume(); }
 export function stopAll() { stopVoice(); }
 
 // ---- Sound effects (see docs/RepRoom-audio-spec.txt and js/sounds.js) ----
-// The tick and the chime are chosen in Settings > Sound effects; GO is fixed.
+// The tick, GO and the chime are all chosen in Settings > Sound effects (GO: Q16).
 
 const myTick = () => sounds.tickById(settings().tick);
+const myGo = () => sounds.goById(settings().go);
 const myChime = () => sounds.chimeById(settings().chime);
 
 // Returns why a sound didn't play (for the cue log): 'off', 'no audio', or
@@ -89,7 +90,7 @@ function fx(play, at = 0) {
   return ctx.state === 'running' ? null : ctx.state;
 }
 export const tick = () => fx(myTick().play);
-export const go = () => fx(sounds.go);
+export const go = () => fx(myGo().play);
 export const chime = (after = 0) => fx(myChime().play, after);
 
 // ---- Samples for the pickers (play even when sounds are off: you asked) ----
@@ -107,19 +108,23 @@ function progressLoop(secs, onProgress, onEnd) {
   return () => clearInterval(id);
 }
 
-// The end-of-move cue with one choice swapped in: three ticks 1s apart, then
-// the chime 1.1s after the last tick (as in a workout). kind is 'tick' or
-// 'chime'; the other half stays as the current pick.
+// A cue with one choice swapped in, as in a workout. kind is 'tick', 'go' or
+// 'chime'; the other sounds stay as the current picks.
+// - tick or chime: the end-of-move cue, three ticks 1s apart, then the chime
+//   1.1s after the last tick.
+// - go: the start-of-move cue, three ticks 1s apart, then GO 1s after the
+//   last tick (Q16).
 export function sampleCue(kind, id, onProgress, onEnd) {
   stopSample();
   unlock();
   const t = kind === 'tick' ? sounds.tickById(id) : myTick();
-  const c = kind === 'chime' ? sounds.chimeById(id) : myChime();
+  const end = kind === 'go' ? sounds.goById(id) : kind === 'chime' ? sounds.chimeById(id) : myChime();
+  const endAt = kind === 'go' ? 3 : 3.1;
   const bus = ctx.createGain();
   bus.connect(fxBus);
   [0, 1, 2].forEach(at => t.play(ctx, at, bus));
-  c.play(ctx, 3.1, bus);
-  const stopLoop = progressLoop(3.1 + c.secs + 0.1, onProgress, () => { sample = null; onEnd(); });
+  end.play(ctx, endAt, bus);
+  const stopLoop = progressLoop(endAt + end.secs + 0.1, onProgress, () => { sample = null; onEnd(); });
   sample = { stop: () => { stopLoop(); bus.disconnect(); } };
 }
 
