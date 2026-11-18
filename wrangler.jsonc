@@ -1,0 +1,11 @@
+// RepRoom on Cloudflare (D13, V1.25.0): a Worker that only serves this
+// folder's files (static assets, no script). Cloudflare's Git connection
+// (Workers Builds) runs `npx wrangler deploy` on every push to main.
+// Address: https://reproom.<your-subdomain>.workers.dev
+{
+  "name": "reproom",
+  "compatibility_date": "2026-11-18",
+  "assets": {
+    "directory": "./"
+  }
+}

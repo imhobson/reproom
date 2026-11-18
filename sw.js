@@ -40,7 +40,7 @@ const DAYS = 'reproom-days-v1';
 const DAY_COUNT = 28;
 
 const SHELL = [
-  './', 'index.html', 'manifest.webmanifest', 'css/app.css',
+  './', 'manifest.webmanifest', 'css/app.css',
   'js/main.js', 'js/version.js', 'js/nav.js', 'js/backup.js', 'js/config.js', 'js/data.js', 'js/store.js', 'js/session.js', 'js/symbols.js', 'js/ui.js', 'js/audio.js', 'js/sounds.js', 'js/feedback.js', 'js/autobackup.js',
   'js/weights.js', 'js/cuelog.js', 'js/keepalive.js', 'js/moveimg.js', 'js/track.js', 'js/stats.js', 'js/history.js', 'js/wall.js', 'js/restscenes.js', 'js/cornelius.js', 'js/cornelius-art.js', 'js/cornelius-lines.js', 'js/launch.js', 'js/screens/progress.js',
   'js/screens/home.js', 'js/screens/details.js', 'js/screens/info.js', 'js/screens/player.js',
@@ -177,7 +177,9 @@ async function cacheFirst(req, cache = VERSION) {
     if (res.ok) c.put(req, res.clone());
     return res;
   } catch (err) {
-    return (req.mode === 'navigate' && await c.match('index.html')) || Response.error();
+    // './', not 'index.html': Cloudflare answers /index.html with a redirect to /,
+    // and a redirected response can't be used for a page load (D13).
+    return (req.mode === 'navigate' && await c.match('./')) || Response.error();
   }
 }
 

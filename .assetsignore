@@ -1,0 +1,6 @@
+# Files in the site folder that aren't part of the app (D13).
+.git
+.assetsignore
+.nojekyll
+.release
+wrangler.jsonc

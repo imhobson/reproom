@@ -1,0 +1,6 @@
+# RepRoom is a personal app: keep it out of search engines (D13).
+# Caching needs nothing here: Cloudflare already sends
+# "Cache-Control: public, max-age=0, must-revalidate", so the phone re-checks
+# every file and the service worker decides what's kept offline.
+/*
+  X-Robots-Tag: noindex, nofollow
