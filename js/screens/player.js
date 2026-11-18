@@ -24,6 +24,49 @@ import * as stats from '../stats.js';
 import * as rest from '../restscenes.js';
 import * as cornelius from '../cornelius.js';
 
+// I10: the section calls. On the Next up (or Get ready) of the first move of
+// a new section, and of the first move of Main's final block, the voice says
+// the call first, then the move's name. Not in run routines, and not on the
+// workout's very first move.
+const CALLS = {
+  main: { id: 'main', text: 'Main workout.', expr: 'proud' },
+  weights: { id: 'weights', text: 'Weights.', expr: 'wink' },
+  cooldown: { id: 'cool-down', text: 'Cool-down.', expr: 'zen' },
+  finalBlock: { id: 'final-block', text: 'Final block.', expr: 'surprised' },
+};
+const CALL_GAP_MS = 300; // between the call and the move's name
+
+// Step index -> call, for this workout's steps.
+function sectionCalls(steps, run) {
+  const out = {};
+  if (run) return out;
+  const isDo = s => s.type === 'move' || (s.type === 'weight' && s.preview);
+  let prevSec = null;
+  steps.forEach((s, i) => {
+    if (!isDo(s)) return;
+    if (prevSec && s.section !== prevSec && CALLS[s.section]) out[i] = CALLS[s.section];
+    prevSec = s.section;
+  });
+  // Main's final block (Mike, 18 Nov): once per workout, on the first move of
+  // the last block. Main is rounds split by its rests; a block is a run of
+  // rounds with the same moves (e.g. 2 rounds of side plank + flutter kicks).
+  // Only when Main has more than one block.
+  const rounds = [];
+  let cur = null;
+  steps.forEach((s, i) => {
+    if (s.section !== 'main') return;
+    if (s.type === 'rest') { cur = null; return; }
+    if (s.type !== 'move') return;
+    if (!cur) rounds.push(cur = { start: i, key: [] });
+    cur.key.push(`${s.move}|${s.side || ''}`);
+  });
+  const same = (a, b) => a.key.join() === b.key.join();
+  let k = rounds.length - 1;
+  while (k > 0 && same(rounds[k - 1], rounds[k])) k--;
+  if (k > 0 && !out[rounds[k].start]) out[rounds[k].start] = CALLS.finalBlock;
+  return out;
+}
+
 const SHORT = { warmup: 'Warm-up', main: 'Main', weights: 'Weights', cooldown: 'Cool-down' };
 // A run routine's sections are labelled with its group (Warm-up / Drills /
 // Cool-down), in the kicker and the strip (F11).
@@ -69,6 +112,7 @@ function start(key) {
   P = {
     id: ++playId, key, run, day, stage: run ? null : st.stage, intensity: st.intensity, workout, steps, stats: st2,
     firstMove: moveIdx[0], lastMove: lastDo,
+    calls: sectionCalls(steps, run), called: new Set(), dlgClose: null,
     weightsOn: !!on.weights, on,
     wvals: {}, // weight step index -> { reps, kg } on screen
     wdone: {}, // weight step index -> { set, side, reps, kg } saved by DONE
@@ -100,11 +144,20 @@ function enterStep(i) {
     // Once, as Get ready / Next up starts. Straight after a move ends by
     // itself, wait for the finish chime first so they don't talk over each other.
     clearTimeout(P.voiceTimer);
+    closeCall();
     const name = stepName(step);
-    if (P.afterChime) {
-      const plan = P.planStart + VOICE_AFTER_CHIME_MS;
-      P.voiceTimer = setTimeout(() => { if (P && P.running) audio.sayMove(step, cuelog.cue('voice', name, plan, false)); }, VOICE_AFTER_CHIME_MS);
-    } else audio.sayMove(step, cuelog.cue('voice', name, P.planStart, false));
+    // I10: a section call first, the first time this move is reached.
+    const call = P.calls[i] && !P.called.has(i) ? P.calls[i] : null;
+    if (call) P.called.add(i);
+    const sayName = plan => audio.sayMove(step, cuelog.cue('voice', name, plan, false));
+    const start = P.afterChime ? VOICE_AFTER_CHIME_MS : 0;
+    const plan0 = P.planStart + start;
+    const begin = () => {
+      if (!P || !P.running || P.idx !== i) return;
+      if (!call) { sayName(plan0); return; }
+      sayCall(call, i, plan0, sayName);
+    };
+    if (start) P.voiceTimer = setTimeout(begin, start); else begin();
   } else {
     // The picture for this rest (I07): a new random pick from the ticked
     // scenes every rest, never the same one twice running when there's a
@@ -128,6 +181,24 @@ function enterStep(i) {
   }
   P.afterChime = false;
 }
+
+// I10: say a section call, then the move's name once it's done. With the
+// Cornelius voice heard (and the screen on), he pops up while he says it and
+// closes by himself; a tap closes him sooner. The Next up timer keeps running.
+async function sayCall(call, i, plan, sayName) {
+  const secs = await audio.phraseSecs(call.id);
+  if (!P || !P.running || P.idx !== i) return;
+  audio.sayPhrase(call.id, call.text, cuelog.cue('voice', call.text.replace(/\.$/, ''), plan, false));
+  const gap = Math.round(secs * 1000) + CALL_GAP_MS;
+  P.voiceTimer = setTimeout(() => { if (P && P.running && P.idx === i) sayName(plan + gap); }, gap);
+  if (audio.voiceHeard() && !P.muted && store.get().settings.voice === cornelius.VOICE_ID && document.visibilityState === 'visible') {
+    P.dlgClose = cornelius.showDialogue({
+      expr: call.expr, text: call.text, talkSecs: secs, autoClose: 1.2,
+      onClose: () => { if (P) P.dlgClose = null; },
+    });
+  }
+}
+function closeCall() { if (P && P.dlgClose) { const f = P.dlgClose; P.dlgClose = null; f(); } }
 
 // A weight set: no timer, the numbers start from last time (set 1) or the
 // set just done (sets 2 and 3).
@@ -399,6 +470,7 @@ const trackOf = res => track.build(P.steps, res, P.on);
 
 function finish() {
   clearTimeout(P.voiceTimer);
+  closeCall();
   stopTimer();
   audio.stopAll();
   letSleep();
@@ -461,6 +533,7 @@ function wallMoment(stageJustCompleted) {
 
 function endWorkout() {
   clearTimeout(P.voiceTimer);
+  closeCall();
   stopTimer();
   // Every workout ended early is saved (F14): its time, the moves done so far
   // and any weight sets count in the totals; the day stays unticked and it
@@ -869,6 +942,7 @@ function arm() {
 function disarm() { if (watcher) { const w = watcher; watcher = null; w.destroy(); } }
 
 function onBack() {
+  if (P.dlgClose) { closeCall(); return; } // I10: Cornelius's pop-up closes first
   if (P.sheet === 'end') keepGoing();
   else if (P.sheet === 'info') closeInfo();
   else askEnd();
@@ -1015,6 +1089,7 @@ export function snapshot() {
 // Leaving the player any other way (e.g. the phone's back button) pauses it.
 export function leave() {
   disarm(); // back on other screens works as normal
+  closeCall();
   if (P && P.running) { P.running = false; stopTimer(); cuelog.note('pause', 'Pause (left the player)'); }
   audio.pause();
   keepalive.pause();

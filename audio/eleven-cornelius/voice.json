@@ -842,6 +842,22 @@
   "phrase--launch": {
    "text": "Let's do this, Michael.",
    "secs": 1.72
+  },
+  "phrase--main": {
+   "text": "Main workout.",
+   "secs": 1.58
+  },
+  "phrase--weights": {
+   "text": "Weights.",
+   "secs": 0.84
+  },
+  "phrase--cool-down": {
+   "text": "Cool-down.",
+   "secs": 1.11
+  },
+  "phrase--final-block": {
+   "text": "Final block.",
+   "secs": 1.3
   }
  }
 }

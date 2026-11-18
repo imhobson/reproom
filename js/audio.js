@@ -307,6 +307,19 @@ async function playClip(v, name, fallback, logEntry, seq) {
   a.play().catch(() => { if (clip === a) { clip = null; speak(fallback, logEntry); } });
 }
 
+// I10: how long a phrase takes to say, in seconds: the clip's length from
+// voice.json, or about 1.3s for the phone voice or a phrase with no clip yet.
+// The move's name follows the section call 0.3s after it ends.
+export async function phraseSecs(id) {
+  const v = settings().voice;
+  if (v === 'off' || v === 'phone') return 1.3;
+  const clips = await clipsFor(v);
+  return clips[`phrase--${id}`]?.secs ?? 1.3;
+}
+// I10: whether a recorded or phone voice would speak right now (sound on,
+// not muted, a voice picked). Cornelius's pop-up only shows when he's heard.
+export const voiceHeard = () => soundOn() && settings().voice !== 'off';
+
 // Just a few words in the phone voice, for anything with no recorded clip
 // (e.g. "Left side."; Rest, Walk back and Right side use sayPhrase). Off when
 // the voice is off.
@@ -348,7 +361,7 @@ export async function launch() {
 
 // Load a workout's clips ahead so they start on time, and the phrase clips
 // (Q11), so the first "Rest." isn't late.
-const PHRASES = ['rest', 'walk-back', 'right-side'];
+const PHRASES = ['rest', 'walk-back', 'right-side', 'main', 'weights', 'cool-down', 'final-block']; // I10: the section calls
 export async function preload(steps) {
   const v = settings().voice;
   if (v === 'off' || v === 'phone') return;
